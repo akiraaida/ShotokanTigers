@@ -1,2 +1,0 @@
-chmod a+x changethis.sh
-./changethis.sh
