@@ -1,3 +1,7 @@
+
+###For Test Case Format
+http://www.tutorialspoint.com/software_testing_dictionary/test_case.htm
+
 Lab 2
 ---
 Notes on control points for each function
