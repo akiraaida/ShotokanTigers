@@ -1,0 +1,379 @@
+Test Cases
+
+	Login - Kathryn
+	================
+
+	Logout - Kathryn
+	================
+
+	Transfer - Kathryn
+	================
+
+	Withdraw - Alex
+	================
+
+	Paybill - Alex
+	================
+
+	Deposit - Alex
+	================
+
+	Change Plan - Akira
+	================
+
+		Scenario: Verify account holder's name and account number correspond with each other (Incorrect name, correct number).
+		Test Step: Admin enters an incorrect account holder's name but correct account number.
+		Test Input: 
+					1. login
+					2. admin
+					3. changeplan
+					4. Bob Stevenson
+					5. 12345
+		Expected Result: The admin is notified the account is not valid.
+		Expected Output: - Print: "Please enter your session type: "
+						 - Print: "Please enter a command admin: "
+						 - Print: "Please enter the account holder's name: "
+						 - Print: "Please enter the account number: "
+						 - Print: "Error, account specificed is not a valid account."
+						 - File: No change.
+		
+		Scenario: Verify account holder's name and account number correspond with each other (Correct name, incorrect number).
+		Test Step: Admin enters a correct account holder's name but incorrect account number.
+		Test Input: 
+					1. login
+					2. admin
+					3. changeplan
+					4. John Doe
+					5. 11111
+		Expected Result: The admin is notified the account is not valid.
+		Expected Output: - Print: "Please enter your session type: "
+						 - Print: "Please enter a command admin: "
+						 - Print: "Please enter the account holder's name: "
+						 - Print: "Please enter the account number: "
+						 - Print: "Error, account specificed is not a valid account."
+						 - File: No change.
+		
+		Scenario: Verify account holder's name and account number correspond with each other (Correct name, correct number but not matching).
+		Test Step: Admin enters a correct account holder and correct account number but they do not correspond to each other.
+		Test Input: 
+					1. login
+					2. admin
+					3. changeplan
+					4. John Doe
+					5. 12346
+		Expected Result: The admin is notified the account is not valid.
+		Expected Output: - Print: "Please enter your session type: "
+						 - Print: "Please enter a command admin: "
+						 - Print: "Please enter the account holder's name: "
+						 - Print: "Please enter the account number: "
+						 - Print: "Error, account specificed is not a valid account."
+						 - File: No change.
+		
+		Scenario: Verify admin can change an account from SP (student) to NP (non-student). 
+		Test Step: Admin enters a correct account holder, correct account number and they do correspond to each other.
+		Test Input: 
+					1. login
+					2. admin
+					3. changeplan
+					4. John Doe
+					5. 12345
+		Expected Result: The information is saved to the bank account transaction file saying that the account payment plan is now NP (non-student).
+		Expected Output: - Print: "Please enter your session type: "
+						 - Print: "Please enter a command admin: "
+						 - Print: "Please enter the account holder's name: "
+						 - Print: "Please enter the account number: "
+						 - Print: "Success, John Doe is now on a non-student payment plan."
+						 - File: "08 John Doe             12345 00000000 00"
+	
+		Scenario: Verify admin can change an account from NP (non-student) to SP (student). 
+		Test Step: Admin enters a correct account holder, correct account number and they do correspond to each other.
+		Test Input:
+					1. login
+					2. admin
+					3. changeplan
+					4. Matt Cow
+					5. 12346
+		Expected Result: The information is saved to the bank account transaction file saying that the account payment plan is now SP (student).
+		Expected Output: - Print: "Please enter your session type: "
+						 - Print: "Please enter a command admin: "
+						 - Print: "Please enter the account holder's name: "
+						 - Print: "Please enter the account number: "
+						 - Print: "Success, Matt Cow is now on a student payment plan."
+						 - File: "08 Matt Cow             12346 00000000 00"
+
+		Scenario: Verify normal users can not access the changeplan feature.
+		Test Step: Normal user attempts to use the changeplan feature.
+		Test Input:
+					1. login
+					2. standard
+					3. Name: John Doe
+					4. changeplan
+		Expected Result: The command is rejected.
+		Expected Output: - Print: "Please enter your session type: "
+						 - Print: "Please enter a login name: "
+						 - Print: "Please enter a command user: "
+						 - Print: "Error, you do not have the correct privileges to access this feature."
+						 - File: "No change"
+		
+	Disable - Akira
+	================
+
+		Scenario: Verify account holder's name and account number correspond with each other (Incorrect name, correct number).
+		Test Step: Admin enters an incorrect account holder's name but correct account number.
+		Test Input: 
+					1. login
+					2. admin
+					3. disable
+					4. Bob Stevenson
+				    5. 12345
+		Expected Result: The admin is notified the account is not valid.
+		Expected Output: - Print: "Please enter your session type: "
+						 - Print: "Please enter a command admin: "
+						 - Print: "Please enter the account holder's name: "
+						 - Print: "Please enter the account number: "
+						 - Print: "Error, account specificed is not a valid account."
+						 - File: No change.
+		
+		Scenario: Verify account holder's name and account number correspond with each other (Correct name, incorrect number).
+		Test Step: Admin enters a correct account holder's name but incorrect account number.
+		Test Input: 
+					1. login
+					2. admin
+					3. disable
+					4. John Doe
+					5. 11111
+		Expected Result: The admin is notified the account is not valid.
+		Expected Output: - Print: "Please enter your session type: "
+						 - Print: "Please enter a command admin: "
+						 - Print: "Please enter the account holder's name: "
+						 - Print: "Please enter the account number: "
+						 - Print: "Error, account specificed is not a valid account."
+						 - File: No change.
+		
+		Scenario: Verify account holder's name and account number correspond with each other (Correct name, correct number but not matching).
+		Test Step: Admin enters a correct account holder and correct account number but they do not correspond to each other.
+		Test Input: 
+					1. login
+					2. admin
+					3. disable
+					4. John Doe
+					5. 12346
+		Expected Result: The admin is notified the account is not valid.
+		Expected Output: - Print: "Please enter your session type: "
+						 - Print: "Please enter a command admin: "
+						 - Print: "Please enter the account holder's name: "
+						 - Print: "Please enter the account number: "
+						 - Print: "Error, account specificed is not a valid account."
+						 - File: No change.
+
+		Scenario: Verify normal users can not access the disable feature.
+		Test Step: Normal user attempts to use the disable feature.
+		Test Input:
+					1. login
+					2. standard
+					3. John Doe
+					4. disable
+		Expected Result: The command is rejected.
+		Expected Output: - Print: "Please enter your session type: "
+						 - Print: "Please enter a login name: "
+						 - Print: "Please enter a command user: "
+						 - Print: "Error, you do not have the correct privileges to access this feature."
+						 - File: No change.
+		
+		Scenario: Verify admin can change an account from A (active) to D (disabled). 
+		Test Step: Admin enters a correct account holder, correct account number and they do correspond to each other.
+		Test Input: 
+					1. login
+					2. admin
+					3. disable
+					4. John Doe
+					5. 12345
+		Expected Result: The information is saved to the bank account transaction file saying that the account is now disabled.
+		Expected Output: - Print: "Please enter your session type: "
+						 - Print: "Please enter a command admin: "
+						 - Print: "Please enter the account holder's name: "
+						 - Print: "Please enter the account number: "
+						 - Print: "Success, John Doe's account is now disabled."
+						 - File: "07 John Doe             12345 00000000 00"
+				
+		Scenario: Verify user withdraw transaction can no longer be done to a disabled account. 
+		Test Step: Enter the disabled account's correct account holder's name, account number, and an amount of money in the withdraw feature.
+		Test Input: 1. login
+					2. standard
+					3. John Doe
+					4. withdrawal
+					5. 12345
+					6. 100
+		Expected Result: Command is denied because the account is disabled.
+		Expected Output: - Print: "Please enter your session type: "
+						 - Print: "Please enter a login name: "
+						 - Print: "Please enter a command user: "
+						 - Print: "Please enter your account number: "
+						 - Print: "Enter the amount of money you wish to withdraw: "
+						 - Print: "Error, your account is disabled."
+		
+		Scenario: Verify user deposit transaction can no longer be done to a disabled account. 
+		Test Step: Enter the disabled account's correct account holder's name, account number, and an amount of money in the deposit feature.
+		Test Input: 1. login
+					2. standard
+					3. John Doe
+					4. deposit
+					5. 12345
+					6. 100
+		Expected Result: Command is denied because the account is disabled.
+		Expected Output: - Print: "Please enter your session type: "
+						 - Print: "Please enter a login name: "
+						 - Print: "Please enter a command user: "
+						 - Print: "Please enter your account number: "
+						 - Print: "Enter the amount of money you wish to deposit: "
+						 - Print: "Error, your account is disabled."
+		
+		Scenario: Verify paybill transaction can no longer be done to a disabled account. 
+		Test Step: Enter the disabled account's correct account holder's name, account number, company, and an amount of money to pay in the paybill feature.
+		Test Input:
+		Expected Result: Command is denied because the account is disabled.
+		Expected Output:
+		
+		Scenario: Verify delete transaction can no longer be done to a disabled account. 
+		Test Step: Enter the disabled account's correct account holder's name and account number in the delete feature.
+		Test Input:
+		Expected Result: Command is denied because the account is disabled.
+		Expected Output:
+		
+		Scenario: Verify disable transaction can no longer be done to a disabled account. 
+		Test Step: Enter the disabled account's correct account holder's name and account number in the disable feature.
+		Test Input:
+		Expected Result: Command is denied because the account is disabled.
+		Expected Output:
+		
+		Scenario: Verify transfer transaction can no longer be done with a disabled account (From an account to a disabled account). 
+		Test Step: Enter the disabled account's correct account holder's name, account number, another account number and an amount of money in the transfer feature.
+		Test Input:
+		Expected Result: Command is denied because the account is disabled (disabled precedes valid account).
+		Expected Output:
+		
+		Scenario: Verify transfer transaction can no longer be done with a disabled account (From a disabled account to another account). 
+		Test Step: Enter an account holder's name, account number, the disabled account number, and an amount of money in the transfer feature.
+		Test Input:
+		Expected Result: Command is denied because the account is disabled (disabled precedes valid account).
+		Expected Output:	
+
+	Delete - Akira
+	================
+
+		Scenario: Verify account holder's name and account number correspond with each other (Incorrect name, correct number).
+		Test Step: Admin enters an incorrect account holder's name but correct account number.
+		Test Input:
+		Expected Result: The admin is notified the account is not valid.
+		Expected Output:
+		
+		Scenario: Verify account holder's name and account number correspond with each other (Correct name, incorrect number).
+		Test Step: Admin enters a correct account holder's name but incorrect account number.
+		Test Input:
+		Expected Result: The admin is notified the account is not valid.
+		Expected Output:
+		
+		Scenario: Verify account holder's name and account number correspond with each other (Correct name, correct number but not matching).
+		Test Step: Admin enters a correct account holder and correct account number but they do not correspond to each other.
+		Test Input:
+		Expected Result: The admin is notified the account is not valid.
+		Expected Output:
+
+		Scenario: Verify normal users can not access the delete feature.
+		Test Step: Normal user attempts to use the delete feature.
+		Test Input:
+		Expected Result: The command is rejected.
+		Expected Output:
+
+		Scenario: Verify all of the text prompts appear for the admin during a normal delete transaction.
+		Test Step: Admin enters a a valid account holder's name, and the account number corresponding to that name thus deleting the account. 
+		Test Input:
+		Expected Result: All of the text prompts and UI features should appear during this transaction.
+		Expected Output:
+		
+		Scenario: Verify admin can delete an account. 
+		Test Step: Admin enters a correct account holder, correct account number and they do correspond to each other.
+		Test Input:
+		Expected Result: The information is saved to the bank account transaction file saying that the account is now deleted.
+		Expected Output:
+		
+		Scenario: Verify withdraw transaction can no longer be done to a deleted account. 
+		Test Step: Enter the deleted account's correct account holder's name, account number, and an amount of money in the withdraw feature.
+		Test Input:
+		Expected Result: Command is denied because the account is deleted.
+		Expected Output:
+		
+		Scenario: Verify deposit transaction can no longer be done to a deleted account. 
+		Test Step: Enter the deleted account's correct account holder's name, account number, and an amount of money in the deposit feature.
+		Test Input:
+		Expected Result: Command is denied because the account is deleted.
+		Expected Output:
+		
+		Scenario: Verify paybill transaction can no longer be done to a deleted account. 
+		Test Step: Enter the deleted account's correct account holder's name, account number, company, and an amount of money to pay in the paybill feature.
+		Test Input:
+		Expected Result: Command is denied because the account is deleted.
+		Expected Output:
+
+		Scenario: Verify delete transaction can no longer be done to a deleted account. 
+		Test Step: Enter the deleted account's correct account holder's name and account number in the delete feature.
+		Test Input:
+		Expected Result: Command is denied because the account is deleted.
+		Expected Output:
+
+		Scenario: Verify disable transaction can no longer be done to a deleted account. 
+		Test Step: Enter the deleted account's correct account holder's name and account number in the disable feature.
+		Test Input:
+		Expected Result: Command is denied because the account is deleted.
+		Expected Output:
+
+		Scenario: Verify transfer transaction can no longer be done with a deleted account (From an account to a deleted account). 
+		Test Step: Enter the deleted account's correct account holder's name, account number, another account number and an amount of money in the transfer feature.
+		Test Input:
+		Expected Result: Command is denied because the account is deleted (deleted precedes valid account).
+		Expected Output:
+		
+		Scenario: Verify transfer transaction can no longer be done with a deleted account (From a deleted account to another account). 
+		Test Step: Enter an account holder's name, account number, the deleted account number, and an amount of money in the transfer feature.
+		Test Input:
+		Expected Result: Command is denied because the account is deleted (deleted precedes valid account).		
+		Expected Output:
+
+	Create - Akira
+	================
+
+		Scenario: Verify account creation (with valid input).
+		Test Step: Admin enters an account holder's name that is under 20 characters and initial balance less than $99999.99 into the create feature.
+		Test Input:
+		Expected Result: Information is saved to the bank account transaction file with this new information and a uniquely generated account number.
+		Expected Output:
+		
+		Scenario: Verify account creation (with invalid name input).
+		Test Step: Admin enters an account holder's name that is greater than 20 characters and initial balance less than $99999.99 into the create feature.
+		Test Input:
+		Expected Result: Transaction is denied and the admin is notified that the name is to long.
+		Expected Output:	
+
+		Scenario: Verify account creation (with invalid inital balance input).
+		Test Step: Admin enters an account holder's name that is less than or equal to 20 characters and initial balance greater than $99999.99 into the create feature.
+		Test Input:
+		Expected Result: Transaction is denied and the admin is notified that the initial balance is to much.
+		Expected Output:
+		
+		Scenario: Verify account creation (with both inputs being invalid).
+		Test Step: Admin enters an account holder's name that is greater than 20 characters and initial balance greater than $99999.99 into the create feature.
+		Test Input:
+		Expected Result: Transaction is denied and the admin is notified that both input fields are invalid.
+		Expected Output:
+		
+		Scenario: Verify normal users can not access the create feature.
+		Test Step: Normal user attempts to use the create feature.
+		Test Input:
+		Expected Result: The command is rejected.
+		Expected Output:
+		
+		Scenario: Verify account is not available in the same session.
+		Test Step: A transaction is done with the newly created account holder's name and account number.
+		Test Input:
+		Expected Result: Transaction is denied because the file hasn't been sent to the back end yet for processing (same session)
+		Expected Output:
