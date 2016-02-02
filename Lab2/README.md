@@ -1,6 +1,6 @@
 
 ###For Test Case Format
-http://www.tutorialspoint.com/software_testing_dictionary/test_case.htm
+Follow Akira's Examples
 
 Lab 2
 ---
