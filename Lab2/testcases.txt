@@ -200,9 +200,9 @@ Test Cases
 		Test Step: Enter the disabled account's correct account holder's name, account number, and an amount of money in the withdraw feature.
 		Test Input: 1. login
 					2. standard
-					3. John Doe
+					3. Bran Bob
 					4. withdrawal
-					5. 12345
+					5. 12347
 					6. 100
 		Expected Result: Command is denied because the account is disabled.
 		Expected Output: - Print: "Please enter your session type: "
@@ -211,14 +211,15 @@ Test Cases
 						 - Print: "Please enter your account number: "
 						 - Print: "Enter the amount of money you wish to withdraw: "
 						 - Print: "Error, your account is disabled."
+						 - File: No change
 		
 		Scenario: Verify user deposit transaction can no longer be done to a disabled account. 
 		Test Step: Enter the disabled account's correct account holder's name, account number, and an amount of money in the deposit feature.
 		Test Input: 1. login
 					2. standard
-					3. John Doe
+					3. Bran Bob
 					4. deposit
-					5. 12345
+					5. 12347
 					6. 100
 		Expected Result: Command is denied because the account is disabled.
 		Expected Output: - Print: "Please enter your session type: "
@@ -227,36 +228,94 @@ Test Cases
 						 - Print: "Please enter your account number: "
 						 - Print: "Enter the amount of money you wish to deposit: "
 						 - Print: "Error, your account is disabled."
+						 - File: No change
 		
-		Scenario: Verify paybill transaction can no longer be done to a disabled account. 
+		Scenario: Verify user paybill transaction can no longer be done to a disabled account. 
 		Test Step: Enter the disabled account's correct account holder's name, account number, company, and an amount of money to pay in the paybill feature.
-		Test Input:
+		Test Input: 1. login
+					2. standard
+					3. Bran Bob
+					4. paybill
+					5. 12347
+					6. The Bright Light Electric Company (EC)
+					7. 100
 		Expected Result: Command is denied because the account is disabled.
-		Expected Output:
+		Expected Output: - Print: "Please enter your session type: "
+						 - Print: "Please enter a login name: "
+						 - Print: "Please enter a command user: "
+						 - Print: "Please enter your account number: "
+						 - Print: "Please enter the company you wish to pay to: "
+						 - Print: "Enter the amount of money you wish to pay: "
+						 - Print: "Error, your account is disabled."
+						 - File: No change
 		
-		Scenario: Verify delete transaction can no longer be done to a disabled account. 
+		Scenario: Verify delete transaction can still be done to a disabled account. 
 		Test Step: Enter the disabled account's correct account holder's name and account number in the delete feature.
-		Test Input:
-		Expected Result: Command is denied because the account is disabled.
-		Expected Output:
+		Test Input: 1. login
+					2. admin
+					3. delete
+					4. Bran Bob
+					5. 12347
+		Expected Result: Disabled account is deleted.
+		Expected Output: - Print: "Please enter your session type: "
+						 - Print: "Please enter a command admin: "
+						 - Print: "Please enter the account holder's name: "
+						 - Print: "Please enter the account number: "
+						 - Print: "Success, account has been deleted."
+						 - File: "06 John Doe             12345 00000000 00"
 		
 		Scenario: Verify disable transaction can no longer be done to a disabled account. 
 		Test Step: Enter the disabled account's correct account holder's name and account number in the disable feature.
-		Test Input:
+		Test Input: 1. login
+					2. admin
+					3. disable
+					4. Bran Bob
+					5. 12347
 		Expected Result: Command is denied because the account is disabled.
-		Expected Output:
+		Expected Output: - Print: "Please enter your session type: "
+						 - Print: "Please enter a command admin: "
+						 - Print: "Please enter the account holder's name: "
+						 - Print: "Please enter the account number: "
+						 - Print: "Error, account is already disabled"
+						 - File: No change
 		
-		Scenario: Verify transfer transaction can no longer be done with a disabled account (From an account to a disabled account). 
-		Test Step: Enter the disabled account's correct account holder's name, account number, another account number and an amount of money in the transfer feature.
-		Test Input:
+		Scenario: Verify user transfer transaction can no longer be done with a disabled account (From an account to a disabled account). 
+		Test Step: Enter the disabled account's correct account holder's name and account number, another account number and an amount of money in the transfer feature.
+		Test Input: 1. login
+					2. standard
+					3. Bran Bob
+					4. transfer
+					5. 12347
+					6. 12345
+					7. 100
 		Expected Result: Command is denied because the account is disabled (disabled precedes valid account).
-		Expected Output:
+		Expected Output: - Print: "Please enter your session type: "
+						 - Print: "Please enter a login name: "
+						 - Print: "Please enter a command user: "
+						 - Print: "Please enter the account holder's name: "
+						 - Print: "Please enter the account number: "
+						 - Print: "Please enter the account number to recieve money: "
+						 - Print: "Error, your account is disabled"
+						 - File: No change
 		
-		Scenario: Verify transfer transaction can no longer be done with a disabled account (From a disabled account to another account). 
+		Scenario: Verify user transfer transaction can no longer be done with a disabled account (From a disabled account to another account). 
 		Test Step: Enter an account holder's name, account number, the disabled account number, and an amount of money in the transfer feature.
-		Test Input:
+		Test Input: 1. login
+					2. standard
+					3. John Doe
+					4. transfer
+					5. 12345
+					6. 12347
+					7. 100
 		Expected Result: Command is denied because the account is disabled (disabled precedes valid account).
-		Expected Output:	
+		Expected Output: - Print: "Please enter your session type: "
+						 - Print: "Please enter a login name: "
+						 - Print: "Please enter a command user: "
+						 - Print: "Please enter the account holder's name: "
+						 - Print: "Please enter the account number: "
+						 - Print: "Please enter the account number to recieve money: "
+						 - Print: "Error, that account is disabled"
+						 - File: No change
 
 	Delete - Akira
 	================
@@ -283,12 +342,6 @@ Test Cases
 		Test Step: Normal user attempts to use the delete feature.
 		Test Input:
 		Expected Result: The command is rejected.
-		Expected Output:
-
-		Scenario: Verify all of the text prompts appear for the admin during a normal delete transaction.
-		Test Step: Admin enters a a valid account holder's name, and the account number corresponding to that name thus deleting the account. 
-		Test Input:
-		Expected Result: All of the text prompts and UI features should appear during this transaction.
 		Expected Output:
 		
 		Scenario: Verify admin can delete an account. 
