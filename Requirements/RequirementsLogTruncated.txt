@@ -140,11 +140,23 @@ For legibility purposes when you're reading the requirements document. You shoul
 
 Taylor Smith [12:00 PM] 
 added and commented on a Plain Text snippet: questions.txt 
-Does the front end need to support both input from both command line input and text file, or only from one or the other?
-  If it needs to support both does it need to support them both in the same session?
-    example: I invoke the front end: ./Front_End.exe transactions_list.txt, after processing all the transactions in the file should the front end terminate or wait for more possible transactions from the command line?
-For Withdraw/Deposit/Transfer, when asked for the specified amount will it always come in a specific format, like $ followed by dollar amount then decimal point then 2 cent values or do we have to support all possible input methods?
-1 Comment Click to expand inline 28 lines
+  1.  a. Does the front end need to support both input from both command line input and text file, or only from one or the other?
+      b. If it needs to support both does it need to support them both in the same session?
+          example: I invoke the front end: ./Front_End.exe transactions_list.txt, after processing all the transactions in the file should the front end terminate or wait for more possible transactions from the command line?
+  2.  a. For Withdraw/Deposit/Transfer, when asked for the specified amount will it always come in a specific format, like $ followed by dollar amount then decimal point then 2 cent values or do we have to support all possible input methods?
+          example: Which of the following should be valid when prompted for an amount, $500.00, $500, 500.00, 500
+      b. Will amounts greater than $1000 be comma grouped or will be one continuous string?
+          example: Will the input be $1,000,000 or $1000000 to deposit a million dollars?
+  3. For Withdraw/transfer/deposit/paybill, it asks for the name of the bank account when logged in as admin and then states that the bank account must be a valid account for the account holder currently logged in. Can admins perform all these actions on any account as long as the name and account number match? What should happen if an admin provides a name for an account and an account number that don't match?
+  4. Several transactions state that the amount is limited in standard mode(withdraw, pay bill, transfer) are admins allowed unlimited amounts in these transactions?
+  5. When withdrawing it states that the remaining balance must be at least $0. However then when the file is merged on the bank end the account is to be debited 5 or 10 cents per transaction. The bank strictly enforces that no account may ever have a negative balance. Should the front end maintain the number of transactions an account has made and only allow a withdraw of an amount that allows the fees for previous and the current withdrawn transaction to be paid.
+      example: I have $400 in my account, if I withdraw $400 resulting in an account balance of $0, when the transactions are merged on the back end the resulting balance would be -$0.05 or -$0.10 which is invalid. How should this situation be avoided, on the front end by calculating amount owing in fees or should the back end ignore fees on a 0 balance account?
+  6. For paying bills will the company name always be provided as the 2 letter initialism or is inputting the companies full name also valid? If full name is a valid method of entry will the TV company always have the punctuation and will the EC company always be prefaced with the word "The".
+  7. Where is it stated that deposited funds are not available until the end of the day? The requirements document says they are not available in the current session.
+  8. If an account is deleted should the number of the account maintained as a reserved number where no new accounts receive that number to prevent accidental deposits/withdrawls to a newly made account with the same account number as a previously deleted account?
+  9. Can a user login to a disabled account but simply not commit any transactions or are they locked out of their account? Can a disabled account ever be re-enabled by an admin?
+  10. How will the change plan transaction allow switching from non student plan? Will it always just swap the current plan to the other plan?
+  11. Can the difference if there is any between a day and a session be clarified? What constitutes a day vs a session? On top of page 8 it says that after a logout transaction is processed a file for the whole day is written. After every logout is the back end merging of the transaction file and master file done?
 1 4 2 1  
 After a thorough reading of the requirements document, here is a list of all questions I have, any clarifications would be greatly appreciated.
 

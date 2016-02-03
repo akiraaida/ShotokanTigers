@@ -3,14 +3,28 @@ Overview
 I've matched sections in this to the "EXTREME COURSE PROJECT" *guitars* master
 file.
 
-Stuff
-===
+General
+----
+- The front end is used to generate transaction output files that the back end
+    will manage. ​*Your front end must also check for constraints and create
+    output files that meet these constraints*​.
+- There are lots of inconsistencies in the banking system requirements document
+    (this is on purpose)
+- You shouldn't be ​_literally_​ using underscores in your data
+- Check for EoF to see when input file is complete.
 
 Current Bank Accounts File (Front End)
 ----
+- the account number, active/disabled,and balance do not matter for the
+    END_OF_FILE account
+- Users should not be allowed to access the end_of_file account
 
-Current Bank Accounts File (Back End)
+
+Current Bank Accounts File & Master Bank Accounts File (Back End)
 ----
+​- *Everyone can add an extra flag to the end of the current and master bank
+    accounts files, e.g. NNNNN_AAAAAAAAAAAAAAAAAAAA_S_PPPPPPPP_Q, where Q is S
+    for student plans and N for non-student plans.*​
 
 
 The Front End
@@ -19,21 +33,47 @@ The Front End
 Informal Customer Requirements for the Front End/Transaction Code Details
 ----
 - login
+  - A second log-in attempt will be rejected and ignored; subsequent
+      transactions will be considered as part of the first account login
 - withdrawal
 - transfer
 - paybill
 - deposit
 - create
+  - Truncate account names if necessary
+  - By default, accounts should be non-student plans. 
 - delete
+  - An Admin can delete an account that has been disabled.
 - disable
 - changeplan
+  - it should allow changes in both directions
 - logout
 
 General Requirements for the Front End
 ----
+- the front end should check for transaction constraints. This includes trying
+    to withdraw more money from an account than is allowed
+- If you restart the front end and try again, it should still correctly fail to
+    withdraw more money than allowed
+- Must track sessions even after restart in same day:
+  - The front end should keep internal track of balances...The front end should
+      not be reading in transaction output files, or start fresh each session
+      from the master accounts list.
+  - Deposits should neither be available in the same login session ​*or in the
+      same day*​. You cannot access the funds until the next day after the back
+      end has applied the transactions.
+- Can assume accounts will not complete more than 9999 transactions each day.
+- On the nature of transfers:
+    @patsmuk: Re: "perhaps two 02 lines where the first is implicitly the
+    withdrawal and the second is implicitly the deposit" *This will be the
+    universal procedure for transfer transactions*​
+- Need to support both input from both command line input and text file; it
+    should wait unless text file told it to terminate
 
 Bank Account Transaction File
 ----
+- If the program sees a transaction code of 00, it can ignore the rest. The
+    other data does not matter for the end of session line
 
 The Back End
 ====
@@ -50,5 +90,6 @@ Back End Error Recording
 The Merged Bank Account Transaction File
 ----
 
-The Master Bank Acounts File
+Current & Master Bank Acounts File:
 ----
+See above
