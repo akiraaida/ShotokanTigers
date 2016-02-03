@@ -1,24 +1,24 @@
 Test Cases
 
-	Login - Kathryn
+	Login - Alex
 	================
 
-	Logout - Kathryn
+	Logout - Alex
 	================
 
-	Transfer - Kathryn
+	Transfer - Alex
 	================
 
 	Enable - Kathryn (THIS ONE IS NEW, READ SLACK)
 	================
 
-	Withdraw - Alex
+	Withdrawal - Kathryn
 	================
 
-	Paybill - Alex
+	Paybill - Kathryn
 	================
 
-	Deposit - Alex
+	Deposit - Kathryn
 	================
 
 	Change Plan - Akira
