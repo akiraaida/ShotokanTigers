@@ -239,7 +239,6 @@ When we create a file do we just assign the next avaliable bank account number s
 
 Mike Miljanovic [1:50 PM] 
 What do you mean "create a file"?
-If someone wants to make a list of the clarifications, I'm sure your classmates would appreciate it.
 
 Patrick Smuk [2:27 PM] 
 Which transactions incur fees? withdraw/deposit/transfer/paybill? Are fees charged if an admin initiates the transaction?
