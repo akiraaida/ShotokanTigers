@@ -13,14 +13,31 @@ Test Cases
 	================
   
     Scenario: Enable a disabled account in admin mode
-		Test Step: 
+		Test Step: In admin mode, enable a disabled account 
 		Test Input: 
-					1. 
-		Expected Result: 
+					1. login
+          2. admin
+          3. enable
+          4. Bran Bob
+          5. 12347
+		Expected Result: - Print: 
+						 - File: Transaction changing 'D' to 'A' for Bran Bob
 		Expected Output: - 
 						 - 
              
     Scenario: Try to enable an active account
+		Test Step: In admin mode, enable an active account
+		Test Input: 
+					1. login
+          2. admin
+          3. enable
+          4. John Doe
+          5. 12345
+		Expected Result:  
+		Expected Output: - 
+						 - 
+             
+    Scenario: Try to enable a deleted account
 		Test Step: 
 		Test Input: 
 					1. 
@@ -28,7 +45,7 @@ Test Cases
 		Expected Output: - 
 						 - 
              
-    Scenario: Try to enable a deleted account
+    Scenario: Call 'Enable' when logged out  [ logout, redundant? ]
 		Test Step: 
 		Test Input: 
 					1. 
