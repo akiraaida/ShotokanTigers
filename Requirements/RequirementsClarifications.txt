@@ -1,0 +1,54 @@
+Overview
+===
+I've matched sections in this to the "EXTREME COURSE PROJECT" *guitars* master
+file.
+
+Stuff
+===
+
+Current Bank Accounts File (Front End)
+----
+
+Current Bank Accounts File (Back End)
+----
+
+
+The Front End
+===
+
+Informal Customer Requirements for the Front End/Transaction Code Details
+----
+- login
+- withdrawal
+- transfer
+- paybill
+- deposit
+- create
+- delete
+- disable
+- changeplan
+- logout
+
+General Requirements for the Front End
+----
+
+Bank Account Transaction File
+----
+
+The Back End
+====
+
+Informal Customer Requirements for the Back End
+----
+
+General Requirements for the Back End
+----
+
+Back End Error Recording
+----
+
+The Merged Bank Account Transaction File
+----
+
+The Master Bank Acounts File
+----
