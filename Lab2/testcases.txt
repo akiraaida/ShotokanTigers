@@ -11,8 +11,56 @@ Test Cases
 
 	Enable - Kathryn (THIS ONE IS NEW, READ SLACK)
 	================
+  
+    Scenario: Enable a disabled account in admin mode
+		Test Step: 
+		Test Input: 
+					1. 
+		Expected Result: 
+		Expected Output: - 
+						 - 
+             
+    Scenario: Try to enable an active account
+		Test Step: 
+		Test Input: 
+					1. 
+		Expected Result: 
+		Expected Output: - 
+						 - 
+             
+    Scenario: Try to enable a deleted account
+		Test Step: 
+		Test Input: 
+					1. 
+		Expected Result: 
+		Expected Output: - 
+						 - 
+             
+    Scenario: Enable invalid account (bad name) [ account validation, redundant? ]
+		Test Step: 
+		Test Input: 
+					1. 
+		Expected Result: 
+		Expected Output: - 
+						 - 
+             
+    Scenario: Enable invalid account (good name, bad number) [ account validation, redundant? ]
+		Test Step: 
+		Test Input: 
+					1. 
+		Expected Result: 
+		Expected Output: - 
+						 - 
 
-		Scenario: 
+		Scenario: Call 'Enable' in standard mode [ admin priv, redundant? ]
+		Test Step: 
+		Test Input: 
+					1. 
+		Expected Result: 
+		Expected Output: - 
+						 - 
+             
+    Scenario: Call 'Enable' when logged out  [ logout, redundant? ]
 		Test Step: 
 		Test Input: 
 					1. 
