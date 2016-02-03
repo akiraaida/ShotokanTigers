@@ -24,6 +24,7 @@ General
 
       Mike Miljanovic [4:59 PM] 
       I'll leave it up to @jeremy if he wants to change that
+- you should test as much as possible
 
 Current Bank Accounts File (Front End)
 ----

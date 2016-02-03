@@ -374,3 +374,13 @@ Is their an minimum amount of money for a transfer between accounts? If not can 
 
 Jeremy Bradbury [1:32 PM] 
 Transfers are > $0
+
+Matthew O'Neill [6:14 PM] 
+@michaelmiljanovic:  You Stated:
+5) Let's go with the front end deducting the 5-10 cent transaction fee every time a transaction is made. Do this first, so that if someone tries to withdraw 400$ from a 400$ account, it is rejected since the 5-10 cents will be removed before the withdraw happens.
+
+[6:15] 
+does this mean that there need to be a test case for showing the deduction working?
+
+Mike Miljanovic [6:16 PM] 
+you should test as much as possible :simple_smile:
