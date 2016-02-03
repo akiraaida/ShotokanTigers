@@ -27,11 +27,11 @@ Test Cases
 		Scenario: Verify account holder's name and account number correspond with each other (Incorrect name, correct number).
 		Test Step: Admin enters an incorrect account holder's name but correct account number.
 		Test Input: 
-					1. login
-					2. admin
-					3. changeplan
-					4. Bob Stevenson
-					5. 12345
+					login
+					admin
+					changeplan
+					Bob Stevenson
+					12345
 		Expected Result: The admin is notified the account is not valid.
 		Expected Output: - Print: "Please enter your session type: "
 						 - Print: "Please enter a command admin: "
@@ -43,11 +43,11 @@ Test Cases
 		Scenario: Verify account holder's name and account number correspond with each other (Correct name, incorrect number).
 		Test Step: Admin enters a correct account holder's name but incorrect account number.
 		Test Input: 
-					1. login
-					2. admin
-					3. changeplan
-					4. John Doe
-					5. 11111
+					login
+					admin
+					changeplan
+					John Doe
+					11111
 		Expected Result: The admin is notified the account is not valid.
 		Expected Output: - Print: "Please enter your session type: "
 						 - Print: "Please enter a command admin: "
@@ -59,11 +59,11 @@ Test Cases
 		Scenario: Verify account holder's name and account number correspond with each other (Correct name, correct number but not matching).
 		Test Step: Admin enters a correct account holder and correct account number but they do not correspond to each other.
 		Test Input: 
-					1. login
-					2. admin
-					3. changeplan
-					4. John Doe
-					5. 12346
+					login
+					admin
+					changeplan
+					John Doe
+					12346
 		Expected Result: The admin is notified the account is not valid.
 		Expected Output: - Print: "Please enter your session type: "
 						 - Print: "Please enter a command admin: "
@@ -75,11 +75,11 @@ Test Cases
 		Scenario: Verify admin can change an account from SP (student) to NP (non-student). 
 		Test Step: Admin enters a correct account holder, correct account number and they do correspond to each other.
 		Test Input: 
-					1. login
-					2. admin
-					3. changeplan
-					4. John Doe
-					5. 12345
+					login
+					admin
+					changeplan
+					John Doe
+					12345
 		Expected Result: The information is saved to the bank account transaction file saying that the account payment plan is now NP (non-student).
 		Expected Output: - Print: "Please enter your session type: "
 						 - Print: "Please enter a command admin: "
@@ -91,11 +91,11 @@ Test Cases
 		Scenario: Verify admin can change an account from NP (non-student) to SP (student). 
 		Test Step: Admin enters a correct account holder, correct account number and they do correspond to each other.
 		Test Input:
-					1. login
-					2. admin
-					3. changeplan
-					4. Matt Cow
-					5. 12346
+					login
+					admin
+					changeplan
+					Matt Cow
+					12346
 		Expected Result: The information is saved to the bank account transaction file saying that the account payment plan is now SP (student).
 		Expected Output: - Print: "Please enter your session type: "
 						 - Print: "Please enter a command admin: "
@@ -107,10 +107,10 @@ Test Cases
 		Scenario: Verify normal users can not access the changeplan feature.
 		Test Step: Normal user attempts to use the changeplan feature.
 		Test Input:
-					1. login
-					2. standard
-					3. John Doe
-					4. changeplan
+					login
+					standard
+					John Doe
+					changeplan
 		Expected Result: The command is rejected.
 		Expected Output: - Print: "Please enter your session type: "
 						 - Print: "Please enter a login name: "
@@ -124,11 +124,11 @@ Test Cases
 		Scenario: Verify account holder's name and account number correspond with each other (Incorrect name, correct number).
 		Test Step: Admin enters an incorrect account holder's name but correct account number.
 		Test Input: 
-					1. login
-					2. admin
-					3. disable
-					4. Bob Stevenson
-				    5. 12345
+					login
+					admin
+					disable
+					Bob Stevenson
+				    12345
 		Expected Result: The admin is notified the account is not valid.
 		Expected Output: - Print: "Please enter your session type: "
 						 - Print: "Please enter a command admin: "
@@ -140,11 +140,11 @@ Test Cases
 		Scenario: Verify account holder's name and account number correspond with each other (Correct name, incorrect number).
 		Test Step: Admin enters a correct account holder's name but incorrect account number.
 		Test Input: 
-					1. login
-					2. admin
-					3. disable
-					4. John Doe
-					5. 11111
+					login
+					admin
+					disable
+					John Doe
+					11111
 		Expected Result: The admin is notified the account is not valid.
 		Expected Output: - Print: "Please enter your session type: "
 						 - Print: "Please enter a command admin: "
@@ -156,11 +156,11 @@ Test Cases
 		Scenario: Verify account holder's name and account number correspond with each other (Correct name, correct number but not matching).
 		Test Step: Admin enters a correct account holder and correct account number but they do not correspond to each other.
 		Test Input: 
-					1. login
-					2. admin
-					3. disable
-					4. John Doe
-					5. 12346
+					login
+					admin
+					disable
+					John Doe
+					12346
 		Expected Result: The admin is notified the account is not valid.
 		Expected Output: - Print: "Please enter your session type: "
 						 - Print: "Please enter a command admin: "
@@ -172,10 +172,10 @@ Test Cases
 		Scenario: Verify normal users can not access the disable feature.
 		Test Step: Normal user attempts to use the disable feature.
 		Test Input:
-					1. login
-					2. standard
-					3. John Doe
-					4. disable
+					login
+					standard
+					John Doe
+					disable
 		Expected Result: The command is rejected.
 		Expected Output: - Print: "Please enter your session type: "
 						 - Print: "Please enter a login name: "
@@ -186,11 +186,11 @@ Test Cases
 		Scenario: Verify admin can change an account from A (active) to D (disabled). 
 		Test Step: Admin enters a correct account holder, correct account number and they do correspond to each other.
 		Test Input: 
-					1. login
-					2. admin
-					3. disable
-					4. John Doe
-					5. 12345
+					login
+					admin
+					disable
+					John Doe
+					12345
 		Expected Result: The information is saved to the bank account transaction file saying that the account is now disabled.
 		Expected Output: - Print: "Please enter your session type: "
 						 - Print: "Please enter a command admin: "
@@ -201,12 +201,12 @@ Test Cases
 				
 		Scenario: Verify user withdraw transaction can no longer be done to a disabled account. 
 		Test Step: Enter the disabled account's correct account holder's name, account number, and an amount of money in the withdraw feature.
-		Test Input: 1. login
-					2. standard
-					3. Bran Bob
-					4. withdrawal
-					5. 12347
-					6. 100
+		Test Input: login
+					standard
+					Bran Bob
+					withdrawal
+					12347
+					100
 		Expected Result: Command is denied because the account is disabled.
 		Expected Output: - Print: "Please enter your session type: "
 						 - Print: "Please enter a login name: "
@@ -218,12 +218,12 @@ Test Cases
 		
 		Scenario: Verify user deposit transaction can no longer be done to a disabled account. 
 		Test Step: Enter the disabled account's correct account holder's name, account number, and an amount of money in the deposit feature.
-		Test Input: 1. login
-					2. standard
-					3. Bran Bob
-					4. deposit
-					5. 12347
-					6. 100
+		Test Input: login
+					standard
+					Bran Bob
+					deposit
+					12347
+					100
 		Expected Result: Command is denied because the account is disabled.
 		Expected Output: - Print: "Please enter your session type: "
 						 - Print: "Please enter a login name: "
@@ -235,13 +235,13 @@ Test Cases
 		
 		Scenario: Verify user paybill transaction can no longer be done to a disabled account. 
 		Test Step: Enter the disabled account's correct account holder's name, account number, company, and an amount of money to pay in the paybill feature.
-		Test Input: 1. login
-					2. standard
-					3. Bran Bob
-					4. paybill
-					5. 12347
-					6. The Bright Light Electric Company (EC)
-					7. 100
+		Test Input: login
+					standard
+					Bran Bob
+					paybill
+					12347
+					The Bright Light Electric Company (EC)
+					100
 		Expected Result: Command is denied because the account is disabled.
 		Expected Output: - Print: "Please enter your session type: "
 						 - Print: "Please enter a login name: "
@@ -254,11 +254,11 @@ Test Cases
 		
 		Scenario: Verify delete transaction can still be done to a disabled account. 
 		Test Step: Enter the disabled account's correct account holder's name and account number in the delete feature.
-		Test Input: 1. login
-					2. admin
-					3. delete
-					4. Bran Bob
-					5. 12347
+		Test Input: login
+					admin
+					delete
+					Bran Bob
+					12347
 		Expected Result: Disabled account is deleted.
 		Expected Output: - Print: "Please enter your session type: "
 						 - Print: "Please enter a command admin: "
@@ -269,11 +269,11 @@ Test Cases
 		
 		Scenario: Verify disable transaction can no longer be done to a disabled account. 
 		Test Step: Enter the disabled account's correct account holder's name and account number in the disable feature.
-		Test Input: 1. login
-					2. admin
-					3. disable
-					4. Bran Bob
-					5. 12347
+		Test Input: login
+					admin
+					disable
+					Bran Bob
+					12347
 		Expected Result: Command is denied because the account is disabled.
 		Expected Output: - Print: "Please enter your session type: "
 						 - Print: "Please enter a command admin: "
@@ -284,13 +284,13 @@ Test Cases
 		
 		Scenario: Verify user transfer transaction can no longer be done with a disabled account (From an account to a disabled account). 
 		Test Step: Enter the disabled account's correct account holder's name and account number, another account number and an amount of money in the transfer feature.
-		Test Input: 1. login
-					2. standard
-					3. Bran Bob
-					4. transfer
-					5. 12347
-					6. 12345
-					7. 100
+		Test Input: login
+					standard
+					Bran Bob
+					transfer
+					12347
+					12345
+					100
 		Expected Result: Command is denied because the account is disabled (disabled precedes valid account).
 		Expected Output: - Print: "Please enter your session type: "
 						 - Print: "Please enter a login name: "
@@ -303,13 +303,13 @@ Test Cases
 		
 		Scenario: Verify user transfer transaction can no longer be done with a disabled account (From a disabled account to another account). 
 		Test Step: Enter an account holder's name, account number, the disabled account number, and an amount of money in the transfer feature.
-		Test Input: 1. login
-					2. standard
-					3. John Doe
-					4. transfer
-					5. 12345
-					6. 12347
-					7. 100
+		Test Input: login
+					standard
+					John Doe
+					transfer
+					12345
+					12347
+					100
 		Expected Result: Command is denied because the account is disabled (disabled precedes valid account).
 		Expected Output: - Print: "Please enter your session type: "
 						 - Print: "Please enter a login name: "
@@ -326,11 +326,11 @@ Test Cases
 		Scenario: Verify account holder's name and account number correspond with each other (Incorrect name, correct number).
 		Test Step: Admin enters an incorrect account holder's name but correct account number.
 		Test Input: 
-					1. login
-					2. admin
-					3. delete
-					4. Bob Stevenson
-				    5. 12345
+					login
+					admin
+					delete
+					Bob Stevenson
+				    12345
 		Expected Result: The admin is notified the account is not valid.
 		Expected Output: - Print: "Please enter your session type: "
 						 - Print: "Please enter a command admin: "
@@ -342,11 +342,11 @@ Test Cases
 		Scenario: Verify account holder's name and account number correspond with each other (Correct name, incorrect number).
 		Test Step: Admin enters a correct account holder's name but incorrect account number.
 		Test Input: 
-					1. login
-					2. admin
-					3. delete
-					4. John Doe
-					5. 11111
+					login
+					admin
+					delete
+					John Doe
+					11111
 		Expected Result: The admin is notified the account is not valid.
 		Expected Output: - Print: "Please enter your session type: "
 						 - Print: "Please enter a command admin: "
@@ -358,11 +358,11 @@ Test Cases
 		Scenario: Verify account holder's name and account number correspond with each other (Correct name, correct number but not matching).
 		Test Step: Admin enters a correct account holder and correct account number but they do not correspond to each other.
 		Test Input: 
-					1. login
-					2. admin
-					3. delete
-					4. John Doe
-					5. 12346
+					login
+					admin
+					delete
+					John Doe
+					12346
 		Expected Result: The admin is notified the account is not valid.
 		Expected Output: - Print: "Please enter your session type: "
 						 - Print: "Please enter a command admin: "
@@ -374,10 +374,10 @@ Test Cases
 		Scenario: Verify normal users can not access the disable feature.
 		Test Step: Normal user attempts to use the delete feature.
 		Test Input:
-					1. login
-					2. standard
-					3. John Doe
-					4. delete
+					login
+					standard
+					John Doe
+					delete
 		Expected Result: The command is rejected.
 		Expected Output: - Print: "Please enter your session type: "
 						 - Print: "Please enter a login name: "
@@ -388,11 +388,11 @@ Test Cases
 		Scenario: Verify admin can delete an account.
 		Test Step: Admin enters a correct account holder, correct account number and they do correspond to each other.
 		Test Input: 
-					1. login
-					2. admin
-					3. delete
-					4. John Doe
-					5. 12345
+					login
+					admin
+					delete
+					John Doe
+					12345
 		Expected Result: The information is saved to the bank account transaction file saying that the account is now deleted.
 		Expected Output: - Print: "Please enter your session type: "
 						 - Print: "Please enter a command admin: "
@@ -403,12 +403,12 @@ Test Cases
 		
 		Scenario: Verify user withdraw transaction can no longer be done to a deleted account. 
 		Test Step: Enter the deleted account's correct account holder's name, account number, and an amount of money in the withdraw feature.
-		Test Input: 1. login
-					2. standard
-					3. Bran Bob
-					4. withdrawal
-					5. 12347
-					6. 100
+		Test Input: login
+					standard
+					Bran Bob
+					withdrawal
+					12347
+					100
 		Expected Result: Command is denied because the account is deleted.
 		Expected Output: - Print: "Please enter your session type: "
 						 - Print: "Please enter a login name: "
@@ -420,12 +420,12 @@ Test Cases
 		
 		Scenario: Verify user deposit transaction can no longer be done to a deleted account. 
 		Test Step: Enter the deleted account's correct account holder's name, account number, and an amount of money in the deposit feature.
-		Test Input: 1. login
-					2. standard
-					3. Bran Bob
-					4. deposit
-					5. 12347
-					6. 100
+		Test Input: login
+					standard
+					Bran Bob
+					deposit
+					12347
+					100
 		Expected Result: Command is denied because the account is deleted.
 		Expected Output: - Print: "Please enter your session type: "
 						 - Print: "Please enter a login name: "
@@ -437,13 +437,13 @@ Test Cases
 		
 		Scenario: Verify user paybill transaction can no longer be done to a deleted account. 
 		Test Step: Enter the deleted account's correct account holder's name, account number, company, and an amount of money to pay in the paybill feature.
-		Test Input: 1. login
-					2. standard
-					3. Bran Bob
-					4. paybill
-					5. 12347
-					6. The Bright Light Electric Company (EC)
-					7. 100
+		Test Input: login
+					standard
+					Bran Bob
+					paybill
+					12347
+					The Bright Light Electric Company (EC)
+					100
 		Expected Result: Command is denied because the account is deleted.
 		Expected Output: - Print: "Please enter your session type: "
 						 - Print: "Please enter a login name: "
@@ -456,11 +456,11 @@ Test Cases
 		
 		Scenario: Verify delete transaction can still be done to a deleted account. 
 		Test Step: Enter the deleted account's correct account holder's name and account number in the delete feature.
-		Test Input: 1. login
-					2. admin
-					3. delete
-					4. Bran Bob
-					5. 12347
+		Test Input: login
+					admin
+					delete
+					Bran Bob
+					12347
 		Expected Result: Disabled account is deleted.
 		Expected Output: - Print: "Please enter your session type: "
 						 - Print: "Please enter a command admin: "
@@ -471,11 +471,11 @@ Test Cases
 		
 		Scenario: Verify delete transaction can no longer be done to a deleted account. 
 		Test Step: Enter the deleted account's correct account holder's name and account number in the delete feature.
-		Test Input: 1. login
-					2. admin
-					3. delete
-					4. Bran Bob
-					5. 12347
+		Test Input: login
+					admin
+					delete
+					Bran Bob
+					12347
 		Expected Result: Command is denied because the account is deleted.
 		Expected Output: - Print: "Please enter your session type: "
 						 - Print: "Please enter a command admin: "
@@ -486,13 +486,13 @@ Test Cases
 		
 		Scenario: Verify user transfer transaction can no longer be done with a deleted account (From an account to a deleted account). 
 		Test Step: Enter the deleted account's correct account holder's name and account number, another account number and an amount of money in the transfer feature.
-		Test Input: 1. login
-					2. standard
-					3. Bran Bob
-					4. transfer
-					5. 12347
-					6. 12345
-					7. 100
+		Test Input: login
+					standard
+					Bran Bob
+					transfer
+					12347
+					12345
+					100
 		Expected Result: Command is denied because the account is deleted (deleted precedes valid account).
 		Expected Output: - Print: "Please enter your session type: "
 						 - Print: "Please enter a login name: "
@@ -505,13 +505,13 @@ Test Cases
 		
 		Scenario: Verify user transfer transaction can no longer be done with a deleted account (From a deleted account to another account). 
 		Test Step: Enter an account holder's name, account number, the deleted account number, and an amount of money in the transfer feature.
-		Test Input: 1. login
-					2. standard
-					3. John Doe
-					4. transfer
-					5. 12345
-					6. 12347
-					7. 100
+		Test Input: login
+					standard
+					John Doe
+					transfer
+					12345
+					12347
+					100
 		Expected Result: Command is denied because the account is deleted (deleted precedes valid account).
 		Expected Output: - Print: "Please enter your session type: "
 						 - Print: "Please enter a login name: "
@@ -527,11 +527,11 @@ Test Cases
 
 		Scenario: Verify account creation (with valid input).
 		Test Step: Admin enters an account holder's name that is under 20 characters and initial balance less than $99999.99 into the create feature.
-		Test Input: 1. login
-					2. admin
-					3. create
-					4. Lock Lan
-					5. 200
+		Test Input: login
+					admin
+					create
+					Lock Lan
+					200
 		Expected Result: Information is saved to the bank account transaction file with this new information and a uniquely generated account number.
 		Expected Output: - Print: "Please enter your session type: "
 						 - Print: "Please enter a command admin: "
@@ -542,11 +542,11 @@ Test Cases
 		
 		Scenario: Verify account creation (with invalid name input).
 		Test Step: Admin enters an account holder's name that is greater than 20 characters and initial balance less than $99999.99 into the create feature.
-		Test Input: 1. login
-					2. admin
-					3. create
-					4. 123456789012345678901
-					5. 100
+		Test Input: login
+					admin
+					create
+					123456789012345678901
+					100
 		Expected Result: Transaction is allowed but the name is truncated to 20 characters.
 		Expected Output: - Print: "Please enter your session type: "
 						 - Print: "Please enter a command admin: "
@@ -557,11 +557,11 @@ Test Cases
 
 		Scenario: Verify account creation (with invalid inital balance input).
 		Test Step: Admin enters an account holder's name that is less than or equal to 20 characters and initial balance greater than $99999.99 into the create feature.
-		Test Input: 1. login
-					2. admin
-					3. create
-					4. Lock Lan
-					5. $199999.99
+		Test Input: login
+					admin
+					create
+					Lock Lan
+					$199999.99
 		Expected Result: Transaction is denied and the admin is notified that the initial balance is to much.
 		Expected Output: - Print: "Please enter your session type: "
 						 - Print: "Please enter a command admin: "
@@ -572,11 +572,11 @@ Test Cases
 		
 		Scenario: Verify account creation (with both inputs being invalid).
 		Test Step: Admin enters an account holder's name that is greater than 20 characters and initial balance greater than $99999.99 into the create feature.
-		Test Input: 1. login
-					2. admin
-					3. create
-					4. 123456789012345678901
-					5. $199999.99
+		Test Input: login
+					admin
+					create
+					123456789012345678901
+					$199999.99
 		Expected Result: Transaction is denied and the admin is notified that the initial balance is to much.
 		Expected Output: - Print: "Please enter your session type: "
 						 - Print: "Please enter a command admin: "
@@ -587,9 +587,9 @@ Test Cases
 		
 		Scenario: Verify normal users can not access the create feature.
 		Test Step: Normal user attempts to use the create feature.
-		Test Input: 1. login
-					2. John Doe
-					3. create
+		Test Input: login
+					John Doe
+					create
 		Expected Result: The command is rejected.
 		Expected Output: - Print: "Please enter your session type: "
 						 - Print: "Please enter a login name: "
@@ -599,12 +599,12 @@ Test Cases
 		
 		Scenario: Verify account is not available in the same session.
 		Test Step: A transaction is done with the newly created account holder's name and account number.
-		Test Input: 1. login
-					2. standard
-					3. Jack Nat
-					4. withdrawal
-					5. 12349
-					6. 70
+		Test Input: login
+					standard
+					Jack Nat
+					withdrawal
+					12349
+					70
 		Expected Result: Transaction is denied because the file hasn't been sent to the back end yet for processing (same session)
 		Expected Output: - Print: "Please enter your session type: "
 						 - Print: "Please enter a login name: "
