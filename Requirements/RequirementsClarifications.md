@@ -60,7 +60,7 @@ Informal Customer Requirements for the Front End/Transaction Code Details
     is made. Do this first, so that if someone tries to withdraw 400$ from a
     400$ account, it is rejected since the 5-10 cents will be removed before
     the withdraw happens.
- - Can take variable amounts (due to the existence of cheques)
+ - restricted to canadian currency paper amounts (see above)
 - transfer
   - Transfers are > $0
 - paybill
@@ -68,7 +68,7 @@ Informal Customer Requirements for the Front End/Transaction Code Details
     initialism
     - at least, this assumption "is fine"
 - deposit
- - restricted to canadian currency paper amounts (see above)
+ - Can take variable amounts (due to the existence of cheques)
 - create
   - Truncate account names if necessary
   - By default, accounts should be non-student plans.
