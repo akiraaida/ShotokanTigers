@@ -61,14 +61,20 @@ Informal Customer Requirements for the Front End/Transaction Code Details
     400$ account, it is rejected since the 5-10 cents will be removed before
     the withdraw happens.
  - restricted to canadian currency paper amounts (see above)
+ - * incurs fees in standard mode
+ - Limit is per account; can withdraw max amount twice if it's from different accounts
+ - Limit is for entire day
 - transfer
   - Transfers are > $0
+  - * incurs fees in standard mode
 - paybill
   - For paying bills will the company name always be provided as the 2 letter
     initialism
     - at least, this assumption "is fine"
+  - * incurs fees in standard mode
 - deposit
  - Can take variable amounts (due to the existence of cheques)
+ - * incurs fees in standar mdoe
 - create
   - Truncate account names if necessary
   - By default, accounts should be non-student plans.
