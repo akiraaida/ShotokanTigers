@@ -12,17 +12,99 @@ Test Cases
 	Enable - Kathryn 
 	================
   [* Login/logout issues covered elsewhere?]
+  
   Scenario: Verify account when disabled [* partial cp]
   Scenario: Verify account when enabled [* partial cp]
   Scenario: Verify account when deleted [*cp]
-  Scenario: Verify normal users can not access the enable feature. [*cp]
-  Scenario: Verify account holder's name and account number correspond with each other (Incorrect name, correct number). [*cp]
-  Scenario: Verify account holder's name and account number correspond with each other (Correct name, incorrect number). [*cp]
-  Scenario: Verify account holder's name and account number correspond with each other (Correct name, correct number but not matching). [*cp]
+  
+  Scenario: Verify normal users can not access the enable feature.
+  Test Step: Normal user attempts to use the enable feature.
+  Test Input:
+        login
+        standard
+        John Doe
+        enable
+  Expected Result: The command is rejected.
+  Expected Output: - Print: "Please enter your session type: "
+           - Print: "Please enter a login name: "
+           - Print: "Please enter a command user: "
+           - Print: "Error, you do not have the correct privileges to access this feature."
+           - File: "No change"
+  
+  Scenario: Verify account holder's name and account number correspond with each other (Incorrect name, correct number).
+  Test Step: Admin enters an incorrect account holder's name but correct account number.
+  Test Input: 
+        login
+        admin
+        enable
+        Bob Stevenson
+        12345
+  Expected Result: The admin is notified the account is not valid.
+  Expected Output: - Print: "Please enter your session type: "
+           - Print: "Please enter a command admin: "
+           - Print: "Please enter the account holder's name: "
+           - Print: "Please enter the account number: "
+           - Print: "Error, account specificed is not a valid account."
+           - File: No change.
+             
+             
+  Scenario: Verify account holder's name and account number correspond with each other (Correct name, incorrect number).
+  Test Step: Admin enters a correct account holder's name but incorrect account number.
+  Test Input: 
+        login
+        admin
+        enable
+        Bran Bob
+        11111
+  Expected Result: The admin is notified the account is not valid.
+  Expected Output: - Print: "Please enter your session type: "
+           - Print: "Please enter a command admin: "
+           - Print: "Please enter the account holder's name: "
+           - Print: "Please enter the account number: "
+           - Print: "Error, account specificed is not a valid account."
+           - File: No change.
+                     
+  Scenario: Verify account holder's name and account number correspond with each other (Correct name, correct number but not matching).
+  Test Step: Admin enters a correct account holder and correct account number but they do not correspond to each other.
+  Test Input: 
+        login
+        admin
+        enable
+        Bran Bob
+        12346
+  Expected Result: The admin is notified the account is not valid.
+  Expected Output: - Print: "Please enter your session type: "
+           - Print: "Please enter a command admin: "
+           - Print: "Please enter the account holder's name: "
+           - Print: "Please enter the account number: "
+           - Print: "Error, account specificed is not a valid account."
+           - File: No change.
+                     
+                     
   Scenario: Verify user withdraw transaction can now be done to a re-enabled account. [partial *cp]
   Scenario: Verify user deposit transaction can now be done to a re-enabled account. [partial *cp]
   Scenario: Verify user paybill transaction can now be done to a re-enabled account. [partial *cp]
-  Scenario: Verify delete transaction will not be done to a re-enabled account. [*cp]
+  
+  Scenario: Verify delete transaction can no longer be done to a re-enabled account.
+  Test Step: Enter the re-enabled account's correct account holder's name and account number in the delete feature.
+  Test Input: login
+        admin
+        enable
+        Bran Bob
+        12347
+        delete
+        Bran Bob
+        12347
+  Expected Result: Command is denied because the account is deleted.
+  Expected Output: - Print: "Please enter your session type: "
+           - Print: "Please enter a command admin: "
+           - Print: "Please enter the account holder's name: "
+           - Print: "Please enter the account number: "
+           - Print: "Please enter the account holder's name: "
+           - Print: "Please enter the account number: "
+           - Print: [*TODO @Kathryn after talk to Akira: output message for deleting non-disabled account]
+           - File: No change
+  
   Scenario: Verify user transfer transaction can now be done with a re-enabled account (From an account to a re-enabled account). [partial *cp]
   Scenario: Verify user transfer transaction can now be done with a re-enabled account (From a re-enabled account to another account). [partial *cp]
   [* NOTE: do both admin and standard mode checks need to happen for standard permission functions?]
