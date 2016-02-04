@@ -384,3 +384,39 @@ does this mean that there need to be a test case for showing the deduction worki
 
 Mike Miljanovic [6:16 PM] 
 you should test as much as possible :simple_smile:
+
+Nicholas Gregorio [6:56 PM] 
+Should the user ever be shown their balance before/after transactions, or is it assumed that they know it?
+
+Mike Miljanovic [6:59 PM] 
+That's an interface feature so for now, it's up to you. The constraints don't specify what the interface needs to look like.
+
+[6:59] 
+Certainly from a debugging aspect it helps to be able to see the balance, but that's your call
+
+Colton Howe [7:52 PM] 
+When doing the PayBill function, the account number the user provides must match the valid account number of the user logged in.
+Since the admin doesn't have an account, does this mean the admin can pay bills for any account?
+Also, to the tune of a question asked above, the maximum amount of money that can be paid to a bill holder in current session is $2000. Is this also supposed to be "current day"?(edited)
+
+Mike Miljanovic [8:02 PM] 
+Yes, an admin can pay a bill for any account. Yes, should also be current day.
+
+Colton Howe [8:04 PM] 
+Thank you. Also do the three companies have their own accounts in the system we should be processing the money to?
+
+Mike Miljanovic [8:06 PM] 
+Not at the moment.
+
+Jeremy Kwok [9:31 PM] 
+When we try to disable/enable that is already disabled/enabled, will there be an error, or will it continue, preserve the disable/enabled status, and log that into the transaction record?
+
+Mike Miljanovic [9:32 PM] 
+should just fail and not do anything
+
+[9:32] 
+don't log it
+
+Jeremy Bradbury [9:36 PM] 
+To add to Mike's response: it should fail ​_gracefully_​ (i.e. With an error message to the terminal) and not be logged in the transaction file
+1  
