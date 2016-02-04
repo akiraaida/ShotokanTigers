@@ -307,6 +307,47 @@ Test Cases
 
 	Deposit - Kathryn
 	================
+  Summary of previous:
+  - Verify login session
+    - no logins
+    - logged out
+  - React to permissions accordingly
+    - depending on whether or not is admin-exclusive function
+      - admin exclusive:
+        - reject standard mode usage
+      - not admin exclusive:
+        - get account
+          - validate account/number combination for admin
+          - ask a different question for user if any
+        - don't charge admins transaction fees
+        - limits do not apply to admins usually but do to standard
+  - Check valid monetary input
+    - no negatives
+    - proper formatting
+    - shouldn't be 0 for any of these probably
+    - some must conform to canadian currency
+      - check that all dollar bills are supported
+      - check that too small amounts are rejected
+      - check that values that can't be billerized aren't output
+      - check that truncated lines aren't valid (where appropriate?)
+  - Don't exceed max/drop into overdraft
+    - keeping in mind transaction fees
+    - check
+      - breach limit
+      - at limit
+      - below limit
+    - try it
+      - for 1 call
+      - for several calls
+      - for several sessions
+        - login logout into same
+        - login logout login into different login into first
+      - over several accounts
+        - check that limit is not enforced as if for same account
+          - held funds (deposit)
+          - transaction fees
+          - limit
+          - after admin action?
 
 	Change Plan - Akira
 	================
