@@ -11,411 +11,97 @@ Test Cases
 
 	Enable - Kathryn 
 	================
-  
-    Scenario: Enable a disabled account in admin mode
-    -----
-		Test Step: In admin mode, enable a disabled account 
-		Test Input: 
-					login
-          admin
-          enable
-          Bran Bob
-          12347
-		Expected Result: - Print: 
-						 - File: Transaction changing 'D' to 'A' for Bran Bob
-		Expected Output: - 
-						 - 
-             
-    Scenario: Try to enable an already active account
-    ----
-		Test Step: In admin mode, enable an active account
-		Test Input: 
-					login
-          admin
-          enable
-          John Doe
-          12345
-		Expected Result:  
-		Expected Output: - 
-						 - 
-             
-    [Account Verification] Scenario: Try to enable a deleted account
-    ----
-		Test Step: 
-		Test Input: 
-					1. 
-		Expected Result: 
-		Expected Output: - 
-						 - 
-             
-    [Account Verification] Scenario: Enable invalid account (bad name)
-    ----
-		Test Step: 
-		Test Input: 
-					1. 
-		Expected Result: 
-		Expected Output: - 
-						 - 
-             
-    [Account Verification] Scenario: Enable invalid account (good name, bad number)
-    ----
-		Test Step: 
-		Test Input: 
-					1. 
-		Expected Result: 
-		Expected Output: - 
-						 - 
-             
-		[Permissions Verification] Scenario: Call 'Enable' in standard mode
-    -----
-		Test Step: 
-		Test Input: 
-					1. 
-		Expected Result: 
-		Expected Output: - 
-						 - 
-             
-    [Logout Verification] Scenario: Call 'Enable' when logged out
-    ----
-		Test Step: 
-		Test Input: 
-					1. 
-		Expected Result: 
-		Expected Output: - 
-						 - 
-             
-    [Logout Verification] Scenario: Call 'Enable' after admin logout
-    ----
-		Test Step: 
-		Test Input: 
-					1. 
-		Expected Result: 
-		Expected Output: - 
-						 - 
-             
-    [Logout Verification] Scenario: Call 'Enable' after standard logout
-    ----
-		Test Step: 
-		Test Input: 
-					1. 
-		Expected Result: 
-		Expected Output: - 
-						 - 
+  [* Login/logout issues covered elsewhere?]
+  Scenario: Verify account when disabled [* partial cp]
+  Scenario: Verify account when enabled [* partial cp]
+  Scenario: Verify account when deleted [*cp]
+  Scenario: Verify normal users can not access the enable feature. [*cp]
+  Scenario: Verify account holder's name and account number correspond with each other (Incorrect name, correct number). [*cp]
+  Scenario: Verify account holder's name and account number correspond with each other (Correct name, incorrect number). [*cp]
+  Scenario: Verify account holder's name and account number correspond with each other (Correct name, correct number but not matching). [*cp]
+  Scenario: Verify user withdraw transaction can now be done to a re-enabled account. [partial *cp]
+  Scenario: Verify user deposit transaction can now be done to a re-enabled account. [partial *cp]
+  Scenario: Verify user paybill transaction can now be done to a re-enabled account. [partial *cp]
+  Scenario: Verify delete transaction will not be done to a re-enabled account. [*cp]
+  Scenario: Verify user transfer transaction can now be done with a re-enabled account (From an account to a re-enabled account). [partial *cp]
+  Scenario: Verify user transfer transaction can now be done with a re-enabled account (From a re-enabled account to another account). [partial *cp]
+  [* NOTE: do both admin and standard mode checks need to happen for standard permission functions?]
              
 	Withdrawal - Kathryn
 	================
-    Scenario: Good Guy Scenario
-    ----
-    Test Step: Valid Standard Mode Account withdrawal within limit
-    
-    Scenario: Good Guy Scenario
-    ----
-    Test Step: Valid Standard Mode Account withdrawal exactly at limit
-    
-    Scenario: Not Good Guy Scenario
-    ----
-    Test Step: Valid Standard Mode Account withdrawal out of bounds
-    
-    Scenario: maximum withdrawals
-    ----
-    Test Step: Withdraw everything to cash limit in 20s over many withdraws
-    
-    Scenario: maximum withdrawals 2
-    -----
-    Test Step: Withdraw everything to cash limit in 5s over many withdraws
-    
-    Scenario: too low withdrawal
-    -----
-    Test Step: make a withdrawal under $5
-    
-    Scenario: too low withdrawal: admin edition
-    -----
-    Test Step: make a withdrawal under $5...as an admin
-    
-    Scenario: too weird withdrawal
-    -----
-    Test Step: make a withdrawal with a value like $27 dollars
-    
-    Scenario: Do you know what a $50 dollars is
-    ----
-    Test Step: make a withdrawal of $50 and see if it knows
-    
-    Scenairo: Does it know what a $5 is
-    ----
-    Test Step: Make a $5 withdrawal
-    
-    Scenario: 2 withdraw scenario
-    ----
-    Test Step: Standard mode withdrawal adding up past breach
-    
-    Scenario: 2 withdraw scenario but it's okay
-    ----
-    Test Step: Standard mode withdrawal adding up within breach
-    
-    Scenario: 2 withdraw scenario at limit
-    -----
-    Test Step: Standard mode withdrawal adding up at exactly the threshold
-    
-    Scenario: 2 session scenario
-    ----
-    Test Step: Standard mode withdrawal login, logout, login past breach
-    
-    Scenario: 2 session scenario but it's okay
-    ----
-    Test Step: Standard mode withdrawal login, logout, login within threshold
-    
-    Scenario: 2 session scenario at limit
-    -----
-    Test Step: same stuff but exactly $500
-    
-    Scenario: Admin Scenario
-    ----
-    Test Step: Admin makes a withdrawal within bounds
-    
-    Scenario: Admin Powers Scenario
-    ----
-    Test Step: Admin makes a withdrawal out of bounds
-    
-    Scenario: Overdraw as Admin
-    -----
-    Test Step: overdraw past amount of money as admin
-    
-    Scenario: Overdraw as Admin in 2 withdraws
-    -----
-    Test Step: overdraw past amount of money in 2 steps
-    
-    Scenario: Overdraw as Admin in 2 sessions
-    -----
-    Test Step: what it says on the tin
-    
-    Scenario: Overdraw in Standard Mode
-    -----
-    Test Step: make 1 withdraw to exceed balance
-    
-    Scenario: Overdraw in 2 steps
-    ----
-    Test Step: make 2 withdrawals to exceed balance
-    
-    Scenario: Overdraw in 2 sessions
-    ----
-    Test Step: after logout, overdraw
-    
-    Scenario: Clean it out
-    ----
-    Test Step: take out all the money as a standard user
-    
-    Scenario: Take max amount of money from 2 accounts
-    -----
-    Test Step: take $500 from 2 accounts
-    
-    Scenario: Withdraw from 2 accounts
-    -----
-    Test Step: take money from 2 accounts
-    
-    Scenario: Withdraw an amount from 1 account that would exceed another
-        account
-    -----
-    
-    Scenario: Deposit then try to get deposited funds
-    -----
-    Test Step: Deposit money that's like current balance + 1 or something then
-      try to take out current balance + 1
-      
-    Scenario: Withdraw, deposit, then try to get an invalid amount
-    -----
-    Test Step: Withdraw money, deposit so that it's back to original balance,
-        then try to withdraw original balance.
-        
-    Scenario: Deposit then withdraw an appropriate amount
-    -----
-    Test Step: Like the other one, but within bounds.
-    
-    Scenario: Withdraw, deposit, withdraw an appropriate amount
-    -----
-    Test Step: Withdraw so that there is $30, deposit some amount of money, Withdraw last $30.
-  
-  
-    Scenario: Withdraw, but the fees would put your balance below zero
-    ----
-    Test Step:
-    
-    
-  *TODO @Kathryn after other withdrawal functions defined: copypasta Account
-      Verification w disable check*
-  
-  *TODO @Kathryn ditto: copypasta Permission things incl diff between standard & admin
-      mode*
-  
-  *TODO @Kathryn ditto: copypasta Logout Verification*
+  [* Login/logout issues covered elsewhere?]
+  Scenario: Verify account holder's name and account number correspond with each other (Incorrect name, correct number). [*cp]
+  Scenario: Verify account holder's name and account number correspond with each other (Correct name, incorrect number). [*cp]
+  Scenario: Verify account holder's name and account number correspond with each other (Correct name, correct number but not matching). [*cp]
+  Scenario: Verify standard mode user's name and account number correspond with each other (Correct name, incorrect number). [partial *cp]
+  Scenario: Verify standard mode user's name and held account number correspond with each other (Correct name, correct number but not matching). [partial *cp]
+  Scenario: Verify negative dollars input for admin
+  Scenario: Verify input dollars of $0 for admin
+  Scenario: Verify input of ######.##
+  Scenario: Verify input of ####.##
+  Scenario: Verify input of .##
+  Scenario: Verify input of #
+  Scenario: Verify input of ########
+  Scenario: Verify input of $######.##
+  Scenario: Verify input of $ ######.##
+  Scenario: Verify input of ######.##$
+  Scenario: Verify input of ######.## $
+  Scenario: Verify input of ######,##
+  Scenario: Verify input of $######,##
+  Scenario: Verify input of ######.##$
+  Scenario: Verify input of ###### ##
+  Scenario: Verify input of ######.###
+  Scenario: Verify input of 0000#.##
+  Scenario: Verify input of ######.# (legit)
+  Scenario: Verify input of <$5
+  Scenario: Verify input of $5
+  Scenario: Verify input of $5*k
+  Scenario: Verify input of $5 + invalid
+  Scenario: Verify input of $10
+  Scenario: Verify input of $10*k
+  Scenario: Verify combo of $10 & $5
+  Scenario: Verify $50
+  Scenario: Verify single account withdraw limit
+  Scenario: Verify single account withdraw limit for multiple calls
+  Scenario: Verify single account withdraw limit for multiple sessions
+  Scenario: Verify withdrawal transaction fee is applied for standard
+  Scenario: Verify several withdrawal tranasaction fees are applied for several calls
+  Scenario: Verify single account withdraw limit for admins doesn't apply
+  Scenario: Verify single account withdraw limit for admins does not incur transaction fee
+  Scenario: Verify separate account limits with 1st rejected at limit and 2nd accepted
+  Scenario: Verify separate account limits with both accepted for amount over limit
+  Scenario: Verify separate account limits with both accepted
+  Scenario: Verify admin withdrawals before user withdrawal does not affect limit
+  Scenario: Verify admin withdrawals after user withdrawal does not come into confict with limit
+  Scenario: Verify withdrawal with resulting positive balance
+  Scenario: Verify withdrawal with resulting negative balance accounts for withdrawal transaction feeScenario: Verify withdrawal with resulting zero balance
+  Scenario: Verify withdrawal with resulting negative balance
+  Scenario: Verify withdrawal with resulting negative balance accounts for previous transaction fee from previous withdrawal
+  Scenario: Verify withdrawal with resulting negative balance accounts for previous transaction fee from previous transfer
+  Scenario: Verify withdrawal with resulting negative balance accounts for previous transaction fee from previous paybill
+  Scenario: Verify withdrawal with resulting negative balance accounts for previous transaction fee from previous deposit
+  Scenario: Verify withdrawal for resulting negative balance on last of multiple calls
+  Scenario: Verify withdrawal for resulting zero balance on last of multiple calls
+  Scenario: Verify withdrawal for resulting positive balance on last of multiple calls
+  Scenario: Verify withdrawal for resulting negative balance over multiple sessions
+  Scenario: Verify withdrawal for resulting zero balance over multiple sessions
+  Scenario: Verify withdrawal for resulting positive balance over multiple sessions
+  Scenario: Verify withdrawal for resulting negative balance after session as different user
+  Scenario: Verify withdrawal for resulting zero balance after session as different user
+  Scenario: Verify withdrawal for resulting positive balance after session as different user
+  Scenario: Verify withdrawal for resulting negative balance as admin
+  Scenario: Verify withdrawal for resulting zero balance as admin
+  Scenario: Verify withdrawal for resulting positive balance as admin
 
 	Paybill - Kathryn
 	================
-  
-    Scenario: Ask for transfer to 3 correct recipients
-    -----
-    Test Step: pay bills to each of EC, CQ, TV
+  [* Login/logout issues covered elsewhere?]
     
-    Scenario: Ask for fake transfer
-    -----
-    Test Step: ask for CE, QC, & VT
-    
-    Scenario: Ask for transfer that truncates to correct one
-    -----
-    Test Step: ask for ECA, CQB, TVC
-    
-    Scenario: Ask for transfer past $2000 in standard mode
-    ----
-    Test Step: do that
-    
-    Scenario: Ask for transfer at $2000 in standard mode
-    -----
-    
-    Scenario: Ask for transfer past balance
-    -----
-    
-    Scenario: Ask for transfer past $2000 in admin mode
-    -----
-    
-    Scenario Ask for transfer past balance & transaction fee
-    -----
-    
-    Scenario: Ask for transfer past $2000 to each recipient
-    -----
-    
-    Scenario: Ask for transfer adding up to $2000 to one recipient
-    -----
-    
-    Scenario: Ask to transfer $0
-    -----
-    
-    Scenario: Ask to transfer negative values
-    -----
-    
-    Scenario: Ask for transfer in admin mode
-    ----
-    Test Step: ensure no transaction fees are applied
-  
-    
-    
-  *TODO @Kathryn after other paybill functions defined: copypasta Account
-      Verification w disable check*
-  
-  *TODO @Kathryn ditto: copypasta Permission things incl diff between standard & admin
-      mode*
-  
-  *TODO @Kathryn ditto: copypasta Logout Verification*
 
 	Deposit - Kathryn
 	================
-  Summary of previous:
-  - Verify login session
-    - Alex will cover?
-    - no logins
-    - logged out
-  - React to permissions accordingly
-    - depending on whether or not is admin-exclusive function
-      - admin exclusive:
-        - reject standard mode usage
-      - not admin exclusive:
-        - get account
-          - validate account/number combination for admin
-          
-            Scenario: Verify account holder's name and account number correspond with each other (Incorrect name, correct number).
-            Test Step: Admin enters an incorrect account holder's name but correct account number.
-            Test Input: 
-                  login
-                  admin
-                  changeplan
-                  Bob Stevenson
-                  12345
-            Expected Result: The admin is notified the account is not valid.
-            Expected Output: - Print: "Please enter your session type: "
-                     - Print: "Please enter a command admin: "
-                     - Print: "Please enter the account holder's name: "
-                     - Print: "Please enter the account number: "
-                     - Print: "Error, account specificed is not a valid account."
-                     - File: No change.
-                     
-            Scenario: Verify account holder's name and account number correspond with each other (Correct name, incorrect number).
-            Test Step: Admin enters a correct account holder's name but incorrect account number.
-            Test Input: 
-                  login
-                  admin
-                  changeplan
-                  John Doe
-                  11111
-            Expected Result: The admin is notified the account is not valid.
-            Expected Output: - Print: "Please enter your session type: "
-                     - Print: "Please enter a command admin: "
-                     - Print: "Please enter the account holder's name: "
-                     - Print: "Please enter the account number: "
-                     - Print: "Error, account specificed is not a valid account."
-                     - File: No change.
-                   
-                   
-            Scenario: Verify account holder's name and account number correspond with each other (Correct name, correct number but not matching).
-            Test Step: Admin enters a correct account holder and correct account number but they do not correspond to each other.
-            Test Input: 
-                  login
-                  admin
-                  changeplan
-                  John Doe
-                  12346
-            Expected Result: The admin is notified the account is not valid.
-            Expected Output: - Print: "Please enter your session type: "
-                     - Print: "Please enter a command admin: "
-                     - Print: "Please enter the account holder's name: "
-                     - Print: "Please enter the account number: "
-                     - Print: "Error, account specificed is not a valid account."
-                     - File: No change.
-                   
-          - ask a different question for user if any
-          
-            Scenario: Verify normal users can not access the changeplan feature.
-            Test Step: Normal user attempts to use the changeplan feature.
-            Test Input:
-                  login
-                  standard
-                  John Doe
-                  changeplan
-            Expected Result: The command is rejected.
-            Expected Output: - Print: "Please enter your session type: "
-                     - Print: "Please enter a login name: "
-                     - Print: "Please enter a command user: "
-                     - Print: "Error, you do not have the correct privileges to access this feature."
-                     - File: "No change"
-             
-        - don't charge admins transaction fees
-        - limits do not apply to admins usually but do to standard
-  - Verify account validity
-    - Akira has covered for deleted/disabled accounts (except for enable?)
-  - Check valid monetary input
-    - no negatives
-    - proper formatting
-    - shouldn't be 0 for any of these probably
-    - some must conform to canadian currency
-      - check that all dollar bills are supported
-      - check that too small amounts are rejected
-      - check that values that can't be billerized aren't output
-      - check that truncated lines aren't valid (where appropriate?)
-  - Don't exceed max/drop into overdraft
-    - keeping in mind transaction fees
-    - check
-      - breach limit
-      - at limit
-      - below limit
-    - try it
-      - for 1 call
-      - for several calls
-      - for several sessions
-        - login logout into same
-        - login logout login into different login into first
-      - over several accounts
-        - check that limit is not enforced as if for same account
-          - held funds (deposit)
-          - transaction fees
-          - limit
-          - after admin action?
+  [* Login/logout issues covered elsewhere?]
+  
 
 	Change Plan - Akira
 	================
