@@ -16,6 +16,7 @@ General
 - We are assuming this bank is Canadian currency only [in terms of dollar bill amounts]
   - including $5, $10, $20, $50, $100
 - This conversation:
+
       Santiago Bonada [4:55 PM] 
       the format of the bank account transaction file for each transaction is
       CC_AAAAAAAAAAAAAAAAAAAA_NNNNN_PPPPPPPP_QM while the format for current bank
@@ -24,6 +25,7 @@ General
 
       Mike Miljanovic [4:59 PM] 
       I'll leave it up to @jeremy if he wants to change that
+      
 - you should test as much as possible
 
 Current Bank Accounts File (Front End)
@@ -38,8 +40,8 @@ Current Bank Accounts File & Master Bank Accounts File (Back End)
 ​- *Everyone can add an extra flag to the end of the current and master bank
     accounts files, e.g. NNNNN_AAAAAAAAAAAAAAAAAAAA_S_PPPPPPPP_Q, where Q is S
     for student plans and N for non-student plans.*​
-
-
+    
+    
 The Front End
 ===
 
@@ -86,18 +88,19 @@ Informal Customer Requirements for the Front End/Transaction Code Details
     - If the program sees a transaction code of 00, it can ignore the rest. The
         other data does not matter for the end of session line
 - Transaction Code 09
-  enable – enable a bank account
-  • should ask for the bank account holder’s name (as a text line)
-  • should ask for the account number (as a text line)
-  • should change the bank account from disabled (D) to active (A)
-  • should save this information for the bank account transaction file
-  • Constraints:
-  o privileged transaction - only accepted when logged in admin
-  mode
-  o Account holder’s name must be the name of an existing
-  account holder
-  o Account number must be the number of the account holder
-  specified
+  enable 
+  enable a bank account
+    - should ask for the bank account holder’s name (as a text line)
+    - should ask for the account number (as a text line)
+    - should change the bank account from disabled (D) to active (A)
+    - should save this information for the bank account transaction file 
+  Constraints:
+    - privileged transaction - only accepted when logged in admin
+        mode
+    - Account holder’s name must be the name of an existing
+        account holder
+    - Account number must be the number of the account holder
+        specified
 
 General Requirements for the Front End
 ----
@@ -136,6 +139,13 @@ General Requirements for the Front End
 
     Mike Miljanovic [12:28 PM] 
     basically yes
+- When a terminal command fails (e.g. enable an already enabled account) the
+    behaviour should be as follows: "it should fail ​_gracefully_​ (i.e. With
+    an error message to the terminal) and not be logged in the transaction
+    file"
+
+    
+    
 Bank Account Transaction File
 ----
 - This conversation:
@@ -164,6 +174,13 @@ Permissions
   unless the account is disabled. Reject log ins for non-matching
   name/accounts, even if they are an admin.
 - Admins are allowed any amount that fits in the format.
+    
+    
+Implementation-Dependent things
+----
+- "That's an interface feature so for now, it's up to you...From a debugging
+    aspect it helps to be able to see the balance, but that's your call"
+
     
 The Back End
 ====
