@@ -9,35 +9,38 @@ Test Cases
 	Transfer - Alex
 	================
 
-	Enable - Kathryn (THIS ONE IS NEW, READ SLACK)
+	Enable - Kathryn 
 	================
   
-    Scenario: Enable a disabled account in admin mode
+    Enable a disabled account in admin mode
+    -----
 		Test Step: In admin mode, enable a disabled account 
 		Test Input: 
-					1. login
-          2. admin
-          3. enable
-          4. Bran Bob
-          5. 12347
+					login
+          admin
+          enable
+          Bran Bob
+          12347
 		Expected Result: - Print: 
 						 - File: Transaction changing 'D' to 'A' for Bran Bob
 		Expected Output: - 
 						 - 
              
-    Scenario: Try to enable an active account
+    Try to enable an active account
+    ----
 		Test Step: In admin mode, enable an active account
 		Test Input: 
-					1. login
-          2. admin
-          3. enable
-          4. John Doe
-          5. 12345
+					login
+          admin
+          enable
+          John Doe
+          12345
 		Expected Result:  
 		Expected Output: - 
 						 - 
              
-    Scenario: Try to enable a deleted account
+    Try to enable a deleted account
+    ----
 		Test Step: 
 		Test Input: 
 					1. 
@@ -45,7 +48,8 @@ Test Cases
 		Expected Output: - 
 						 - 
              
-    Scenario: Call 'Enable' when logged out  [ logout, redundant? ]
+    Call 'Enable' when logged out
+    ----
 		Test Step: 
 		Test Input: 
 					1. 
@@ -53,7 +57,8 @@ Test Cases
 		Expected Output: - 
 						 - 
              
-    Scenario: Enable invalid account (bad name) [ account validation, redundant? ]
+    Enable invalid account (bad name)
+    ----
 		Test Step: 
 		Test Input: 
 					1. 
@@ -61,16 +66,8 @@ Test Cases
 		Expected Output: - 
 						 - 
              
-    Scenario: Enable invalid account (good name, bad number) [ account validation, redundant? ]
-		Test Step: 
-		Test Input: 
-					1. 
-		Expected Result: 
-		Expected Output: - 
-						 - 
-
-<<<<<<< HEAD
-		Scenario: Call 'Enable' in standard mode [ admin priv, redundant? ]
+    Enable invalid account (good name, bad number)
+    ----
 		Test Step: 
 		Test Input: 
 					1. 
@@ -78,7 +75,8 @@ Test Cases
 		Expected Output: - 
 						 - 
              
-    Scenario: Call 'Enable' when logged out  [ logout, redundant? ]
+		Call 'Enable' in standard mode
+    -----
 		Test Step: 
 		Test Input: 
 					1. 
@@ -86,10 +84,34 @@ Test Cases
 		Expected Output: - 
 						 - 
              
-	Withdraw - Alex
-=======
+    Call 'Enable' when logged out
+    ----
+		Test Step: 
+		Test Input: 
+					1. 
+		Expected Result: 
+		Expected Output: - 
+						 - 
+             
+    Call 'Enable' after admin logout
+    ----
+		Test Step: 
+		Test Input: 
+					1. 
+		Expected Result: 
+		Expected Output: - 
+						 - 
+             
+    Call 'Enable' after standard logout
+    ----
+		Test Step: 
+		Test Input: 
+					1. 
+		Expected Result: 
+		Expected Output: - 
+						 - 
+             
 	Withdrawal - Kathryn
->>>>>>> master
 	================
 
 	Paybill - Kathryn
