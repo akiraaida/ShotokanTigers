@@ -112,9 +112,55 @@ Test Cases
 	Withdrawal - Kathryn
 	================
   [* Login/logout issues covered elsewhere?]
-  Scenario: Verify account holder's name and account number correspond with each other (Incorrect name, correct number). [*cp]
-  Scenario: Verify account holder's name and account number correspond with each other (Correct name, incorrect number). [*cp]
-  Scenario: Verify account holder's name and account number correspond with each other (Correct name, correct number but not matching). [*cp]
+  Scenario: Verify account holder's name and account number correspond with each other (Incorrect name, correct number).
+  Test Step: Admin enters an incorrect account holder's name but correct account number.
+  Test Input: 
+        login
+        admin
+        withdrawal
+        Bob Stevenson
+        12345
+  Expected Result: The admin is notified the account is not valid.
+  Expected Output: - Print: "Please enter your session type: "
+           - Print: "Please enter a command admin: "
+           - Print: "Please enter the account holder's name: "
+           - Print: "Please enter the account number: "
+           - Print: "Error, account specificed is not a valid account."
+           - File: No change.
+             
+             
+  Scenario: Verify account holder's name and account number correspond with each other (Correct name, incorrect number).
+  Test Step: Admin enters a correct account holder's name but incorrect account number.
+  Test Input: 
+        login
+        admin
+        withdrawal
+        Bran Bob
+        11111
+  Expected Result: The admin is notified the account is not valid.
+  Expected Output: - Print: "Please enter your session type: "
+           - Print: "Please enter a command admin: "
+           - Print: "Please enter the account holder's name: "
+           - Print: "Please enter the account number: "
+           - Print: "Error, account specificed is not a valid account."
+           - File: No change.
+                     
+  Scenario: Verify account holder's name and account number correspond with each other (Correct name, correct number but not matching).
+  Test Step: Admin enters a correct account holder and correct account number but they do not correspond to each other.
+  Test Input: 
+        login
+        admin
+        enable
+        Bran Bob
+        12346
+  Expected Result: The admin is notified the account is not valid.
+  Expected Output: - Print: "Please enter your session type: "
+           - Print: "Please enter a command admin: "
+           - Print: "Please enter the account holder's name: "
+           - Print: "Please enter the account number: "
+           - Print: "Error, account specificed is not a valid account."
+           - File: No change.
+           
   Scenario: Verify standard mode user's name and account number correspond with each other (Correct name, incorrect number). [partial *cp]
   Scenario: Verify standard mode user's name and held account number correspond with each other (Correct name, correct number but not matching). [partial *cp]
   Scenario: Verify negative dollars input for admin
