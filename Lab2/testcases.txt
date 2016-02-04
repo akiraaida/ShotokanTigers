@@ -150,7 +150,7 @@ Test Cases
   Test Input: 
         login
         admin
-        enable
+        withdrawal
         Bran Bob
         12346
   Expected Result: The admin is notified the account is not valid.
