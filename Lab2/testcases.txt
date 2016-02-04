@@ -12,7 +12,7 @@ Test Cases
 	Enable - Kathryn 
 	================
   
-    Enable a disabled account in admin mode
+    Scenario: Enable a disabled account in admin mode
     -----
 		Test Step: In admin mode, enable a disabled account 
 		Test Input: 
@@ -26,7 +26,7 @@ Test Cases
 		Expected Output: - 
 						 - 
              
-    Try to enable an active account
+    Scenario: Try to enable an already active account
     ----
 		Test Step: In admin mode, enable an active account
 		Test Input: 
@@ -39,7 +39,7 @@ Test Cases
 		Expected Output: - 
 						 - 
              
-    Try to enable a deleted account
+    [Account Verification] Scenario: Try to enable a deleted account
     ----
 		Test Step: 
 		Test Input: 
@@ -48,7 +48,7 @@ Test Cases
 		Expected Output: - 
 						 - 
              
-    Call 'Enable' when logged out
+    [Account Verification] Scenario: Enable invalid account (bad name)
     ----
 		Test Step: 
 		Test Input: 
@@ -57,7 +57,7 @@ Test Cases
 		Expected Output: - 
 						 - 
              
-    Enable invalid account (bad name)
+    [Account Verification] Scenario: Enable invalid account (good name, bad number)
     ----
 		Test Step: 
 		Test Input: 
@@ -66,16 +66,7 @@ Test Cases
 		Expected Output: - 
 						 - 
              
-    Enable invalid account (good name, bad number)
-    ----
-		Test Step: 
-		Test Input: 
-					1. 
-		Expected Result: 
-		Expected Output: - 
-						 - 
-             
-		Call 'Enable' in standard mode
+		[Permissions Verification] Scenario: Call 'Enable' in standard mode
     -----
 		Test Step: 
 		Test Input: 
@@ -84,7 +75,7 @@ Test Cases
 		Expected Output: - 
 						 - 
              
-    Call 'Enable' when logged out
+    [Logout Verification] Scenario: Call 'Enable' when logged out
     ----
 		Test Step: 
 		Test Input: 
@@ -93,7 +84,7 @@ Test Cases
 		Expected Output: - 
 						 - 
              
-    Call 'Enable' after admin logout
+    [Logout Verification] Scenario: Call 'Enable' after admin logout
     ----
 		Test Step: 
 		Test Input: 
@@ -102,7 +93,7 @@ Test Cases
 		Expected Output: - 
 						 - 
              
-    Call 'Enable' after standard logout
+    [Logout Verification] Scenario: Call 'Enable' after standard logout
     ----
 		Test Step: 
 		Test Input: 
@@ -113,6 +104,24 @@ Test Cases
              
 	Withdrawal - Kathryn
 	================
+    Scenario: Good Guy Scenario
+    ----
+    Test Step: Valid Standard Mode Account withdrawal within limit
+    
+    Scenario: Admin Scenario
+    ----
+    Test Step: Admin makes a withdrawal within bounds
+    
+    
+    
+  
+  *TODO @Kathryn after other withdrawal functions defined: copypasta Account
+      Verification w disable check*
+  
+  *TODO @Kathryn ditto: copypasta Permission things incl diff between standard & admin
+      mode*
+  
+  *TODO @Kathryn ditto: copypasta Logout Verification*
 
 	Paybill - Kathryn
 	================
