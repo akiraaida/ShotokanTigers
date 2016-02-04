@@ -40,8 +40,8 @@ Current Bank Accounts File & Master Bank Accounts File (Back End)
 ​- *Everyone can add an extra flag to the end of the current and master bank
     accounts files, e.g. NNNNN_AAAAAAAAAAAAAAAAAAAA_S_PPPPPPPP_Q, where Q is S
     for student plans and N for non-student plans.*​
-
-
+    
+    
 The Front End
 ===
 
@@ -139,6 +139,13 @@ General Requirements for the Front End
 
     Mike Miljanovic [12:28 PM] 
     basically yes
+- When a terminal command fails (e.g. enable an already enabled account) the
+    behaviour should be as follows: "it should fail ​_gracefully_​ (i.e. With
+    an error message to the terminal) and not be logged in the transaction
+    file"
+
+    
+    
 Bank Account Transaction File
 ----
 - This conversation:
@@ -167,6 +174,13 @@ Permissions
   unless the account is disabled. Reject log ins for non-matching
   name/accounts, even if they are an admin.
 - Admins are allowed any amount that fits in the format.
+    
+    
+Implementation-Dependent things
+----
+- "That's an interface feature so for now, it's up to you...From a debugging
+    aspect it helps to be able to see the balance, but that's your call"
+
     
 The Back End
 ====
