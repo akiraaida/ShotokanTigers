@@ -309,6 +309,7 @@ Test Cases
 	================
   Summary of previous:
   - Verify login session
+    - Alex will cover?
     - no logins
     - logged out
   - React to permissions accordingly
@@ -318,9 +319,76 @@ Test Cases
       - not admin exclusive:
         - get account
           - validate account/number combination for admin
+          
+            Scenario: Verify account holder's name and account number correspond with each other (Incorrect name, correct number).
+            Test Step: Admin enters an incorrect account holder's name but correct account number.
+            Test Input: 
+                  login
+                  admin
+                  changeplan
+                  Bob Stevenson
+                  12345
+            Expected Result: The admin is notified the account is not valid.
+            Expected Output: - Print: "Please enter your session type: "
+                     - Print: "Please enter a command admin: "
+                     - Print: "Please enter the account holder's name: "
+                     - Print: "Please enter the account number: "
+                     - Print: "Error, account specificed is not a valid account."
+                     - File: No change.
+                     
+            Scenario: Verify account holder's name and account number correspond with each other (Correct name, incorrect number).
+            Test Step: Admin enters a correct account holder's name but incorrect account number.
+            Test Input: 
+                  login
+                  admin
+                  changeplan
+                  John Doe
+                  11111
+            Expected Result: The admin is notified the account is not valid.
+            Expected Output: - Print: "Please enter your session type: "
+                     - Print: "Please enter a command admin: "
+                     - Print: "Please enter the account holder's name: "
+                     - Print: "Please enter the account number: "
+                     - Print: "Error, account specificed is not a valid account."
+                     - File: No change.
+                   
+                   
+            Scenario: Verify account holder's name and account number correspond with each other (Correct name, correct number but not matching).
+            Test Step: Admin enters a correct account holder and correct account number but they do not correspond to each other.
+            Test Input: 
+                  login
+                  admin
+                  changeplan
+                  John Doe
+                  12346
+            Expected Result: The admin is notified the account is not valid.
+            Expected Output: - Print: "Please enter your session type: "
+                     - Print: "Please enter a command admin: "
+                     - Print: "Please enter the account holder's name: "
+                     - Print: "Please enter the account number: "
+                     - Print: "Error, account specificed is not a valid account."
+                     - File: No change.
+                   
           - ask a different question for user if any
+          
+            Scenario: Verify normal users can not access the changeplan feature.
+            Test Step: Normal user attempts to use the changeplan feature.
+            Test Input:
+                  login
+                  standard
+                  John Doe
+                  changeplan
+            Expected Result: The command is rejected.
+            Expected Output: - Print: "Please enter your session type: "
+                     - Print: "Please enter a login name: "
+                     - Print: "Please enter a command user: "
+                     - Print: "Error, you do not have the correct privileges to access this feature."
+                     - File: "No change"
+             
         - don't charge admins transaction fees
         - limits do not apply to admins usually but do to standard
+  - Verify account validity
+    - Akira has covered for deleted/disabled accounts (except for enable?)
   - Check valid monetary input
     - no negatives
     - proper formatting
