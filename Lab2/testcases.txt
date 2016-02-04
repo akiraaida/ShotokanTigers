@@ -250,6 +250,60 @@ Test Cases
 
 	Paybill - Kathryn
 	================
+  
+    Scenario: Ask for transfer to 3 correct recipients
+    -----
+    Test Step: pay bills to each of EC, CQ, TV
+    
+    Scenario: Ask for fake transfer
+    -----
+    Test Step: ask for CE, QC, & VT
+    
+    Scenario: Ask for transfer that truncates to correct one
+    -----
+    Test Step: ask for ECA, CQB, TVC
+    
+    Scenario: Ask for transfer past $2000 in standard mode
+    ----
+    Test Step: do that
+    
+    Scenario: Ask for transfer at $2000 in standard mode
+    -----
+    
+    Scenario: Ask for transfer past balance
+    -----
+    
+    Scenario: Ask for transfer past $2000 in admin mode
+    -----
+    
+    Scenario Ask for transfer past balance & transaction fee
+    -----
+    
+    Scenario: Ask for transfer past $2000 to each recipient
+    -----
+    
+    Scenario: Ask for transfer adding up to $2000 to one recipient
+    -----
+    
+    Scenario: Ask to transfer $0
+    -----
+    
+    Scenario: Ask to transfer negative values
+    -----
+    
+    Scenario: Ask for transfer in admin mode
+    ----
+    Test Step: ensure no transaction fees are applied
+  
+    
+    
+  *TODO @Kathryn after other paybill functions defined: copypasta Account
+      Verification w disable check*
+  
+  *TODO @Kathryn ditto: copypasta Permission things incl diff between standard & admin
+      mode*
+  
+  *TODO @Kathryn ditto: copypasta Logout Verification*
 
 	Deposit - Kathryn
 	================
