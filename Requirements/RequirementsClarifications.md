@@ -16,6 +16,7 @@ General
 - We are assuming this bank is Canadian currency only [in terms of dollar bill amounts]
   - including $5, $10, $20, $50, $100
 - This conversation:
+
       Santiago Bonada [4:55 PM] 
       the format of the bank account transaction file for each transaction is
       CC_AAAAAAAAAAAAAAAAAAAA_NNNNN_PPPPPPPP_QM while the format for current bank
@@ -24,6 +25,7 @@ General
 
       Mike Miljanovic [4:59 PM] 
       I'll leave it up to @jeremy if he wants to change that
+      
 - you should test as much as possible
 
 Current Bank Accounts File (Front End)
@@ -86,18 +88,19 @@ Informal Customer Requirements for the Front End/Transaction Code Details
     - If the program sees a transaction code of 00, it can ignore the rest. The
         other data does not matter for the end of session line
 - Transaction Code 09
-  enable – enable a bank account
-  • should ask for the bank account holder’s name (as a text line)
-  • should ask for the account number (as a text line)
-  • should change the bank account from disabled (D) to active (A)
-  • should save this information for the bank account transaction file
-  • Constraints:
-  o privileged transaction - only accepted when logged in admin
-  mode
-  o Account holder’s name must be the name of an existing
-  account holder
-  o Account number must be the number of the account holder
-  specified
+  enable 
+  enable a bank account
+    - should ask for the bank account holder’s name (as a text line)
+    - should ask for the account number (as a text line)
+    - should change the bank account from disabled (D) to active (A)
+    - should save this information for the bank account transaction file 
+  Constraints:
+    - privileged transaction - only accepted when logged in admin
+        mode
+    - Account holder’s name must be the name of an existing
+        account holder
+    - Account number must be the number of the account holder
+        specified
 
 General Requirements for the Front End
 ----
