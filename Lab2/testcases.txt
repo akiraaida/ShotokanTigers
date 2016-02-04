@@ -36,7 +36,9 @@ Test Cases
   Scenario: Verify standard mode user's name and account number correspond with each other (Correct name, incorrect number). [partial *cp]
   Scenario: Verify standard mode user's name and held account number correspond with each other (Correct name, correct number but not matching). [partial *cp]
   Scenario: Verify negative dollars input for admin
+  Scenario: Verify negative dollars input for user
   Scenario: Verify input dollars of $0 for admin
+  Scenario: Verify input dollars of $0 for user
   Scenario: Verify input of ######.##
   Scenario: Verify input of ####.##
   Scenario: Verify input of .##
@@ -74,7 +76,8 @@ Test Cases
   Scenario: Verify admin withdrawals before user withdrawal does not affect limit
   Scenario: Verify admin withdrawals after user withdrawal does not come into confict with limit
   Scenario: Verify withdrawal with resulting positive balance
-  Scenario: Verify withdrawal with resulting negative balance accounts for withdrawal transaction feeScenario: Verify withdrawal with resulting zero balance
+  Scenario: Verify withdrawal with resulting negative balance accounts for withdrawal transaction fee
+  Scenario: Verify withdrawal with resulting zero balance
   Scenario: Verify withdrawal with resulting negative balance
   Scenario: Verify withdrawal with resulting negative balance accounts for previous transaction fee from previous withdrawal
   Scenario: Verify withdrawal with resulting negative balance accounts for previous transaction fee from previous transfer
@@ -96,11 +99,35 @@ Test Cases
 	Paybill - Kathryn
 	================
   [* Login/logout issues covered elsewhere?]
-    
+  [* CP most from withdraw ]
+  Scenario: Verify EC is accepted in standard mode
+  Scenario: Verify CQ is accepted in standard mode
+  Scenario: Verify TV is accepted in standard mode
+  Scenario: Verify EC is accepted in admin mode
+  Scenario: Verify CQ is accepted in admin mode
+  Scenario: Verify TV is accepted in admin mode
+  Scenario: Verify invalid 2 letter is not accepted in standard mode
+  Scenario: Verify 3 letter is not accepted in standard mode
+  Scenario: Verify 1 letter is not accepted in standard mode
+  Scenario: Verify truncated 3 letter is not accepted in standard mode
+  Scenario: Verify invalid 2 letter is not accepted in admin mode
+  Scenario: Verify 3 letter is not accepted in admin mode
+  Scenario: Verify 1 letter is not accepted in admin mode
+  Scenario: Verify truncated 3 letter is not accepted in admin mode
+  Scenario: Verify lowercase ec is accepted in standard mode
+  Scenario: Verify lowercase cq is accepted in standard mode
+  Scenario: Verify lowercase tv is accepted in standard mode
+  Scenario: Verify reversal, CE is not accepted in standard mode
 
 	Deposit - Kathryn
 	================
   [* Login/logout issues covered elsewhere?]
+  [* CP most from withdraw ]
+  Scenario: Verify deposited funds cannot be withdrawn
+  Scenario: Verify deposited funds cannot be used with paybill
+  Scenario: Verify deposited funds cannot be transferred from deposited account to account
+  Scenario: Verify deposited funds cannot be transferred from account to deposited account
+  
   
 
 	Change Plan - Akira
