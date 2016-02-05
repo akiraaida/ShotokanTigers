@@ -804,3 +804,276 @@ Test Cases
 						 - Print: "Please enter an amount to withdraw: "
 						 - Print: "Error, this account can't be withdrawn from yet: "
 						 - File: No change
+
+Login – Alex
+================
+
+Scenario: Verify that user cannot login if another login session has been created.
+Test Step: User Attempts to login when another person is logged in
+Test Input: 
+					login
+					standard
+					John Doe
+					login
+Expected Result: The user is notified that they must first logout before they attempt another login
+Expected Output: - Print: "Please enter your session type: “
+		   - Print: “Please enter your name: “
+		   - Print: “Welcome John Doe please enter a command: “
+		   - Print: “You are already logged in you must logout to attempt a new login”
+
+Scenario: Verify that username exists when the user logs in.
+Test Step: User Attempts to login when don’t currently have an account
+Test Input: 
+					login
+					standard
+					Bob Stevenson
+Expected Result: The user is notified that they do not have a valid account and must speak to an admin before being able to login in. 
+Expected Output: - Print: "Please enter your session type: “
+		   - Print: “Please enter your name: “
+   		   - Print: “Bob Stevenson you don’t seem to have an account please contact the 					  administrator to have an account setup.”
+
+Scenario: Verify that users and admins have different privileges
+Test Step: Use admin command as user and as admin
+Test Input: 
+					login
+					standard
+					John Doe
+					disable
+					logout
+					login
+					admin
+					disable
+					John Doe
+					12345
+Expected Result: User is unable to perform admin operation, and admin is able to perform operation 
+Expected Output: - Print: “Please enter your session type: “
+		   - Print: “Please enter your name: “
+		   - Print: “Welcome John Doe please enter a command: “
+   		   - Print: “Invalid command please enter a valid command”
+		   - Print: “Have a nice day”
+		   - Print: “Please enter your session type: “
+		   - Print: “Please enter a command admin: "
+		   - Print: “Please enter account holder’s name: “
+		   - Print: “Please enter the account number: “
+		   - Print: “Account removed”
+		   - File: “07 John Doe 12345 00000000 00”
+
+Scenario: Verify login must be perform before other commands can be used
+Test Step: Use withdraw before user login
+Test Input: 
+					withdraw
+Expected Result: User is unable to perform operation since they are not logged in
+Expected Output: - Print: “You must be logged in to use this command”
+
+
+Logout – Alex
+================
+
+Scenario: Verify logout is successful
+Test Step: User is unable to use operations after logout
+Test Input: 
+					login
+					standard
+					John Doe
+					logout
+					withdrawal
+
+Expected Result: User is unable to perform operations after logout 
+Expected Output: - Print: “Please enter your session type: “
+		   - Print: “Please enter your name: “
+   		   - Print: “Invalid command please enter a valid command”
+		   - Print: “Have a nice day”
+		   - Print: “You are not logged in please login to use other commands”
+
+Scenario: Verify logout cannot be done when user is not logged in
+Test Step: Test logout before user is logged in
+Test Input: 
+					logout
+
+Expected Result: User is unable to perform logout operation
+Expected Output: - Print: “You are not logged in please login to use other commands”
+
+Scenario: Verify receipt is given to the user   
+Test Step: Use command that outputs to receipt and check receipt after logout
+Test Input: 
+					login
+					standard
+					John Doe
+					withdraw
+					12345
+					100
+					logout
+
+Expected Result: User is unable to perform logout operation
+Expected Output: - Print: “You are not logged in please login to use other commands”
+		    - Print: "Please enter your session type: “
+		    - Print: “Please enter your name: “
+		    - Print: “Welcome John Doe please enter a command: “
+		    - Print: “Please enter your account number: ”
+		    - Print: “Please enter the amount you want to withdraw: ”
+		    - File: “07 John Doe 12345 00000100 01”
+		    - Print “100 dollars has been withdrawn. Are there any other transactions you wish to 			      perform?: ”
+		    - Print: “Have a nice day”
+		    - File: “John Doe
+  Withdrawal 100
+  Current balance 100”
+
+Transfer – Alex
+================
+Scenario: Verify account number for transfer  
+Test Step: Use incorrect account number when transferring
+Test Input: 
+					login
+					standard
+					John Doe
+					transfer
+					12346
+
+Expected Result: User is unable to transfer from a different account
+Expected Output: - Print: "Please enter your session type: “
+		    - Print: “Please enter your name: “
+		    - Print: “Welcome John Doe please enter a command: “
+		    - Print: “Enter your account number: ”
+		    - Print: “Account number Invalid”
+
+Scenario: Verify user cannot transfer to the same account
+Test Step: Transfer to the same account
+Test Input: 
+					login
+					standard
+					John Doe
+					transfer
+					12345
+					12345
+
+Expected Result: User is unable to transfer from a different account
+Expected Output: - Print: "Please enter your session type: “
+		    - Print: “Please enter your name: “
+		    - Print: “Welcome John Doe please enter a command: “
+		    - Print: “Enter your account number: ”
+		    - Print: “Enter account number to transfer to: “
+		    - Print: “You cannot transfer to your own account”
+
+Scenario: Verify user can transfer at the transfer zero dollars
+Test Step: Attempt to transfer zero dollars 
+Test Input: 
+					login
+					standard
+					John Doe
+					transfer
+					12345
+					12346
+					0
+
+Expected Result: User is unable to transfer from a different account
+Expected Output:  - Print: "Please enter your session type: “
+		    - Print: “Please enter your name: “
+		    - Print: “Welcome John Doe please enter a command: “
+		    - Print: “Enter your account number: ”
+		    - Print: “Enter account number to transfer to: “
+		    - Print: “Enter amount”
+		    - Print: “You cannot transfer zero dollars”
+
+Scenario: Verify user transfers incurs fees where the admin does not 
+Test Step: Attempt to transfer money in user account and then in admin account
+Test Input: 
+					login
+					standard
+					John Doe
+					transfer
+					12345
+					12346
+					100
+					logout
+					login
+					transfer
+					12345
+					12346
+					100
+
+Expected Result: Account reduces 105 because of fees when user transfers, account reduces by 100 when admin transfers
+Expected Output   - Print: "Please enter your session type: “
+		    - Print: “Please enter your name: “
+		    - Print: “Welcome John Doe please enter a command: “
+		    - Print: “Enter your account number: ”
+		    - Print: “Enter account number to transfer to: “
+		    - Print: “Enter amount”
+		    - File: “Transfers account -105”
+		    - Print: “Transfer complete”
+		    - Print: “Have a great day”
+		    - Print: "Please enter your session type: “
+		    - Print: “Welcome please enter a command: “
+		    - Print: “Enter your account number: ”
+		    - Print: “Enter account number to transfer to: “
+		    - Print: “Enter amount”
+		    - File: “Transfers account -105”
+		    - Print: “Transfer complete”
+
+Scenario: Verify max transfer  
+Test Step: Test 1000 dollar transfer
+Test Input: 
+					login
+					standard
+					John Doe
+					transfer
+					12345
+					12346
+					1000
+
+Expected Result: Account reduces 1050 because of fees when user transfers
+Expected Output   - Print: "Please enter your session type: “
+		    - Print: “Please enter your name: “
+		    - Print: “Welcome John Doe please enter a command: “
+		    - Print: “Enter your account number: ”
+		    - Print: “Enter account number to transfer to: “
+		    - Print: “Enter amount”
+		    - File: “Transfers account -1050”
+
+Scenario: Verify working transfer limit
+Test Step: Test 1005 dollar transfer
+Test Input: 
+					login
+					standard
+					John Doe
+					transfer
+					12345
+					12346
+					1005
+
+Expected Result: Account reduces 1050 because of fees when user transfers
+Expected Output   - Print: "Please enter your session type: “
+		    - Print: “Please enter your name: “
+		    - Print: “Welcome John Doe please enter a command: “
+		    - Print: “Enter your account number: ”
+		    - Print: “Enter account number to transfer to: “
+		    - Print: “Enter amount”
+		    - Print: “You cannot transfer 1005 dollars it is beyond the transfer limit”
+
+Scenario: Verify summing of transfers
+Test Step: Test a 505 dollar transfer after 500 dollar transfer
+Test Input: 
+					login
+					standard
+					John Doe
+					transfer
+					12345
+					12346
+					500
+					transfer
+					12345
+					12346
+					505
+
+Expected Result: Account reduces 1050 because of fees when user transfers
+Expected Output   - Print: "Please enter your session type: “
+		    - Print: “Please enter your name: “
+		    - Print: “Welcome John Doe please enter a command: “
+		    - Print: “Enter your account number: ”
+		    - Print: “Enter account number to transfer to: “
+		    - Print: “Enter amount”
+		    - File: “Transfers account -505”
+		    - Print: “Transfer complete”
+		    - Print: “Enter your account number: ”
+		    - Print: “Enter account number to transfer to: “
+		    - Print: “Enter amount”
+		    - Print: “You cannot transfer 505 dollars because you will go beyond the transfer limit
