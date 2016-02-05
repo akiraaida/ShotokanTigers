@@ -1,1 +1,7 @@
 Test Plan
+============
+
+A test plan document, outlining how your tests are organized (in directories or whatever),
+how they will be run (as shell scripts or DOS batch files), and how the output
+will be stored and organized for reporting and comparison with later runs (make text file
+printouts of any directory structures and script files created)

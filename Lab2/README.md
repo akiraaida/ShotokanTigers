@@ -132,6 +132,7 @@ LET'S CALL DIBS FOR WRITING TEST CASES
   withdrawal
   paybill
   deposit
+  enable
   
   Alex
   ----

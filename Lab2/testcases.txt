@@ -1,14 +1,5 @@
 Test Cases
 
-	Login - Alex
-	================
-
-	Logout - Alex
-	================
-
-	Transfer - Alex
-	================
-
 	Enable - Kathryn 
 	================
   [* Login/logout issues covered elsewhere?]
