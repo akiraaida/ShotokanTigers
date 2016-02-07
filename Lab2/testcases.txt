@@ -2,11 +2,44 @@ Test Cases
 
 	Enable - Kathryn 
 	================
-  [* Login/logout issues covered elsewhere?]
+  Scenario: Verify disabled account is then enabled
+  Test Step: Admin enables an account which is disabled.
+  Test Input:
+        login
+        admin
+        enable
+        Bran Bob
+        12347
+  Expected result: Command is accepted.
+  Excepted Output: - Print: [TODO: after filled everything out]
+           - File: [TODO: after filled everything out]
   
-  Scenario: Verify disabled account is then enabled [* partial cp]
-  Scenario: Verify no enable on already enabled account [* partial cp]
-  Scenario: Verify no enable on deleted account [*cp]
+  Scenario: Verify no enable on already enabled account
+  Test Step: Admin enables an account which does not need enabling
+  Test Input:
+        login
+        admin
+        enable
+        John Doe
+        12345
+  Expected Result: Command is rejected.
+  Excepted Output: - Print: [TODO: after filled everything out]
+           - File: "No change"
+  
+  Scenario: Verify no enable on deleted account
+  Test Step: Admin enables an account that no longer exists.
+  Test Input:
+        login
+        admin
+        delete
+        Bran Bob
+        12347
+        enable
+        Bran Bob
+        12347
+  Excepted Result: Command is rejected
+  Excepted Output: - Print: [TODO: after filled everything out]
+           - File: [TODO: after filled everything out]
   
   Scenario: Verify normal users can not access the enable feature.
   Test Step: Normal user attempts to use the enable feature.
@@ -72,10 +105,59 @@ Test Cases
            - File: No change.
                      
                      
-  Scenario: Verify user withdraw transaction can now be done to a re-enabled account. [partial *cp]
-  Scenario: Verify user deposit transaction can now be done to a re-enabled account. [partial *cp]
-  Scenario: Verify user paybill transaction can now be done to a re-enabled account. [partial *cp]
+  Scenario: Verify user withdraw transaction can now be done to a re-enabled account.
+  Test Step: Admin enables an account and then withdraws from it.
+  Test Input:
+        login
+        admin
+        enable
+        Bran Bob
+        12347
+        withdraw
+        Bran Bob
+        12347
+        5.00
+  Expected Result: 5 dollars is withdrawn.
+  Excepted Output: - Print: [TODO: after filled everything out]
+           - File: [TODO: after filled everything out]
   
+  Scenario: Verify user deposit transaction can now be done to a re-enabled account.
+  Test Step: Admin enables an account and then performs a deposit.
+  Test Input:
+        login
+        admin
+        enable
+        Bran Bob
+        12347
+        deposit
+        Bran Bob
+        12347
+        5.00
+  Expected Result: 5 dollars is added to the account.
+  Excepted Output: - Print: [TODO: after filled everything out]
+           - File: [TODO: after filled everything out]
+  
+  
+  Scenario: Verify user paybill transaction can now be done to a re-enabled account.
+  Test Step: Admin enables an account and then pays a bill.
+  Test Input:
+        login
+        admin
+        enable
+        Bran Bob
+        12347
+        paybill
+        Bran Bob
+        12347
+        'TV'
+        10.0
+  Expected Result: 10 dollars is paid to TV
+  Excepted Output: - Print: [TODO: after filled everything out]
+           - File: [TODO: after filled everything out]
+        
+        
+  
+  [TODO: is disabling an account a requirement for deletion?]
   Scenario: Verify delete transaction can no longer be done to a re-enabled account.
   Test Step: Enter the re-enabled account's correct account holder's name and account number in the delete feature.
   Test Input: login
@@ -96,9 +178,40 @@ Test Cases
            - Print: [*TODO @Kathryn after talk to Akira: output message for deleting non-disabled account]
            - File: No change
   
-  Scenario: Verify user transfer transaction can now be done with a re-enabled account (From an account to a re-enabled account). [partial *cp]
-  Scenario: Verify user transfer transaction can now be done with a re-enabled account (From a re-enabled account to another account). [partial *cp]
-  [* NOTE: do both admin and standard mode checks need to happen for standard permission functions?]
+  Scenario: Verify user transfer transaction can now be done with a re-enabled account (From an account to a re-enabled account).
+  Test Step: Admin enables an account, then transfers money to it.
+  Test Input:
+        login
+        admin
+        enable
+        Bran Bob
+        12347
+        transfer
+        John Doe
+        12345
+        12347
+        10.0
+  Expected Result: enabled account gets 10.0
+  Excepted Output: - Print: [TODO: after filled everything out]
+           - File: [TODO: after filled everything out]
+        
+  
+  Scenario: Verify user transfer transaction can now be done with a re-enabled account (From a re-enabled account to another account).
+  Test Step: Admin enables an account, then has money transferred from it.
+  Test Input:
+        login
+        admin
+        enable
+        Bran Bob
+        12347
+        transfer
+        Bran Bob
+        12347
+        12345
+        10.0
+   Expected Result: enabled account transfers 10.0
+   Excepted Output: - Print: [TODO: after filled everything out]
+           - File: [TODO: after filled everything out]
              
 	Withdrawal - Kathryn
 	================
