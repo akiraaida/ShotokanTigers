@@ -4,9 +4,9 @@ Test Cases
 	================
   [* Login/logout issues covered elsewhere?]
   
-  Scenario: Verify account when disabled [* partial cp]
-  Scenario: Verify account when enabled [* partial cp]
-  Scenario: Verify account when deleted [*cp]
+  Scenario: Verify disabled account is then enabled [* partial cp]
+  Scenario: Verify no enable on already enabled account [* partial cp]
+  Scenario: Verify no enable on deleted account [*cp]
   
   Scenario: Verify normal users can not access the enable feature.
   Test Step: Normal user attempts to use the enable feature.
@@ -154,66 +154,66 @@ Test Cases
            
   Scenario: Verify standard mode user's name and account number correspond with each other (Correct name, incorrect number). [partial *cp]
   Scenario: Verify standard mode user's name and held account number correspond with each other (Correct name, correct number but not matching). [partial *cp]
-  Scenario: Verify negative dollars input for admin
-  Scenario: Verify negative dollars input for user
-  Scenario: Verify input dollars of $0 for admin
-  Scenario: Verify input dollars of $0 for user
-  Scenario: Verify input of ######.##
-  Scenario: Verify input of ####.##
-  Scenario: Verify input of .##
+  Scenario: Verify negative dollars input is rejected for admin
+  Scenario: Verify negative dollars input is rejected for user
+  Scenario: Verify input dollars of $0 is rejected for admin
+  Scenario: Verify input dollars of $0 is rejected for user
+  Scenario: Verify dollar input ######.## is rejected
+  Scenario: Verify dollar input of ####.## is rejected
+  Scenario: Verify withdrawal input of .##
   Scenario: Verify input of #
-  Scenario: Verify input of ########
-  Scenario: Verify input of $######.##
-  Scenario: Verify input of $ ######.##
-  Scenario: Verify input of ######.##$
-  Scenario: Verify input of ######.## $
-  Scenario: Verify input of ######,##
-  Scenario: Verify input of $######,##
-  Scenario: Verify input of ######.##$
-  Scenario: Verify input of ###### ##
-  Scenario: Verify input of ######.###
-  Scenario: Verify input of 0000#.##
-  Scenario: Verify input of ######.# (legit)
-  Scenario: Verify input of <$5
-  Scenario: Verify input of $5
-  Scenario: Verify input of $5*k
-  Scenario: Verify input of $5 + invalid
-  Scenario: Verify input of $10
-  Scenario: Verify input of $10*k
-  Scenario: Verify combo of $10 & $5
-  Scenario: Verify $50
-  Scenario: Verify single account withdraw limit
-  Scenario: Verify single account withdraw limit for multiple calls
-  Scenario: Verify single account withdraw limit for multiple sessions
+  Scenario: Verify withdrawal input of ######## is rejected
+  Scenario: Verify withdrawal input of $######.## is rejected
+  Scenario: Verify withdrawal input of $ ######.## is rejected
+  Scenario: Verify withdrawal input of ######.##$ is rejected
+  Scenario: Verify withdrawal input of ######.## $ is rejected
+  Scenario: Verify withdrawal input of ######,## is rejected
+  Scenario: Verify withdrawal input of $######,## is rejected
+  Scenario: Verify withdrawal input of ######.##$ is rejected
+  Scenario: Verify withdrawal input of ###### ## is rejected
+  Scenario: Verify withdrawal input of ######.### is rejected
+  Scenario: Verify withdrawal input of 0000#.## is rejected
+  Scenario: Verify withdrawal input of ######.# (legit) is accepted
+  Scenario: Verify dollar value of <$5 is rejected
+  Scenario: Verify dollar value of $5 is accepted
+  Scenario: Verify dollar value of $5*k is accepted
+  Scenario: Verify dollar value of $5 + invalid is rejected
+  Scenario: Verify dollar value of $10 is accepted
+  Scenario: Verify dollar value of $10*k is accepted
+  Scenario: Verify combo of $10 & $5 is accepted
+  Scenario: Verify $50 is rejected
+  Scenario: Verify single account withdraw limit cannot be excceded
+  Scenario: Verify single account withdraw limit cannot be exceeded (for multiple calls)
+  Scenario: Verify single account withdraw limit cannot be exceeded (for multiple sessions)
   Scenario: Verify withdrawal transaction fee is applied for standard
   Scenario: Verify several withdrawal tranasaction fees are applied for several calls
   Scenario: Verify single account withdraw limit for admins doesn't apply
   Scenario: Verify single account withdraw limit for admins does not incur transaction fee
-  Scenario: Verify separate account limits with 1st rejected at limit and 2nd accepted
-  Scenario: Verify separate account limits with both accepted for amount over limit
-  Scenario: Verify separate account limits with both accepted
+  Scenario: Verify separate account limits are separate with 1st rejected at limit and 2nd accepted
+  Scenario: Verify separate account limits are separate with both accepted for amount over limit
+  Scenario: Verify separate account limits are separate with both accepted
   Scenario: Verify admin withdrawals before user withdrawal does not affect limit
   Scenario: Verify admin withdrawals after user withdrawal does not come into confict with limit
-  Scenario: Verify withdrawal with resulting positive balance
-  Scenario: Verify withdrawal with resulting negative balance accounts for withdrawal transaction fee
-  Scenario: Verify withdrawal with resulting zero balance
-  Scenario: Verify withdrawal with resulting negative balance
-  Scenario: Verify withdrawal with resulting negative balance accounts for previous transaction fee from previous withdrawal
-  Scenario: Verify withdrawal with resulting negative balance accounts for previous transaction fee from previous transfer
-  Scenario: Verify withdrawal with resulting negative balance accounts for previous transaction fee from previous paybill
-  Scenario: Verify withdrawal with resulting negative balance accounts for previous transaction fee from previous deposit
-  Scenario: Verify withdrawal for resulting negative balance on last of multiple calls
-  Scenario: Verify withdrawal for resulting zero balance on last of multiple calls
-  Scenario: Verify withdrawal for resulting positive balance on last of multiple calls
-  Scenario: Verify withdrawal for resulting negative balance over multiple sessions
-  Scenario: Verify withdrawal for resulting zero balance over multiple sessions
-  Scenario: Verify withdrawal for resulting positive balance over multiple sessions
-  Scenario: Verify withdrawal for resulting negative balance after session as different user
-  Scenario: Verify withdrawal for resulting zero balance after session as different user
-  Scenario: Verify withdrawal for resulting positive balance after session as different user
-  Scenario: Verify withdrawal for resulting negative balance as admin
-  Scenario: Verify withdrawal for resulting zero balance as admin
-  Scenario: Verify withdrawal for resulting positive balance as admin
+  Scenario: Verify withdrawal with resulting positive balance is accepted
+  Scenario: Verify withdrawal balance check accounts for withdrawal transaction fee
+  Scenario: Verify withdrawal with resulting zero balance is accepted
+  Scenario: Verify withdrawal with resulting negative balance is rejected
+  Scenario: Verify withdrawal with resulting negative balance accounts is rejected (for previous transaction fee from previous withdrawal)
+  Scenario: Verify withdrawal with resulting negative balance accounts is rejected (for previous transaction fee from previous transfer)
+  Scenario: Verify withdrawal with resulting negative balance accounts is rejected (for previous transaction fee from previous paybill)
+  Scenario: Verify withdrawal with resulting negative balance accounts is rejected (for previous transaction fee from previous deposit)
+  Scenario: Verify withdrawal for resulting negative balance is rejected (on last of multiple calls)
+  Scenario: Verify withdrawal for resulting zero balance is rejected (on last of multiple calls)
+  Scenario: Verify withdrawal for resulting positive balance is accepted (on last of multiple calls)
+  Scenario: Verify withdrawal for resulting negative balance is rejected (over multiple sessions)
+  Scenario: Verify withdrawal for resulting zero balance is rejected (over multiple sessions)
+  Scenario: Verify withdrawal for resulting positive balance is accepted (over multiple sessions)
+  Scenario: Verify withdrawal for resulting negative balance is rejected (after session as different user)
+  Scenario: Verify withdrawal for resulting zero balance is rejected (after session as different user)
+  Scenario: Verify withdrawal for resulting positive balance is accepted (after session as different user)
+  Scenario: Verify withdrawal for resulting negative balance is rejected (as admin)
+  Scenario: Verify withdrawal for resulting zero balance is rejected (as admin)
+  Scenario: Verify withdrawal for resulting positive balance is accepted (as admin)
 
 	Paybill - Kathryn
 	================
