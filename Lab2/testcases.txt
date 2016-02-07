@@ -11,7 +11,7 @@ Test Cases
         Bran Bob
         12347
   Expected result: Command is accepted.
-  Excepted Output: - Print: [TODO: after filled everything out]
+  Expected Output: - Print: [TODO: after filled everything out]
            - File: [TODO: after filled everything out]
   
   Scenario: Verify no enable on already enabled account
@@ -23,7 +23,7 @@ Test Cases
         John Doe
         12345
   Expected Result: Command is rejected.
-  Excepted Output: - Print: [TODO: after filled everything out]
+  Expected Output: - Print: [TODO: after filled everything out]
            - File: "No change"
   
   Scenario: Verify no enable on deleted account
@@ -37,8 +37,8 @@ Test Cases
         enable
         Bran Bob
         12347
-  Excepted Result: Command is rejected
-  Excepted Output: - Print: [TODO: after filled everything out]
+  Expected Result: Command is rejected
+  Expected Output: - Print: [TODO: after filled everything out]
            - File: [TODO: after filled everything out]
   
   Scenario: Verify normal users can not access the enable feature.
@@ -118,7 +118,7 @@ Test Cases
         12347
         5.00
   Expected Result: 5 dollars is withdrawn.
-  Excepted Output: - Print: [TODO: after filled everything out]
+  Expected Output: - Print: [TODO: after filled everything out]
            - File: [TODO: after filled everything out]
   
   Scenario: Verify user deposit transaction can now be done to a re-enabled account.
@@ -134,7 +134,7 @@ Test Cases
         12347
         5.00
   Expected Result: 5 dollars is added to the account.
-  Excepted Output: - Print: [TODO: after filled everything out]
+  Expected Output: - Print: [TODO: after filled everything out]
            - File: [TODO: after filled everything out]
   
   
@@ -152,7 +152,7 @@ Test Cases
         'TV'
         10.0
   Expected Result: 10 dollars is paid to TV
-  Excepted Output: - Print: [TODO: after filled everything out]
+  Expected Output: - Print: [TODO: after filled everything out]
            - File: [TODO: after filled everything out]
         
         
@@ -192,7 +192,7 @@ Test Cases
         12347
         10.0
   Expected Result: enabled account gets 10.0
-  Excepted Output: - Print: [TODO: after filled everything out]
+  Expected Output: - Print: [TODO: after filled everything out]
            - File: [TODO: after filled everything out]
         
   
@@ -208,9 +208,9 @@ Test Cases
         Bran Bob
         12347
         12345
-        10.0
+        10.00
    Expected Result: enabled account transfers 10.0
-   Excepted Output: - Print: [TODO: after filled everything out]
+   Expected Output: - Print: [TODO: after filled everything out]
            - File: [TODO: after filled everything out]
              
 	Withdrawal - Kathryn
@@ -265,28 +265,169 @@ Test Cases
            - Print: "Error, account specificed is not a valid account."
            - File: No change.
            
-  Scenario: Verify standard mode user's name and account number correspond with each other (Correct name, incorrect number). [partial *cp]
-  Scenario: Verify standard mode user's name and held account number correspond with each other (Correct name, correct number but not matching). [partial *cp]
+  Scenario: Verify standard mode user's name and account number correspond with each other (Correct name, incorrect number).
+  Test Step: Logged in user enters an incorrect number
+  Test Input:
+        login
+        John Doe
+        withdrawal
+        12340
+  Expected Result: The account number is rejected.
+  Expected Output: - Print: [TODO: after filled everything out]
+         - File: [TODO: after filled everything out]
+        
+  
+  Scenario: Verify standard mode user's name and held account number correspond with each other (Correct name, correct number but not matching).
+  Test Step: Logged in user enters a number to an account that does not belong to them.
+  Test Input:
+        login
+        John Doe
+        withdrawal
+        12347
+  Expected Result: The account number is rejected. [Note: should be identical to nonexistent account]
+  Expected Output: - Print: [TODO: after filled everything out]
+         - File: [TODO: after filled everything out]
+
   Scenario: Verify negative dollars input is rejected for admin
-  Scenario: Verify negative dollars input is rejected for user
+  Test Step: Try to enter a negative value as an admin.
+  Test Input:
+        login
+        admin
+        withdrawal
+        John Doe
+        12345
+        -40.00
+  Expected Result: Admin is informed that negative values are invalid.
+  Expected Output: - Print: [TODO: after filled everything out]
+         - File: [TODO: after filled everything out]
+  
+  Scenario: Verify negative dollars input is rejected for user [TODO]
+  
   Scenario: Verify input dollars of $0 is rejected for admin
-  Scenario: Verify input dollars of $0 is rejected for user
+  Test Step: Try to enter a zero value as an admin.
+  Test Input:
+        login
+        admin
+        withdrawal
+        John Doe
+        12345
+        0.00
+  Expected Result: Admin is informed that zero values are invalid.
+  Expected Output: - Print: [TODO: after filled everything out]
+         - File: [TODO: after filled everything out]
+  
+  Scenario: Verify input dollars of $0 is rejected for user [TODO]
+  
   Scenario: Verify dollar input ######.## is rejected
-  Scenario: Verify dollar input of ####.## is rejected
+  Test Step: Try to enter an excessive value as a user.
+  Test Input:
+        login
+        John Doe
+        withdrawal
+        12345
+        654321.00
+  Expected Result: User is informed that their format is invalid.
+  Expected Output: - Print: [TODO: after filled everything out]
+         - File: [TODO: after filled everything out]
+         
   Scenario: Verify withdrawal input of .##
+  Test Step: Try to enter a truncated decimal as a user.
+  Test Input:
+        login
+        John Doe
+        withdrawal
+        12345
+        .50
+  Expected Result: User is informed that their format is invalid.
+  Expected Output: - Print: [TODO: after filled everything out]
+         - File: [TODO: after filled everything out]
+  
   Scenario: Verify input of #
-  Scenario: Verify withdrawal input of ######## is rejected
+  Test Step: Try to enter a number without a decimal point as a user
+  Test Input:
+        login
+        John Doe
+        withdrawal
+        12345
+        5
+  Expected Result: User is informed that a decimal point is required.
+  Expected Output: - Print: [TODO: after filled everything out]
+         - File: "No change"
+  
   Scenario: Verify withdrawal input of $######.## is rejected
-  Scenario: Verify withdrawal input of $ ######.## is rejected
+  Test Step: Try to enter a number with preceding dollar sign.
+  Test Input:
+        login
+        John Doe
+        withdrawal
+        12345
+        $5.00
+  Expected Result: User is informed that dollar signs are not acceptable.
+  Expected Output: - Print: [TODO: after filled everything out]
+         - File: "No change"
+  
   Scenario: Verify withdrawal input of ######.##$ is rejected
-  Scenario: Verify withdrawal input of ######.## $ is rejected
+  Test Step: Try to enter a number with trailing dollar sign.
+  Test Input:
+        login
+        John Doe
+        withdrawal
+        12345
+        5.00$
+  Expected Result: User is informed that dollar signs are not acceptable.
+  Expected Output: - Print: [TODO: after filled everything out]
+         - File: "No change"
+  
   Scenario: Verify withdrawal input of ######,## is rejected
-  Scenario: Verify withdrawal input of $######,## is rejected
-  Scenario: Verify withdrawal input of ######.##$ is rejected
+  Test Step: Try to enter a number with comma delimiters.
+  Test Input:
+        login
+        John Doe
+        withdrawal
+        12345
+        5,00
+  Expected Result: User is reminded to use . to represent decimal
+  Expected Output: - Print: [TODO: after filled everything out]
+         - File: "No change"
+         
   Scenario: Verify withdrawal input of ###### ## is rejected
+  Test Step: Try to enter a number with space delimiters.
+  Test Input:
+        login
+        John Doe
+        withdrawal
+        12345
+        5 00
+  Expected Result: User is informed not to put spaces between their numbers.
+  Expected Output: - Print: [TODO: after filled everything out]
+         - File: "No change"
+  
   Scenario: Verify withdrawal input of ######.### is rejected
+  Test Step: Try to enter a number with 3 fractional parts
+  Test Input:
+        login
+        John Doe
+        withdrawal
+        12345
+        5.123
+  Expected Result: User is reminded to only use 2 fineness.
+  Expected Output: - Print: [TODO: after filled everything out]
+         - File: "No change"
+  
   Scenario: Verify withdrawal input of 0000#.## is rejected
-  Scenario: Verify withdrawal input of ######.# (legit) is accepted
+  Test Step: Enter a number with preceding zeroes.
+  Test Input:
+        login
+        John Doe
+        withdrawal
+        12345
+        00005.12
+  Expected Result: User is informed that their number doesn't make sense.
+  Expected Output: - Print: [TODO: after filled everything out]
+         - File: "No change"
+  
+  Scenario: Verify withdrawal input of ######.# is rejected
+  Scenario: Verify withdrawal input of ######.## (legit) is accepted
   Scenario: Verify dollar value of <$5 is rejected
   Scenario: Verify dollar value of $5 is accepted
   Scenario: Verify dollar value of $5*k is accepted
