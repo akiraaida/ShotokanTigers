@@ -1,0 +1,6 @@
+login
+admin
+deposit
+Bran Bob
+12347
+100

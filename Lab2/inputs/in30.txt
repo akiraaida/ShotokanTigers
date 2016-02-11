@@ -1,0 +1,6 @@
+login
+admin
+withdrawal
+John Doe
+12345
+100
