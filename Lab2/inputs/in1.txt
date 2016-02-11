@@ -1,5 +1,0 @@
-login
-admin
-changeplan
-Bob Stevenson
-12345

@@ -1,7 +1,0 @@
-login
-standard
-John Doe
-transfer
-12345
-12347
-100

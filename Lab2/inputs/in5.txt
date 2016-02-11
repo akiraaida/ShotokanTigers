@@ -1,5 +1,0 @@
-login
-admin
-changeplan
-Matt Cow
-12346AA
