@@ -409,7 +409,7 @@ Test Cases
         John Doe
         withdrawal
         12345
-        5.123
+        5.000
   Expected Result: User is reminded to only use 2 fineness.
   Expected Output: - Print: [TODO: after filled everything out]
          - File: "No change"
@@ -421,13 +421,15 @@ Test Cases
         John Doe
         withdrawal
         12345
-        00005.12
+        00005.00
   Expected Result: User is informed that their number doesn't make sense.
   Expected Output: - Print: [TODO: after filled everything out]
          - File: "No change"
   
   Scenario: Verify withdrawal input of ######.# is rejected
   Test Step: Enter a number like 20.0
+  Test Input:
+      
   
   Scenario: Verify withdrawal input of ######.## (legit) is accepted
   Test Step: Enter a number like 20.00
