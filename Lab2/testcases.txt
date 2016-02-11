@@ -164,30 +164,6 @@ Test Cases
   Expected Result: 10 dollars is paid to TV
   Expected Output: - Print: [TODO: after filled everything out]
            - File: [TODO: after filled everything out]
-        
-        
-  
-  [TODO: is disabling an account a requirement for deletion?]
-  Scenario: Verify delete transaction can no longer be done to a re-enabled account.
-  Test Step: Enter the re-enabled account's correct account holder's name and account number in the delete feature.
-  Test Input: login
-        admin
-        enable
-        Bran Bob
-        12347
-        delete
-        Bran Bob
-        12347
-        logout
-  Expected Result: Command is denied because the account is deleted.
-  Expected Output: - Print: "Please enter your session type: "
-           - Print: "Please enter a command admin: "
-           - Print: "Please enter the account holder's name: "
-           - Print: "Please enter the account number: "
-           - Print: "Please enter the account holder's name: "
-           - Print: "Please enter the account number: "
-           - Print: [*TODO @Kathryn after talk to Akira: output message for deleting non-disabled account]
-           - File: No change
   
   Scenario: Verify user transfer transaction can now be done with a re-enabled account (From an account to a re-enabled account).
   Test Step: Admin enables an account, then transfers money to it.
