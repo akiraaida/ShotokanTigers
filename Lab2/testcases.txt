@@ -427,91 +427,197 @@ Test Cases
          - File: "No change"
   
   Scenario: Verify withdrawal input of ######.# is rejected
-  Test Step: Enter a number like 20.0
+  Test Step: Enter a number like 5.0
   Test Input:
-      
+        login
+        John Doe
+        withdrawal
+        12345
+        5.0
+  Expected Result: User is informed that the incorrect number of zeroes
+  following decimal was used.
+  Expected Output: - Print: [TODO: after filled everything out]
+         - File: "No change"
   
   Scenario: Verify withdrawal input of ######.## (legit) is accepted
-  Test Step: Enter a number like 20.00
+  Test Step: Enter a number like 5.00
+  Test Input:
+        login
+        John Doe
+        withdrawal
+        12345
+        5.00
+  Expected Result: Transaction occurs successfully
+  Expected Output - Print: [TODO: after filled everything out]
+         - File: [TODO: same]
   
   Scenario: Verify dollar value of <$5 is rejected
   Test Step: Enter a number like 4.99
-  
+  Test Input:
+        login
+        John Doe
+        withdrawal
+        12345
+        4.99
+  Expected Result: User is informed that only canadian bill values are
+      acceptable.
+  Expected Output: - Print: [TODO: after filled everything out]
+         - File: "No change"
+         
   Scenario: Verify dollar value of $5 is accepted
   Test Step: Try to withdraw 5.00 in user mode
+  Test Input:
+        login
+        John Doe
+        withdrawal
+        12345
+        5.00
+  Expected Result: user successfully withdraws 5.00
+  Expected Output: - Print: [TODO: after filled everything out]
+         - File: [TODO: samesies]
   
   Scenario: Verify composite dollar value (mixed bills) is accepted
   Test Step: Try to withdraw 15.00
+  Test Input:
+        login
+        John Doe
+        withdrawal
+        12345
+        15.00
+  Expected Result: user successfully withdraws 15.00
+  Expected Output: - Print: [TODO: after filled everything out]
+         - File: [TODO: samesies]
   
   Scenario: Verify dollar value of $5 + invalid is rejected
   Test Step: Try to withdraw 7.00
+  Test Input
+        login
+        John Doe
+        withdrawal
+        12345
+        7.00
+  Expected Result: user is informed only canadian dollar values are acceptable
+  Expected Output: - Print: [TODO: after filled everything out]
+         - File: "No change"
+  
   
   Scenario: Verify single account withdraw limit cannot be exceeded
   Test Step: Try to withdraw 505.00 in user mode
+  Test Input: [TODO: invent a rich prince]
   
   Scenario: Verify single account withdraw limit cannot be exceeded (for multiple calls)
   Test Step: Try to withdraw 100.00 then 400.00 in user mode
+  Test Input: [TODO: invent a rich prince]
   
   Scenario: Verify single account withdraw limit cannot be exceeded (for multiple sessions)
   Test Step: Login and withdraw twice, over limit
+  Test Input: [TODO: invent a rich prince]
   
   Scenario: Verify withdrawal transaction fee is applied for standard
-  Test Step: Try to withdraw [TODO: when transaction fees are known (which they have been)]]
+  Test Step: Try to withdraw [TODO: make 2 of these for student & standard plan uggh]
   
   Scenario: Verify several withdrawal tranasaction fees are applied for several calls
-  [TODO: when transaction fees are known (which they have been)]]
+  [TODO: make 2 of these for student & standard plan uggh]
   
   Scenario: Verify single account withdraw limit for admins doesn't apply
   Test Step: As admin, withdraw $600.00
+  Test Input: [TODO: invent a rich prince]
   
   Scenario: Verify single account withdraw limit for admins does not incur transaction fee
-  Test Step: [TODO: when transaction fees are known (which they have been)]]
+  Test Step: [TODO: make 2 of these for student & standard plan uggh]
   
   Scenario: Verify separate account limits are separate with 1st rejected at limit and 2nd accepted
   Test Step: Withdraw $600.0 from one acount, $400.0 from another
+  Test Input: [TODO: invent a rich prince]
   
   Scenario: Verify separate account limits are separate with both accepted
   Test Step: Withdraw $200 from one, $100 from another
+  Test Input: [TODO: make a guy with 2 accounts]
   
   Scenario: Verify separate account limits are separate with both accepted for amount over limit
   Test Step: Withdraw $200 from one, $400 from another
+  Test Input: [TODO: make a guy with 2 accounts]
   
   Scenario: Verify admin withdrawals occuring before user withdrawal does not affect limit
   Test Step: Withdraw $600 from admin then $100 as user
+  Test Input: [TODO: invent a rich prince]
   
   Scenario: Verify admin withdrawals after user withdrawal does not come into confict with limit
   Test Step: Withdraw $400 as user and $200 as admin
-  
-  Scenario: Verify withdrawal with resulting positive balance is accepted
-  Test Step: Withdraw $100 as user
+  Test Input: [TODO: invent a rich prince]
+          [NOTE: AH SHIT TRUESAY we should logout]
   
   Scenario: Verify withdrawal with resulting zero balance is accepted
   Test Step: [TODO: after transaction fees have been done (which they have been)]]
+  Test Input:
   
   Scenario: Verify withdrawal with resulting negative balance is rejected
   Test Step: Withdraw $1 more than balance (within transaction limit)
   
   Scenario: Verify withdrawal with resulting negative balance accounts is rejected (for previous transaction fee from previous withdrawal)
-  Test Step: [TODO: after transaction values have been defined (which they have been)]]
+  Test Step: 
+  [TODO: make 2 of these for student & standard plan? uggh]
   
   
   Scenario: Verify withdrawal with resulting negative balance accounts is rejected (for previous transaction fee from previous transfer)
-  Test Step: [TODO: after transaction values have been defined (which they have been)]]
+  Test Step:
+  [TODO: make 2 of these for student & standard plan? uggh]
   
   Scenario: Verify withdrawal with resulting negative balance accounts is rejected (for previous transaction fee from previous paybill)
-  Test Step: [TODO: after transaction values have been defined (which they have been)]]
+  Test Step: 
+  [TODO: make 2 of these for student & standard plan? uggh]
   
   Scenario: Verify withdrawal with resulting negative balance accounts is rejected (for previous transaction fee from previous deposit)
-  Test Step: [TODO: after transaction values have been defined (which they have been)]]
+  Test Step: 
+  [TODO: make 2 of these for student & standard plan? uggh]
+  
+  Scenario: Verify transaction fees are applied to only successful withdrawals
+  Test Step: Do 5 withdrawals, last of which will fail.
+  Test Input:
+  Expected Result: 4 moneies and 4 transaction fees are removed.
+  Expected Output:
+  
+  Scenario: Verify transaction fees are applied for multiple calls
+  Test Step: Do 5 withdrawals, leaving a positive balance.
+  Test Input:
+  Expected Result: 5 monies and 5 transaction fees are applied.
+  Expected Output:
   
   Scenario: Verify withdrawal for resulting negative balance is rejected (on last of multiple calls)
   Test Step: withdraw $100 then above balance
+  Test Input:
+          login
+          John Doe
+          withdrawal
+          12345
+          100.00
+          withdrawal
+          12345
+          11.00
+          logout
+  Expected Result: $100 is withdrawn.
+  Expected Output: [TODO: after everything is filled out]
   
   Scenario: Verify withdrawal for resulting zero balance is accepted (on last of multiple calls)
-  Test Step: [TODO: after transaction values have been defined (which they have been)]]
+  Test Step: 
+  [TODO: make 2 of these for student & standard plan? uggh]
   
   Scenario: Verify withdrawal for resulting positive balance is accepted (on last of multiple calls)
   Test Step: withdraw multiple times leaving like a $50 buffer or something
+  Test Input:
+          login
+          John Doe
+          withdrawal
+          12345
+          10.00
+          withdrawal
+          12345
+          10.00
+          withdrawal
+          12345
+          10.00
+  Expected Result: $30 is withdrawn.
+  Expected Output: [TODO: after everything is filled out.]
   
   Scenario: Verify withdrawal for resulting negative balance is rejected (over multiple sessions)
   Test Step: [TODO: after corresponding above is fine]
@@ -536,12 +642,32 @@ Test Cases
   
   Scenario: Verify withdrawal for resulting negative balance is rejected (as admin)
   Test Step: withdraw like $1 over balance
+  Test Input:
+          login
+          admin
+          withdrawal
+          John Doe
+          12345
+          111.00
+          logout
+  Expected Result: Admin is informed that the thing would become negative
+  Expected Output: [TODO: after things are filled out]
   
   Scenario: Verify withdrawal for resulting zero balance is rejected (as admin)
-  Test Step: [TODO: after transaction fees are defined (which they have been)]
+  Test Step: [TODO: separate SP and other plan?]
   
   Scenario: Verify withdrawal for resulting positive balance is accepted (as admin)
   Test Step: withdraw as admin with like $50 buffer
+  Test Input:
+          login
+          admin
+          withdrawal
+          John Doe
+          12345
+          5.00
+          logout
+  Expected Result: $5.00 is deducted.
+  Expected Output: [TODO: after things are filled out]
 
 	Paybill - Kathryn
 	================
