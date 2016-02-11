@@ -1594,8 +1594,7 @@ Expected Output   - Print: "Please enter your session type: “
 		    - Print: “Welcome John Doe please enter a command: “
 		    - Print: “Enter your account number: ”
 		    - Print: “Enter account number to transfer to: “
-		    - Print: “Enter amount”
-		    - File: “Transfers account -105”
+		    - Print: “Enter amount"
 		    - Print: “Transfer complete”
 		    - Print: “Have a great day”
 		    - Print: "Please enter your session type: “
@@ -1603,7 +1602,6 @@ Expected Output   - Print: "Please enter your session type: “
 		    - Print: “Enter your account number: ”
 		    - Print: “Enter account number to transfer to: “
 		    - Print: “Enter amount”
-		    - File: “Transfers account -105”
 		    - Print: “Transfer complete”
 
 Scenario: Verify max transfer  
@@ -1624,7 +1622,6 @@ Expected Output   - Print: "Please enter your session type: “
 		    - Print: “Enter your account number: ”
 		    - Print: “Enter account number to transfer to: “
 		    - Print: “Enter amount”
-		    - File: “Transfers account -1050”
 
 Scenario: Verify working transfer limit
 Test Step: Test 1005 dollar transfer
@@ -1668,7 +1665,6 @@ Expected Output   - Print: "Please enter your session type: “
 		    - Print: “Enter your account number: ”
 		    - Print: “Enter account number to transfer to: “
 		    - Print: “Enter amount”
-		    - File: “Transfers account -505”
 		    - Print: “Transfer complete”
 		    - Print: “Enter your account number: ”
 		    - Print: “Enter account number to transfer to: “
