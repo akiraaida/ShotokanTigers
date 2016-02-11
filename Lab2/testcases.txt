@@ -427,16 +427,25 @@ Test Cases
          - File: "No change"
   
   Scenario: Verify withdrawal input of ######.# is rejected
+  Test Step: Enter a number like 20.0
+  
   Scenario: Verify withdrawal input of ######.## (legit) is accepted
+  Test Step: Enter a number like 20.00
+  
   Scenario: Verify dollar value of <$5 is rejected
+  Test Step: Enter a number like 4.99
+  
   Scenario: Verify dollar value of $5 is accepted
-  Scenario: Verify dollar value of $5*k is accepted
+  Test Step: Try to withdraw 5.00 in user mode
+  
+  Scenario: Verify composite dollar value (mixed bills) is accepted
+  Test Step: Try to withdraw 15.00
+  
   Scenario: Verify dollar value of $5 + invalid is rejected
-  Scenario: Verify dollar value of $10 is accepted
-  Scenario: Verify dollar value of $10*k is accepted
-  Scenario: Verify combo of $10 & $5 is accepted
-  Scenario: Verify $50 is rejected
+  Test Step: Try to withdraw 7.00
+  
   Scenario: Verify single account withdraw limit cannot be excceded
+  
   Scenario: Verify single account withdraw limit cannot be exceeded (for multiple calls)
   Scenario: Verify single account withdraw limit cannot be exceeded (for multiple sessions)
   Scenario: Verify withdrawal transaction fee is applied for standard
