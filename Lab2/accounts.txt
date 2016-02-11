@@ -1,4 +1,7 @@
 12345 John Doe             A 00110.00 S
 12346 Matt Cow             A 00110.00 N
 12347 Bran Bob             D 00110.00 N
+12348 Ashe Adc             A 10010.00 N
+12349 Anon Guy             A 01100.96 S
+12350 Anon Guy             A 00100.80 N
 00000 END_OF_FILE          A 00000.00 S
