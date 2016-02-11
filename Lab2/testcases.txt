@@ -10,6 +10,7 @@ Test Cases
         enable
         Bran Bob
         12347
+        logout
   Expected result: Command is accepted.
   Expected Output: - Print: [TODO: after filled everything out]
            - File: [TODO: after filled everything out]
@@ -22,6 +23,7 @@ Test Cases
         enable
         John Doe
         12345
+        logout
   Expected Result: Command is rejected.
   Expected Output: - Print: [TODO: after filled everything out]
            - File: "No change"
@@ -37,6 +39,7 @@ Test Cases
         enable
         Bran Bob
         12347
+        logout
   Expected Result: Command is rejected
   Expected Output: - Print: [TODO: after filled everything out]
            - File: [TODO: after filled everything out]
@@ -48,6 +51,7 @@ Test Cases
         standard
         John Doe
         enable
+        logout
   Expected Result: The command is rejected.
   Expected Output: - Print: "Please enter your session type: "
            - Print: "Please enter a login name: "
@@ -63,6 +67,7 @@ Test Cases
         enable
         Bob Stevenson
         12345
+        logout
   Expected Result: The admin is notified the account is not valid.
   Expected Output: - Print: "Please enter your session type: "
            - Print: "Please enter a command admin: "
@@ -80,6 +85,7 @@ Test Cases
         enable
         Bran Bob
         11111
+        logout
   Expected Result: The admin is notified the account is not valid.
   Expected Output: - Print: "Please enter your session type: "
            - Print: "Please enter a command admin: "
@@ -96,6 +102,7 @@ Test Cases
         enable
         Bran Bob
         12346
+        logout
   Expected Result: The admin is notified the account is not valid.
   Expected Output: - Print: "Please enter your session type: "
            - Print: "Please enter a command admin: "
@@ -117,6 +124,7 @@ Test Cases
         Bran Bob
         12347
         5.00
+        logout
   Expected Result: 5 dollars is withdrawn.
   Expected Output: - Print: [TODO: after filled everything out]
            - File: [TODO: after filled everything out]
@@ -133,6 +141,7 @@ Test Cases
         Bran Bob
         12347
         5.00
+        logout
   Expected Result: 5 dollars is added to the account.
   Expected Output: - Print: [TODO: after filled everything out]
            - File: [TODO: after filled everything out]
@@ -149,8 +158,9 @@ Test Cases
         paybill
         Bran Bob
         12347
-        'TV'
+        TV
         10.0
+        logout
   Expected Result: 10 dollars is paid to TV
   Expected Output: - Print: [TODO: after filled everything out]
            - File: [TODO: after filled everything out]
@@ -168,6 +178,7 @@ Test Cases
         delete
         Bran Bob
         12347
+        logout
   Expected Result: Command is denied because the account is deleted.
   Expected Output: - Print: "Please enter your session type: "
            - Print: "Please enter a command admin: "
@@ -191,6 +202,7 @@ Test Cases
         12345
         12347
         10.0
+        logout
   Expected Result: enabled account gets 10.0
   Expected Output: - Print: [TODO: after filled everything out]
            - File: [TODO: after filled everything out]
@@ -209,6 +221,7 @@ Test Cases
         12347
         12345
         10.00
+        logout
    Expected Result: enabled account transfers 10.0
    Expected Output: - Print: [TODO: after filled everything out]
            - File: [TODO: after filled everything out]
@@ -224,6 +237,7 @@ Test Cases
         withdrawal
         Bob Stevenson
         12345
+        logout
   Expected Result: The admin is notified the account is not valid.
   Expected Output: - Print: "Please enter your session type: "
            - Print: "Please enter a command admin: "
@@ -241,6 +255,7 @@ Test Cases
         withdrawal
         Bran Bob
         11111
+        logout
   Expected Result: The admin is notified the account is not valid.
   Expected Output: - Print: "Please enter your session type: "
            - Print: "Please enter a command admin: "
@@ -257,6 +272,7 @@ Test Cases
         withdrawal
         Bran Bob
         12346
+        logout
   Expected Result: The admin is notified the account is not valid.
   Expected Output: - Print: "Please enter your session type: "
            - Print: "Please enter a command admin: "
@@ -272,6 +288,7 @@ Test Cases
         John Doe
         withdrawal
         12340
+        logout
   Expected Result: The account number is rejected.
   Expected Output: - Print: [TODO: after filled everything out]
          - File: [TODO: after filled everything out]
@@ -284,6 +301,7 @@ Test Cases
         John Doe
         withdrawal
         12347
+        logout
   Expected Result: The account number is rejected. [Note: should be identical to nonexistent account]
   Expected Output: - Print: [TODO: after filled everything out]
          - File: [TODO: after filled everything out]
@@ -297,6 +315,7 @@ Test Cases
         John Doe
         12345
         -40.00
+        logout
   Expected Result: Admin is informed that negative values are invalid.
   Expected Output: - Print: [TODO: after filled everything out]
          - File: [TODO: after filled everything out]
@@ -312,6 +331,7 @@ Test Cases
         John Doe
         12345
         0.00
+        logout
   Expected Result: Admin is informed that zero values are invalid.
   Expected Output: - Print: [TODO: after filled everything out]
          - File: [TODO: after filled everything out]
@@ -326,6 +346,7 @@ Test Cases
         withdrawal
         12345
         654321.00
+        logout
   Expected Result: User is informed that their format is invalid.
   Expected Output: - Print: [TODO: after filled everything out]
          - File: [TODO: after filled everything out]
@@ -338,6 +359,7 @@ Test Cases
         withdrawal
         12345
         .50
+        logout
   Expected Result: User is informed that their format is invalid.
   Expected Output: - Print: [TODO: after filled everything out]
          - File: [TODO: after filled everything out]
@@ -350,6 +372,7 @@ Test Cases
         withdrawal
         12345
         5
+        logout
   Expected Result: User is informed that a decimal point is required.
   Expected Output: - Print: [TODO: after filled everything out]
          - File: "No change"
@@ -362,6 +385,7 @@ Test Cases
         withdrawal
         12345
         $5.00
+        logout
   Expected Result: User is informed that dollar signs are not acceptable.
   Expected Output: - Print: [TODO: after filled everything out]
          - File: "No change"
@@ -374,6 +398,7 @@ Test Cases
         withdrawal
         12345
         5.00$
+        logout
   Expected Result: User is informed that dollar signs are not acceptable.
   Expected Output: - Print: [TODO: after filled everything out]
          - File: "No change"
@@ -386,6 +411,7 @@ Test Cases
         withdrawal
         12345
         5,00
+        logout
   Expected Result: User is reminded to use . to represent decimal
   Expected Output: - Print: [TODO: after filled everything out]
          - File: "No change"
@@ -398,6 +424,7 @@ Test Cases
         withdrawal
         12345
         5 00
+        logout
   Expected Result: User is informed not to put spaces between their numbers.
   Expected Output: - Print: [TODO: after filled everything out]
          - File: "No change"
@@ -410,6 +437,7 @@ Test Cases
         withdrawal
         12345
         5.000
+        logout
   Expected Result: User is reminded to only use 2 fineness.
   Expected Output: - Print: [TODO: after filled everything out]
          - File: "No change"
@@ -422,6 +450,7 @@ Test Cases
         withdrawal
         12345
         00005.00
+        logout
   Expected Result: User is informed that their number doesn't make sense.
   Expected Output: - Print: [TODO: after filled everything out]
          - File: "No change"
@@ -434,6 +463,7 @@ Test Cases
         withdrawal
         12345
         5.0
+        logout
   Expected Result: User is informed that the incorrect number of zeroes
   following decimal was used.
   Expected Output: - Print: [TODO: after filled everything out]
@@ -447,6 +477,7 @@ Test Cases
         withdrawal
         12345
         5.00
+        logout
   Expected Result: Transaction occurs successfully
   Expected Output - Print: [TODO: after filled everything out]
          - File: [TODO: same]
@@ -459,6 +490,7 @@ Test Cases
         withdrawal
         12345
         4.99
+        logout
   Expected Result: User is informed that only canadian bill values are
       acceptable.
   Expected Output: - Print: [TODO: after filled everything out]
@@ -472,6 +504,7 @@ Test Cases
         withdrawal
         12345
         5.00
+        logout
   Expected Result: user successfully withdraws 5.00
   Expected Output: - Print: [TODO: after filled everything out]
          - File: [TODO: samesies]
@@ -484,6 +517,7 @@ Test Cases
         withdrawal
         12345
         15.00
+        logout
   Expected Result: user successfully withdraws 15.00
   Expected Output: - Print: [TODO: after filled everything out]
          - File: [TODO: samesies]
@@ -496,6 +530,7 @@ Test Cases
         withdrawal
         12345
         7.00
+        logout
   Expected Result: user is informed only canadian dollar values are acceptable
   Expected Output: - Print: [TODO: after filled everything out]
          - File: "No change"
@@ -504,72 +539,116 @@ Test Cases
   Scenario: Verify single account withdraw limit cannot be exceeded
   Test Step: Try to withdraw 505.00 in user mode
   Test Input: [TODO: invent a rich prince]
+  Expected Result:
+  Expected Output: [TODO: after things are filled out]
   
   Scenario: Verify single account withdraw limit cannot be exceeded (for multiple calls)
   Test Step: Try to withdraw 100.00 then 400.00 in user mode
   Test Input: [TODO: invent a rich prince]
+  Expected Result:
+  Expected Output: [TODO: after things are filled out]
   
   Scenario: Verify single account withdraw limit cannot be exceeded (for multiple sessions)
   Test Step: Login and withdraw twice, over limit
   Test Input: [TODO: invent a rich prince]
+  Expected Result:
+  Expected Output: [TODO: after things are filled out]
   
   Scenario: Verify withdrawal transaction fee is applied for standard
   Test Step: Try to withdraw [TODO: make 2 of these for student & standard plan uggh]
+  Test Input:
+  Expected Result:
+  Expected Output: [TODO: after things are filled out]
   
   Scenario: Verify several withdrawal tranasaction fees are applied for several calls
   [TODO: make 2 of these for student & standard plan uggh]
+  Test Step:
+  Test Input:
+  Expected Result:
+  Expected Output: [TODO: after things are filled out]
   
   Scenario: Verify single account withdraw limit for admins doesn't apply
   Test Step: As admin, withdraw $600.00
   Test Input: [TODO: invent a rich prince]
+  Expected Result:
+  Expected Output: [TODO: after things are filled out]
   
   Scenario: Verify single account withdraw limit for admins does not incur transaction fee
   Test Step: [TODO: make 2 of these for student & standard plan uggh]
+  Test Input:
+  Expected Result:
+  Expected Output: [TODO: after things are filled out]
   
   Scenario: Verify separate account limits are separate with 1st rejected at limit and 2nd accepted
   Test Step: Withdraw $600.0 from one acount, $400.0 from another
   Test Input: [TODO: invent a rich prince]
+  Expected Result:
+  Expected Output: [TODO: after things are filled out]
   
   Scenario: Verify separate account limits are separate with both accepted
   Test Step: Withdraw $200 from one, $100 from another
   Test Input: [TODO: make a guy with 2 accounts]
+  Expected Result:
+  Expected Output: [TODO: after things are filled out]
   
   Scenario: Verify separate account limits are separate with both accepted for amount over limit
   Test Step: Withdraw $200 from one, $400 from another
   Test Input: [TODO: make a guy with 2 accounts]
+  Expected Result:
+  Expected Output: [TODO: after things are filled out]
   
   Scenario: Verify admin withdrawals occuring before user withdrawal does not affect limit
   Test Step: Withdraw $600 from admin then $100 as user
   Test Input: [TODO: invent a rich prince]
+  Expected Result:
+  Expected Output: [TODO: after things are filled out]
   
   Scenario: Verify admin withdrawals after user withdrawal does not come into confict with limit
   Test Step: Withdraw $400 as user and $200 as admin
   Test Input: [TODO: invent a rich prince]
-          [NOTE: AH SHIT TRUESAY we should logout]
+  Expected Result:
+  Expected Output: [TODO: after things are filled out]
   
   Scenario: Verify withdrawal with resulting zero balance is accepted
   Test Step: [TODO: after transaction fees have been done (which they have been)]]
   Test Input:
+  Expected Result:
+  Expected Output: [TODO: after things are filled out]
   
   Scenario: Verify withdrawal with resulting negative balance is rejected
   Test Step: Withdraw $1 more than balance (within transaction limit)
+  Test Input:
+  Expected Result:
+  Expected Output: [TODO: after things are filled out]
   
   Scenario: Verify withdrawal with resulting negative balance accounts is rejected (for previous transaction fee from previous withdrawal)
   Test Step: 
   [TODO: make 2 of these for student & standard plan? uggh]
+  Test Input:
+  Expected Result:
+  Expected Output: [TODO: after things are filled out]
   
   
   Scenario: Verify withdrawal with resulting negative balance accounts is rejected (for previous transaction fee from previous transfer)
   Test Step:
   [TODO: make 2 of these for student & standard plan? uggh]
+  Test Input:
+  Expected Result:
+  Expected Output: [TODO: after things are filled out]
   
   Scenario: Verify withdrawal with resulting negative balance accounts is rejected (for previous transaction fee from previous paybill)
   Test Step: 
   [TODO: make 2 of these for student & standard plan? uggh]
+  Test Input:
+  Expected Result:
+  Expected Output: [TODO: after things are filled out]
   
   Scenario: Verify withdrawal with resulting negative balance accounts is rejected (for previous transaction fee from previous deposit)
   Test Step: 
   [TODO: make 2 of these for student & standard plan? uggh]
+  Test Input:
+  Expected Result:
+  Expected Output: [TODO: after things are filled out]
   
   Scenario: Verify transaction fees are applied to only successful withdrawals
   Test Step: Do 5 withdrawals, last of which will fail.
@@ -601,6 +680,9 @@ Test Cases
   Scenario: Verify withdrawal for resulting zero balance is accepted (on last of multiple calls)
   Test Step: 
   [TODO: make 2 of these for student & standard plan? uggh]
+  Test Input:
+  Expected Result:
+  Expected Output: [TODO: after things are filled out]
   
   Scenario: Verify withdrawal for resulting positive balance is accepted (on last of multiple calls)
   Test Step: withdraw multiple times leaving like a $50 buffer or something
@@ -616,28 +698,44 @@ Test Cases
           withdrawal
           12345
           10.00
+          logout
   Expected Result: $30 is withdrawn.
   Expected Output: [TODO: after everything is filled out.]
   
   Scenario: Verify withdrawal for resulting negative balance is rejected (over multiple sessions)
   Test Step: [TODO: after corresponding above is fine]
+  Test Input:
+  Expected Result:
+  Expected Output: [TODO: after things are filled out]
   
   Scenario: Verify withdrawal for resulting zero balance is rejected (over multiple sessions)
   Test Step: [TODO: after corresponding above is fine]
+  Test Input:
+  Expected Result:
+  Expected Output: [TODO: after things are filled out]
   
   Scenario: Verify withdrawal for resulting positive balance is accepted (over multiple sessions)
   Test Step: [TODO: after corresponding above is fine]  
+  Test Input:
+  Expected Result:
+  Expected Output: [TODO: after things are filled out]
   
   Scenario: Verify withdrawal for resulting negative balance is rejected (after session as different user)
   Test Step: [TODO: after corresponding above is fine]
+  Test Input:
+  Expected Result:
+  Expected Output: [TODO: after things are filled out]
   
   
   Scenario: Verify withdrawal for resulting zero balance is rejected (after session as different user)
   Test Step: [TODO: after corresponding above is fine]
-  
+  Test Input:
+  Expected Result:
+  Expected Output: [TODO: after things are filled out]
   
   Scenario: Verify withdrawal for resulting positive balance is accepted (after session as different user)
   Test Step: [TODO: after corresponding above is fine]
+  Test Input:
 
   
   Scenario: Verify withdrawal for resulting negative balance is rejected (as admin)
@@ -675,57 +773,111 @@ Test Cases
   [* CP most from withdraw ]
   Scenario: Verify EC is accepted in standard mode
   Test Step: pay a bill to Bright Light Electric Company as user
+  Test Input:
+  Expected Result:
+  Expected Output: [TODO: after things are filled out]
   
   Scenario: Verify CQ is accepted in standard mode
   Test Step: pay a bill to Credit Card Company Q as user
+  Test Input:
+  Expected Result:
+  Expected Output: [TODO: after things are filled out]
   
   Scenario: Verify TV is accepted in standard mode
   Test Step: pay a bill to Low Definition TV, inc as user
+  Test Input:
+  Expected Result:
+  Expected Output: [TODO: after things are filled out]
   
   Scenario: Verify EC is accepted in admin mode
   Test Step: pay a bill to Bright Light Electric Company as admin
+  Test Input:
+  Expected Result:
+  Expected Output: [TODO: after things are filled out]
   
   Scenario: Verify CQ is accepted in admin mode
   Test Step: pay a bill to Credit Card Company Q as admin
+  Test Input:
+  Expected Result:
+  Expected Output: [TODO: after things are filled out]
   
   Scenario: Verify TV is accepted in admin mode
   Test Step: pay a bill to Low Definition TV, inc as admin
+  Test Input:
+  Expected Result:
+  Expected Output: [TODO: after things are filled out]
   
   Scenario: Verify invalid 2 letter is not accepted in standard mode
   Test Step: try to pay a bill to BS as user
+  Test Input:
+  Expected Result:
+  Expected Output: [TODO: after things are filled out]
   
   Scenario: Verify 3 letter is not accepted in standard mode
   Test Step: try to pay a bill to SBS as user
+  Test Input:
+  Expected Result:
+  Expected Output: [TODO: after things are filled out]
   
   Scenario: Verify 1 letter is not accepted in standard mode
   Test Step: try to pay a bill to S as user
+  Test Input:
+  Expected Result:
+  Expected Output: [TODO: after things are filled out]
   
   Scenario: Verify truncated 3 letter is not accepted in standard mode
   Test Step: try to pay a bill to TVI as user
+  Test Input:
+  Expected Result:
+  Expected Output: [TODO: after things are filled out]
   
   Scenario: Verify invalid 2 letter is not accepted in admin mode
   Test Step: try to pay a bill to BS as admin
+  Test Input:
+  Expected Result:
+  Expected Output: [TODO: after things are filled out]
   
   Scenario: Verify 3 letter is not accepted in admin mode
   Test Step: try to pay a bill to SBS as admin
+  Test Input:
+  Expected Result:
+  Expected Output: [TODO: after things are filled out]
   
   Scenario: Verify 1 letter is not accepted in admin mode
   Test Step: try to pay a bill to S as admin
+  Test Input:
+  Expected Result:
+  Expected Output: [TODO: after things are filled out]
   
   Scenario: Verify truncated 3 letter is not accepted in admin mode
   Test Step: try to pay a bill to TVI as admin
+  Test Input:
+  Expected Result:
+  Expected Output: [TODO: after things are filled out]
   
   Scenario: Verify lowercase ec is accepted in standard mode
   Test Step: try to pay a bill to ec as user
+  Test Input:
+  Expected Result:
+  Expected Output: [TODO: after things are filled out]
   
   Scenario: Verify lowercase cq is accepted in standard mode
   Test Step: try to pay a bill to cq as user
+  Test Input:
+  Expected Result:
+  Expected Output: [TODO: after things are filled out]
   
   Scenario: Verify lowercase tv is accepted in standard mode
   Test Step: try to pay a bill to tv as user
+  Test Input:
+  Expected Result:
+  Expected Output: [TODO: after things are filled out]
   
   Scenario: Verify reversal, CE is not accepted in standard mode
   Test Step: try to pay a bill to CE as user
+  Test Input:
+  Expected Result:
+  Expected Output: [TODO: after things are filled out]
   
 
 	Deposit - Kathryn
@@ -734,15 +886,27 @@ Test Cases
   [* CP most from withdraw ]
   Scenario: Verify deposited funds cannot be withdrawn
   Test Step: put in balance and then withdraw previous balance + 1 as user
+  Test Input:
+  Expected Result:
+  Expected Output: [TODO: after things are filled out]
   
   Scenario: Verify deposited funds cannot be used with paybill
   Test Step: put in that amount up there and then pay a bill as user
+  Test Input:
+  Expected Result:
+  Expected Output: [TODO: after things are filled out]
   
   Scenario: Verify deposited funds cannot be transferred from deposited account to account
   Test Step: transfer it
+  Test Input:
+  Expected Result:
+  Expected Output: [TODO: after things are filled out]
   
   Scenario: Verify deposited funds cannot be transferred from account to deposited account
   Test Step: transfer it
+  Test Input:
+  Expected Result:
+  Expected Output: [TODO: after things are filled out]
   
   
 
