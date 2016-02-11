@@ -1,5 +1,5 @@
-Change Plan - Akira
-================
+Change Plan
+==========
 
 1.	Scenario: Verify account holder's name and account number correspond with each other (Incorrect name, correct number).
 	Test Step: Admin enters an incorrect account holder's name but correct account number.
@@ -9,6 +9,7 @@ Change Plan - Akira
 				changeplan
 				Bob Stevenson
 				12345
+				logout
 	Expected Result: The admin is notified the account is not valid.
 	Expected Output: - Print: "Please enter your session type: "
 					 - Print: "Please enter a command admin: "
@@ -16,7 +17,9 @@ Change Plan - Akira
 					 - Print: "Please enter the account number: "
 					 - Print: "Error, account specificed is not a valid account."
 					 - File: 10 admin                00000 00000000 A 
-	
+					 - File: 00 admin                00000 00000000   
+	Files: chng000.in
+
 2.	Scenario: Verify account holder's name and account number correspond with each other (Correct name, incorrect number).
 	Test Step: Admin enters a correct account holder's name but incorrect account number.
 	Test Input: 
@@ -25,6 +28,7 @@ Change Plan - Akira
 				changeplan
 				John Doe
 				11111
+				logout
 	Expected Result: The admin is notified the account is not valid.
 	Expected Output: - Print: "Please enter your session type: "
 					 - Print: "Please enter a command admin: "
@@ -32,6 +36,8 @@ Change Plan - Akira
 					 - Print: "Please enter the account number: "
 					 - Print: "Error, account specificed is not a valid account."
 					 - File: 10 admin                00000 00000000 A 
+					 - File: 00                      00000 00000000   
+	Files: chng001.in
 	
 3.	Scenario: Verify account holder's name and account number correspond with each other (Correct name, correct number but not matching).
 	Test Step: Admin enters a correct account holder and correct account number but they do not correspond to each other.
@@ -41,6 +47,7 @@ Change Plan - Akira
 				changeplan
 				John Doe
 				12346
+				logout
 	Expected Result: The admin is notified the account is not valid.
 	Expected Output: - Print: "Please enter your session type: "
 					 - Print: "Please enter a command admin: "
@@ -48,6 +55,8 @@ Change Plan - Akira
 					 - Print: "Please enter the account number: "
 					 - Print: "Error, account specificed is not a valid account."
 					 - File: 10 admin                00000 00000000 A 
+					 - File: 00                      00000 00000000   
+	Files: chng002.in
 	
 4.	Scenario: Verify admin can change an account from SP (student) to NP (non-student). 
 	Test Step: Admin enters a correct account holder, correct account number and they do correspond to each other.
@@ -57,6 +66,7 @@ Change Plan - Akira
 				changeplan
 				John Doe
 				12345
+				logout
 	Expected Result: The information is saved to the bank account transaction file saying that the account payment plan is now NP (non-student).
 	Expected Output: - Print: "Please enter your session type: "
 					 - Print: "Please enter a command admin: "
@@ -65,6 +75,8 @@ Change Plan - Akira
 					 - Print: "Success, John Doe is now on a non-student payment plan."
 					 - File: 10 admin                00000 00000000 A 
 					 - File: 08 John Doe             12345 00000000   
+					 - File: 00                      00000 00000000   
+	Files: chng003.in
 
 5.	Scenario: Verify admin can change an account from NP (non-student) to SP (student). 
 	Test Step: Admin enters a correct account holder, correct account number and they do correspond to each other.
@@ -74,6 +86,7 @@ Change Plan - Akira
 				changeplan
 				Matt Cow
 				12346
+				logout
 	Expected Result: The information is saved to the bank account transaction file saying that the account payment plan is now SP (student).
 	Expected Output: - Print: "Please enter your session type: "
 					 - Print: "Please enter a command admin: "
@@ -82,6 +95,9 @@ Change Plan - Akira
 					 - Print: "Success, Matt Cow is now on a student payment plan."
 					 - File: 10 admin                00000 00000000 A 
 					 - File: 08 Matt Cow             12346 00000000   
+					 - File: 00                      00000 00000000   
+					 - File: 00                      00000 00000000   
+	Files: chng004.in
 
 6.	Scenario: Verify normal users can not access the changeplan feature.
 	Test Step: Normal user attempts to use the changeplan feature.
@@ -90,15 +106,19 @@ Change Plan - Akira
 				standard
 				John Doe
 				changeplan
+				logout
 	Expected Result: The command is rejected.
 	Expected Output: - Print: "Please enter your session type: "
 					 - Print: "Please enter a login name: "
 					 - Print: "Please enter a command user: "
 					 - Print: "Error, you do not have the correct privileges to access this feature."
 					 - File: 10 John Doe             00000 00000000 S 
+					 - File: 00                      00000 00000000   
+					 - File: 00                      00000 00000000   
+	Files: chng005.in
 	
-Disable - Akira
-================
+Disable
+==========
 
 7.	Scenario: Verify account holder's name and account number correspond with each other (Incorrect name, correct number).
 	Test Step: Admin enters an incorrect account holder's name but correct account number.
@@ -108,6 +128,7 @@ Disable - Akira
 				disable
 				Bob Stevenson
 			    12345
+			    logout
 	Expected Result: The admin is notified the account is not valid.
 	Expected Output: - Print: "Please enter your session type: "
 					 - Print: "Please enter a command admin: "
@@ -115,6 +136,9 @@ Disable - Akira
 					 - Print: "Please enter the account number: "
 					 - Print: "Error, account specificed is not a valid account."
 					 - File: 10 admin                00000 00000000 A 
+					 - File: 00                      00000 00000000   
+					 - File: 00                      00000 00000000   
+	Files: dsbl000.in
 	
 8.	Scenario: Verify account holder's name and account number correspond with each other (Correct name, incorrect number).
 	Test Step: Admin enters a correct account holder's name but incorrect account number.
@@ -124,6 +148,7 @@ Disable - Akira
 				disable
 				John Doe
 				11111
+				logout
 	Expected Result: The admin is notified the account is not valid.
 	Expected Output: - Print: "Please enter your session type: "
 					 - Print: "Please enter a command admin: "
@@ -131,6 +156,9 @@ Disable - Akira
 					 - Print: "Please enter the account number: "
 					 - Print: "Error, account specificed is not a valid account."
 					 - File: 10 admin                00000 00000000 A 
+					 - File: 00                      00000 00000000   
+					 - File: 00                      00000 00000000   
+	Files: dsbl001.in
 	
 9.	Scenario: Verify account holder's name and account number correspond with each other (Correct name, correct number but not matching).
 	Test Step: Admin enters a correct account holder and correct account number but they do not correspond to each other.
@@ -140,6 +168,7 @@ Disable - Akira
 				disable
 				John Doe
 				12346
+				logout
 	Expected Result: The admin is notified the account is not valid.
 	Expected Output: - Print: "Please enter your session type: "
 					 - Print: "Please enter a command admin: "
@@ -147,6 +176,9 @@ Disable - Akira
 					 - Print: "Please enter the account number: "
 					 - Print: "Error, account specificed is not a valid account."
 					 - File: 10 admin                00000 00000000 A 
+					 - File: 00                      00000 00000000   
+					 - File: 00                      00000 00000000   
+	Files: dsbl002.in
 
 10.	Scenario: Verify normal users can not access the disable feature.
 	Test Step: Normal user attempts to use the disable feature.
@@ -155,12 +187,15 @@ Disable - Akira
 				standard
 				John Doe
 				disable
+				logout
 	Expected Result: The command is rejected.
 	Expected Output: - Print: "Please enter your session type: "
 					 - Print: "Please enter a login name: "
 					 - Print: "Please enter a command user: "
 					 - Print: "Error, you do not have the correct privileges to access this feature."
 					 - File: 10 John Doe             00000 00000000 S 
+					 - File: 00                      00000 00000000   
+	Files: dsbl003.in
 	
 11.	Scenario: Verify admin can change an account from A (active) to D (disabled). 
 	Test Step: Admin enters a correct account holder, correct account number and they do correspond to each other.
@@ -170,6 +205,7 @@ Disable - Akira
 				disable
 				John Doe
 				12345
+				logout
 	Expected Result: The information is saved to the bank account transaction file saying that the account is now disabled.
 	Expected Output: - Print: "Please enter your session type: "
 					 - Print: "Please enter a command admin: "
@@ -177,7 +213,9 @@ Disable - Akira
 					 - Print: "Please enter the account number: "
 					 - Print: "Success, John Doe's account is now disabled."
 					 - File: 10 admin                00000 00000000 A 
-					 - File: 07 John Doe             12345 00000000 
+					 - File: 07 John Doe             12345 00000000   
+					 - File: 00                      00000 00000000   
+	Files: dsbl004.in
 			
 12.	Scenario: Verify user withdraw transaction can no longer be done to a disabled account - user. 
 	Test Step: Enter the disabled account's correct account holder's name, account number, and an amount of money in the withdraw feature.
@@ -188,6 +226,7 @@ Disable - Akira
 				withdrawal
 				12347
 				100
+				logout
 	Expected Result: Command is denied because the account is disabled.
 	Expected Output: - Print: "Please enter your session type: "
 					 - Print: "Please enter a login name: "
@@ -195,7 +234,9 @@ Disable - Akira
 					 - Print: "Please enter your account number: "
 					 - Print: "Enter the amount of money you wish to withdraw: "
 					 - Print: "Error, your account is disabled."
-					 - File: 10 Bran Bob             00000 00000000 S
+					 - File: 10 Bran Bob             00000 00000000 S 
+					 - File: 00                      00000 00000000   
+	Files: dsbl005.in
 	
 13.	Scenario: Verify user deposit transaction can no longer be done to a disabled account - user. 
 	Test Step: Enter the disabled account's correct account holder's name, account number, and an amount of money in the deposit feature.
@@ -206,6 +247,7 @@ Disable - Akira
 				deposit
 				12347
 				100
+				logout
 	Expected Result: Command is denied because the account is disabled.
 	Expected Output: - Print: "Please enter your session type: "
 					 - Print: "Please enter a login name: "
@@ -213,7 +255,9 @@ Disable - Akira
 					 - Print: "Please enter your account number: "
 					 - Print: "Enter the amount of money you wish to deposit: "
 					 - Print: "Error, your account is disabled."
-					 - File: 10 Bran Bob             00000 00000000 S
+					 - File: 10 Bran Bob             00000 00000000 S 
+					 - File: 00                      00000 00000000   
+	Files: dsbl006.in
 	
 14.	Scenario: Verify user paybill transaction can no longer be done to a disabled account - user. 
 	Test Step: Enter the disabled account's correct account holder's name, account number, company, and an amount of money to pay in the paybill feature.
@@ -225,6 +269,7 @@ Disable - Akira
 				12347
 				The Bright Light Electric Company (EC)
 				100
+				logout
 	Expected Result: Command is denied because the account is disabled.
 	Expected Output: - Print: "Please enter your session type: "
 					 - Print: "Please enter a login name: "
@@ -233,7 +278,9 @@ Disable - Akira
 					 - Print: "Please enter the company you wish to pay to: "
 					 - Print: "Enter the amount of money you wish to pay: "
 					 - Print: "Error, your account is disabled."
-					 - File: 10 Bran Bob             00000 00000000 S
+					 - File: 10 Bran Bob             00000 00000000 S 
+					 - File: 00                      00000 00000000   
+	Files: dsbl007.in
 	
 15.	Scenario: Verify delete transaction can still be done to a disabled account - user. 
 	Test Step: Enter the disabled account's correct account holder's name and account number in the delete feature.
@@ -243,14 +290,17 @@ Disable - Akira
 				delete
 				Bran Bob
 				12347
+				logout
 	Expected Result: Disabled account is deleted.
 	Expected Output: - Print: "Please enter your session type: "
 					 - Print: "Please enter a command admin: "
 					 - Print: "Please enter the account holder's name: "
 					 - Print: "Please enter the account number: "
 					 - Print: "Success, account has been deleted."
-					 - File: 10 admin                00000 00000000 A
-					 - File: 06 Bran Bob             12347 00000000 
+					 - File: 10 admin                00000 00000000 A 
+					 - File: 06 Bran Bob             12347 00000000   
+					 - File: 00                      00000 00000000   
+	Files: dsbl008.in
 	
 16.	Scenario: Verify disable transaction can no longer be done to a disabled account - user. 
 	Test Step: Enter the disabled account's correct account holder's name and account number in the disable feature.
@@ -260,13 +310,16 @@ Disable - Akira
 				disable
 				Bran Bob
 				12347
+				logout
 	Expected Result: Command is denied because the account is disabled.
 	Expected Output: - Print: "Please enter your session type: "
 					 - Print: "Please enter a command admin: "
 					 - Print: "Please enter the account holder's name: "
 					 - Print: "Please enter the account number: "
 					 - Print: "Error, account is already disabled"
-					 - File: 10 admin                00000 00000000 A
+					 - File: 10 admin                00000 00000000 A 
+					 - File: 00                      00000 00000000   
+	Files: dsbl009.in
 	
 17.	Scenario: Verify user transfer transaction can no longer be done with a disabled account (From an account to a disabled account) - user.  
 	Test Step: Enter the disabled account's correct account holder's name and account number, another account number and an amount of money in the transfer feature.
@@ -278,6 +331,7 @@ Disable - Akira
 				12347
 				12345
 				100
+				logout
 	Expected Result: Command is denied because the account is disabled (disabled precedes valid account) - user.
 	Expected Output: - Print: "Please enter your session type: "
 					 - Print: "Please enter a login name: "
@@ -286,7 +340,9 @@ Disable - Akira
 					 - Print: "Please enter the account number: "
 					 - Print: "Please enter the account number to recieve money: "
 					 - Print: "Error, your account is disabled"
-					 - File: 10 Bran Bob             00000 00000000 S
+					 - File: 10 Bran Bob             00000 00000000 S 
+					 - File: 00                      00000 00000000   
+	Files: dsbl010.in
 	
 18.	Scenario: Verify user transfer transaction can no longer be done with a disabled account (From a disabled account to another account) - user. 
 	Test Step: Enter an account holder's name, account number, the disabled account number, and an amount of money in the transfer feature.
@@ -298,6 +354,7 @@ Disable - Akira
 				12345
 				12347
 				100
+				logout
 	Expected Result: Command is denied because the account is disabled (disabled precedes valid account).
 	Expected Output: - Print: "Please enter your session type: "
 					 - Print: "Please enter a login name: "
@@ -306,7 +363,9 @@ Disable - Akira
 					 - Print: "Please enter the account number: "
 					 - Print: "Please enter the account number to recieve money: "
 					 - Print: "Error, that account is disabled"
-					 - File: 10 John Doe             00000 00000000 S
+					 - File: 10 John Doe             00000 00000000 S 
+					 - File: 00                      00000 00000000   
+	Files: dsbl011.in
 
 19.	Scenario: Verify user withdraw transaction can no longer be done to a disabled account - admin. 
 	Test Step: Enter the disabled account's correct account holder's name, account number, and an amount of money in the withdraw feature.
@@ -317,6 +376,7 @@ Disable - Akira
 				Bran Bob
 				12347
 				100
+				logout
 	Expected Result: Command is denied because the account is disabled.
 	Expected Output: - Print: "Please enter your session type: "
 					 - Print: "Please enter a command admin: "
@@ -324,7 +384,9 @@ Disable - Akira
 					 - Print: "Please enter the account number: "
 					 - Print: "Enter the amount of money you wish to withdraw: "
 					 - Print: "Error, that account has been disabled."
-					 - File: 10 Bran Bob             00000 00000000 S
+					 - File: 10 Bran Bob             00000 00000000 S 
+					 - File: 00                      00000 00000000   
+	Files: dsbl012.in
 
 20.	Scenario: Verify user deposit transaction can no longer be done to a disabled account - admin. 
 	Test Step: Enter the disabled account's correct account holder's name, account number, and an amount of money in the deposit feature.
@@ -335,6 +397,7 @@ Disable - Akira
 				Bran Bob
 				12347
 				100
+				logout
 	Expected Result: Command is denied because the account is disabled.
 	Expected Output: - Print: "Please enter your session type: "
 					 - Print: "Please enter a command admin: "
@@ -342,7 +405,9 @@ Disable - Akira
 					 - Print: "Please enter the account number: "
 					 - Print: "Enter the amount of money you wish to deposit: "
 					 - Print: "Error, that account has been disabled."
-					 - File: 10 Bran Bob             00000 00000000 S
+					 - File: 10 Bran Bob             00000 00000000 S 
+					 - File: 00                      00000 00000000   
+	Files: dsbl013.in
 	
 21.	Scenario: Verify user paybill transaction can no longer be done to a disabled account - admin. 
 	Test Step: Enter the disabled account's correct account holder's name, account number, company, and an amount of money to pay in the paybill feature.
@@ -354,6 +419,7 @@ Disable - Akira
 				12347
 				The Bright Light Electric Company (EC)
 				100
+				logout
 	Expected Result: Command is denied because the account is disabled.
 	Expected Output: - Print: "Please enter your session type: "
 					 - Print: "Please enter a command admin: "
@@ -361,7 +427,9 @@ Disable - Akira
 					 - Print: "Please enter the account number: "
 					 - Print: "Enter the amount of money you wish to pay: "
 					 - Print: "Error, that account has been disabled."
-					 - File: 10 admin                00000 00000000 A
+					 - File: 10 admin                00000 00000000 A 
+					 - File: 00                      00000 00000000   
+	Files: dsbl014.in
 					
 22.	Scenario: Verify user transfer transaction can no longer be done with a disabled account (From an account to a disabled account) - admin.  
 	Test Step: Enter the disabled account's correct account holder's name and account number, another account number and an amount of money in the transfer feature.
@@ -373,6 +441,7 @@ Disable - Akira
 				12347
 				12345
 				100
+				logout
 	Expected Result: Command is denied because the account is disabled (disabled precedes valid account) - admin.
 	Expected Output: - Print: "Please enter your session type: "
 					 - Print: "Please enter a command admin: "
@@ -380,7 +449,9 @@ Disable - Akira
 					 - Print: "Please enter the account number: "
 					 - Print: "Please enter the account number to recieve money: "
 					 - Print: "Error, that account has been is disabled"
-					 - File: 10 admin                00000 00000000 A
+					 - File: 10 admin                00000 00000000 A 
+					 - File: 00                      00000 00000000   
+	Files: dsbl015.in
 	
 23.	Scenario: Verify user transfer transaction can no longer be done with a disabled account (From a disabled account to another account) - admin. 
 	Test Step: Enter an account holder's name, account number, the disabled account number, and an amount of money in the transfer feature.
@@ -392,6 +463,7 @@ Disable - Akira
 				12345
 				12347
 				100
+				logout
 	Expected Result: Command is denied because the account is disabled (disabled precedes valid account).
 	Expected Output: - Print: "Please enter your session type: "
 					 - Print: "Please enter a command admin: "
@@ -399,10 +471,12 @@ Disable - Akira
 					 - Print: "Please enter the account number: "
 					 - Print: "Please enter the account number to recieve money: "
 					 - Print: "Error, that account has been is disabled"
-					 - File: 10 admin                00000 00000000 A
+					 - File: 10 admin                00000 00000000 A 
+					 - File: 00                      00000 00000000   
+	Files: dsbl016.in
 
-Delete - Akira
-================
+Delete
+==========
 
 24.	Scenario: Verify account holder's name and account number correspond with each other (Incorrect name, correct number).
 	Test Step: Admin enters an incorrect account holder's name but correct account number.
@@ -412,13 +486,16 @@ Delete - Akira
 				delete
 				Bob Stevenson
 			    12345
+				logout
 	Expected Result: The admin is notified the account is not valid.
 	Expected Output: - Print: "Please enter your session type: "
 					 - Print: "Please enter a command admin: "
 					 - Print: "Please enter the account holder's name: "
 					 - Print: "Please enter the account number: "
 					 - Print: "Error, account specificed is not a valid account."
-					 - File: 10 admin                00000 00000000 A
+					 - File: 10 admin                00000 00000000 A 
+					 - File: 00                      00000 00000000   
+	Files: delt000.in
 	
 25.	Scenario: Verify account holder's name and account number correspond with each other (Correct name, incorrect number).
 	Test Step: Admin enters a correct account holder's name but incorrect account number.
@@ -428,13 +505,16 @@ Delete - Akira
 				delete
 				John Doe
 				11111
+				logout
 	Expected Result: The admin is notified the account is not valid.
 	Expected Output: - Print: "Please enter your session type: "
 					 - Print: "Please enter a command admin: "
 					 - Print: "Please enter the account holder's name: "
 					 - Print: "Please enter the account number: "
 					 - Print: "Error, account specificed is not a valid account."
-					 - File: 10 admin                00000 00000000 A
+					 - File: 10 admin                00000 00000000 A 
+					 - File: 00                      00000 00000000   
+	Files: delt001.in
 	
 26.	Scenario: Verify account holder's name and account number correspond with each other (Correct name, correct number but not matching).
 	Test Step: Admin enters a correct account holder and correct account number but they do not correspond to each other.
@@ -444,13 +524,16 @@ Delete - Akira
 				delete
 				John Doe
 				12346
+				logout
 	Expected Result: The admin is notified the account is not valid.
 	Expected Output: - Print: "Please enter your session type: "
 					 - Print: "Please enter a command admin: "
 					 - Print: "Please enter the account holder's name: "
 					 - Print: "Please enter the account number: "
 					 - Print: "Error, account specificed is not a valid account."
-					 - File: 10 admin                00000 00000000 A
+					 - File: 10 admin                00000 00000000 A 
+					 - File: 00                      00000 00000000   
+	Files: delt002.in
 
 27.	Scenario: Verify normal users can not access the disable feature.
 	Test Step: Normal user attempts to use the delete feature.
@@ -459,12 +542,14 @@ Delete - Akira
 				standard
 				John Doe
 				delete
+				logout
 	Expected Result: The command is rejected.
 	Expected Output: - Print: "Please enter your session type: "
 					 - Print: "Please enter a login name: "
 					 - Print: "Please enter a command user: "
 					 - Print: "Error, you do not have the correct privileges to access this feature."
 					 - File: No change.
+	Files: delt003.in
 	
 28.	Scenario: Verify admin can delete an account.
 	Test Step: Admin enters a correct account holder, correct account number and they do correspond to each other.
@@ -474,6 +559,7 @@ Delete - Akira
 				delete
 				John Doe
 				12345
+				logout
 	Expected Result: The information is saved to the bank account transaction file saying that the account is now deleted.
 	Expected Output: - Print: "Please enter your session type: "
 					 - Print: "Please enter a command admin: "
@@ -481,6 +567,8 @@ Delete - Akira
 					 - Print: "Please enter the account number: "
 					 - Print: "Success, John Doe's account is now deleted."
 					 - File: 06 John Doe             12345 00000000   
+					 - File: 00                      00000 00000000    
+	Files: delt004.in
 	
 29.	Scenario: Verify user can not do transactions to a deleted account. 
 	Test Step: Enter the deleted account's correct account holder's name, account number, and an amount of money in the withdraw feature.
@@ -493,6 +581,7 @@ Delete - Akira
 					 - Print: "Please enter a login name: "
 					 - Print: "Error, that account does not exist."
 					 - File: No change
+	Files: delt005.in
 
 30.	Scenario: Verify admin can not do transactions to a deleted account. 
 	Test Step: Enter the deleted account's correct account holder's name, account number, and an amount of money in the withdraw feature.
@@ -503,6 +592,7 @@ Delete - Akira
 				John Doe
 				12345
 				100
+				logout
 	Expected Result: Command is denied because the account is deleted.
 	Expected Output: - Print: "Please enter your session type: "
 					 - Print: "Please enter a command admin: "
@@ -510,10 +600,12 @@ Delete - Akira
 					 - Print: "Please enter the account number: "
 					 - Print: "Enter the amount of money you wish to withdraw: "
 					 - Print: "Error, that account does not exist."
-					 - File: 10 admin                00000 00000000 A
+					 - File: 10 admin                00000 00000000 A 
+					 - File: 00                      00000 00000000   
+	Files: delt006.in
 
-Create - Akira
-================
+Create
+==========
 
 31.	Scenario: Verify account creation (with valid input).
 	Test Step: Admin enters an account holder's name that is under 20 characters and initial balance less than $99999.99 into the create feature.
@@ -523,6 +615,7 @@ Create - Akira
 				create
 				Lock Lan
 				200
+				logout
 	Expected Result: Information is saved to the bank account transaction file with this new information and a uniquely generated account number.
 	Expected Output: - Print: "Please enter your session type: "
 					 - Print: "Please enter a command admin: "
@@ -531,6 +624,8 @@ Create - Akira
 					 - Print: "Success, account created. User's unique account number is 13245."
 					 - File: 10 admin                00000 00000000 A
 					 - File: 05 Lock Lan             13245 00200.00   
+					 - File: 00                      00000 00000000   
+	Files: crte000.in
 	
 32.	Scenario: Verify account creation (with invalid name input - to long).
 	Test Step: Admin enters an account holder's name that is greater than 20 characters and initial balance less than $99999.99 into the create feature.
@@ -540,6 +635,7 @@ Create - Akira
 				create
 				123456789012345678901
 				100
+				logout
 	Expected Result: Transaction is allowed but the name is truncated to 20 characters.
 	Expected Output: - Print: "Please enter your session type: "
 					 - Print: "Please enter a command admin: "
@@ -548,6 +644,8 @@ Create - Akira
 					 - Print: "Success, account created."
 					 - File: 10 admin                00000 00000000 A
 					 - File: 05 12345678901234567890 12349 00100.00   
+					 - File: 00                      00000 00000000   
+	Files: crte001.in
 
 33.	Scenario: Verify account creation (with invalid name input - used already).
 	Test Step: Admin enters an account holder's name that is already used.
@@ -557,13 +655,16 @@ Create - Akira
 				create
 				John Doe
 				100
+				logout
 	Expected Result: Transaction is not allowed because the name is already taken.
 	Expected Output: - Print: "Please enter your session type: "
 					 - Print: "Please enter a command admin: "
 					 - Print: "Please enter the new account holder's name: "
 					 - Print: "Please enter their initial balance: "
 					 - Print: "Error, account name already taken."
-					 - File: 10 admin                00000 00000000 A
+					 - File: 10 admin                00000 00000000 A 
+					 - File: 00                      00000 00000000   
+	Files: crte002.in
 
 34.	Scenario: Verify account creation (with invalid inital balance input).
 	Test Step: Admin enters an account holder's name that is less than or equal to 20 characters and initial balance greater than $99999.99 into the create feature.
@@ -573,13 +674,16 @@ Create - Akira
 				create
 				Lock Lan
 				$199999.99
+				logout
 	Expected Result: Transaction is denied and the admin is notified that the initial balance is to much.
 	Expected Output: - Print: "Please enter your session type: "
 					 - Print: "Please enter a command admin: "
 					 - Print: "Please enter the new account holder's name: "
 					 - Print: "Please enter their initial balance: "
 					 - Print: "Error, initial account balance exceeds the allowed amount."
-					 - File: 10 admin                00000 00000000 A
+					 - File: 10 admin                00000 00000000 A 
+					 - File: 00                      00000 00000000   
+	Files: crte003.in
 	
 35.	Scenario: Verify account creation (with both inputs being invalid).
 	Test Step: Admin enters an account holder's name that is greater than 20 characters and initial balance greater than $99999.99 into the create feature.
@@ -589,26 +693,32 @@ Create - Akira
 				create
 				123456789012345678901
 				$199999.99
+				logout
 	Expected Result: Transaction is denied and the admin is notified that the initial balance is to much.
 	Expected Output: - Print: "Please enter your session type: "
 					 - Print: "Please enter a command admin: "
 					 - Print: "Please enter the new account holder's name: "
 					 - Print: "Please enter their initial balance: "
 					 - Print: "Error, initial account balance exceeds the allowed amount."
-					 - File: 10 admin                00000 00000000 A
-	
+					 - File: 10 admin                00000 00000000 A 
+					 - File: 00                      00000 00000000   
+	Files: crte004.in
+
 36.	Scenario: Verify normal users can not access the create feature.
 	Test Step: Normal user attempts to use the create feature.
 	Test Input: 
 				login
 				John Doe
 				create
+				logout
 	Expected Result: The command is rejected.
 	Expected Output: - Print: "Please enter your session type: "
 					 - Print: "Please enter a login name: "
 					 - Print: "Please enter a command user: "
 					 - Print: "Error, you do not have the correct privileges to access this feature."
-					 - File: 10 John Doe             00000 00000000 A
+					 - File: 10 John Doe             00000 00000000 S 
+					 - File: 00                      00000 00000000   
+	Files: crte005.in
 	
 37.	Scenario: Verify account is not available in the same session.
 	Test Step: A transaction is done with the newly created account holder's name and account number.
@@ -622,6 +732,7 @@ Create - Akira
 				Lock Lan
 				13245
 				100
+				logout
 	Expected Result: Transaction is denied because the file hasn't been sent to the back end yet for processing (same session)
 	Expected Output: - Print: "Please enter your session type: "
 					 - Print: "Please enter a command admin: "
@@ -634,3 +745,5 @@ Create - Akira
 					 - Print: "Error, account does not exist."
 					 - File: 10 admin                00000 00000000 A
 					 - File: 05 Lock Lan             13245 00200.00   
+					 - File: 00                      00000 00000000   
+	Files: crte006.in
