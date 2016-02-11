@@ -444,71 +444,177 @@ Test Cases
   Scenario: Verify dollar value of $5 + invalid is rejected
   Test Step: Try to withdraw 7.00
   
-  Scenario: Verify single account withdraw limit cannot be excceded
+  Scenario: Verify single account withdraw limit cannot be exceeded
+  Test Step: Try to withdraw 505.00 in user mode
   
   Scenario: Verify single account withdraw limit cannot be exceeded (for multiple calls)
+  Test Step: Try to withdraw 100.00 then 400.00 in user mode
+  
   Scenario: Verify single account withdraw limit cannot be exceeded (for multiple sessions)
+  Test Step: Login and withdraw twice, over limit
+  
   Scenario: Verify withdrawal transaction fee is applied for standard
+  Test Step: Try to withdraw [TODO: when transaction fees are known (which they have been)]]
+  
   Scenario: Verify several withdrawal tranasaction fees are applied for several calls
+  [TODO: when transaction fees are known (which they have been)]]
+  
   Scenario: Verify single account withdraw limit for admins doesn't apply
+  Test Step: As admin, withdraw $600.00
+  
   Scenario: Verify single account withdraw limit for admins does not incur transaction fee
+  Test Step: [TODO: when transaction fees are known (which they have been)]]
+  
   Scenario: Verify separate account limits are separate with 1st rejected at limit and 2nd accepted
-  Scenario: Verify separate account limits are separate with both accepted for amount over limit
+  Test Step: Withdraw $600.0 from one acount, $400.0 from another
+  
   Scenario: Verify separate account limits are separate with both accepted
-  Scenario: Verify admin withdrawals before user withdrawal does not affect limit
+  Test Step: Withdraw $200 from one, $100 from another
+  
+  Scenario: Verify separate account limits are separate with both accepted for amount over limit
+  Test Step: Withdraw $200 from one, $400 from another
+  
+  Scenario: Verify admin withdrawals occuring before user withdrawal does not affect limit
+  Test Step: Withdraw $600 from admin then $100 as user
+  
   Scenario: Verify admin withdrawals after user withdrawal does not come into confict with limit
+  Test Step: Withdraw $400 as user and $200 as admin
+  
   Scenario: Verify withdrawal with resulting positive balance is accepted
-  Scenario: Verify withdrawal balance check accounts for withdrawal transaction fee
+  Test Step: Withdraw $100 as user
+  
   Scenario: Verify withdrawal with resulting zero balance is accepted
+  Test Step: [TODO: after transaction fees have been done (which they have been)]]
+  
   Scenario: Verify withdrawal with resulting negative balance is rejected
+  Test Step: Withdraw $1 more than balance (within transaction limit)
+  
   Scenario: Verify withdrawal with resulting negative balance accounts is rejected (for previous transaction fee from previous withdrawal)
+  Test Step: [TODO: after transaction values have been defined (which they have been)]]
+  
+  
   Scenario: Verify withdrawal with resulting negative balance accounts is rejected (for previous transaction fee from previous transfer)
+  Test Step: [TODO: after transaction values have been defined (which they have been)]]
+  
   Scenario: Verify withdrawal with resulting negative balance accounts is rejected (for previous transaction fee from previous paybill)
+  Test Step: [TODO: after transaction values have been defined (which they have been)]]
+  
   Scenario: Verify withdrawal with resulting negative balance accounts is rejected (for previous transaction fee from previous deposit)
+  Test Step: [TODO: after transaction values have been defined (which they have been)]]
+  
   Scenario: Verify withdrawal for resulting negative balance is rejected (on last of multiple calls)
-  Scenario: Verify withdrawal for resulting zero balance is rejected (on last of multiple calls)
+  Test Step: withdraw $100 then above balance
+  
+  Scenario: Verify withdrawal for resulting zero balance is accepted (on last of multiple calls)
+  Test Step: [TODO: after transaction values have been defined (which they have been)]]
+  
   Scenario: Verify withdrawal for resulting positive balance is accepted (on last of multiple calls)
+  Test Step: withdraw multiple times leaving like a $50 buffer or something
+  
   Scenario: Verify withdrawal for resulting negative balance is rejected (over multiple sessions)
+  Test Step: [TODO: after corresponding above is fine]
+  
   Scenario: Verify withdrawal for resulting zero balance is rejected (over multiple sessions)
+  Test Step: [TODO: after corresponding above is fine]
+  
   Scenario: Verify withdrawal for resulting positive balance is accepted (over multiple sessions)
+  Test Step: [TODO: after corresponding above is fine]  
+  
   Scenario: Verify withdrawal for resulting negative balance is rejected (after session as different user)
+  Test Step: [TODO: after corresponding above is fine]
+  
+  
   Scenario: Verify withdrawal for resulting zero balance is rejected (after session as different user)
+  Test Step: [TODO: after corresponding above is fine]
+  
+  
   Scenario: Verify withdrawal for resulting positive balance is accepted (after session as different user)
+  Test Step: [TODO: after corresponding above is fine]
+
+  
   Scenario: Verify withdrawal for resulting negative balance is rejected (as admin)
+  Test Step: withdraw like $1 over balance
+  
   Scenario: Verify withdrawal for resulting zero balance is rejected (as admin)
+  Test Step: [TODO: after transaction fees are defined (which they have been)]
+  
   Scenario: Verify withdrawal for resulting positive balance is accepted (as admin)
+  Test Step: withdraw as admin with like $50 buffer
 
 	Paybill - Kathryn
 	================
   [* Login/logout issues covered elsewhere?]
   [* CP most from withdraw ]
   Scenario: Verify EC is accepted in standard mode
+  Test Step: pay a bill to Bright Light Electric Company as user
+  
   Scenario: Verify CQ is accepted in standard mode
+  Test Step: pay a bill to Credit Card Company Q as user
+  
   Scenario: Verify TV is accepted in standard mode
+  Test Step: pay a bill to Low Definition TV, inc as user
+  
   Scenario: Verify EC is accepted in admin mode
+  Test Step: pay a bill to Bright Light Electric Company as admin
+  
   Scenario: Verify CQ is accepted in admin mode
+  Test Step: pay a bill to Credit Card Company Q as admin
+  
   Scenario: Verify TV is accepted in admin mode
+  Test Step: pay a bill to Low Definition TV, inc as admin
+  
   Scenario: Verify invalid 2 letter is not accepted in standard mode
+  Test Step: try to pay a bill to BS as user
+  
   Scenario: Verify 3 letter is not accepted in standard mode
+  Test Step: try to pay a bill to SBS as user
+  
   Scenario: Verify 1 letter is not accepted in standard mode
+  Test Step: try to pay a bill to S as user
+  
   Scenario: Verify truncated 3 letter is not accepted in standard mode
+  Test Step: try to pay a bill to TVI as user
+  
   Scenario: Verify invalid 2 letter is not accepted in admin mode
+  Test Step: try to pay a bill to BS as admin
+  
   Scenario: Verify 3 letter is not accepted in admin mode
+  Test Step: try to pay a bill to SBS as admin
+  
   Scenario: Verify 1 letter is not accepted in admin mode
+  Test Step: try to pay a bill to S as admin
+  
   Scenario: Verify truncated 3 letter is not accepted in admin mode
+  Test Step: try to pay a bill to TVI as admin
+  
   Scenario: Verify lowercase ec is accepted in standard mode
+  Test Step: try to pay a bill to ec as user
+  
   Scenario: Verify lowercase cq is accepted in standard mode
+  Test Step: try to pay a bill to cq as user
+  
   Scenario: Verify lowercase tv is accepted in standard mode
+  Test Step: try to pay a bill to tv as user
+  
   Scenario: Verify reversal, CE is not accepted in standard mode
+  Test Step: try to pay a bill to CE as user
+  
 
 	Deposit - Kathryn
 	================
   [* Login/logout issues covered elsewhere?]
   [* CP most from withdraw ]
   Scenario: Verify deposited funds cannot be withdrawn
+  Test Step: put in balance and then withdraw previous balance + 1 as user
+  
   Scenario: Verify deposited funds cannot be used with paybill
+  Test Step: put in that amount up there and then pay a bill as user
+  
   Scenario: Verify deposited funds cannot be transferred from deposited account to account
+  Test Step: transfer it
+  
   Scenario: Verify deposited funds cannot be transferred from account to deposited account
+  Test Step: transfer it
   
   
 
