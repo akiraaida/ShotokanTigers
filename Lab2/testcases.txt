@@ -1,7 +1,8 @@
 Test Cases
 
-	Enable - Kathryn 
+	Enable - Kathryn
 	================
+	[enab000]
   Scenario: Verify disabled account is then enabled
   Test Step: Admin enables an account which is disabled.
   Test Input:
@@ -20,7 +21,7 @@ Test Cases
            - File: "10 admin                00000 00000000 A "
            - File: "09 Bran Bob             12347 00000000 00"
 					 - File: "00 admin                00000 00000000 00"
-  
+
   Scenario: Verify only disabled accounts may be enabled.
   Test Step: Admin enables an enabled account.
   Test Input:
@@ -38,7 +39,7 @@ Test Cases
            - Print: "Error, account specified is already active."
            - File: "10 admin                00000 00000000 A "
 					 - File: "00                      00000 00000000 00"
-  
+
   Scenario: Verify normal users can not access the enable feature.
   Test Step: Normal user attempts to use the enable feature.
   Test Input:
@@ -54,10 +55,10 @@ Test Cases
            - Print: "Error, you do not have the correct privileges to access this feature."
            - File: "10 John Doe             00000 00000000 S "
 					 - File: "00                      00000 00000000 00"
-  
+
   Scenario: Verify account holder's name and account number correspond with each other (Incorrect name, correct number).
   Test Step: Admin enters an incorrect account holder's name but correct account number.
-  Test Input: 
+  Test Input:
         login
         admin
         enable
@@ -72,11 +73,11 @@ Test Cases
            - Print: "Error, account specificed is not a valid account."
            - File: "10 admin                00000 00000000 A "
 					 - File: "00                      00000 00000000 00"
-             
-             
+
+
   Scenario: Verify account holder's name and account number correspond with each other (Correct name, incorrect number).
   Test Step: Admin enters a correct account holder's name but incorrect account number.
-  Test Input: 
+  Test Input:
         login
         admin
         enable
@@ -91,10 +92,10 @@ Test Cases
            - Print: "Error, account specificed is not a valid account."
            - File: "10 admin                00000 00000000 A "
 					 - File: "00                      00000 00000000 00"
-                     
+
   Scenario: Verify account holder's name and account number correspond with each other (Correct name, correct number but not matching).
   Test Step: Admin enters a correct account holder and correct account number but they do not correspond to each other.
-  Test Input: 
+  Test Input:
         login
         admin
         enable
@@ -109,8 +110,8 @@ Test Cases
            - Print: "Error, account specificed is not a valid account."
            - File: "10 admin                00000 00000000 A "
 					 - File: "00                      00000 00000000 00"
-                     
-                     
+
+
   Scenario: Verify user withdraw transaction can now be done to a re-enabled account.
   Test Step: Admin enables an account and then performs admin & standard withdraw.
   Test Input:
@@ -159,7 +160,7 @@ Test Cases
            - File: "01 Bran Bob             12347 00005.00 00"
            - File: "01 Bran Bob             12347 00000.10 00"
 					 - File: "00                      00000 00000000 00"
-  
+
   Scenario: Verify user deposit transaction can now be done to a re-enabled account.
   Test Step: Admin enables an account and then performs a deposit. Then, user logs in and makes a deposit.
   Test Input:
@@ -208,8 +209,8 @@ Test Cases
            - File: "04 Bran Bob             12347 00005.00 00"
            - File: "01 Bran Bob             12347 00000.10 00"
 					 - File: "00                      00000 00000000 00"
-  
-  
+
+
   Scenario: Verify user paybill transaction can now be done to a re-enabled account.
   Test Step: Admin enables an account and then admin & standard pays a bill.
   Test Input:
@@ -261,7 +262,7 @@ Test Cases
            - File: "03 Bran Bob             12347 00005.00 00"
            - File: "01 Bran Bob             12347 00000.10 00"
 					 - File: "00                      00000 00000000 00"
-  
+
   Scenario: Verify transfer can be done with re-enabled accounts
   Test Step: Admin enables an account, then transfers money to it.
       Next, admin enables an account, then has money transferred from it.
@@ -286,14 +287,14 @@ Test Cases
   Expected Output: - Print: "Please enter your session type: "
            - Print: "Please enter a command admin: "
            - File: [TODO: after filled everything out]
-  
-             
+
+
 	Withdrawal - Kathryn
 	================
   [* Login/logout issues covered elsewhere?]
   Scenario: Verify account holder's name and account number correspond with each other (Incorrect name, correct number).
   Test Step: Admin enters an incorrect account holder's name but correct account number.
-  Test Input: 
+  Test Input:
         login
         admin
         withdrawal
@@ -308,11 +309,11 @@ Test Cases
            - Print: "Error, account specificed is not a valid account."
            - File: "10 admin                00000 00000000 A "
 					 - File: "00                      00000 00000000 00"
-           
+
   Scenario: Verify that not existing numbers are not accepted by withdrawal (Correct name, incorrect number)
   Test Step: Admin enters a correct account holder's name but incorrect account number.
       Next, Logged in user enters an incorrect number.
-  Test Input: 
+  Test Input:
         login
         admin
         withdrawal
@@ -333,11 +334,11 @@ Test Cases
            - File: No change.
           - Print: [TODO: after filled everything out]
          - File: [TODO: after filled everything out]
-         
+
   Scenario: Verify that only numbers belonging to the name can be used
   Test Step: Admin enters a correct account holder and correct account number but they do not correspond to each other.
   Test Step: Logged in user enters a number to an account that does not belong to them.
-  Test Input: 
+  Test Input:
         login
         admin
         withdrawal
@@ -362,7 +363,7 @@ Test Cases
            - Print: "Please enter a login name: "
            - Print: "Please enter a command user: "
            - File: [TODO: after filled everything out]
-  
+
   Scenario: Verify negative dollars input is rejected
   Test Step: Try to enter a negative value as an admin.
   Test Step: Try to enter a negative value as a user
@@ -379,7 +380,7 @@ Test Cases
   Expected Output: - Print: "Please enter your session type: "
            - Print: "Please enter a command admin: "
          - File: [TODO: after filled everything out]
-           
+
   Scenario: Verify input dollars of $0 is rejected
   Test Step: Try to enter a zero value as an admin.
   Test Step: Try to enter a negative value as a user
@@ -398,7 +399,7 @@ Test Cases
            - Print: "Please enter a login name: "
            - Print: "Please enter a command user: "
          - File: [TODO: after filled everything out]
-  
+
   Scenario: Verify that only #####.## number of decimals is accepted
   Test Step: Try to enter an excessive value as a user.
   Test Step: Try to enter a truncated decimal as a user.
@@ -460,7 +461,7 @@ Test Cases
            - Print: "Please enter a command user: "
   Expected Output: - Print: [TODO: after filled everything out]
          - File: [TODO: after filled everything out]
-  
+
   Scenario: Verrify forbidden symbols are not accepted.
   Test Step: Try to enter a number with preceding dollar sign.
   Test Step: Try to enter a number with trailing dollar sign.
@@ -494,8 +495,8 @@ Test Cases
            - Print: "Please enter a command user: "
   Expected Output: - Print: [TODO: after filled everything out]
          - File: "No change"
-  
-         
+
+
   Scenario: Verify withdrawal input of ###### ## is rejected
   Test Step: Try to enter a number with space delimiters.
   Test Input:
@@ -511,7 +512,7 @@ Test Cases
            - Print: "Please enter a command user: "
   Expected Output: - Print: [TODO: after filled everything out]
          - File: "No change"
-  
+
 
   Scenario: Verify withdrawal input of ######.## (legit) is accepted
   Test Step: Enter a number like 5.00
@@ -528,7 +529,7 @@ Test Cases
            - Print: "Please enter a command user: "
   Expected Output - Print: [TODO: after filled everything out]
          - File: [TODO: same]
-  
+
   Scenario: Verify only canadian bill values are allowed
   Test Step: Enter a number like 4.99
   Test Step: Try to withdraw 7.00
@@ -554,9 +555,9 @@ Test Cases
            - Print: "Please enter a command user: "
   Expected Output: - Print: [TODO: after filled everything out]
          - File: "No change"
-  
-  
-         
+
+
+
   Scenario: Verify dollar value of $5 is accepted
   Test Step: Try to withdraw 5.00 in user mode
   Test Input:
@@ -572,7 +573,7 @@ Test Cases
            - Print: "Please enter a command user: "
   Expected Output: - Print: [TODO: after filled everything out]
          - File: [TODO: samesies]
-  
+
   Scenario: Verify composite dollar value (mixed bills) is accepted
   Test Step: Try to withdraw 15.00
   Test Input:
@@ -585,7 +586,7 @@ Test Cases
   Expected Result: user successfully withdraws 15.00
   Expected Output: - Print: [TODO: after filled everything out]
          - File: [TODO: samesies]
-         
+
   Scenario: Verify single account withdraw limit cannot be exceeded
   Test Step: Try to withdraw 505.00 in user mode
   Test Step: Try to withdraw 100.00 then 400.00 in user mode
@@ -593,7 +594,7 @@ Test Cases
   Test Input: [TODO: invent a rich prince]
   Expected Result:
   Expected Output: [TODO: after things are filled out]
-  
+
   Scenario: Verify withdrawal transaction fee is applied for standard & are applied for several calls
   Test Step: Try to withdraw [TODO: make 2 of these for student & standard plan uggh]
   Test Input:
@@ -607,38 +608,38 @@ Test Cases
   Test Input: [TODO: make a guy with 2 accounts]
   Expected Result:
   Expected Output: [TODO: after things are filled out]
-  
+
   Scenario: Verify single account withdraw limit for admins doesn't apply
   Test Step: As admin, withdraw $600.00
   Test Input: [TODO: invent a rich prince]
   Expected Result:
   Expected Output: [TODO: after things are filled out]
-  
+
   Scenario: Verify single account withdraw limit for admins does not incur transaction fee
   Test Step: [TODO: make 2 of these for student & standard plan uggh]
   Test Input:
   Expected Result:
   Expected Output: [TODO: after things are filled out]
-  
+
   Scenario: Verify admin withdrawals do not conflict with user's withdrawal limit
   Test Step: Withdraw $600 from admin then $100 as user
   Test Step: Withdraw $400 as user and $200 as admin
   Test Input: [TODO: invent a rich prince]
   Expected Result:
   Expected Output: [TODO: after things are filled out]
-  
+
   Scenario: Verify withdrawal with resulting zero balance is accepted
   Test Step: [TODO: after transaction fees have been done (which they have been)]]
   Test Input:
   Expected Result:
   Expected Output: [TODO: after things are filled out]
-  
+
   Scenario: Verify withdrawal with resulting negative balance is rejected
   Test Step: Withdraw $1 more than balance (within transaction limit)
   Test Input:
   Expected Result:
   Expected Output: [TODO: after things are filled out]
-  
+
   Scenario: Verify that previous transaction fees are factored into balance calculations
   Test Step: Verify withdrawal with resulting negative balance accounts is rejected (for previous transaction fee from previous withdrawal)
   Test Step: Verify withdrawal with resulting negative balance accounts is rejected (for previous transaction fee from previous transfer)
@@ -647,19 +648,19 @@ Test Cases
   Test Input:
   Expected Result:
   Expected Output: [TODO: after things are filled out]
-  
+
   Scenario: Verify transaction fees are applied to only successful withdrawals
   Test Step: Do 5 withdrawals, last of which will fail.
   Test Input:
   Expected Result: 4 moneies and 4 transaction fees are removed.
   Expected Output:
-  
+
   Scenario: Verify transaction fees are applied for multiple calls
   Test Step: Do 5 withdrawals, leaving a positive balance.
   Test Input:
   Expected Result: 5 monies and 5 transaction fees are applied.
   Expected Output:
-  
+
   Scenario: Verify withdrawal for resulting negative balance is rejected (on last of multiple calls)
   Test Step: withdraw $100 then above balance
   Test Input:
@@ -674,14 +675,14 @@ Test Cases
           logout
   Expected Result: $100 is withdrawn.
   Expected Output: [TODO: after everything is filled out]
-  
+
   Scenario: Verify withdrawal for resulting zero balance is accepted (on last of multiple calls)
-  Test Step: 
+  Test Step:
   [TODO: make 2 of these for student & standard plan? uggh]
   Test Input:
   Expected Result:
   Expected Output: [TODO: after things are filled out]
-  
+
   Scenario: Verify withdrawal for resulting positive balance is accepted (on last of multiple calls)
   Test Step: withdraw multiple times leaving like a $50 buffer or something
   Test Input:
@@ -699,22 +700,22 @@ Test Cases
           logout
   Expected Result: $30 is withdrawn.
   Expected Output: [TODO: after everything is filled out.]
-  
+
   Scenario: Verify withdrawal for resulting negative balance is rejected (over multiple sessions)
   Test Step: [TODO: after corresponding above is fine]
   Test Input:
   Expected Result:
   Expected Output: [TODO: after things are filled out]
-  
+
   Scenario: Verify withdrawal for resulting zero balance is rejected (over multiple sessions)
   Test Step: [TODO: after corresponding above is fine]
   Test Input:
   Expected Result:
   Expected Output: [TODO: after things are filled out]
-  
+
   { [TODO: ]
-  
-  
+
+
   Scenario: Verify withdrawals cannot result in a negative balance
   Test Step: [TODO: after corresponding above is fine]
   Test Step: withdraw like $1 over balance
@@ -729,7 +730,7 @@ Test Cases
           logout
   Expected Result:
   Expected Output: [TODO: after things are filled out]
-  
+
   Scenario: Verify withdrawal for resulting positive or zero balance is accepted
   Test Step: Verify withdrawal for resulting positive balance is accepted (over multiple sessions)
   Test Step: Verify withdrawal for resulting zero balance is accepted (after session as different user)
@@ -749,14 +750,14 @@ Test Cases
   Expected Result: $5.00 is deducted.
   Expected Result: [TODO]
   Expected Output: [TODO: after things are filled out]
-  
+
 
 
 	Paybill - Kathryn
 	================
   [* Login/logout issues covered elsewhere?]
   [* CP most from withdraw ]
-  
+
   Scenario: Verify the canon companies are accepted
   Test Step: pay a bill to Bright Light Electric Company as user
   Test Step: pay a bill to Credit Card Company Q as user
@@ -766,8 +767,8 @@ Test Cases
   Test Step: pay a bill to Low Definition TV, inc as admin
   Test Input:
   Expected Result:
-  Expected Output: [TODO: after things are filled out] 
-  
+  Expected Output: [TODO: after things are filled out]
+
   Scenario: Verify invalid company names are not accepted
   Test Step: try to pay a bill to BS as user
   Test Step: try to pay a bill to SBS as user
@@ -781,36 +782,36 @@ Test Cases
   Test Input:
   Expected Result:
   Expected Output: [TODO: after things are filled out]
-  
-  
-  
- 
-  
+
+
+
+
+
 
 	Deposit - Kathryn
 	================
   [* Login/logout issues covered elsewhere?]
   [* CP most from withdraw ]
-  
+
   { [TODO: Verify deposited funds have gone into the ether]
   Scenario: Verify deposited funds cannot be withdrawn
   Test Step: put in balance and then withdraw previous balance + 1 as user
   Test Input:
   Expected Result:
   Expected Output: [TODO: after things are filled out]
-  
+
   Scenario: Verify deposited funds cannot be used with paybill
   Test Step: put in that amount up there and then pay a bill as user
   Test Input:
   Expected Result:
   Expected Output: [TODO: after things are filled out]
-  
+
   Scenario: Verify deposited funds cannot be transferred from deposited account to account
   Test Step: transfer it
   Test Input:
   Expected Result:
   Expected Output: [TODO: after things are filled out]
-  
+
   Scenario: Verify deposited funds cannot be transferred from account to deposited account
   Test Step: transfer it
   Test Input:
@@ -818,15 +819,15 @@ Test Cases
   Expected Output: [TODO: after things are filled out]
   }
 
-  
-  
+
+
 
 	Change Plan - Akira
 	================
 
 		Scenario: Verify account holder's name and account number correspond with each other (Incorrect name, correct number).
 		Test Step: Admin enters an incorrect account holder's name but correct account number.
-		Test Input: 
+		Test Input:
 					login
 					admin
 					changeplan
@@ -839,10 +840,10 @@ Test Cases
 						 - Print: "Please enter the account number: "
 						 - Print: "Error, account specificed is not a valid account."
 						 - File: No change.
-		
+
 		Scenario: Verify account holder's name and account number correspond with each other (Correct name, incorrect number).
 		Test Step: Admin enters a correct account holder's name but incorrect account number.
-		Test Input: 
+		Test Input:
 					login
 					admin
 					changeplan
@@ -855,10 +856,10 @@ Test Cases
 						 - Print: "Please enter the account number: "
 						 - Print: "Error, account specificed is not a valid account."
 						 - File: No change.
-		
+
 		Scenario: Verify account holder's name and account number correspond with each other (Correct name, correct number but not matching).
 		Test Step: Admin enters a correct account holder and correct account number but they do not correspond to each other.
-		Test Input: 
+		Test Input:
 					login
 					admin
 					changeplan
@@ -871,10 +872,10 @@ Test Cases
 						 - Print: "Please enter the account number: "
 						 - Print: "Error, account specificed is not a valid account."
 						 - File: No change.
-		
-		Scenario: Verify admin can change an account from SP (student) to NP (non-student). 
+
+		Scenario: Verify admin can change an account from SP (student) to NP (non-student).
 		Test Step: Admin enters a correct account holder, correct account number and they do correspond to each other.
-		Test Input: 
+		Test Input:
 					login
 					admin
 					changeplan
@@ -887,8 +888,8 @@ Test Cases
 						 - Print: "Please enter the account number: "
 						 - Print: "Success, John Doe is now on a non-student payment plan."
 						 - File: "08 John Doe             12345 00000000 00"
-	
-		Scenario: Verify admin can change an account from NP (non-student) to SP (student). 
+
+		Scenario: Verify admin can change an account from NP (non-student) to SP (student).
 		Test Step: Admin enters a correct account holder, correct account number and they do correspond to each other.
 		Test Input:
 					login
@@ -917,13 +918,13 @@ Test Cases
 						 - Print: "Please enter a command user: "
 						 - Print: "Error, you do not have the correct privileges to access this feature."
 						 - File: "No change"
-		
+
 	Disable - Akira
 	================
 
 		Scenario: Verify account holder's name and account number correspond with each other (Incorrect name, correct number).
 		Test Step: Admin enters an incorrect account holder's name but correct account number.
-		Test Input: 
+		Test Input:
 					login
 					admin
 					disable
@@ -936,10 +937,10 @@ Test Cases
 						 - Print: "Please enter the account number: "
 						 - Print: "Error, account specificed is not a valid account."
 						 - File: No change.
-		
+
 		Scenario: Verify account holder's name and account number correspond with each other (Correct name, incorrect number).
 		Test Step: Admin enters a correct account holder's name but incorrect account number.
-		Test Input: 
+		Test Input:
 					login
 					admin
 					disable
@@ -952,10 +953,10 @@ Test Cases
 						 - Print: "Please enter the account number: "
 						 - Print: "Error, account specificed is not a valid account."
 						 - File: No change.
-		
+
 		Scenario: Verify account holder's name and account number correspond with each other (Correct name, correct number but not matching).
 		Test Step: Admin enters a correct account holder and correct account number but they do not correspond to each other.
-		Test Input: 
+		Test Input:
 					login
 					admin
 					disable
@@ -982,10 +983,10 @@ Test Cases
 						 - Print: "Please enter a command user: "
 						 - Print: "Error, you do not have the correct privileges to access this feature."
 						 - File: No change.
-		
-		Scenario: Verify admin can change an account from A (active) to D (disabled). 
+
+		Scenario: Verify admin can change an account from A (active) to D (disabled).
 		Test Step: Admin enters a correct account holder, correct account number and they do correspond to each other.
-		Test Input: 
+		Test Input:
 					login
 					admin
 					disable
@@ -998,8 +999,8 @@ Test Cases
 						 - Print: "Please enter the account number: "
 						 - Print: "Success, John Doe's account is now disabled."
 						 - File: "07 John Doe             12345 00000000 00"
-				
-		Scenario: Verify user withdraw transaction can no longer be done to a disabled account - user. 
+
+		Scenario: Verify user withdraw transaction can no longer be done to a disabled account - user.
 		Test Step: Enter the disabled account's correct account holder's name, account number, and an amount of money in the withdraw feature.
 		Test Input: login
 					standard
@@ -1015,8 +1016,8 @@ Test Cases
 						 - Print: "Enter the amount of money you wish to withdraw: "
 						 - Print: "Error, your account is disabled."
 						 - File: No change
-		
-		Scenario: Verify user deposit transaction can no longer be done to a disabled account - user. 
+
+		Scenario: Verify user deposit transaction can no longer be done to a disabled account - user.
 		Test Step: Enter the disabled account's correct account holder's name, account number, and an amount of money in the deposit feature.
 		Test Input: login
 					standard
@@ -1032,8 +1033,8 @@ Test Cases
 						 - Print: "Enter the amount of money you wish to deposit: "
 						 - Print: "Error, your account is disabled."
 						 - File: No change
-		
-		Scenario: Verify user paybill transaction can no longer be done to a disabled account - user. 
+
+		Scenario: Verify user paybill transaction can no longer be done to a disabled account - user.
 		Test Step: Enter the disabled account's correct account holder's name, account number, company, and an amount of money to pay in the paybill feature.
 		Test Input: login
 					standard
@@ -1051,8 +1052,8 @@ Test Cases
 						 - Print: "Enter the amount of money you wish to pay: "
 						 - Print: "Error, your account is disabled."
 						 - File: No change
-		
-		Scenario: Verify delete transaction can still be done to a disabled account - user. 
+
+		Scenario: Verify delete transaction can still be done to a disabled account - user.
 		Test Step: Enter the disabled account's correct account holder's name and account number in the delete feature.
 		Test Input: login
 					admin
@@ -1066,8 +1067,8 @@ Test Cases
 						 - Print: "Please enter the account number: "
 						 - Print: "Success, account has been deleted."
 						 - File: "06 John Doe             12345 00000000 00"
-		
-		Scenario: Verify disable transaction can no longer be done to a disabled account - user. 
+
+		Scenario: Verify disable transaction can no longer be done to a disabled account - user.
 		Test Step: Enter the disabled account's correct account holder's name and account number in the disable feature.
 		Test Input: login
 					admin
@@ -1081,8 +1082,8 @@ Test Cases
 						 - Print: "Please enter the account number: "
 						 - Print: "Error, account is already disabled"
 						 - File: No change
-		
-		Scenario: Verify user transfer transaction can no longer be done with a disabled account (From an account to a disabled account) - user.  
+
+		Scenario: Verify user transfer transaction can no longer be done with a disabled account (From an account to a disabled account) - user.
 		Test Step: Enter the disabled account's correct account holder's name and account number, another account number and an amount of money in the transfer feature.
 		Test Input: login
 					standard
@@ -1100,8 +1101,8 @@ Test Cases
 						 - Print: "Please enter the account number to recieve money: "
 						 - Print: "Error, your account is disabled"
 						 - File: No change
-		
-		Scenario: Verify user transfer transaction can no longer be done with a disabled account (From a disabled account to another account) - user. 
+
+		Scenario: Verify user transfer transaction can no longer be done with a disabled account (From a disabled account to another account) - user.
 		Test Step: Enter an account holder's name, account number, the disabled account number, and an amount of money in the transfer feature.
 		Test Input: login
 					standard
@@ -1120,7 +1121,7 @@ Test Cases
 						 - Print: "Error, that account is disabled"
 						 - File: No change
 
-		Scenario: Verify user withdraw transaction can no longer be done to a disabled account - admin. 
+		Scenario: Verify user withdraw transaction can no longer be done to a disabled account - admin.
 		Test Step: Enter the disabled account's correct account holder's name, account number, and an amount of money in the withdraw feature.
 		Test Input: login
 					admin
@@ -1137,7 +1138,7 @@ Test Cases
 						 - Print: "Error, that account has been disabled."
 						 - File: No change
 
-		Scenario: Verify user deposit transaction can no longer be done to a disabled account - admin. 
+		Scenario: Verify user deposit transaction can no longer be done to a disabled account - admin.
 		Test Step: Enter the disabled account's correct account holder's name, account number, and an amount of money in the deposit feature.
 		Test Input: login
 					admin
@@ -1153,8 +1154,8 @@ Test Cases
 						 - Print: "Enter the amount of money you wish to deposit: "
 						 - Print: "Error, that account has been disabled."
 						 - File: No change
-		
-		Scenario: Verify user paybill transaction can no longer be done to a disabled account - admin. 
+
+		Scenario: Verify user paybill transaction can no longer be done to a disabled account - admin.
 		Test Step: Enter the disabled account's correct account holder's name, account number, company, and an amount of money to pay in the paybill feature.
 		Test Input: login
 					admin
@@ -1171,8 +1172,8 @@ Test Cases
 						 - Print: "Enter the amount of money you wish to pay: "
 						 - Print: "Error, that account has been disabled."
 						 - File: No change
-						
-		Scenario: Verify user transfer transaction can no longer be done with a disabled account (From an account to a disabled account) - admin.  
+
+		Scenario: Verify user transfer transaction can no longer be done with a disabled account (From an account to a disabled account) - admin.
 		Test Step: Enter the disabled account's correct account holder's name and account number, another account number and an amount of money in the transfer feature.
 		Test Input: login
 					admin
@@ -1189,8 +1190,8 @@ Test Cases
 						 - Print: "Please enter the account number to recieve money: "
 						 - Print: "Error, that account has been is disabled"
 						 - File: No change
-		
-		Scenario: Verify user transfer transaction can no longer be done with a disabled account (From a disabled account to another account) - admin. 
+
+		Scenario: Verify user transfer transaction can no longer be done with a disabled account (From a disabled account to another account) - admin.
 		Test Step: Enter an account holder's name, account number, the disabled account number, and an amount of money in the transfer feature.
 		Test Input: login
 					admin
@@ -1213,7 +1214,7 @@ Test Cases
 
 		Scenario: Verify account holder's name and account number correspond with each other (Incorrect name, correct number).
 		Test Step: Admin enters an incorrect account holder's name but correct account number.
-		Test Input: 
+		Test Input:
 					login
 					admin
 					delete
@@ -1226,10 +1227,10 @@ Test Cases
 						 - Print: "Please enter the account number: "
 						 - Print: "Error, account specificed is not a valid account."
 						 - File: No change.
-		
+
 		Scenario: Verify account holder's name and account number correspond with each other (Correct name, incorrect number).
 		Test Step: Admin enters a correct account holder's name but incorrect account number.
-		Test Input: 
+		Test Input:
 					login
 					admin
 					delete
@@ -1242,10 +1243,10 @@ Test Cases
 						 - Print: "Please enter the account number: "
 						 - Print: "Error, account specificed is not a valid account."
 						 - File: No change.
-		
+
 		Scenario: Verify account holder's name and account number correspond with each other (Correct name, correct number but not matching).
 		Test Step: Admin enters a correct account holder and correct account number but they do not correspond to each other.
-		Test Input: 
+		Test Input:
 					login
 					admin
 					delete
@@ -1272,10 +1273,10 @@ Test Cases
 						 - Print: "Please enter a command user: "
 						 - Print: "Error, you do not have the correct privileges to access this feature."
 						 - File: No change.
-		
+
 		Scenario: Verify admin can delete an account.
 		Test Step: Admin enters a correct account holder, correct account number and they do correspond to each other.
-		Test Input: 
+		Test Input:
 					login
 					admin
 					delete
@@ -1288,8 +1289,8 @@ Test Cases
 						 - Print: "Please enter the account number: "
 						 - Print: "Success, John Doe's account is now deleted."
 						 - File: "06 John Doe             12345 00000000 00"
-		
-		Scenario: Verify user withdraw transaction can no longer be done to a deleted account - user. 
+
+		Scenario: Verify user withdraw transaction can no longer be done to a deleted account - user.
 		Test Step: Enter the deleted account's correct account holder's name, account number, and an amount of money in the withdraw feature.
 		Test Input: login
 					standard
@@ -1305,8 +1306,8 @@ Test Cases
 						 - Print: "Enter the amount of money you wish to withdraw: "
 						 - Print: "Error, your account is deleted."
 						 - File: No change
-		
-		Scenario: Verify user deposit transaction can no longer be done to a deleted account - user. 
+
+		Scenario: Verify user deposit transaction can no longer be done to a deleted account - user.
 		Test Step: Enter the deleted account's correct account holder's name, account number, and an amount of money in the deposit feature.
 		Test Input: login
 					standard
@@ -1322,8 +1323,8 @@ Test Cases
 						 - Print: "Enter the amount of money you wish to deposit: "
 						 - Print: "Error, your account is deleted."
 						 - File: No change
-		
-		Scenario: Verify user paybill transaction can no longer be done to a deleted account - user. 
+
+		Scenario: Verify user paybill transaction can no longer be done to a deleted account - user.
 		Test Step: Enter the deleted account's correct account holder's name, account number, company, and an amount of money to pay in the paybill feature.
 		Test Input: login
 					standard
@@ -1341,8 +1342,8 @@ Test Cases
 						 - Print: "Enter the amount of money you wish to pay: "
 						 - Print: "Error, your account is deleted."
 						 - File: No change
-		
-		Scenario: Verify delete transaction can still be done to a deleted account - user. 
+
+		Scenario: Verify delete transaction can still be done to a deleted account - user.
 		Test Step: Enter the deleted account's correct account holder's name and account number in the delete feature.
 		Test Input: login
 					admin
@@ -1356,8 +1357,8 @@ Test Cases
 						 - Print: "Please enter the account number: "
 						 - Print: "Success, account has been deleted."
 						 - File: "06 John Doe             12345 00000000 00"
-		
-		Scenario: Verify delete transaction can no longer be done to a deleted account - user. 
+
+		Scenario: Verify delete transaction can no longer be done to a deleted account - user.
 		Test Step: Enter the deleted account's correct account holder's name and account number in the delete feature.
 		Test Input: login
 					admin
@@ -1371,8 +1372,8 @@ Test Cases
 						 - Print: "Please enter the account number: "
 						 - Print: "Error, account is already deleted"
 						 - File: No change
-		
-		Scenario: Verify user transfer transaction can no longer be done with a deleted account (From an account to a deleted account) - user. 
+
+		Scenario: Verify user transfer transaction can no longer be done with a deleted account (From an account to a deleted account) - user.
 		Test Step: Enter the deleted account's correct account holder's name and account number, another account number and an amount of money in the transfer feature.
 		Test Input: login
 					standard
@@ -1390,8 +1391,8 @@ Test Cases
 						 - Print: "Please enter the account number to recieve money: "
 						 - Print: "Error, your account is deleted"
 						 - File: No change
-		
-		Scenario: Verify user transfer transaction can no longer be done with a deleted account (From a deleted account to another account) - user. 
+
+		Scenario: Verify user transfer transaction can no longer be done with a deleted account (From a deleted account to another account) - user.
 		Test Step: Enter an account holder's name, account number, the deleted account number, and an amount of money in the transfer feature.
 		Test Input: login
 					standard
@@ -1410,7 +1411,7 @@ Test Cases
 						 - Print: "Error, that account is deleted"
 						 - File: No change
 
-		Scenario: Verify user withdraw transaction can no longer be done to a deleted account - admin. 
+		Scenario: Verify user withdraw transaction can no longer be done to a deleted account - admin.
 		Test Step: Enter the deleted account's correct account holder's name, account number, and an amount of money in the withdraw feature.
 		Test Input: login
 					admin
@@ -1427,7 +1428,7 @@ Test Cases
 						 - Print: "Error, that account has been deleted."
 						 - File: No change
 
-		Scenario: Verify user deposit transaction can no longer be done to a deleted account - admin. 
+		Scenario: Verify user deposit transaction can no longer be done to a deleted account - admin.
 		Test Step: Enter the deleted account's correct account holder's name, account number, and an amount of money in the deposit feature.
 		Test Input: login
 					admin
@@ -1443,8 +1444,8 @@ Test Cases
 						 - Print: "Enter the amount of money you wish to deposit: "
 						 - Print: "Error, that account has been deleted."
 						 - File: No change
-		
-		Scenario: Verify user paybill transaction can no longer be done to a deleted account - admin. 
+
+		Scenario: Verify user paybill transaction can no longer be done to a deleted account - admin.
 		Test Step: Enter the deleted account's correct account holder's name, account number, company, and an amount of money to pay in the paybill feature.
 		Test Input: login
 					admin
@@ -1461,8 +1462,8 @@ Test Cases
 						 - Print: "Enter the amount of money you wish to pay: "
 						 - Print: "Error, that account has been deleted."
 						 - File: No change
-						
-		Scenario: Verify user transfer transaction can no longer be done with a deleted account (From an account to a deleted account) - admin.  
+
+		Scenario: Verify user transfer transaction can no longer be done with a deleted account (From an account to a deleted account) - admin.
 		Test Step: Enter the deleted account's correct account holder's name and account number, another account number and an amount of money in the transfer feature.
 		Test Input: login
 					admin
@@ -1479,8 +1480,8 @@ Test Cases
 						 - Print: "Please enter the account number to recieve money: "
 						 - Print: "Error, that account has been deleted"
 						 - File: No change
-		
-		Scenario: Verify user transfer transaction can no longer be done with a deleted account (From a deleted account to another account) - admin. 
+
+		Scenario: Verify user transfer transaction can no longer be done with a deleted account (From a deleted account to another account) - admin.
 		Test Step: Enter an account holder's name, account number, the deleted account number, and an amount of money in the transfer feature.
 		Test Input: login
 					admin
@@ -1515,7 +1516,7 @@ Test Cases
 						 - Print: "Please enter their initial balance: "
 						 - Print: "Success, account created."
 						 - File: "05 Lock Lan             12345 00200.00 00"
-		
+
 		Scenario: Verify account creation (with invalid name input - to long).
 		Test Step: Admin enters an account holder's name that is greater than 20 characters and initial balance less than $99999.99 into the create feature.
 		Test Input: login
@@ -1560,7 +1561,7 @@ Test Cases
 						 - Print: "Please enter their initial balance: "
 						 - Print: "Error, initial account balance exceeds the allowed amount."
 						 - File: No change
-		
+
 		Scenario: Verify account creation (with both inputs being invalid).
 		Test Step: Admin enters an account holder's name that is greater than 20 characters and initial balance greater than $99999.99 into the create feature.
 		Test Input: login
@@ -1575,7 +1576,7 @@ Test Cases
 						 - Print: "Please enter their initial balance: "
 						 - Print: "Error, initial account balance exceeds the allowed amount."
 						 - File: No change
-		
+
 		Scenario: Verify normal users can not access the create feature.
 		Test Step: Normal user attempts to use the create feature.
 		Test Input: login
@@ -1587,7 +1588,7 @@ Test Cases
 						 - Print: "Please enter a command user: "
 						 - Print: "Error, you do not have the correct privileges to access this feature."
 						 - File: No change
-		
+
 		Scenario: Verify account is not available in the same session.
 		Test Step: A transaction is done with the newly created account holder's name and account number.
 		Test Input: login
@@ -1610,7 +1611,7 @@ Login – Alex
 
 Scenario: Verify that user cannot login if another login session has been created.
 Test Step: User Attempts to login when another person is logged in
-Test Input: 
+Test Input:
 					login
 					standard
 					John Doe
@@ -1623,18 +1624,18 @@ Expected Output: - Print: "Please enter your session type: “
 
 Scenario: Verify that username exists when the user logs in.
 Test Step: User Attempts to login when don’t currently have an account
-Test Input: 
+Test Input:
 					login
 					standard
 					Bob Stevenson
-Expected Result: The user is notified that they do not have a valid account and must speak to an admin before being able to login in. 
+Expected Result: The user is notified that they do not have a valid account and must speak to an admin before being able to login in.
 Expected Output: - Print: "Please enter your session type: “
 		   - Print: “Please enter your name: “
    		   - Print: “Bob Stevenson you don’t seem to have an account please contact the 					  administrator to have an account setup.”
 
 Scenario: Verify that users and admins have different privileges
 Test Step: Use admin command as user and as admin
-Test Input: 
+Test Input:
 					login
 					standard
 					John Doe
@@ -1645,7 +1646,7 @@ Test Input:
 					disable
 					John Doe
 					12345
-Expected Result: User is unable to perform admin operation, and admin is able to perform operation 
+Expected Result: User is unable to perform admin operation, and admin is able to perform operation
 Expected Output: - Print: “Please enter your session type: “
 		   - Print: “Please enter your name: “
 		   - Print: “Welcome John Doe please enter a command: “
@@ -1660,7 +1661,7 @@ Expected Output: - Print: “Please enter your session type: “
 
 Scenario: Verify login must be perform before other commands can be used
 Test Step: Use withdraw before user login
-Test Input: 
+Test Input:
 					withdraw
 Expected Result: User is unable to perform operation since they are not logged in
 Expected Output: - Print: “You must be logged in to use this command”
@@ -1671,14 +1672,14 @@ Logout – Alex
 
 Scenario: Verify logout is successful
 Test Step: User is unable to use operations after logout
-Test Input: 
+Test Input:
 					login
 					standard
 					John Doe
 					logout
 					withdrawal
 
-Expected Result: User is unable to perform operations after logout 
+Expected Result: User is unable to perform operations after logout
 Expected Output: - Print: “Please enter your session type: “
 		   - Print: “Please enter your name: “
    		   - Print: “Invalid command please enter a valid command”
@@ -1687,15 +1688,15 @@ Expected Output: - Print: “Please enter your session type: “
 
 Scenario: Verify logout cannot be done when user is not logged in
 Test Step: Test logout before user is logged in
-Test Input: 
+Test Input:
 					logout
 
 Expected Result: User is unable to perform logout operation
 Expected Output: - Print: “You are not logged in please login to use other commands”
 
-Scenario: Verify receipt is given to the user   
+Scenario: Verify receipt is given to the user
 Test Step: Use command that outputs to receipt and check receipt after logout
-Test Input: 
+Test Input:
 					login
 					standard
 					John Doe
@@ -1720,9 +1721,9 @@ Expected Output: - Print: “You are not logged in please login to use other com
 
 Transfer – Alex
 ================
-Scenario: Verify account number for transfer  
+Scenario: Verify account number for transfer
 Test Step: Use incorrect account number when transferring
-Test Input: 
+Test Input:
 					login
 					standard
 					John Doe
@@ -1738,7 +1739,7 @@ Expected Output: - Print: "Please enter your session type: “
 
 Scenario: Verify user cannot transfer to the same account
 Test Step: Transfer to the same account
-Test Input: 
+Test Input:
 					login
 					standard
 					John Doe
@@ -1755,8 +1756,8 @@ Expected Output: - Print: "Please enter your session type: “
 		    - Print: “You cannot transfer to your own account”
 
 Scenario: Verify user can transfer at the transfer zero dollars
-Test Step: Attempt to transfer zero dollars 
-Test Input: 
+Test Step: Attempt to transfer zero dollars
+Test Input:
 					login
 					standard
 					John Doe
@@ -1774,9 +1775,9 @@ Expected Output:  - Print: "Please enter your session type: “
 		    - Print: “Enter amount”
 		    - Print: “You cannot transfer zero dollars”
 
-Scenario: Verify user transfers incurs fees where the admin does not 
+Scenario: Verify user transfers incurs fees where the admin does not
 Test Step: Attempt to transfer money in user account and then in admin account
-Test Input: 
+Test Input:
 					login
 					standard
 					John Doe
@@ -1807,9 +1808,9 @@ Expected Output   - Print: "Please enter your session type: “
 		    - Print: “Enter amount”
 		    - Print: “Transfer complete”
 
-Scenario: Verify max transfer  
+Scenario: Verify max transfer
 Test Step: Test 1000 dollar transfer
-Test Input: 
+Test Input:
 					login
 					standard
 					John Doe
@@ -1828,7 +1829,7 @@ Expected Output   - Print: "Please enter your session type: “
 
 Scenario: Verify working transfer limit
 Test Step: Test 1005 dollar transfer
-Test Input: 
+Test Input:
 					login
 					standard
 					John Doe
@@ -1848,7 +1849,7 @@ Expected Output   - Print: "Please enter your session type: “
 
 Scenario: Verify summing of transfers
 Test Step: Test a 505 dollar transfer after 500 dollar transfer
-Test Input: 
+Test Input:
 					login
 					standard
 					John Doe
