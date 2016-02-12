@@ -142,7 +142,7 @@ Test Cases
            - Print: "Please enter value to withdraw: "
            - Print: "Success, 5.00 has been withdrawn."
            - Print: "New Balance:"
-           - Print: "  105.00"
+           - Print: "105.00"
            - Print: "Please enter your session type: "
            - Print: "Please enter a login name: "
            - Print: "Please enter a command user: "
@@ -150,16 +150,18 @@ Test Cases
            - Print: "Please enter value to withdraw: "
            - Print: "Success, 5.00 has been withdrawn."
            - Print: "New Balance:"
-           - Print: "  99.90"
+           - Print: "99.90"
            - File: "10 admin                00000 00000000 A "
            - File: "09 Bran Bob             12347 00000000 00"
+           - File: "01 Bran Bob             12347 00005.00 00"
 					 - File: "00                      00000 00000000 00"
            - File: "10 Bran Bob             00000 00000000 S "
            - File: "01 Bran Bob             12347 00005.00 00"
+           - File: "01 Bran Bob             12347 00000.10 00"
 					 - File: "00                      00000 00000000 00"
   
   Scenario: Verify user deposit transaction can now be done to a re-enabled account.
-  Test Step: Admin enables an account and then performs a deposit.
+  Test Step: Admin enables an account and then performs a deposit. Then, user logs in and makes a deposit.
   Test Input:
         login
         admin
@@ -171,14 +173,45 @@ Test Cases
         12347
         5.00
         logout
+        login
+        standard
+        Bran Bob
+        deposit
+        12347
+        5.00
+        logout
   Expected Result: 5 dollars is added to the account.
   Expected Output: - Print: "Please enter your session type: "
            - Print: "Please enter a command admin: "
-           - File: [TODO: after filled everything out]
+           - Print: "Please enter the account holder's name: "
+           - Print: "Please enter the account number: "
+           - Print: "Success, Bran Bob's account is now enabled."
+           - Print: "Please enter the account holder's name: "
+           - Print: "Please enter the account number: "
+           - Print: "Please enter value to deposit: "
+           - Print: "Success, 5.00 has been deposited."
+           - Print: "New Balance:"
+           - Print: "115.00"
+           - Print: "Please enter your session type: "
+           - Print: "Please enter a login name: "
+           - Print: "Please enter a command user: "
+           - Print: "Please enter the account number: "
+           - Print: "Please enter value to deposit: "
+           - Print: "Success, 5.00 has been deposited."
+           - Print: "New Balance:"
+           - Print: "119.90"
+           - File: "10 admin                00000 00000000 A "
+           - File: "09 Bran Bob             12347 00000000 00"
+           - File: "04 Bran Bob             12347 00005.00 00"
+					 - File: "00                      00000 00000000 00"
+           - File: "10 Bran Bob             00000 00000000 S "
+           - File: "04 Bran Bob             12347 00005.00 00"
+           - File: "01 Bran Bob             12347 00000.10 00"
+					 - File: "00                      00000 00000000 00"
   
   
   Scenario: Verify user paybill transaction can now be done to a re-enabled account.
-  Test Step: Admin enables an account and then pays a bill.
+  Test Step: Admin enables an account and then admin & standard pays a bill.
   Test Input:
         login
         admin
@@ -189,12 +222,45 @@ Test Cases
         Bran Bob
         12347
         TV
-        10.0
+        5.00
         logout
+        login
+        standard
+        Bran Bob
+        paybill
+        12347
+        TV
+        5.00
   Expected Result: 10 dollars is paid to TV
   Expected Output: - Print: "Please enter your session type: "
            - Print: "Please enter a command admin: "
-           - File: [TODO: after filled everything out]
+           - Print: "Please enter the account holder's name: "
+           - Print: "Please enter the account number: "
+           - Print: "Success, Bran Bob's account is now enabled."
+           - Print: "Please enter the account holder's name: "
+           - Print: "Please enter the account number: "
+           - Print: "Please enter a billing recipient: "
+           - Print: "Please enter value to pay: "
+           - Print: "Success, 5.00 has been paid to TV."
+           - Print: "New Balance:"
+           - Print: "105.00"
+           - Print: "Please enter your session type: "
+           - Print: "Please enter a login name: "
+           - Print: "Please enter a command user: "
+           - Print: "Please enter the account number: "
+           - Print: "Please enter a billing recipient: "
+           - Print: "Please enter value to pay: "
+           - Print: "Success, 5.00 has been paid to TV."
+           - Print: "New Balance:"
+           - Print: "99.90"
+           - File: "10 admin                00000 00000000 A "
+           - File: "09 Bran Bob             12347 00000000 00"
+           - File: "03 Bran Bob             12347 00005.00 00"
+					 - File: "00                      00000 00000000 00"
+           - File: "10 Bran Bob             00000 00000000 S "
+           - File: "03 Bran Bob             12347 00005.00 00"
+           - File: "01 Bran Bob             12347 00000.10 00"
+					 - File: "00                      00000 00000000 00"
   
   Scenario: Verify transfer can be done with re-enabled accounts
   Test Step: Admin enables an account, then transfers money to it.
