@@ -165,9 +165,9 @@ Test Cases
   Expected Output: - Print: [TODO: after filled everything out]
            - File: [TODO: after filled everything out]
   
-  { [TODO: Verify user transation can be done between accounts]
-  Scenario: Verify user transfer transaction can now be done with a re-enabled account (From an account to a re-enabled account).
+  Scenario: Verify transfer can be done with re-enabled accounts
   Test Step: Admin enables an account, then transfers money to it.
+      Next, admin enables an account, then has money transferred from it.
   Test Input:
         login
         admin
@@ -179,30 +179,15 @@ Test Cases
         12345
         12347
         10.0
-        logout
-  Expected Result: enabled account gets 10.0
-  Expected Output: - Print: [TODO: after filled everything out]
-           - File: [TODO: after filled everything out]
-        
-  
-  Scenario: Verify user transfer transaction can now be done with a re-enabled account (From a re-enabled account to another account).
-  Test Step: Admin enables an account, then has money transferred from it.
-  Test Input:
-        login
-        admin
-        enable
-        Bran Bob
-        12347
         transfer
         Bran Bob
         12347
         12345
         10.00
         logout
-   Expected Result: enabled account transfers 10.0
-   Expected Output: - Print: [TODO: after filled everything out]
+  Expected Result: Bran Bob is enabled & 10.00 is transferred back and forth between him and John Doe.
+  Expected Output: - Print: [TODO: after filled everything out]
            - File: [TODO: after filled everything out]
-  }
   
              
 	Withdrawal - Kathryn
@@ -224,11 +209,10 @@ Test Cases
            - Print: "Please enter the account number: "
            - Print: "Error, account specificed is not a valid account."
            - File: No change.
-             
-  { [TODO: Correct name, incorrect number]
-  
-  Scenario: Verify account holder's name and account number correspond with each other (Correct name, incorrect number).
+           
+  Scenario: Verify that not existing numbers are not accepted by withdrawal (Correct name, incorrect number)
   Test Step: Admin enters a correct account holder's name but incorrect account number.
+      Next, Logged in user enters an incorrect number.
   Test Input: 
         login
         admin
@@ -236,31 +220,24 @@ Test Cases
         Bran Bob
         11111
         logout
-  Expected Result: The admin is notified the account is not valid.
+        login
+        Bran Bob
+        withdrawal
+        12340
+        logout
+  Expected Result: The account number is rejected for both admin & user
   Expected Output: - Print: "Please enter your session type: "
            - Print: "Please enter a command admin: "
            - Print: "Please enter the account holder's name: "
            - Print: "Please enter the account number: "
            - Print: "Error, account specificed is not a valid account."
            - File: No change.
-           
-  Scenario: Verify standard mode user's name and account number correspond with each other (Correct name, incorrect number).
-  Test Step: Logged in user enters an incorrect number
-  Test Input:
-        login
-        John Doe
-        withdrawal
-        12340
-        logout
-  Expected Result: The account number is rejected.
-  Expected Output: - Print: [TODO: after filled everything out]
+          - Print: [TODO: after filled everything out]
          - File: [TODO: after filled everything out]
-  }
-  
-  { [TODO: Correct name, correct number but not belonging]
-  
-  Scenario: Verify account holder's name and account number correspond with each other (Correct name, correct number but not matching).
+         
+  Scenario: Verify that only numbers belonging to the name can be used
   Test Step: Admin enters a correct account holder and correct account number but they do not correspond to each other.
+  Test Step: Logged in user enters a number to an account that does not belong to them.
   Test Input: 
         login
         admin
@@ -268,32 +245,26 @@ Test Cases
         Bran Bob
         12346
         logout
-  Expected Result: The admin is notified the account is not valid.
-  Expected Output: - Print: "Please enter your session type: "
-           - Print: "Please enter a command admin: "
-           - Print: "Please enter the account holder's name: "
-           - Print: "Please enter the account number: "
-           - Print: "Error, account specificed is not a valid account."
-           - File: No change.
-           
-  Scenario: Verify standard mode user's name and held account number correspond with each other (Correct name, correct number but not matching).
-  Test Step: Logged in user enters a number to an account that does not belong to them.
   Test Input:
         login
         John Doe
         withdrawal
         12347
         logout
+  Expected Result: The admin is notified the account is not valid.
   Expected Result: The account number is rejected. [Note: should be identical to nonexistent account]
+  Expected Output: - Print: "Please enter your session type: "
+           - Print: "Please enter a command admin: "
+           - Print: "Please enter the account holder's name: "
+           - Print: "Please enter the account number: "
+           - Print: "Error, account specificed is not a valid account."
+           - File: No change.
   Expected Output: - Print: [TODO: after filled everything out]
-         - File: [TODO: after filled everything out]
-  }
+           - File: [TODO: after filled everything out]
   
-                     
-  { [TODO: Verify negative dollars input]
-  
-  Scenario: Verify negative dollars input is rejected for admin
+  Scenario: Verify negative dollars input is rejected
   Test Step: Try to enter a negative value as an admin.
+  Test Step: Try to enter a negative value as a user
   Test Input:
         login
         admin
@@ -302,21 +273,14 @@ Test Cases
         12345
         -40.00
         logout
-  Expected Result: Admin is informed that negative values are invalid.
+        [TODO]
+  Expected Result: Admin is informed that negative values are invalid. [TODO]
   Expected Output: - Print: [TODO: after filled everything out]
          - File: [TODO: after filled everything out]
-  
-  Scenario: Verify negative dollars input is rejected for user [TODO]
-  Test Step: Try to enter a negative value as a user
-  Test Input:
-  Expected Result:
-  Expectet Output:
-  }
            
-  { [TODO: Verify input dollars of $0 is rejected]
-  
-  Scenario: Verify input dollars of $0 is rejected for admin
+  Scenario: Verify input dollars of $0 is rejected
   Test Step: Try to enter a zero value as an admin.
+  Test Step: Try to enter a negative value as a user
   Test Input:
         login
         admin
@@ -325,20 +289,18 @@ Test Cases
         12345
         0.00
         logout
-  Expected Result: Admin is informed that zero values are invalid.
+        [TODO]
+  Expected Result: Admin is informed that zero values are invalid. [TODO]
   Expected Output: - Print: [TODO: after filled everything out]
          - File: [TODO: after filled everything out]
   
-  Scenario: Verify input dollars of $0 is rejected for user [TODO]
-  Test Step: Try to enter a negative value as a user
-  Test Input:
-  Expected Result:
-  Expectet Output:  
-  }
-  
-  { [TODO: Verify dollar input #####.## is kept]
-    Scenario: Verify dollar input ######.## is rejected
+  Scenario: Verify that only #####.## number of decimals is accepted
   Test Step: Try to enter an excessive value as a user.
+  Test Step: Try to enter a truncated decimal as a user.
+  Test Step: Try to enter a number without a decimal point as a user
+  Test Step: Try to enter a number with 3 fractional parts
+  Test Step: Enter a number with preceding zeroes.
+  Test Step: Enter a number like 5.0
   Test Input:
         login
         John Doe
@@ -346,12 +308,6 @@ Test Cases
         12345
         654321.00
         logout
-  Expected Result: User is informed that their format is invalid.
-  Expected Output: - Print: [TODO: after filled everything out]
-         - File: [TODO: after filled everything out]
-         
-  Scenario: Verify withdrawal input of .##
-  Test Step: Try to enter a truncated decimal as a user.
   Test Input:
         login
         John Doe
@@ -359,12 +315,6 @@ Test Cases
         12345
         .50
         logout
-  Expected Result: User is informed that their format is invalid.
-  Expected Output: - Print: [TODO: after filled everything out]
-         - File: [TODO: after filled everything out]
-  
-  Scenario: Verify input of #
-  Test Step: Try to enter a number without a decimal point as a user
   Test Input:
         login
         John Doe
@@ -372,10 +322,6 @@ Test Cases
         12345
         5
         logout
-  Expected Result: User is informed that a decimal point is required.
-  Expected Output: - Print: [TODO: after filled everything out]
-         - File: "No change"  Scenario: Verify withdrawal input of ######.### is rejected
-  Test Step: Try to enter a number with 3 fractional parts
   Test Input:
         login
         John Doe
@@ -383,12 +329,6 @@ Test Cases
         12345
         5.000
         logout
-  Expected Result: User is reminded to only use 2 fineness.
-  Expected Output: - Print: [TODO: after filled everything out]
-         - File: "No change"
-  
-  Scenario: Verify withdrawal input of 0000#.## is rejected
-  Test Step: Enter a number with preceding zeroes.
   Test Input:
         login
         John Doe
@@ -396,12 +336,6 @@ Test Cases
         12345
         00005.00
         logout
-  Expected Result: User is informed that their number doesn't make sense.
-  Expected Output: - Print: [TODO: after filled everything out]
-         - File: "No change"
-  
-  Scenario: Verify withdrawal input of ######.# is rejected
-  Test Step: Enter a number like 5.0
   Test Input:
         login
         John Doe
@@ -409,16 +343,20 @@ Test Cases
         12345
         5.0
         logout
+  Expected Result: User is informed that their format is invalid.
+  Expected Result: User is informed that their format is invalid.
+  Expected Result: User is reminded to only use 2 fineness.
+  Expected Result: User is informed that a decimal point is required.
+  Expected Result: User is informed that their number doesn't make sense.
   Expected Result: User is informed that the incorrect number of zeroes
   following decimal was used.
   Expected Output: - Print: [TODO: after filled everything out]
-         - File: "No change"
+         - File: [TODO: after filled everything out]
   
-  }
-  
-  { [TODO: Verify forbidden symbols are not accepted]
-  Scenario: Verify withdrawal input of $######.## is rejected
+  Scenario: Verrify forbidden symbols are not accepted.
   Test Step: Try to enter a number with preceding dollar sign.
+  Test Step: Try to enter a number with trailing dollar sign.
+  Test Step: Try to enter a number with comma delimiters.
   Test Input:
         login
         John Doe
@@ -426,12 +364,6 @@ Test Cases
         12345
         $5.00
         logout
-  Expected Result: User is informed that dollar signs are not acceptable.
-  Expected Output: - Print: [TODO: after filled everything out]
-         - File: "No change"
-  
-  Scenario: Verify withdrawal input of ######.##$ is rejected
-  Test Step: Try to enter a number with trailing dollar sign.
   Test Input:
         login
         John Doe
@@ -439,11 +371,6 @@ Test Cases
         12345
         5.00$
         logout
-  Expected Result: User is informed that dollar signs are not acceptable.
-  Expected Output: - Print: [TODO: after filled everything out]
-         - File: "No change"
-  Scenario: Verify withdrawal input of ######,## is rejected
-  Test Step: Try to enter a number with comma delimiters.
   Test Input:
         login
         John Doe
@@ -451,13 +378,11 @@ Test Cases
         12345
         5,00
         logout
+  Expected Result: User is informed that dollar signs are not acceptable.
+  Expected Result: User is informed that dollar signs are not acceptable.
   Expected Result: User is reminded to use . to represent decimal
   Expected Output: - Print: [TODO: after filled everything out]
          - File: "No change"
-  }
-  
-  
-  
   
          
   Scenario: Verify withdrawal input of ###### ## is rejected
@@ -487,9 +412,9 @@ Test Cases
   Expected Output - Print: [TODO: after filled everything out]
          - File: [TODO: same]
   
-  { [TODO: Verify noncanadian bill values]
-  Scenario: Verify dollar value of <$5 is rejected
+  Scenario: Verify only canadian bill values are allowed
   Test Step: Enter a number like 4.99
+  Test Step: Try to withdraw 7.00
   Test Input:
         login
         John Doe
@@ -497,13 +422,6 @@ Test Cases
         12345
         4.99
         logout
-  Expected Result: User is informed that only canadian bill values are
-      acceptable.
-  Expected Output: - Print: [TODO: after filled everything out]
-         - File: "No change"s
-         
-  Scenario: Verify dollar value of $5 + invalid is rejected
-  Test Step: Try to withdraw 7.00
   Test Input
         login
         John Doe
@@ -511,10 +429,11 @@ Test Cases
         12345
         7.00
         logout
+  Expected Result: User is informed that only canadian bill values are
+      acceptable.
   Expected Result: user is informed only canadian dollar values are acceptable
   Expected Output: - Print: [TODO: after filled everything out]
          - File: "No change"
-  }
   
   
          
@@ -543,61 +462,28 @@ Test Cases
   Expected Result: user successfully withdraws 15.00
   Expected Output: - Print: [TODO: after filled everything out]
          - File: [TODO: samesies]
-  
-  { [TODO: Verify withdraw limit cannot be exceeded]
+         
   Scenario: Verify single account withdraw limit cannot be exceeded
   Test Step: Try to withdraw 505.00 in user mode
-  Test Input: [TODO: invent a rich prince]
-  Expected Result:
-  Expected Output: [TODO: after things are filled out]
-  
-  Scenario: Verify single account withdraw limit cannot be exceeded (for multiple calls)
   Test Step: Try to withdraw 100.00 then 400.00 in user mode
-  Test Input: [TODO: invent a rich prince]
-  Expected Result:
-  Expected Output: [TODO: after things are filled out]
-  
-  Scenario: Verify single account withdraw limit cannot be exceeded (for multiple sessions)
   Test Step: Login and withdraw twice, over limit
   Test Input: [TODO: invent a rich prince]
   Expected Result:
   Expected Output: [TODO: after things are filled out]
-  }
   
-  { [TODO: Verify withdrawal transaction fee is applied for standard]
-  Scenario: Verify withdrawal transaction fee is applied for standard
+  Scenario: Verify withdrawal transaction fee is applied for standard & are applied for several calls
   Test Step: Try to withdraw [TODO: make 2 of these for student & standard plan uggh]
   Test Input:
   Expected Result:
   Expected Output: [TODO: after things are filled out]
-  
-  Scenario: Verify several withdrawal tranasaction fees are applied for several calls
-  [TODO: make 2 of these for student & standard plan uggh]
-  Test Step:
-  Test Input:
-  Expected Result:
-  Expected Output: [TODO: after things are filled out]
-  }
-  
-  { [TODO: Verify account limits are separate]
-  Scenario: Verify separate account limits are separate with both accepted
+
+  Scenario: Verify account limits are separate
   Test Step: Withdraw $200 from one, $100 from another
-  Test Input: [TODO: make a guy with 2 accounts]
-  Expected Result:
-  Expected Output: [TODO: after things are filled out]
-  
-  Scenario: Verify separate account limits are separate with both accepted for amount over limit
   Test Step: Withdraw $200 from one, $400 from another
+  Test Step: Withdraw $600.0 from one acount, $400.0 from another
   Test Input: [TODO: make a guy with 2 accounts]
   Expected Result:
   Expected Output: [TODO: after things are filled out]
-  
-  Scenario: Verify separate account limits are separate with 1st rejected at limit and 2nd accepted
-  Test Step: Withdraw $600.0 from one acount, $400.0 from another
-  Test Input: [TODO: invent a rich prince]
-  Expected Result:
-  Expected Output: [TODO: after things are filled out]
-  }
   
   Scenario: Verify single account withdraw limit for admins doesn't apply
   Test Step: As admin, withdraw $600.00
@@ -611,19 +497,12 @@ Test Cases
   Expected Result:
   Expected Output: [TODO: after things are filled out]
   
-  { [TODO: Verify admin withdrawals do not conflict with user's withdrawal limit]
-  Scenario: Verify admin withdrawals occuring before user withdrawal does not affect limit
+  Scenario: Verify admin withdrawals do not conflict with user's withdrawal limit
   Test Step: Withdraw $600 from admin then $100 as user
-  Test Input: [TODO: invent a rich prince]
-  Expected Result:
-  Expected Output: [TODO: after things are filled out]
-  
-  Scenario: Verify admin withdrawals after user withdrawal does not come into confict with limit
   Test Step: Withdraw $400 as user and $200 as admin
   Test Input: [TODO: invent a rich prince]
   Expected Result:
   Expected Output: [TODO: after things are filled out]
-  }
   
   Scenario: Verify withdrawal with resulting zero balance is accepted
   Test Step: [TODO: after transaction fees have been done (which they have been)]]
@@ -637,36 +516,14 @@ Test Cases
   Expected Result:
   Expected Output: [TODO: after things are filled out]
   
-  { [TODO: Verify that previous transaction fees are factored into balance calculations]
-  Scenario: Verify withdrawal with resulting negative balance accounts is rejected (for previous transaction fee from previous withdrawal)
-  Test Step: 
-  [TODO: make 2 of these for student & standard plan? uggh]
+  Scenario: Verify that previous transaction fees are factored into balance calculations
+  Test Step: Verify withdrawal with resulting negative balance accounts is rejected (for previous transaction fee from previous withdrawal)
+  Test Step: Verify withdrawal with resulting negative balance accounts is rejected (for previous transaction fee from previous transfer)
+  Test Step: Verify withdrawal with resulting negative balance accounts is rejected (for previous transaction fee from previous paybill)
+  Test Step: Verify withdrawal with resulting negative balance accounts is rejected (for previous transaction fee from previous deposit)
   Test Input:
   Expected Result:
   Expected Output: [TODO: after things are filled out]
-  
-  
-  Scenario: Verify withdrawal with resulting negative balance accounts is rejected (for previous transaction fee from previous transfer)
-  Test Step:
-  [TODO: make 2 of these for student & standard plan? uggh]
-  Test Input:
-  Expected Result:
-  Expected Output: [TODO: after things are filled out]
-  
-  Scenario: Verify withdrawal with resulting negative balance accounts is rejected (for previous transaction fee from previous paybill)
-  Test Step: 
-  [TODO: make 2 of these for student & standard plan? uggh]
-  Test Input:
-  Expected Result:
-  Expected Output: [TODO: after things are filled out]
-  
-  Scenario: Verify withdrawal with resulting negative balance accounts is rejected (for previous transaction fee from previous deposit)
-  Test Step: 
-  [TODO: make 2 of these for student & standard plan? uggh]
-  Test Input:
-  Expected Result:
-  Expected Output: [TODO: after things are filled out] 
-  }
   
   Scenario: Verify transaction fees are applied to only successful withdrawals
   Test Step: Do 5 withdrawals, last of which will fail.
@@ -732,18 +589,14 @@ Test Cases
   Expected Result:
   Expected Output: [TODO: after things are filled out]
   
-  { [TODO: Verify withdrawals cannot become negative]
+  { [TODO: ]
   
   
-  Scenario: Verify withdrawal for resulting negative balance is rejected (after session as different user)
+  Scenario: Verify withdrawals cannot result in a negative balance
   Test Step: [TODO: after corresponding above is fine]
-  Test Input:
-  Expected Result:
-  Expected Output: [TODO: after things are filled out]
-  
-  Scenario: Verify withdrawal for resulting negative balance is rejected (as admin)
   Test Step: withdraw like $1 over balance
   Test Input:
+          [TODO]
           login
           admin
           withdrawal
@@ -751,36 +604,17 @@ Test Cases
           12345
           111.00
           logout
-  Expected Result: Admin is informed that the thing would become negative
-  Expected Output: [TODO: after things are filled out]
-  
-  
-  }
-  
-  { [TODO: Verify withdrawal for resulting positive or zero balance is accepted]
-  Scenario: Verify withdrawal for resulting positive balance is accepted (over multiple sessions)
-  Test Step: [TODO: after corresponding above is fine]  
-  Test Input:
   Expected Result:
   Expected Output: [TODO: after things are filled out]
   
-  
-  Scenario: Verify withdrawal for resulting zero balance is accepted (after session as different user)
-  Test Step: [TODO: after corresponding above is fine]
-  Test Input:
-  Expected Result:
-  Expected Output: [TODO: after things are filled out]
-  
-  Scenario: Verify withdrawal for resulting positive balance is accepted (after session as different user)
-  Test Step: [TODO: after corresponding above is fine]
-  Test Input:
-  
-  Scenario: Verify withdrawal for resulting zero balance is accepted (as admin)
-  Test Step: [TODO: separate SP and other plan?]
-  
-  Scenario: Verify withdrawal for resulting positive balance is accepted (as admin)
+  Scenario: Verify withdrawal for resulting positive or zero balance is accepted
+  Test Step: Verify withdrawal for resulting positive balance is accepted (over multiple sessions)
+  Test Step: Verify withdrawal for resulting zero balance is accepted (after session as different user)
+  Test Step: Verify withdrawal for resulting positive balance is accepted (after session as different user)
+  Test Step: Verify withdrawal for resulting zero balance is accepted (as admin)
   Test Step: withdraw as admin with like $50 buffer
   Test Input:
+          [TODO]
           login
           admin
           withdrawal
@@ -788,9 +622,10 @@ Test Cases
           12345
           5.00
           logout
+  Test Input:
   Expected Result: $5.00 is deducted.
+  Expected Result: [TODO]
   Expected Output: [TODO: after things are filled out]
-  }
   
 
 
@@ -799,99 +634,32 @@ Test Cases
   [* Login/logout issues covered elsewhere?]
   [* CP most from withdraw ]
   
-  { [TODO: Verify the canon companies are accepted]
-  Scenario: Verify EC is accepted in standard mode
+  Scenario: Verify the canon companies are accepted
   Test Step: pay a bill to Bright Light Electric Company as user
-  Test Input:
-  Expected Result:
-  Expected Output: [TODO: after things are filled out]
-  
-  Scenario: Verify CQ is accepted in standard mode
   Test Step: pay a bill to Credit Card Company Q as user
-  Test Input:
-  Expected Result:
-  Expected Output: [TODO: after things are filled out]
-  
-  Scenario: Verify TV is accepted in standard mode
   Test Step: pay a bill to Low Definition TV, inc as user
-  Test Input:
-  Expected Result:
-  Expected Output: [TODO: after things are filled out]
-  
-  Scenario: Verify EC is accepted in admin mode
   Test Step: pay a bill to Bright Light Electric Company as admin
-  Test Input:
-  Expected Result:
-  Expected Output: [TODO: after things are filled out]
-  
-  Scenario: Verify CQ is accepted in admin mode
   Test Step: pay a bill to Credit Card Company Q as admin
-  Test Input:
-  Expected Result:
-  Expected Output: [TODO: after things are filled out]
-  
-  Scenario: Verify TV is accepted in admin mode
   Test Step: pay a bill to Low Definition TV, inc as admin
   Test Input:
   Expected Result:
-  Expected Output: [TODO: after things are filled out]
-  }
+  Expected Output: [TODO: after things are filled out] 
   
-  { [TODO: Verify not companies are not accepted]
-    Scenario: Verify invalid 2 letter is not accepted in standard mode
+  Scenario: Verify invalid company names are not accepted
   Test Step: try to pay a bill to BS as user
-  Test Input:
-  Expected Result:
-  Expected Output: [TODO: after things are filled out]
-  
-  Scenario: Verify 3 letter is not accepted in standard mode
   Test Step: try to pay a bill to SBS as user
-  Test Input:
-  Expected Result:
-  Expected Output: [TODO: after things are filled out]
-  
-  Scenario: Verify 1 letter is not accepted in standard mode
   Test Step: try to pay a bill to S as user
-  Test Input:
-  Expected Result:
-  Expected Output: [TODO: after things are filled out]
-  
-  Scenario: Verify truncated 3 letter is not accepted in standard mode
   Test Step: try to pay a bill to TVI as user
-  Test Input:
-  Expected Result:
-  Expected Output: [TODO: after things are filled out]
-  
-  Scenario: Verify invalid 2 letter is not accepted in admin mode
   Test Step: try to pay a bill to BS as admin
-  Test Input:
-  Expected Result:
-  Expected Output: [TODO: after things are filled out]
-  
-  Scenario: Verify 3 letter is not accepted in admin mode
   Test Step: try to pay a bill to SBS as admin
-  Test Input:
-  Expected Result:
-  Expected Output: [TODO: after things are filled out]
-  
-  Scenario: Verify 1 letter is not accepted in admin mode
   Test Step: try to pay a bill to S as admin
-  Test Input:
-  Expected Result:
-  Expected Output: [TODO: after things are filled out]
-  
-  Scenario: Verify truncated 3 letter is not accepted in admin mode
   Test Step: try to pay a bill to TVI as admin
-  Test Input:
-  Expected Result:
-  Expected Output: [TODO: after things are filled out]
-  
-  Scenario: Verify reversal, CE is not accepted in standard mode
   Test Step: try to pay a bill to CE as user
   Test Input:
   Expected Result:
   Expected Output: [TODO: after things are filled out]
-  }
+  
+  
   
  
   
