@@ -1,0 +1,412 @@
+Login
+================
+
+Scenario: Verify that user cannot login if another login session has been created.
+Test Step: User Attempts to login when another person is logged in
+Test Input: 
+				    login
+				    standard
+				    John Doe
+				    login
+				    logout
+
+Expected Result: The user is notified that they must first logout before they attempt another login
+Expected Output:- Print: "Please enter your session type: “
+		   		      - Print: "Please enter a login name: "
+		   		      - File: 10 John Doe 00000 00000000 S
+		   		      - Print: "Please enter a command user: "
+		   		      - Print: “You are already logged in you must logout to attempt a new login”
+		   		      - File: 00 00000 00000000
+logn001.in
+logn001.out
+logn001.trans
+
+Scenario: Verify that username exists when the user logs in.
+Test Step: User Attempts to login when don’t currently have an account
+Test Input: 
+				    login
+				    standard
+				    Bob Stevenson
+				
+Expected Result: The user is notified that they do not have a valid account and must speak to an admin before being able to login in. 
+Expected Output:- Print: "Please enter your session type: “
+		   		      - Print: “Please enter your name: “
+   		   		    - Print: “Bob Stevenson you don’t seem to have an account please contact the administrator to have an account setup.”
+logn002.in
+logn002.out
+logn002.trans
+
+Scenario: Verify that users and admins have different privileges
+Test Step: Use admin command as user and as admin
+Test Input: 
+				    login
+				    standard
+				    John Doe
+				    disable
+				    logout
+				    login
+				    admin
+				    disable
+				    John Doe
+				    12345
+				    logout
+
+Expected Result: User is unable to perform admin operation, and admin is able to perform operation 
+Expected Output:- Print: “Please enter your session type: “
+	   			      - Print: "Please enter a login name: "
+	   			      - File: 10 John Doe                    00000 00000000 S
+				        - Print: "Please enter a command user: "
+				        - Print: “Invalid command please enter a valid command”
+				        - File: 00                             00000 00000000
+				        - Print: “Please enter your session type: “
+				        - Print: “Please enter a command admin: "
+				        - Print: “Please enter account holder’s name: “
+				        - Print: “Please enter the account number: “
+				        - Print: “Account removed”
+				        - File: 07 John Doe                    12345 00000000 A
+				        - File: 00                             00000 00000000 
+logn003.in
+logn003.out
+logn003.trans
+
+Scenario: Verify login must be perform before other commands can be used
+Test Step: Use withdraw before user login
+Test Input: 
+				    withdrawal
+				    transfer
+				    paybill
+				    deposit
+				    create
+			      delete
+				    disable
+				    enable
+				    changeplan
+				    logout
+
+Expected Result: User is unable to perform operation since they are not logged in
+Expected Output:- Print: “You must be logged in to use this command”
+				        - Print: “You must be logged in to use this command”
+				        - Print: “You must be logged in to use this command”
+		    	      - Print: “You must be logged in to use this command”
+		    	      - Print: “You must be logged in to use this command”
+		    	      - Print: “You must be logged in to use this command”
+		    	      - Print: “You must be logged in to use this command”
+		    	      - Print: “You must be logged in to use this command”
+		    	      - Print: “You must be logged in to use this command”
+		    	      - Print: “You must be logged in to use this command”
+logn004.in
+logn004.out
+logn004.trans
+
+Logout
+================
+
+Scenario: Verify logout is successful
+Test Step: User is unable to use operations after logout
+Test Input: 
+				    login
+				    standard
+				    John Doe
+				    logout
+				    withdrawal
+				    transfer
+				    paybill
+				    deposit
+				    create
+				    delete
+				    disable
+				    enable
+				    changeplan
+				    logout
+				    login
+				    admin
+				    logout
+				    withdrawal
+				    transfer
+				    paybill
+				    deposit
+				    create
+				    delete
+				    disable
+				    enable
+				    changeplan
+				    logout
+
+Expected Result: User is unable to perform operations after logout 
+Expected Output:- Print: “Please enter your session type: “
+			   	      - Print: “Please enter a login name: “
+				        - Print: "Please enter a command user: "
+			   	      - File: 10 John Doe      00000 00000000 S
+			   	      - File: 00               00000 00000000
+			   	      - Print: “You must be logged in to use this command”
+				        - Print: “You must be logged in to use this command”
+				        - Print: “You must be logged in to use this command”
+		    	      - Print: “You must be logged in to use this command”
+		    	      - Print: “You must be logged in to use this command”
+		    	      - Print: “You must be logged in to use this command”
+		    	      - Print: “You must be logged in to use this command”
+		    	      - Print: “You must be logged in to use this command”
+		    	      - Print: “You must be logged in to use this command”
+		    	      - Print: “You must be logged in to use this command”
+		    	      - File: 10 admin         00000 00000000 A
+		    	      - Print: "Please enter a command admin: "
+		    	      - File: 00               00000 00000000
+		    	      - Print: “You must be logged in to use this command”
+				        - Print: “You must be logged in to use this command”
+				        - Print: “You must be logged in to use this command”
+		    	      - Print: “You must be logged in to use this command”
+		    	      - Print: “You must be logged in to use this command”
+		    	      - Print: “You must be logged in to use this command”
+		    	      - Print: “You must be logged in to use this command”
+		    	      - Print: “You must be logged in to use this command”
+		    	      - Print: “You must be logged in to use this command”
+		    	      - Print: “You must be logged in to use this command”
+logt001.in
+logt001.out
+logt001.trans
+
+Transfer
+================
+
+Scenario: Verify account number for transfer  
+Test Step: Use incorrect account number when transferring
+Test Input: 
+				    login
+				    standard
+				    John Doe
+				    transfer
+				    12346
+				    logout
+
+Expected Result: User is unable to transfer from a different account
+Expected Output:- Print: "Please enter your session type: “
+		    	      - Print: "Please enter a login name: "
+		    	      - File: 10 John_Doe       12345 00000000 S
+		    	      - Print: "Please enter a command user: "
+		    	      - Print: “Enter your account number: ”
+		    	      - Print: “Error, Account number Invalid”
+		    	      - File: 00                00000 00000000
+tran001.in
+tran001.out
+tran001.trans
+
+Scenario: Verify user cannot transfer to the same account
+Test Step: Transfer to the same account
+Test Input: 
+				    login
+				    standard
+				    John Doe
+				    transfer
+				    12345
+				    12345
+				    logout
+
+Expected Result: User is unable to transfer to the same account
+Expected Output:- Print: "Please enter your session type: “
+		    	      - Print: "Please enter a login name: "
+		    	      - File: 10 John Doe       12345 00000000 S
+		    	      - Print: "Please enter a command user: "
+		    	      - Print: “Enter your account number: ”
+		    	      - Print: “Enter account number to transfer to: “
+		    	      - Print: “Error, You cannot transfer to your own account”
+		    	      - File: 00                00000 00000000
+tran002.in
+tran002.out
+tran002.trans
+
+Scenario: Verify user can transfer at the transfer zero dollars
+Test Step: Attempt to transfer zero dollars 
+Test Input: 
+				    login
+				    standard
+				    John Doe
+				    transfer
+				    12345
+				    12346
+				    0
+				    logout
+
+Expected Result: User is unable to transfer from a different account
+Expected Output:- Print: "Please enter your session type: “
+		    	      - Print: "Please enter a login name: "
+		    	      - File: 10 John Doe       00000 00000000 S
+		    	      - Print: "Please enter a command user: "
+		    	      - Print: “Enter your account number: ”
+		    	      - Print: “Enter account number to transfer to: “
+		    	      - Print: “Enter amount”
+		    	      - Print: “Error, You cannot transfer zero dollars”
+		    	      - File: 00                00000 00000000
+tran003.in
+tran003.out
+tran003.trans
+
+Scenario: Verify user transfers incurs fees where the admin does not 
+Test Step: Attempt to transfer money in user account and then in admin account
+Test Input: 
+					  login
+					  standard
+					  John Doe
+					  transfer
+					  12345
+					  12346
+					  100
+					  logout
+					  login
+					  transfer
+					  12345
+					  12346
+					  100
+					  logout
+
+Expected Result: Account reduces 105 because of fees when user transfers, account reduces by 100 when admin transfers
+Expected Output:- Print: "Please enter your session type: “
+		    	      - Print: "Please enter a login name: "
+		    	      - File: 10 John Doe       00000 00000000 S
+		    	      - Print: "Please enter a command user: "
+		    	      - Print: “Enter your account number: ”
+		    	      - Print: “Enter account number to transfer to: “
+		    	      - Print: “Enter amount"
+		    	      - File: 02 John Doe                    12345 00001005 S 
+		    	      - Print: “Transfer complete”
+		    	      - File: 00                             00000 00000000 
+		    	      - Print: "Please enter your session type: “
+		    	      - File: 10 admin          00000 00000000 A
+		    	      - Print: “Welcome please enter a command: “
+		    	      - Print: “Enter a account number: ”
+		    	      - Print: “Enter account number to transfer to: “
+		    	      - Print: “Enter amount”
+		    	      - File: 02 John Doe                     12345 00001000 A
+		    	      - Print: “Transfer complete”
+		    	      - File: 00                              00000 00000000  
+tran004.in
+tran004.out
+tran004.trans
+
+Scenario: Verify max transfer  
+Test Step: Test 1000 dollar transfer
+Test Input: 
+				    login
+				    standard
+				    John Doe
+				    transfer
+				    12345
+				    12346
+				    1000
+				    logout
+
+Expected Result: Account reduces 1050 because of fees when user transfers
+Expected Output:- Print: "Please enter your session type: “
+				        - Print: "Please enter a login name: "
+				        - File: 10 John Doe             00000 0000000 S 
+		    	      - Print: "Please enter a command user: "
+		    	      - Print: “Enter your account number: ”
+		    	      - Print: “Enter account number to transfer to: “
+		    	      - Print: “Enter amount: ”
+		    	      - File: 02 John Doe             12345 0001000 S 
+		    	      - File: 00                      00000 0000000   
+tran005.in
+tran005.out
+tran005.trans
+
+Scenario: Verify working transfer limit
+Test Step: Test 1005 dollar transfer
+Test Input: 
+				    login
+				    standard
+				    John Doe
+				    transfer
+				    12345
+				    12346
+				    1005
+				    logout
+
+Expected Result: Account reduces 1050 because of fees when user transfers
+Expected Output:- Print: "Please enter your session type: “
+		    	      - Print: "Please enter a login name: "
+		    	      - File: 10 John Doe                    00000 00000000 S
+		    	      - Print: "Please enter a command user: "
+		    	      - Print: “Enter your account number: ”
+		    	      - Print: “Enter account number to transfer to: “
+		    	      - Print: “Enter amount”
+		    	      - Print: “You cannot transfer 1005 dollars it is beyond the transfer limit”
+		    	      - File: 00                              00000 0000000  
+tran006.in
+tran006.out
+tran006.trans
+
+Scenario: Verify summing of transfers
+Test Step: Test a 505 dollar transfer after 500 dollar transfer
+Test Input: 
+					  login
+					  standard
+					  John Doe
+					  transfer
+					  12345
+					  12346
+					  500
+					  transfer
+					  12345
+					  12346
+					  505
+					  logout
+
+Expected Result: Account reduces 1050 because of fees when user transfers
+Expected Output:- Print: "Please enter your session type: “
+		            - Print: "Please enter a login name: "
+		            - File: 10 John_Doe                      00000 00000000 S
+		            - Print: "Please enter a command user: "
+		            - Print: “Enter your account number: ”
+		            - Print: “Enter account number to transfer to: “
+		            - Print: “Enter amount: ”
+		            - File: 02 John_Doe                     12345 00001000 S
+		            - Print: “Transfer complete”
+		            - Print: “Enter your account number: ”
+		            - Print: “Enter account number to transfer to: “
+		            - Print: “Enter amount”
+		            - Print: “You cannot transfer 505 dollars because you will go beyond the transfer limit
+		            - File: 00                              00000 0000000   
+tran007.in
+tran007.out
+tran007.trans
+
+Scenario: Verify amount only allow multiples of five
+Test Step: Test a 505 dollar transfer after 500 dollar transfer
+Test Input: 
+					  login
+					  standard
+					  John Doe
+					  transfer
+					  12345
+					  12346
+					  501
+					  transfer
+					  12345
+					  12346
+					  a
+					  transfer
+					  12345
+					  12346
+					  501.0
+					  logout
+
+Expected Result: Account reduces 1050 because of fees when user transfers
+Expected Output:- Print: "Please enter your session type: “
+		            - Print: "Please enter a login name: "
+		            - File: 10 John_Doe                      00000 00000000 S
+		            - Print: "Please enter a command user: "
+		            - Print: “Enter your account number: ”
+		            - Print: “Enter account number to transfer to: “
+		            - Print: “Enter amount: ”
+		            - PrintL "Error, Enter a valid amount"
+		            - Print: “Enter your account number: ”
+		            - Print: “Enter account number to transfer to: “
+		            - Print: “Enter amount: ”
+		            - Print: "Error, Enter a valid amount"
+		            - Print: “Enter your account number: ”
+		            - Print: “Enter account number to transfer to: “
+		            - Print: “Enter amount: ”
+		            - Print: "Error, Enter a valid amount"
+		            - File: 00                              00000 00000000
+tran008.in
+tran008.out
+tran008.trans
