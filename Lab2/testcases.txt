@@ -17,7 +17,9 @@ Test Cases
            - Print: "Please enter the account holder's name: "
            - Print: "Please enter the account number: "
            - Print: "Success, Bran Bob's account is now enabled."
+           - File: "10 admin                00000 00000000 A "
            - File: "09 Bran Bob             12347 00000000 00"
+					 - File: "00 admin                00000 00000000 00"
   
   Scenario: Verify only disabled accounts may be enabled.
   Test Step: Admin enables an enabled account.
@@ -34,7 +36,8 @@ Test Cases
            - Print: "Please enter the account holder's name: "
            - Print: "Please enter the account number: "
            - Print: "Error, account specified is already active."
-           - File: "No change"
+           - File: "10 admin                00000 00000000 A "
+					 - File: "00                      00000 00000000 00"
   
   Scenario: Verify normal users can not access the enable feature.
   Test Step: Normal user attempts to use the enable feature.
@@ -49,7 +52,8 @@ Test Cases
            - Print: "Please enter a login name: "
            - Print: "Please enter a command user: "
            - Print: "Error, you do not have the correct privileges to access this feature."
-           - File: "No change"
+           - File: "10 John Doe             00000 00000000 S "
+					 - File: "00                      00000 00000000 00"
   
   Scenario: Verify account holder's name and account number correspond with each other (Incorrect name, correct number).
   Test Step: Admin enters an incorrect account holder's name but correct account number.
@@ -66,7 +70,8 @@ Test Cases
            - Print: "Please enter the account holder's name: "
            - Print: "Please enter the account number: "
            - Print: "Error, account specificed is not a valid account."
-           - File: No change.
+           - File: "10 admin                00000 00000000 A "
+					 - File: "00                      00000 00000000 00"
              
              
   Scenario: Verify account holder's name and account number correspond with each other (Correct name, incorrect number).
@@ -84,7 +89,8 @@ Test Cases
            - Print: "Please enter the account holder's name: "
            - Print: "Please enter the account number: "
            - Print: "Error, account specificed is not a valid account."
-           - File: No change.
+           - File: "10 admin                00000 00000000 A "
+					 - File: "00                      00000 00000000 00"
                      
   Scenario: Verify account holder's name and account number correspond with each other (Correct name, correct number but not matching).
   Test Step: Admin enters a correct account holder and correct account number but they do not correspond to each other.
@@ -101,7 +107,8 @@ Test Cases
            - Print: "Please enter the account holder's name: "
            - Print: "Please enter the account number: "
            - Print: "Error, account specificed is not a valid account."
-           - File: No change.
+           - File: "10 admin                00000 00000000 A "
+					 - File: "00                      00000 00000000 00"
                      
                      
   Scenario: Verify user withdraw transaction can now be done to a re-enabled account.
@@ -144,8 +151,12 @@ Test Cases
            - Print: "Success, 5.00 has been withdrawn."
            - Print: "New Balance:"
            - Print: "  99.90"
+           - File: "10 admin                00000 00000000 A "
            - File: "09 Bran Bob             12347 00000000 00"
+					 - File: "00                      00000 00000000 00"
+           - File: "10 Bran Bob             00000 00000000 S "
            - File: "01 Bran Bob             12347 00005.00 00"
+					 - File: "00                      00000 00000000 00"
   
   Scenario: Verify user deposit transaction can now be done to a re-enabled account.
   Test Step: Admin enables an account and then performs a deposit.
@@ -229,7 +240,8 @@ Test Cases
            - Print: "Please enter the account holder's name: "
            - Print: "Please enter the account number: "
            - Print: "Error, account specificed is not a valid account."
-           - File: No change.
+           - File: "10 admin                00000 00000000 A "
+					 - File: "00                      00000 00000000 00"
            
   Scenario: Verify that not existing numbers are not accepted by withdrawal (Correct name, incorrect number)
   Test Step: Admin enters a correct account holder's name but incorrect account number.
