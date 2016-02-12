@@ -297,6 +297,10 @@ Test Cases
          - File: [TODO: after filled everything out]
   
   Scenario: Verify negative dollars input is rejected for user [TODO]
+  Test Step: Try to enter a negative value as a user
+  Test Input:
+  Expected Result:
+  Expectet Output:
   
   Scenario: Verify input dollars of $0 is rejected for admin
   Test Step: Try to enter a zero value as an admin.
@@ -313,6 +317,10 @@ Test Cases
          - File: [TODO: after filled everything out]
   
   Scenario: Verify input dollars of $0 is rejected for user [TODO]
+  Test Step: Try to enter a negative value as a user
+  Test Input:
+  Expected Result:
+  Expectet Output:
   
   Scenario: Verify dollar input ######.## is rejected
   Test Step: Try to enter an excessive value as a user.
