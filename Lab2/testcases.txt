@@ -14,11 +14,13 @@ Test Cases
   Expected result: Command is accepted.
   Expected Output: - Print: "Please enter your session type: "
            - Print: "Please enter a command admin: "
-           - Print: [TODO: after filled everything out]
-           - File: [TODO: after filled everything out]
+           - Print: "Please enter the account holder's name: "
+           - Print: "Please enter the account number: "
+           - Print: "Success, Bran Bob's account is now enabled."
+           - File: "09 Bran Bob             12347 00000000 00"
   
-  Scenario: Verify no enable on already enabled account
-  Test Step: Admin enables an account which does not need enabling
+  Scenario: Verify only disabled accounts may be enabled.
+  Test Step: Admin enables an enabled account.
   Test Input:
         login
         admin
@@ -29,24 +31,10 @@ Test Cases
   Expected Result: Command is rejected.
   Expected Output: - Print: "Please enter your session type: "
            - Print: "Please enter a command admin: "
+           - Print: "Please enter the account holder's name: "
+           - Print: "Please enter the account number: "
+           - Print: "Error, account specified is already active."
            - File: "No change"
-  
-  Scenario: Verify no enable on deleted account
-  Test Step: Admin enables an account that no longer exists.
-  Test Input:
-        login
-        admin
-        delete
-        Bran Bob
-        12347
-        enable
-        Bran Bob
-        12347
-        logout
-  Expected Result: Command is rejected
-  Expected Output: - Print: "Please enter your session type: "
-           - Print: "Please enter a command admin: "
-           - File: [TODO: after filled everything out]
   
   Scenario: Verify normal users can not access the enable feature.
   Test Step: Normal user attempts to use the enable feature.
@@ -117,7 +105,7 @@ Test Cases
                      
                      
   Scenario: Verify user withdraw transaction can now be done to a re-enabled account.
-  Test Step: Admin enables an account and then withdraws from it.
+  Test Step: Admin enables an account and then performs admin & standard withdraw.
   Test Input:
         login
         admin
@@ -129,10 +117,35 @@ Test Cases
         12347
         5.00
         logout
-  Expected Result: 5 dollars is withdrawn.
+        login
+        standard
+        Bran Bob
+        withdraw
+        12347
+        5.00
+        logout
+  Expected Result: 10 dollars is withdrawn.
   Expected Output: - Print: "Please enter your session type: "
            - Print: "Please enter a command admin: "
-           - File: [TODO: after filled everything out]
+           - Print: "Please enter the account holder's name: "
+           - Print: "Please enter the account number: "
+           - Print: "Success, Bran Bob's account is now enabled."
+           - Print: "Please enter the account holder's name: "
+           - Print: "Please enter the account number: "
+           - Print: "Please enter value to withdraw: "
+           - Print: "Success, 5.00 has been withdrawn."
+           - Print: "New Balance:"
+           - Print: "  105.00"
+           - Print: "Please enter your session type: "
+           - Print: "Please enter a login name: "
+           - Print: "Please enter a command user: "
+           - Print: "Please enter the account number: "
+           - Print: "Please enter value to withdraw: "
+           - Print: "Success, 5.00 has been withdrawn."
+           - Print: "New Balance:"
+           - Print: "  99.90"
+           - File: "09 Bran Bob             12347 00000000 00"
+           - File: "01 Bran Bob             12347 00005.00 00"
   
   Scenario: Verify user deposit transaction can now be done to a re-enabled account.
   Test Step: Admin enables an account and then performs a deposit.
