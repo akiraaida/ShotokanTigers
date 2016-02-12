@@ -12,7 +12,9 @@ Test Cases
         12347
         logout
   Expected result: Command is accepted.
-  Expected Output: - Print: [TODO: after filled everything out]
+  Expected Output: - Print: "Please enter your session type: "
+           - Print: "Please enter a command admin: "
+           - Print: [TODO: after filled everything out]
            - File: [TODO: after filled everything out]
   
   Scenario: Verify no enable on already enabled account
@@ -25,7 +27,8 @@ Test Cases
         12345
         logout
   Expected Result: Command is rejected.
-  Expected Output: - Print: [TODO: after filled everything out]
+  Expected Output: - Print: "Please enter your session type: "
+           - Print: "Please enter a command admin: "
            - File: "No change"
   
   Scenario: Verify no enable on deleted account
@@ -41,7 +44,8 @@ Test Cases
         12347
         logout
   Expected Result: Command is rejected
-  Expected Output: - Print: [TODO: after filled everything out]
+  Expected Output: - Print: "Please enter your session type: "
+           - Print: "Please enter a command admin: "
            - File: [TODO: after filled everything out]
   
   Scenario: Verify normal users can not access the enable feature.
@@ -126,7 +130,8 @@ Test Cases
         5.00
         logout
   Expected Result: 5 dollars is withdrawn.
-  Expected Output: - Print: [TODO: after filled everything out]
+  Expected Output: - Print: "Please enter your session type: "
+           - Print: "Please enter a command admin: "
            - File: [TODO: after filled everything out]
   
   Scenario: Verify user deposit transaction can now be done to a re-enabled account.
@@ -143,7 +148,8 @@ Test Cases
         5.00
         logout
   Expected Result: 5 dollars is added to the account.
-  Expected Output: - Print: [TODO: after filled everything out]
+  Expected Output: - Print: "Please enter your session type: "
+           - Print: "Please enter a command admin: "
            - File: [TODO: after filled everything out]
   
   
@@ -162,7 +168,8 @@ Test Cases
         10.0
         logout
   Expected Result: 10 dollars is paid to TV
-  Expected Output: - Print: [TODO: after filled everything out]
+  Expected Output: - Print: "Please enter your session type: "
+           - Print: "Please enter a command admin: "
            - File: [TODO: after filled everything out]
   
   Scenario: Verify transfer can be done with re-enabled accounts
@@ -186,7 +193,8 @@ Test Cases
         10.00
         logout
   Expected Result: Bran Bob is enabled & 10.00 is transferred back and forth between him and John Doe.
-  Expected Output: - Print: [TODO: after filled everything out]
+  Expected Output: - Print: "Please enter your session type: "
+           - Print: "Please enter a command admin: "
            - File: [TODO: after filled everything out]
   
              
@@ -259,7 +267,9 @@ Test Cases
            - Print: "Please enter the account number: "
            - Print: "Error, account specificed is not a valid account."
            - File: No change.
-  Expected Output: - Print: [TODO: after filled everything out]
+  Expected Output: - Print: "Please enter your session type: "
+           - Print: "Please enter a login name: "
+           - Print: "Please enter a command user: "
            - File: [TODO: after filled everything out]
   
   Scenario: Verify negative dollars input is rejected
@@ -275,7 +285,8 @@ Test Cases
         logout
         [TODO]
   Expected Result: Admin is informed that negative values are invalid. [TODO]
-  Expected Output: - Print: [TODO: after filled everything out]
+  Expected Output: - Print: "Please enter your session type: "
+           - Print: "Please enter a command admin: "
          - File: [TODO: after filled everything out]
            
   Scenario: Verify input dollars of $0 is rejected
@@ -292,6 +303,9 @@ Test Cases
         [TODO]
   Expected Result: Admin is informed that zero values are invalid. [TODO]
   Expected Output: - Print: [TODO: after filled everything out]
+  Expected Output: - Print: "Please enter your session type: "
+           - Print: "Please enter a login name: "
+           - Print: "Please enter a command user: "
          - File: [TODO: after filled everything out]
   
   Scenario: Verify that only #####.## number of decimals is accepted
@@ -350,6 +364,9 @@ Test Cases
   Expected Result: User is informed that their number doesn't make sense.
   Expected Result: User is informed that the incorrect number of zeroes
   following decimal was used.
+  Expected Output: - Print: "Please enter your session type: "
+           - Print: "Please enter a login name: "
+           - Print: "Please enter a command user: "
   Expected Output: - Print: [TODO: after filled everything out]
          - File: [TODO: after filled everything out]
   
@@ -381,6 +398,9 @@ Test Cases
   Expected Result: User is informed that dollar signs are not acceptable.
   Expected Result: User is informed that dollar signs are not acceptable.
   Expected Result: User is reminded to use . to represent decimal
+  Expected Output: - Print: "Please enter your session type: "
+           - Print: "Please enter a login name: "
+           - Print: "Please enter a command user: "
   Expected Output: - Print: [TODO: after filled everything out]
          - File: "No change"
   
@@ -395,6 +415,9 @@ Test Cases
         5 00
         logout
   Expected Result: User is informed not to put spaces between their numbers.
+  Expected Output: - Print: "Please enter your session type: "
+           - Print: "Please enter a login name: "
+           - Print: "Please enter a command user: "
   Expected Output: - Print: [TODO: after filled everything out]
          - File: "No change"
   
@@ -409,6 +432,9 @@ Test Cases
         5.00
         logout
   Expected Result: Transaction occurs successfully
+  Expected Output: - Print: "Please enter your session type: "
+           - Print: "Please enter a login name: "
+           - Print: "Please enter a command user: "
   Expected Output - Print: [TODO: after filled everything out]
          - File: [TODO: same]
   
@@ -432,6 +458,9 @@ Test Cases
   Expected Result: User is informed that only canadian bill values are
       acceptable.
   Expected Result: user is informed only canadian dollar values are acceptable
+  Expected Output: - Print: "Please enter your session type: "
+           - Print: "Please enter a login name: "
+           - Print: "Please enter a command user: "
   Expected Output: - Print: [TODO: after filled everything out]
          - File: "No change"
   
@@ -447,6 +476,9 @@ Test Cases
         5.00
         logout
   Expected Result: user successfully withdraws 5.00
+  Expected Output: - Print: "Please enter your session type: "
+           - Print: "Please enter a login name: "
+           - Print: "Please enter a command user: "
   Expected Output: - Print: [TODO: after filled everything out]
          - File: [TODO: samesies]
   
