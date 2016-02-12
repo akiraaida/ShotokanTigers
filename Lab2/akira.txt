@@ -18,7 +18,10 @@ Change Plan
 					 - Print: "Error, account specificed is not a valid account."
 					 - File: 10 admin                00000 00000000 A 
 					 - File: 00 admin                00000 00000000   
-	Files: chng000.in
+	Files: 
+	chng000.in
+	chng000.out
+	chng000.trans
 
 2.	Scenario: Verify account holder's name and account number correspond with each other (Correct name, incorrect number).
 	Test Step: Admin enters a correct account holder's name but incorrect account number.
@@ -37,8 +40,11 @@ Change Plan
 					 - Print: "Error, account specificed is not a valid account."
 					 - File: 10 admin                00000 00000000 A 
 					 - File: 00                      00000 00000000   
-	Files: chng001.in
-	
+	Files: 
+	chng001.in
+	chng001.out
+	chng001.trans	
+
 3.	Scenario: Verify account holder's name and account number correspond with each other (Correct name, correct number but not matching).
 	Test Step: Admin enters a correct account holder and correct account number but they do not correspond to each other.
 	Test Input: 
@@ -56,7 +62,10 @@ Change Plan
 					 - Print: "Error, account specificed is not a valid account."
 					 - File: 10 admin                00000 00000000 A 
 					 - File: 00                      00000 00000000   
-	Files: chng002.in
+	Files: 
+	chng002.in
+	chng002.out
+	chng002.trans
 	
 4.	Scenario: Verify admin can change an account from SP (student) to NP (non-student). 
 	Test Step: Admin enters a correct account holder, correct account number and they do correspond to each other.
@@ -76,7 +85,10 @@ Change Plan
 					 - File: 10 admin                00000 00000000 A 
 					 - File: 08 John Doe             12345 00000000   
 					 - File: 00                      00000 00000000   
-	Files: chng003.in
+	Files: 
+	chng003.in
+	chng003.out
+	chng003.trans
 
 5.	Scenario: Verify admin can change an account from NP (non-student) to SP (student). 
 	Test Step: Admin enters a correct account holder, correct account number and they do correspond to each other.
@@ -96,8 +108,11 @@ Change Plan
 					 - File: 10 admin                00000 00000000 A 
 					 - File: 08 Matt Cow             12346 00000000   
 					 - File: 00                      00000 00000000   
-					 - File: 00                      00000 00000000   
-	Files: chng004.in
+
+	Files: 
+	chng004.in
+	chng004.out
+	chng004.trans
 
 6.	Scenario: Verify normal users can not access the changeplan feature.
 	Test Step: Normal user attempts to use the changeplan feature.
@@ -115,7 +130,10 @@ Change Plan
 					 - File: 10 John Doe             00000 00000000 S 
 					 - File: 00                      00000 00000000   
 					 - File: 00                      00000 00000000   
-	Files: chng005.in
+	Files: 
+	chng005.in
+	chng005.out
+	chng005.trans
 	
 Disable
 ==========
@@ -137,8 +155,10 @@ Disable
 					 - Print: "Error, account specificed is not a valid account."
 					 - File: 10 admin                00000 00000000 A 
 					 - File: 00                      00000 00000000   
-					 - File: 00                      00000 00000000   
-	Files: dsbl000.in
+	Files: 
+	dsbl000.in
+	dsbl000.out
+	dsbl000.trans
 	
 8.	Scenario: Verify account holder's name and account number correspond with each other (Correct name, incorrect number).
 	Test Step: Admin enters a correct account holder's name but incorrect account number.
@@ -156,7 +176,6 @@ Disable
 					 - Print: "Please enter the account number: "
 					 - Print: "Error, account specificed is not a valid account."
 					 - File: 10 admin                00000 00000000 A 
-					 - File: 00                      00000 00000000   
 					 - File: 00                      00000 00000000   
 	Files: dsbl001.in
 	
@@ -176,7 +195,6 @@ Disable
 					 - Print: "Please enter the account number: "
 					 - Print: "Error, account specificed is not a valid account."
 					 - File: 10 admin                00000 00000000 A 
-					 - File: 00                      00000 00000000   
 					 - File: 00                      00000 00000000   
 	Files: dsbl002.in
 
