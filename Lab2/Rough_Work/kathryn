@@ -297,6 +297,7 @@ Test Cases
 	Withdrawal - Kathryn
 	================
   [* Login/logout issues covered elsewhere?]
+	[with000]
   Scenario: Verify account holder's name and account number correspond with each other (Incorrect name, correct number).
   Test Step: Admin enters an incorrect account holder's name but correct account number.
   Test Input:
@@ -315,6 +316,7 @@ Test Cases
            - File: "10 admin                00000 00000000 A "
 					 - File: "00                      00000 00000000 00"
 
+  [with001]
   Scenario: Verify that not existing numbers are not accepted by withdrawal (Correct name, incorrect number)
   Test Step: Admin enters a correct account holder's name but incorrect account number.
       Next, Logged in user enters an incorrect number.
@@ -340,6 +342,7 @@ Test Cases
           - Print: [TODO: after filled everything out]
          - File: [TODO: after filled everything out]
 
+  [with002]
   Scenario: Verify that only numbers belonging to the name can be used
   Test Step: Admin enters a correct account holder and correct account number but they do not correspond to each other.
   Test Step: Logged in user enters a number to an account that does not belong to them.
@@ -368,7 +371,7 @@ Test Cases
            - Print: "Please enter a login name: "
            - Print: "Please enter a command user: "
            - File: [TODO: after filled everything out]
-
+  [with003]
   Scenario: Verify negative dollars input is rejected
   Test Step: Try to enter a negative value as an admin.
   Test Step: Try to enter a negative value as a user
@@ -385,7 +388,7 @@ Test Cases
   Expected Output: - Print: "Please enter your session type: "
            - Print: "Please enter a command admin: "
          - File: [TODO: after filled everything out]
-
+  [with004]
   Scenario: Verify input dollars of $0 is rejected
   Test Step: Try to enter a zero value as an admin.
   Test Step: Try to enter a negative value as a user
@@ -404,7 +407,7 @@ Test Cases
            - Print: "Please enter a login name: "
            - Print: "Please enter a command user: "
          - File: [TODO: after filled everything out]
-
+  [with005]
   Scenario: Verify that only #####.## number of decimals is accepted
   Test Step: Try to enter an excessive value as a user.
   Test Step: Try to enter a truncated decimal as a user.
@@ -467,6 +470,7 @@ Test Cases
   Expected Output: - Print: [TODO: after filled everything out]
          - File: [TODO: after filled everything out]
 
+  [with006]
   Scenario: Verrify forbidden symbols are not accepted.
   Test Step: Try to enter a number with preceding dollar sign.
   Test Step: Try to enter a number with trailing dollar sign.
@@ -501,7 +505,7 @@ Test Cases
   Expected Output: - Print: [TODO: after filled everything out]
          - File: "No change"
 
-
+  [with007]
   Scenario: Verify withdrawal input of ###### ## is rejected
   Test Step: Try to enter a number with space delimiters.
   Test Input:
@@ -518,7 +522,7 @@ Test Cases
   Expected Output: - Print: [TODO: after filled everything out]
          - File: "No change"
 
-
+  [with008]
   Scenario: Verify withdrawal input of ######.## (legit) is accepted
   Test Step: Enter a number like 5.00
   Test Input:
@@ -534,7 +538,7 @@ Test Cases
            - Print: "Please enter a command user: "
   Expected Output - Print: [TODO: after filled everything out]
          - File: [TODO: same]
-
+  [with009]
   Scenario: Verify only canadian bill values are allowed
   Test Step: Enter a number like 4.99
   Test Step: Try to withdraw 7.00
@@ -562,7 +566,7 @@ Test Cases
          - File: "No change"
 
 
-
+  [with010]
   Scenario: Verify dollar value of $5 is accepted
   Test Step: Try to withdraw 5.00 in user mode
   Test Input:
@@ -579,6 +583,7 @@ Test Cases
   Expected Output: - Print: [TODO: after filled everything out]
          - File: [TODO: samesies]
 
+  [with011]
   Scenario: Verify composite dollar value (mixed bills) is accepted
   Test Step: Try to withdraw 15.00
   Test Input:
@@ -591,7 +596,7 @@ Test Cases
   Expected Result: user successfully withdraws 15.00
   Expected Output: - Print: [TODO: after filled everything out]
          - File: [TODO: samesies]
-
+  [with012]
   Scenario: Verify single account withdraw limit cannot be exceeded
   Test Step: Try to withdraw 505.00 in user mode
   Test Step: Try to withdraw 100.00 then 400.00 in user mode
@@ -600,12 +605,14 @@ Test Cases
   Expected Result:
   Expected Output: [TODO: after things are filled out]
 
+	[with013]
   Scenario: Verify withdrawal transaction fee is applied for standard & are applied for several calls
   Test Step: Try to withdraw [TODO: make 2 of these for student & standard plan uggh]
   Test Input:
   Expected Result:
   Expected Output: [TODO: after things are filled out]
 
+  [with014]
   Scenario: Verify account limits are separate
   Test Step: Withdraw $200 from one, $100 from another
   Test Step: Withdraw $200 from one, $400 from another
@@ -614,18 +621,21 @@ Test Cases
   Expected Result:
   Expected Output: [TODO: after things are filled out]
 
+  [with015]
   Scenario: Verify single account withdraw limit for admins doesn't apply
   Test Step: As admin, withdraw $600.00
   Test Input: [TODO: invent a rich prince]
   Expected Result:
   Expected Output: [TODO: after things are filled out]
 
+  [with016]
   Scenario: Verify single account withdraw limit for admins does not incur transaction fee
   Test Step: [TODO: make 2 of these for student & standard plan uggh]
   Test Input:
   Expected Result:
   Expected Output: [TODO: after things are filled out]
 
+  [with017]
   Scenario: Verify admin withdrawals do not conflict with user's withdrawal limit
   Test Step: Withdraw $600 from admin then $100 as user
   Test Step: Withdraw $400 as user and $200 as admin
@@ -633,18 +643,21 @@ Test Cases
   Expected Result:
   Expected Output: [TODO: after things are filled out]
 
+  [with018]
   Scenario: Verify withdrawal with resulting zero balance is accepted
   Test Step: [TODO: after transaction fees have been done (which they have been)]]
   Test Input:
   Expected Result:
   Expected Output: [TODO: after things are filled out]
 
+  [with019]
   Scenario: Verify withdrawal with resulting negative balance is rejected
   Test Step: Withdraw $1 more than balance (within transaction limit)
   Test Input:
   Expected Result:
   Expected Output: [TODO: after things are filled out]
 
+  [with020]
   Scenario: Verify that previous transaction fees are factored into balance calculations
   Test Step: Verify withdrawal with resulting negative balance accounts is rejected (for previous transaction fee from previous withdrawal)
   Test Step: Verify withdrawal with resulting negative balance accounts is rejected (for previous transaction fee from previous transfer)
@@ -654,18 +667,21 @@ Test Cases
   Expected Result:
   Expected Output: [TODO: after things are filled out]
 
+  [with021]
   Scenario: Verify transaction fees are applied to only successful withdrawals
   Test Step: Do 5 withdrawals, last of which will fail.
   Test Input:
   Expected Result: 4 moneies and 4 transaction fees are removed.
   Expected Output:
 
+  [with022]
   Scenario: Verify transaction fees are applied for multiple calls
   Test Step: Do 5 withdrawals, leaving a positive balance.
   Test Input:
   Expected Result: 5 monies and 5 transaction fees are applied.
   Expected Output:
 
+  [with023]
   Scenario: Verify withdrawal for resulting negative balance is rejected (on last of multiple calls)
   Test Step: withdraw $100 then above balance
   Test Input:
@@ -681,6 +697,7 @@ Test Cases
   Expected Result: $100 is withdrawn.
   Expected Output: [TODO: after everything is filled out]
 
+  [with024]
   Scenario: Verify withdrawal for resulting zero balance is accepted (on last of multiple calls)
   Test Step:
   [TODO: make 2 of these for student & standard plan? uggh]
@@ -688,6 +705,7 @@ Test Cases
   Expected Result:
   Expected Output: [TODO: after things are filled out]
 
+  [with025]
   Scenario: Verify withdrawal for resulting positive balance is accepted (on last of multiple calls)
   Test Step: withdraw multiple times leaving like a $50 buffer or something
   Test Input:
@@ -706,21 +724,21 @@ Test Cases
   Expected Result: $30 is withdrawn.
   Expected Output: [TODO: after everything is filled out.]
 
+  [with026]
   Scenario: Verify withdrawal for resulting negative balance is rejected (over multiple sessions)
   Test Step: [TODO: after corresponding above is fine]
   Test Input:
   Expected Result:
   Expected Output: [TODO: after things are filled out]
 
+  [with027]
   Scenario: Verify withdrawal for resulting zero balance is rejected (over multiple sessions)
   Test Step: [TODO: after corresponding above is fine]
   Test Input:
   Expected Result:
   Expected Output: [TODO: after things are filled out]
 
-  { [TODO: ]
-
-
+  [with028]
   Scenario: Verify withdrawals cannot result in a negative balance
   Test Step: [TODO: after corresponding above is fine]
   Test Step: withdraw like $1 over balance
@@ -736,6 +754,7 @@ Test Cases
   Expected Result:
   Expected Output: [TODO: after things are filled out]
 
+  [with029]
   Scenario: Verify withdrawal for resulting positive or zero balance is accepted
   Test Step: Verify withdrawal for resulting positive balance is accepted (over multiple sessions)
   Test Step: Verify withdrawal for resulting zero balance is accepted (after session as different user)
@@ -762,7 +781,7 @@ Test Cases
 	================
   [* Login/logout issues covered elsewhere?]
   [* CP most from withdraw ]
-
+  [payb000]
   Scenario: Verify the canon companies are accepted
   Test Step: pay a bill to Bright Light Electric Company as user
   Test Step: pay a bill to Credit Card Company Q as user
@@ -774,6 +793,7 @@ Test Cases
   Expected Result:
   Expected Output: [TODO: after things are filled out]
 
+  [payb001]
   Scenario: Verify invalid company names are not accepted
   Test Step: try to pay a bill to BS as user
   Test Step: try to pay a bill to SBS as user
@@ -798,6 +818,7 @@ Test Cases
   [* Login/logout issues covered elsewhere?]
   [* CP most from withdraw ]
 
+  [depo000]
   { [TODO: Verify deposited funds have gone into the ether]
   Scenario: Verify deposited funds cannot be withdrawn
   Test Step: put in balance and then withdraw previous balance + 1 as user
