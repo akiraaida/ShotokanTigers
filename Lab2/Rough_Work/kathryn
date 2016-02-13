@@ -7,7 +7,8 @@ Notes:
 - Enter 'your' account number?
 	- & 'Please' consistency
 	- & New balance consistency
-	
+- typo on specified
+
 Test Cases
 
 	Enable - Kathryn
@@ -28,19 +29,11 @@ Test Cases
   Expected Result: The command is rejected.
 
   [enab003]
-  Scenario: Verify account holder's name and account number correspond with each other (Incorrect name, correct number).
+  Scenario: Verify account holder's name and account number correspond with each other
   Test Step: Admin enters an incorrect account holder's name but correct account number.
-  Expected Result: The admin is notified the account is not valid.
-
-  [enab004]
-  Scenario: Verify account holder's name and account number correspond with each other (Correct name, incorrect number).
-  Test Step: Admin enters a correct account holder's name but incorrect account number.
-  Expected Result: The admin is notified the account is not valid.
-
-	[enab005]
-  Scenario: Verify account holder's name and account number correspond with each other (Correct name, correct number but not matching).
-  Test Step: Admin enters a correct account holder and correct account number but they do not correspond to each other.
-  Expected Result: The admin is notified the account is not valid.
+		  			 Admin enters a correct account holder's name but incorrect account number. (Correct name, incorrect number).
+	           Admin enters a correct account holder's name but incorrect account number. (Correct name, correct number but not matching).
+  Expected Result: The admin is notified the account is not valid.s
 
   [enab006]
   Scenario: Verify user withdraw transaction can now be done to a re-enabled account.
