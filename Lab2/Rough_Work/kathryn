@@ -5,22 +5,7 @@ Test Cases
 	[enab000]
   Scenario: Verify disabled account is then enabled
   Test Step: Admin enables an account which is disabled.
-  Test Input:
-        login
-        admin
-        enable
-        Bran Bob
-        12347
-        logout
   Expected result: Command is accepted.
-  Expected Output: - Print: "Please enter your session type: "
-           - Print: "Please enter a command admin: "
-           - Print: "Please enter the account holder's name: "
-           - Print: "Please enter the account number: "
-           - Print: "Success, Bran Bob's account is now enabled."
-           - File: "10 admin                00000 00000000 A "
-           - File: "09 Bran Bob             12347 00000000 00"
-					 - File: "00 admin                00000 00000000 00"
 
 	[enab001]
   Scenario: Verify only disabled accounts may be enabled.
