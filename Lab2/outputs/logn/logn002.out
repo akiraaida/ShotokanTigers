@@ -1,3 +1,9 @@
 Please enter your session type: 
 Please enter a login name: 
-Bob Stevenson you don’t seem to have an account please contact the administrator to have an account setup.
+Please enter a command user: 
+Invalid command please enter a valid command
+Please enter your session type: 
+Please enter a command admin: 
+Please enter account holder’s name: 
+Please enter the account number: 
+Success, John Doe's account is now disabled.
