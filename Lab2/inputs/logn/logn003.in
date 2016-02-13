@@ -1,11 +1,10 @@
-login
-standard
-John Doe
+withdrawal
+transfer
+paybill
+deposit
+create
+delete
 disable
-logout
-login
-admin
-disable
-John Doe
-12345
+enable
+changeplan
 logout

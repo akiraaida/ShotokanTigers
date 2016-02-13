@@ -26,7 +26,7 @@ Login
 	Test Input: 
 			    login
 			    standard
-			    Bob Stevenson				
+			    Bob Cool				
 	Expected Result: The user is notified that they do not have a valid account and must speak to an admin before being able to login in. 
 	Expected Output: - Print: "Please enter your session type: "
 			   		 - Print: "Please enter your name: "
