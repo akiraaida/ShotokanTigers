@@ -1,0 +1,819 @@
+Test Cases
+
+	Enable - Kathryn
+	================
+  Scenario: Verify disabled account is then enabled
+  Test Step: Admin enables an account which is disabled.
+  Test Input:
+        login
+        admin
+        enable
+        Bran Bob
+        12347
+        logout
+  Expected result: Command is accepted.
+  Expected Output: - Print: "Please enter your session type: "
+           - Print: "Please enter a command admin: "
+           - Print: "Please enter the account holder's name: "
+           - Print: "Please enter the account number: "
+           - Print: "Success, Bran Bob's account is now enabled."
+           - File: "10 admin                00000 00000000 A "
+           - File: "09 Bran Bob             12347 00000000 00"
+					 - File: "00 admin                00000 00000000 00"
+
+  Scenario: Verify only disabled accounts may be enabled.
+  Test Step: Admin enables an enabled account.
+  Test Input:
+        login
+        admin
+        enable
+        John Doe
+        12345
+        logout
+  Expected Result: Command is rejected.
+  Expected Output: - Print: "Please enter your session type: "
+           - Print: "Please enter a command admin: "
+           - Print: "Please enter the account holder's name: "
+           - Print: "Please enter the account number: "
+           - Print: "Error, account specified is already active."
+           - File: "10 admin                00000 00000000 A "
+					 - File: "00                      00000 00000000 00"
+
+  Scenario: Verify normal users can not access the enable feature.
+  Test Step: Normal user attempts to use the enable feature.
+  Test Input:
+        login
+        standard
+        John Doe
+        enable
+        logout
+  Expected Result: The command is rejected.
+  Expected Output: - Print: "Please enter your session type: "
+           - Print: "Please enter a login name: "
+           - Print: "Please enter a command user: "
+           - Print: "Error, you do not have the correct privileges to access this feature."
+           - File: "10 John Doe             00000 00000000 S "
+					 - File: "00                      00000 00000000 00"
+
+  Scenario: Verify account holder's name and account number correspond with each other (Incorrect name, correct number).
+  Test Step: Admin enters an incorrect account holder's name but correct account number.
+  Test Input:
+        login
+        admin
+        enable
+        Bob Stevenson
+        12345
+        logout
+  Expected Result: The admin is notified the account is not valid.
+  Expected Output: - Print: "Please enter your session type: "
+           - Print: "Please enter a command admin: "
+           - Print: "Please enter the account holder's name: "
+           - Print: "Please enter the account number: "
+           - Print: "Error, account specificed is not a valid account."
+           - File: "10 admin                00000 00000000 A "
+					 - File: "00                      00000 00000000 00"
+
+
+  Scenario: Verify account holder's name and account number correspond with each other (Correct name, incorrect number).
+  Test Step: Admin enters a correct account holder's name but incorrect account number.
+  Test Input:
+        login
+        admin
+        enable
+        Bran Bob
+        11111
+        logout
+  Expected Result: The admin is notified the account is not valid.
+  Expected Output: - Print: "Please enter your session type: "
+           - Print: "Please enter a command admin: "
+           - Print: "Please enter the account holder's name: "
+           - Print: "Please enter the account number: "
+           - Print: "Error, account specificed is not a valid account."
+           - File: "10 admin                00000 00000000 A "
+					 - File: "00                      00000 00000000 00"
+
+  Scenario: Verify account holder's name and account number correspond with each other (Correct name, correct number but not matching).
+  Test Step: Admin enters a correct account holder and correct account number but they do not correspond to each other.
+  Test Input:
+        login
+        admin
+        enable
+        Bran Bob
+        12346
+        logout
+  Expected Result: The admin is notified the account is not valid.
+  Expected Output: - Print: "Please enter your session type: "
+           - Print: "Please enter a command admin: "
+           - Print: "Please enter the account holder's name: "
+           - Print: "Please enter the account number: "
+           - Print: "Error, account specificed is not a valid account."
+           - File: "10 admin                00000 00000000 A "
+					 - File: "00                      00000 00000000 00"
+
+
+  Scenario: Verify user withdraw transaction can now be done to a re-enabled account.
+  Test Step: Admin enables an account and then performs admin & standard withdraw.
+  Test Input:
+        login
+        admin
+        enable
+        Bran Bob
+        12347
+        withdraw
+        Bran Bob
+        12347
+        5.00
+        logout
+        login
+        standard
+        Bran Bob
+        withdraw
+        12347
+        5.00
+        logout
+  Expected Result: 10 dollars is withdrawn.
+  Expected Output: - Print: "Please enter your session type: "
+           - Print: "Please enter a command admin: "
+           - Print: "Please enter the account holder's name: "
+           - Print: "Please enter the account number: "
+           - Print: "Success, Bran Bob's account is now enabled."
+           - Print: "Please enter the account holder's name: "
+           - Print: "Please enter the account number: "
+           - Print: "Please enter value to withdraw: "
+           - Print: "Success, 5.00 has been withdrawn."
+           - Print: "New Balance:"
+           - Print: "105.00"
+           - Print: "Please enter your session type: "
+           - Print: "Please enter a login name: "
+           - Print: "Please enter a command user: "
+           - Print: "Please enter the account number: "
+           - Print: "Please enter value to withdraw: "
+           - Print: "Success, 5.00 has been withdrawn."
+           - Print: "New Balance:"
+           - Print: "99.90"
+           - File: "10 admin                00000 00000000 A "
+           - File: "09 Bran Bob             12347 00000000 00"
+           - File: "01 Bran Bob             12347 00005.00 00"
+					 - File: "00                      00000 00000000 00"
+           - File: "10 Bran Bob             00000 00000000 S "
+           - File: "01 Bran Bob             12347 00005.00 00"
+           - File: "01 Bran Bob             12347 00000.10 00"
+					 - File: "00                      00000 00000000 00"
+
+  Scenario: Verify user deposit transaction can now be done to a re-enabled account.
+  Test Step: Admin enables an account and then performs a deposit. Then, user logs in and makes a deposit.
+  Test Input:
+        login
+        admin
+        enable
+        Bran Bob
+        12347
+        deposit
+        Bran Bob
+        12347
+        5.00
+        logout
+        login
+        standard
+        Bran Bob
+        deposit
+        12347
+        5.00
+        logout
+  Expected Result: 5 dollars is added to the account.
+  Expected Output: - Print: "Please enter your session type: "
+           - Print: "Please enter a command admin: "
+           - Print: "Please enter the account holder's name: "
+           - Print: "Please enter the account number: "
+           - Print: "Success, Bran Bob's account is now enabled."
+           - Print: "Please enter the account holder's name: "
+           - Print: "Please enter the account number: "
+           - Print: "Please enter value to deposit: "
+           - Print: "Success, 5.00 has been deposited."
+           - Print: "New Balance:"
+           - Print: "115.00"
+           - Print: "Please enter your session type: "
+           - Print: "Please enter a login name: "
+           - Print: "Please enter a command user: "
+           - Print: "Please enter the account number: "
+           - Print: "Please enter value to deposit: "
+           - Print: "Success, 5.00 has been deposited."
+           - Print: "New Balance:"
+           - Print: "119.90"
+           - File: "10 admin                00000 00000000 A "
+           - File: "09 Bran Bob             12347 00000000 00"
+           - File: "04 Bran Bob             12347 00005.00 00"
+					 - File: "00                      00000 00000000 00"
+           - File: "10 Bran Bob             00000 00000000 S "
+           - File: "04 Bran Bob             12347 00005.00 00"
+           - File: "01 Bran Bob             12347 00000.10 00"
+					 - File: "00                      00000 00000000 00"
+
+
+  Scenario: Verify user paybill transaction can now be done to a re-enabled account.
+  Test Step: Admin enables an account and then admin & standard pays a bill.
+  Test Input:
+        login
+        admin
+        enable
+        Bran Bob
+        12347
+        paybill
+        Bran Bob
+        12347
+        TV
+        5.00
+        logout
+        login
+        standard
+        Bran Bob
+        paybill
+        12347
+        TV
+        5.00
+  Expected Result: 10 dollars is paid to TV
+  Expected Output: - Print: "Please enter your session type: "
+           - Print: "Please enter a command admin: "
+           - Print: "Please enter the account holder's name: "
+           - Print: "Please enter the account number: "
+           - Print: "Success, Bran Bob's account is now enabled."
+           - Print: "Please enter the account holder's name: "
+           - Print: "Please enter the account number: "
+           - Print: "Please enter a billing recipient: "
+           - Print: "Please enter value to pay: "
+           - Print: "Success, 5.00 has been paid to TV."
+           - Print: "New Balance:"
+           - Print: "105.00"
+           - Print: "Please enter your session type: "
+           - Print: "Please enter a login name: "
+           - Print: "Please enter a command user: "
+           - Print: "Please enter the account number: "
+           - Print: "Please enter a billing recipient: "
+           - Print: "Please enter value to pay: "
+           - Print: "Success, 5.00 has been paid to TV."
+           - Print: "New Balance:"
+           - Print: "99.90"
+           - File: "10 admin                00000 00000000 A "
+           - File: "09 Bran Bob             12347 00000000 00"
+           - File: "03 Bran Bob             12347 00005.00 00"
+					 - File: "00                      00000 00000000 00"
+           - File: "10 Bran Bob             00000 00000000 S "
+           - File: "03 Bran Bob             12347 00005.00 00"
+           - File: "01 Bran Bob             12347 00000.10 00"
+					 - File: "00                      00000 00000000 00"
+
+  Scenario: Verify transfer can be done with re-enabled accounts
+  Test Step: Admin enables an account, then transfers money to it.
+      Next, admin enables an account, then has money transferred from it.
+  Test Input:
+        login
+        admin
+        enable
+        Bran Bob
+        12347
+        transfer
+        John Doe
+        12345
+        12347
+        10.0
+        transfer
+        Bran Bob
+        12347
+        12345
+        10.00
+        logout
+  Expected Result: Bran Bob is enabled & 10.00 is transferred back and forth between him and John Doe.
+  Expected Output: - Print: "Please enter your session type: "
+           - Print: "Please enter a command admin: "
+           - File: [TODO: after filled everything out]
+
+
+	Withdrawal - Kathryn
+	================
+  [* Login/logout issues covered elsewhere?]
+  Scenario: Verify account holder's name and account number correspond with each other (Incorrect name, correct number).
+  Test Step: Admin enters an incorrect account holder's name but correct account number.
+  Test Input:
+        login
+        admin
+        withdrawal
+        Bob Stevenson
+        12345
+        logout
+  Expected Result: The admin is notified the account is not valid.
+  Expected Output: - Print: "Please enter your session type: "
+           - Print: "Please enter a command admin: "
+           - Print: "Please enter the account holder's name: "
+           - Print: "Please enter the account number: "
+           - Print: "Error, account specificed is not a valid account."
+           - File: "10 admin                00000 00000000 A "
+					 - File: "00                      00000 00000000 00"
+
+  Scenario: Verify that not existing numbers are not accepted by withdrawal (Correct name, incorrect number)
+  Test Step: Admin enters a correct account holder's name but incorrect account number.
+      Next, Logged in user enters an incorrect number.
+  Test Input:
+        login
+        admin
+        withdrawal
+        Bran Bob
+        11111
+        logout
+        login
+        Bran Bob
+        withdrawal
+        12340
+        logout
+  Expected Result: The account number is rejected for both admin & user
+  Expected Output: - Print: "Please enter your session type: "
+           - Print: "Please enter a command admin: "
+           - Print: "Please enter the account holder's name: "
+           - Print: "Please enter the account number: "
+           - Print: "Error, account specificed is not a valid account."
+           - File: No change.
+          - Print: [TODO: after filled everything out]
+         - File: [TODO: after filled everything out]
+
+  Scenario: Verify that only numbers belonging to the name can be used
+  Test Step: Admin enters a correct account holder and correct account number but they do not correspond to each other.
+  Test Step: Logged in user enters a number to an account that does not belong to them.
+  Test Input:
+        login
+        admin
+        withdrawal
+        Bran Bob
+        12346
+        logout
+  Test Input:
+        login
+        John Doe
+        withdrawal
+        12347
+        logout
+  Expected Result: The admin is notified the account is not valid.
+  Expected Result: The account number is rejected. [Note: should be identical to nonexistent account]
+  Expected Output: - Print: "Please enter your session type: "
+           - Print: "Please enter a command admin: "
+           - Print: "Please enter the account holder's name: "
+           - Print: "Please enter the account number: "
+           - Print: "Error, account specificed is not a valid account."
+           - File: No change.
+  Expected Output: - Print: "Please enter your session type: "
+           - Print: "Please enter a login name: "
+           - Print: "Please enter a command user: "
+           - File: [TODO: after filled everything out]
+
+  Scenario: Verify negative dollars input is rejected
+  Test Step: Try to enter a negative value as an admin.
+  Test Step: Try to enter a negative value as a user
+  Test Input:
+        login
+        admin
+        withdrawal
+        John Doe
+        12345
+        -40.00
+        logout
+        [TODO]
+  Expected Result: Admin is informed that negative values are invalid. [TODO]
+  Expected Output: - Print: "Please enter your session type: "
+           - Print: "Please enter a command admin: "
+         - File: [TODO: after filled everything out]
+
+  Scenario: Verify input dollars of $0 is rejected
+  Test Step: Try to enter a zero value as an admin.
+  Test Step: Try to enter a negative value as a user
+  Test Input:
+        login
+        admin
+        withdrawal
+        John Doe
+        12345
+        0.00
+        logout
+        [TODO]
+  Expected Result: Admin is informed that zero values are invalid. [TODO]
+  Expected Output: - Print: [TODO: after filled everything out]
+  Expected Output: - Print: "Please enter your session type: "
+           - Print: "Please enter a login name: "
+           - Print: "Please enter a command user: "
+         - File: [TODO: after filled everything out]
+
+  Scenario: Verify that only #####.## number of decimals is accepted
+  Test Step: Try to enter an excessive value as a user.
+  Test Step: Try to enter a truncated decimal as a user.
+  Test Step: Try to enter a number without a decimal point as a user
+  Test Step: Try to enter a number with 3 fractional parts
+  Test Step: Enter a number with preceding zeroes.
+  Test Step: Enter a number like 5.0
+  Test Input:
+        login
+        John Doe
+        withdrawal
+        12345
+        654321.00
+        logout
+  Test Input:
+        login
+        John Doe
+        withdrawal
+        12345
+        .50
+        logout
+  Test Input:
+        login
+        John Doe
+        withdrawal
+        12345
+        5
+        logout
+  Test Input:
+        login
+        John Doe
+        withdrawal
+        12345
+        5.000
+        logout
+  Test Input:
+        login
+        John Doe
+        withdrawal
+        12345
+        00005.00
+        logout
+  Test Input:
+        login
+        John Doe
+        withdrawal
+        12345
+        5.0
+        logout
+  Expected Result: User is informed that their format is invalid.
+  Expected Result: User is informed that their format is invalid.
+  Expected Result: User is reminded to only use 2 fineness.
+  Expected Result: User is informed that a decimal point is required.
+  Expected Result: User is informed that their number doesn't make sense.
+  Expected Result: User is informed that the incorrect number of zeroes
+  following decimal was used.
+  Expected Output: - Print: "Please enter your session type: "
+           - Print: "Please enter a login name: "
+           - Print: "Please enter a command user: "
+  Expected Output: - Print: [TODO: after filled everything out]
+         - File: [TODO: after filled everything out]
+
+  Scenario: Verrify forbidden symbols are not accepted.
+  Test Step: Try to enter a number with preceding dollar sign.
+  Test Step: Try to enter a number with trailing dollar sign.
+  Test Step: Try to enter a number with comma delimiters.
+  Test Input:
+        login
+        John Doe
+        withdrawal
+        12345
+        $5.00
+        logout
+  Test Input:
+        login
+        John Doe
+        withdrawal
+        12345
+        5.00$
+        logout
+  Test Input:
+        login
+        John Doe
+        withdrawal
+        12345
+        5,00
+        logout
+  Expected Result: User is informed that dollar signs are not acceptable.
+  Expected Result: User is informed that dollar signs are not acceptable.
+  Expected Result: User is reminded to use . to represent decimal
+  Expected Output: - Print: "Please enter your session type: "
+           - Print: "Please enter a login name: "
+           - Print: "Please enter a command user: "
+  Expected Output: - Print: [TODO: after filled everything out]
+         - File: "No change"
+
+
+  Scenario: Verify withdrawal input of ###### ## is rejected
+  Test Step: Try to enter a number with space delimiters.
+  Test Input:
+        login
+        John Doe
+        withdrawal
+        12345
+        5 00
+        logout
+  Expected Result: User is informed not to put spaces between their numbers.
+  Expected Output: - Print: "Please enter your session type: "
+           - Print: "Please enter a login name: "
+           - Print: "Please enter a command user: "
+  Expected Output: - Print: [TODO: after filled everything out]
+         - File: "No change"
+
+
+  Scenario: Verify withdrawal input of ######.## (legit) is accepted
+  Test Step: Enter a number like 5.00
+  Test Input:
+        login
+        John Doe
+        withdrawal
+        12345
+        5.00
+        logout
+  Expected Result: Transaction occurs successfully
+  Expected Output: - Print: "Please enter your session type: "
+           - Print: "Please enter a login name: "
+           - Print: "Please enter a command user: "
+  Expected Output - Print: [TODO: after filled everything out]
+         - File: [TODO: same]
+
+  Scenario: Verify only canadian bill values are allowed
+  Test Step: Enter a number like 4.99
+  Test Step: Try to withdraw 7.00
+  Test Input:
+        login
+        John Doe
+        withdrawal
+        12345
+        4.99
+        logout
+  Test Input
+        login
+        John Doe
+        withdrawal
+        12345
+        7.00
+        logout
+  Expected Result: User is informed that only canadian bill values are
+      acceptable.
+  Expected Result: user is informed only canadian dollar values are acceptable
+  Expected Output: - Print: "Please enter your session type: "
+           - Print: "Please enter a login name: "
+           - Print: "Please enter a command user: "
+  Expected Output: - Print: [TODO: after filled everything out]
+         - File: "No change"
+
+
+
+  Scenario: Verify dollar value of $5 is accepted
+  Test Step: Try to withdraw 5.00 in user mode
+  Test Input:
+        login
+        John Doe
+        withdrawal
+        12345
+        5.00
+        logout
+  Expected Result: user successfully withdraws 5.00
+  Expected Output: - Print: "Please enter your session type: "
+           - Print: "Please enter a login name: "
+           - Print: "Please enter a command user: "
+  Expected Output: - Print: [TODO: after filled everything out]
+         - File: [TODO: samesies]
+
+  Scenario: Verify composite dollar value (mixed bills) is accepted
+  Test Step: Try to withdraw 15.00
+  Test Input:
+        login
+        John Doe
+        withdrawal
+        12345
+        15.00
+        logout
+  Expected Result: user successfully withdraws 15.00
+  Expected Output: - Print: [TODO: after filled everything out]
+         - File: [TODO: samesies]
+
+  Scenario: Verify single account withdraw limit cannot be exceeded
+  Test Step: Try to withdraw 505.00 in user mode
+  Test Step: Try to withdraw 100.00 then 400.00 in user mode
+  Test Step: Login and withdraw twice, over limit
+  Test Input: [TODO: invent a rich prince]
+  Expected Result:
+  Expected Output: [TODO: after things are filled out]
+
+  Scenario: Verify withdrawal transaction fee is applied for standard & are applied for several calls
+  Test Step: Try to withdraw [TODO: make 2 of these for student & standard plan uggh]
+  Test Input:
+  Expected Result:
+  Expected Output: [TODO: after things are filled out]
+
+  Scenario: Verify account limits are separate
+  Test Step: Withdraw $200 from one, $100 from another
+  Test Step: Withdraw $200 from one, $400 from another
+  Test Step: Withdraw $600.0 from one acount, $400.0 from another
+  Test Input: [TODO: make a guy with 2 accounts]
+  Expected Result:
+  Expected Output: [TODO: after things are filled out]
+
+  Scenario: Verify single account withdraw limit for admins doesn't apply
+  Test Step: As admin, withdraw $600.00
+  Test Input: [TODO: invent a rich prince]
+  Expected Result:
+  Expected Output: [TODO: after things are filled out]
+
+  Scenario: Verify single account withdraw limit for admins does not incur transaction fee
+  Test Step: [TODO: make 2 of these for student & standard plan uggh]
+  Test Input:
+  Expected Result:
+  Expected Output: [TODO: after things are filled out]
+
+  Scenario: Verify admin withdrawals do not conflict with user's withdrawal limit
+  Test Step: Withdraw $600 from admin then $100 as user
+  Test Step: Withdraw $400 as user and $200 as admin
+  Test Input: [TODO: invent a rich prince]
+  Expected Result:
+  Expected Output: [TODO: after things are filled out]
+
+  Scenario: Verify withdrawal with resulting zero balance is accepted
+  Test Step: [TODO: after transaction fees have been done (which they have been)]]
+  Test Input:
+  Expected Result:
+  Expected Output: [TODO: after things are filled out]
+
+  Scenario: Verify withdrawal with resulting negative balance is rejected
+  Test Step: Withdraw $1 more than balance (within transaction limit)
+  Test Input:
+  Expected Result:
+  Expected Output: [TODO: after things are filled out]
+
+  Scenario: Verify that previous transaction fees are factored into balance calculations
+  Test Step: Verify withdrawal with resulting negative balance accounts is rejected (for previous transaction fee from previous withdrawal)
+  Test Step: Verify withdrawal with resulting negative balance accounts is rejected (for previous transaction fee from previous transfer)
+  Test Step: Verify withdrawal with resulting negative balance accounts is rejected (for previous transaction fee from previous paybill)
+  Test Step: Verify withdrawal with resulting negative balance accounts is rejected (for previous transaction fee from previous deposit)
+  Test Input:
+  Expected Result:
+  Expected Output: [TODO: after things are filled out]
+
+  Scenario: Verify transaction fees are applied to only successful withdrawals
+  Test Step: Do 5 withdrawals, last of which will fail.
+  Test Input:
+  Expected Result: 4 moneies and 4 transaction fees are removed.
+  Expected Output:
+
+  Scenario: Verify transaction fees are applied for multiple calls
+  Test Step: Do 5 withdrawals, leaving a positive balance.
+  Test Input:
+  Expected Result: 5 monies and 5 transaction fees are applied.
+  Expected Output:
+
+  Scenario: Verify withdrawal for resulting negative balance is rejected (on last of multiple calls)
+  Test Step: withdraw $100 then above balance
+  Test Input:
+          login
+          John Doe
+          withdrawal
+          12345
+          100.00
+          withdrawal
+          12345
+          11.00
+          logout
+  Expected Result: $100 is withdrawn.
+  Expected Output: [TODO: after everything is filled out]
+
+  Scenario: Verify withdrawal for resulting zero balance is accepted (on last of multiple calls)
+  Test Step:
+  [TODO: make 2 of these for student & standard plan? uggh]
+  Test Input:
+  Expected Result:
+  Expected Output: [TODO: after things are filled out]
+
+  Scenario: Verify withdrawal for resulting positive balance is accepted (on last of multiple calls)
+  Test Step: withdraw multiple times leaving like a $50 buffer or something
+  Test Input:
+          login
+          John Doe
+          withdrawal
+          12345
+          10.00
+          withdrawal
+          12345
+          10.00
+          withdrawal
+          12345
+          10.00
+          logout
+  Expected Result: $30 is withdrawn.
+  Expected Output: [TODO: after everything is filled out.]
+
+  Scenario: Verify withdrawal for resulting negative balance is rejected (over multiple sessions)
+  Test Step: [TODO: after corresponding above is fine]
+  Test Input:
+  Expected Result:
+  Expected Output: [TODO: after things are filled out]
+
+  Scenario: Verify withdrawal for resulting zero balance is rejected (over multiple sessions)
+  Test Step: [TODO: after corresponding above is fine]
+  Test Input:
+  Expected Result:
+  Expected Output: [TODO: after things are filled out]
+
+  { [TODO: ]
+
+
+  Scenario: Verify withdrawals cannot result in a negative balance
+  Test Step: [TODO: after corresponding above is fine]
+  Test Step: withdraw like $1 over balance
+  Test Input:
+          [TODO]
+          login
+          admin
+          withdrawal
+          John Doe
+          12345
+          111.00
+          logout
+  Expected Result:
+  Expected Output: [TODO: after things are filled out]
+
+  Scenario: Verify withdrawal for resulting positive or zero balance is accepted
+  Test Step: Verify withdrawal for resulting positive balance is accepted (over multiple sessions)
+  Test Step: Verify withdrawal for resulting zero balance is accepted (after session as different user)
+  Test Step: Verify withdrawal for resulting positive balance is accepted (after session as different user)
+  Test Step: Verify withdrawal for resulting zero balance is accepted (as admin)
+  Test Step: withdraw as admin with like $50 buffer
+  Test Input:
+          [TODO]
+          login
+          admin
+          withdrawal
+          John Doe
+          12345
+          5.00
+          logout
+  Test Input:
+  Expected Result: $5.00 is deducted.
+  Expected Result: [TODO]
+  Expected Output: [TODO: after things are filled out]
+
+
+
+	Paybill - Kathryn
+	================
+  [* Login/logout issues covered elsewhere?]
+  [* CP most from withdraw ]
+
+  Scenario: Verify the canon companies are accepted
+  Test Step: pay a bill to Bright Light Electric Company as user
+  Test Step: pay a bill to Credit Card Company Q as user
+  Test Step: pay a bill to Low Definition TV, inc as user
+  Test Step: pay a bill to Bright Light Electric Company as admin
+  Test Step: pay a bill to Credit Card Company Q as admin
+  Test Step: pay a bill to Low Definition TV, inc as admin
+  Test Input:
+  Expected Result:
+  Expected Output: [TODO: after things are filled out]
+
+  Scenario: Verify invalid company names are not accepted
+  Test Step: try to pay a bill to BS as user
+  Test Step: try to pay a bill to SBS as user
+  Test Step: try to pay a bill to S as user
+  Test Step: try to pay a bill to TVI as user
+  Test Step: try to pay a bill to BS as admin
+  Test Step: try to pay a bill to SBS as admin
+  Test Step: try to pay a bill to S as admin
+  Test Step: try to pay a bill to TVI as admin
+  Test Step: try to pay a bill to CE as user
+  Test Input:
+  Expected Result:
+  Expected Output: [TODO: after things are filled out]
+
+
+
+
+
+
+	Deposit - Kathryn
+	================
+  [* Login/logout issues covered elsewhere?]
+  [* CP most from withdraw ]
+
+  { [TODO: Verify deposited funds have gone into the ether]
+  Scenario: Verify deposited funds cannot be withdrawn
+  Test Step: put in balance and then withdraw previous balance + 1 as user
+  Test Input:
+  Expected Result:
+  Expected Output: [TODO: after things are filled out]
+
+  Scenario: Verify deposited funds cannot be used with paybill
+  Test Step: put in that amount up there and then pay a bill as user
+  Test Input:
+  Expected Result:
+  Expected Output: [TODO: after things are filled out]
+
+  Scenario: Verify deposited funds cannot be transferred from deposited account to account
+  Test Step: transfer it
+  Test Input:
+  Expected Result:
+  Expected Output: [TODO: after things are filled out]
+
+  Scenario: Verify deposited funds cannot be transferred from account to deposited account
+  Test Step: transfer it
+  Test Input:
+  Expected Result:
+  Expected Output: [TODO: after things are filled out]
+  }
