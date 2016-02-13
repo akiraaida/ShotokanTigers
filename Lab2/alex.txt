@@ -161,9 +161,9 @@ Login
 		    	     - File: 10 admin                00000 00000000 A 
 		    	     - File: 00                      00000 00000000   
 	Files: 
-	logt001.in
-	logt001.out
-	logt001.trans
+	logt000.in
+	logt000.out
+	logt000.trans
 
 	Transfer
 	================
@@ -186,9 +186,9 @@ Login
 		    		 - File: 10 John Doe          12345 00000000 S 
 		    	     - File: 00                   00000 00000000   
 	Files:
-	tran001.in
-	tran001.out
-	tran001.trans
+	tran000.in
+	tran000.out
+	tran000.trans
 
 7.	Scenario: Verify user cannot transfer to the same account
 	Test Step: Transfer to the same account
@@ -210,9 +210,9 @@ Login
 			    	 - File: 10 John Doe             12345 00000000 S 
 			    	 - File: 00                      00000 00000000   
 	Files:
-	tran002.in
-	tran002.out
-	tran002.trans
+	tran001.in
+	tran001.out
+	tran001.trans
 
 	Scenario: Verify user can transfer at the transfer zero dollars
 	Test Step: Attempt to transfer zero dollars 
@@ -231,14 +231,14 @@ Login
 		    	     - Print: "Please enter a command user: "
 		    	     - Print: "Enter your account number: "
 		    	     - Print: "Enter account number to transfer to: "
-		    	     - Print: "Enter amount"
-		    	     - Print: "Error, You cannot transfer zero dollars"
+		    	     - Print: "Enter amount: "
+		    	     - Print: "Error, you cannot transfer zero dollars"
 		    	     - File: 10 John Doe             00000 00000000 S 
 		    	     - File: 00                      00000 00000000   
 	Files:
-	tran003.in
-	tran003.out
-	tran003.trans
+	tran002.in
+	tran002.out
+	tran002.trans
 
 8.	Scenario: Verify user transfers incurs fees where the admin does not 
 	Test Step: Attempt to transfer money in user account and then in admin account
@@ -263,24 +263,24 @@ Login
 		    	     - Print: "Please enter a command user: "
 		    	     - Print: "Enter your account number: "
 		    	     - Print: "Enter account number to transfer to: "
-		    	     - Print: "Enter amount"
-		    	     - Print: "Transfer complete"
+		    	     - Print: "Enter amount: "
+		    	     - Print: "Transfer complete."
 		    	     - Print: "Please enter your session type: "
 		    	     - Print: "Welcome please enter a command: "
 		    	     - Print: "Enter a account number: "
 		    	     - Print: "Enter account number to transfer to: "
-		    	     - Print: "Enter amount"
-		    	     - Print: "Transfer complete"
+		    	     - Print: "Enter amount: "
+		    	     - Print: "Transfer complete."
 		    	     - File: 10 John Doe             00000 00000000 S 
-		    	     - File: 02 John Doe             12345 00001005 S 
+		    	     - File: 02 John Doe             12345 00100.00 S 
 		    	     - File: 00                      00000 00000000   
 		    	     - File: 10 admin                00000 00000000 A 
-		    	     - File: 02 John Doe             12345 00001000 A 
+		    	     - File: 02 John Doe             12345 00100.00 A 
 		    	     - File: 00                      00000 00000000   
 	Files:
-	tran004.in
-	tran004.out
-	tran004.trans
+	tran003.in
+	tran003.out
+	tran003.trans
 
 9.	Scenario: Verify max transfer  
 	Test Step: Test 1000 dollar transfer
@@ -301,12 +301,12 @@ Login
 			    	 - Print: "Enter account number to transfer to: "
 			    	 - Print: "Enter amount: "
 					 - File: 10 John Doe             00000 00000000 S 
-			    	 - File: 02 John Doe             12345 00001000 S 
+			    	 - File: 02 John Doe             12345 01000.00 S 
 			    	 - File: 00                      00000 00000000   
 	Files:
-	tran005.in
-	tran005.out
-	tran005.trans
+	tran004.in
+	tran004.out
+	tran004.trans
 
 10.	Scenario: Verify working transfer limit
 	Test Step: Test 1005 dollar transfer
@@ -330,9 +330,9 @@ Login
 			    	 - File: 10 John Doe             00000 00000000 S 
 			    	 - File: 00                      00000 00000000   
 	Files:
-	tran006.in
-	tran006.out
-	tran006.trans
+	tran005.in
+	tran005.out
+	tran005.trans
 
 11.	Scenario: Verify summing of transfers
 	Test Step: Test a 505 dollar transfer after 500 dollar transfer
@@ -362,12 +362,12 @@ Login
 			         - Print: "Enter amount"
 			         - Print: "You cannot transfer 505 dollars because you will go beyond the transfer limit
 			         - File: 10 John Doe             00000 00000000 S 
-			         - File: 02 John Doe             12345 00001000 S 
+			         - File: 02 John Doe             12345 00500.00 S 
 			         - File: 00                      00000 00000000      
 	Files:
-	tran007.in
-	tran007.out
-	tran007.trans
+	tran006.in
+	tran006.out
+	tran006.trans
 
 12.	Scenario: Verify amount only allow multiples of five
 	Test Step: Test a 505 dollar transfer after 500 dollar transfer
@@ -407,6 +407,6 @@ Login
 			         - File: 10 John Doe             00000 00000000 S 
 			         - File: 00                      00000 00000000   
 	Files:
-	tran008.in
-	tran008.out
-	tran008.trans
+	tran007.in
+	tran007.out
+	tran007.trans

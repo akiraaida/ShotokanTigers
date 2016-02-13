@@ -4,9 +4,13 @@ John Doe
 transfer
 12345
 12346
-500
+501
 transfer
 12345
 12346
-505
+a
+transfer
+12345
+12346
+501.0
 logout
