@@ -25,193 +25,27 @@ Test Cases
   [enab004]
   Scenario: Verify account holder's name and account number correspond with each other (Correct name, incorrect number).
   Test Step: Admin enters a correct account holder's name but incorrect account number.
-  Test Input:
-        login
-        admin
-        enable
-        Bran Bob
-        11111
-        logout
   Expected Result: The admin is notified the account is not valid.
-  Expected Output: - Print: "Please enter your session type: "
-           - Print: "Please enter a command admin: "
-           - Print: "Please enter the account holder's name: "
-           - Print: "Please enter the account number: "
-           - Print: "Error, account specificed is not a valid account."
-           - File: "10 admin                00000 00000000 A "
-					 - File: "00                      00000 00000000 00"
 
 	[enab005]
   Scenario: Verify account holder's name and account number correspond with each other (Correct name, correct number but not matching).
   Test Step: Admin enters a correct account holder and correct account number but they do not correspond to each other.
-  Test Input:
-        login
-        admin
-        enable
-        Bran Bob
-        12346
-        logout
   Expected Result: The admin is notified the account is not valid.
-  Expected Output: - Print: "Please enter your session type: "
-           - Print: "Please enter a command admin: "
-           - Print: "Please enter the account holder's name: "
-           - Print: "Please enter the account number: "
-           - Print: "Error, account specificed is not a valid account."
-           - File: "10 admin                00000 00000000 A "
-					 - File: "00                      00000 00000000 00"
 
   [enab006]
   Scenario: Verify user withdraw transaction can now be done to a re-enabled account.
   Test Step: Admin enables an account and then performs admin & standard withdraw.
-  Test Input:
-        login
-        admin
-        enable
-        Bran Bob
-        12347
-        withdraw
-        Bran Bob
-        12347
-        5.00
-        logout
-        login
-        standard
-        Bran Bob
-        withdraw
-        12347
-        5.00
-        logout
   Expected Result: 10 dollars is withdrawn.
-  Expected Output: - Print: "Please enter your session type: "
-           - Print: "Please enter a command admin: "
-           - Print: "Please enter the account holder's name: "
-           - Print: "Please enter the account number: "
-           - Print: "Success, Bran Bob's account is now enabled."
-           - Print: "Please enter the account holder's name: "
-           - Print: "Please enter the account number: "
-           - Print: "Please enter value to withdraw: "
-           - Print: "Success, 5.00 has been withdrawn."
-           - Print: "New Balance:"
-           - Print: "105.00"
-           - Print: "Please enter your session type: "
-           - Print: "Please enter a login name: "
-           - Print: "Please enter a command user: "
-           - Print: "Please enter the account number: "
-           - Print: "Please enter value to withdraw: "
-           - Print: "Success, 5.00 has been withdrawn."
-           - Print: "New Balance:"
-           - Print: "99.90"
-           - File: "10 admin                00000 00000000 A "
-           - File: "09 Bran Bob             12347 00000000 00"
-           - File: "01 Bran Bob             12347 00005.00 00"
-					 - File: "00                      00000 00000000 00"
-           - File: "10 Bran Bob             00000 00000000 S "
-           - File: "01 Bran Bob             12347 00005.00 00"
-           - File: "01 Bran Bob             12347 00000.10 00"
-					 - File: "00                      00000 00000000 00"
 
   [enab007]
   Scenario: Verify user deposit transaction can now be done to a re-enabled account.
   Test Step: Admin enables an account and then performs a deposit. Then, user logs in and makes a deposit.
-  Test Input:
-        login
-        admin
-        enable
-        Bran Bob
-        12347
-        deposit
-        Bran Bob
-        12347
-        5.00
-        logout
-        login
-        standard
-        Bran Bob
-        deposit
-        12347
-        5.00
-        logout
   Expected Result: 5 dollars is added to the account.
-  Expected Output: - Print: "Please enter your session type: "
-           - Print: "Please enter a command admin: "
-           - Print: "Please enter the account holder's name: "
-           - Print: "Please enter the account number: "
-           - Print: "Success, Bran Bob's account is now enabled."
-           - Print: "Please enter the account holder's name: "
-           - Print: "Please enter the account number: "
-           - Print: "Please enter value to deposit: "
-           - Print: "Success, 5.00 has been deposited."
-           - Print: "New Balance:"
-           - Print: "115.00"
-           - Print: "Please enter your session type: "
-           - Print: "Please enter a login name: "
-           - Print: "Please enter a command user: "
-           - Print: "Please enter the account number: "
-           - Print: "Please enter value to deposit: "
-           - Print: "Success, 5.00 has been deposited."
-           - Print: "New Balance:"
-           - Print: "119.90"
-           - File: "10 admin                00000 00000000 A "
-           - File: "09 Bran Bob             12347 00000000 00"
-           - File: "04 Bran Bob             12347 00005.00 00"
-					 - File: "00                      00000 00000000 00"
-           - File: "10 Bran Bob             00000 00000000 S "
-           - File: "04 Bran Bob             12347 00005.00 00"
-           - File: "01 Bran Bob             12347 00000.10 00"
-					 - File: "00                      00000 00000000 00"
 
   [enab008]
   Scenario: Verify user paybill transaction can now be done to a re-enabled account.
   Test Step: Admin enables an account and then admin & standard pays a bill.
-  Test Input:
-        login
-        admin
-        enable
-        Bran Bob
-        12347
-        paybill
-        Bran Bob
-        12347
-        TV
-        5.00
-        logout
-        login
-        standard
-        Bran Bob
-        paybill
-        12347
-        TV
-        5.00
   Expected Result: 10 dollars is paid to TV
-  Expected Output: - Print: "Please enter your session type: "
-           - Print: "Please enter a command admin: "
-           - Print: "Please enter the account holder's name: "
-           - Print: "Please enter the account number: "
-           - Print: "Success, Bran Bob's account is now enabled."
-           - Print: "Please enter the account holder's name: "
-           - Print: "Please enter the account number: "
-           - Print: "Please enter a billing recipient: "
-           - Print: "Please enter value to pay: "
-           - Print: "Success, 5.00 has been paid to TV."
-           - Print: "New Balance:"
-           - Print: "105.00"
-           - Print: "Please enter your session type: "
-           - Print: "Please enter a login name: "
-           - Print: "Please enter a command user: "
-           - Print: "Please enter the account number: "
-           - Print: "Please enter a billing recipient: "
-           - Print: "Please enter value to pay: "
-           - Print: "Success, 5.00 has been paid to TV."
-           - Print: "New Balance:"
-           - Print: "99.90"
-           - File: "10 admin                00000 00000000 A "
-           - File: "09 Bran Bob             12347 00000000 00"
-           - File: "03 Bran Bob             12347 00005.00 00"
-					 - File: "00                      00000 00000000 00"
-           - File: "10 Bran Bob             00000 00000000 S "
-           - File: "03 Bran Bob             12347 00005.00 00"
-           - File: "01 Bran Bob             12347 00000.10 00"
-					 - File: "00                      00000 00000000 00"
 
   [enab009]
   Scenario: Verify transfer can be done with re-enabled accounts
