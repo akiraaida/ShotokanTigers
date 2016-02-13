@@ -10,56 +10,17 @@ Test Cases
 	[enab001]
   Scenario: Verify only disabled accounts may be enabled.
   Test Step: Admin enables an enabled account.
-  Test Input:
-        login
-        admin
-        enable
-        John Doe
-        12345
-        logout
   Expected Result: Command is rejected.
-  Expected Output: - Print: "Please enter your session type: "
-           - Print: "Please enter a command admin: "
-           - Print: "Please enter the account holder's name: "
-           - Print: "Please enter the account number: "
-           - Print: "Error, account specified is already active."
-           - File: "10 admin                00000 00000000 A "
-					 - File: "00                      00000 00000000 00"
+
   [enab002]
   Scenario: Verify normal users can not access the enable feature.
   Test Step: Normal user attempts to use the enable feature.
-  Test Input:
-        login
-        standard
-        John Doe
-        enable
-        logout
   Expected Result: The command is rejected.
-  Expected Output: - Print: "Please enter your session type: "
-           - Print: "Please enter a login name: "
-           - Print: "Please enter a command user: "
-           - Print: "Error, you do not have the correct privileges to access this feature."
-           - File: "10 John Doe             00000 00000000 S "
-					 - File: "00                      00000 00000000 00"
 
   [enab003]
   Scenario: Verify account holder's name and account number correspond with each other (Incorrect name, correct number).
   Test Step: Admin enters an incorrect account holder's name but correct account number.
-  Test Input:
-        login
-        admin
-        enable
-        Bob Stevenson
-        12345
-        logout
   Expected Result: The admin is notified the account is not valid.
-  Expected Output: - Print: "Please enter your session type: "
-           - Print: "Please enter a command admin: "
-           - Print: "Please enter the account holder's name: "
-           - Print: "Please enter the account number: "
-           - Print: "Error, account specificed is not a valid account."
-           - File: "10 admin                00000 00000000 A "
-					 - File: "00                      00000 00000000 00"
 
   [enab004]
   Scenario: Verify account holder's name and account number correspond with each other (Correct name, incorrect number).

@@ -2,4 +2,4 @@ Please enter your session type:
 Please enter a command admin:
 Please enter the account holder's name:
 Please enter the account number:
-Success, Bran Bob's account is now enabled.
+Error, account specificed is not a valid account.
