@@ -1,0 +1,43 @@
+Please enter your session type:
+Please enter a command admin:
+Please enter the account holder's name:
+Please enter the account number:
+Success, Bran Bob's account is now enabled.
+Please enter the account holder's name:
+Please enter the account number:
+Enter account number to transfer to:
+Enter amount:
+Success, 10.00 has been transferred to 12347.
+New Balance (12345):
+100.00
+New Balance (12347):
+120.00
+Please enter the account holder's name:
+Please enter the account number:
+Enter account number to transfer to:
+Enter amount:
+Success, 10.00 has been transferred to 12345.
+New Balance (12347):
+110.00
+New Balance (12345):
+110.00
+Please enter your session type:
+Please enter a login name:
+Please enter a command user:
+Enter account number to transfer to:
+Enter amount:
+Success, 10.00 has been transferred to 12347.
+New Balance (12345):
+99.95
+New Balance (12347):
+120.00
+Please enter your session type:
+Please enter a login name:
+Please enter a command user:
+Enter account number to transfer to:
+Enter amount:
+Success, 10.00 has been transferred to 12345.
+New Balance (12347):
+109.90
+New Balance (12345):
+109.95

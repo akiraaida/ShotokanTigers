@@ -1,3 +1,13 @@
+Notes:
+----
+- May have to do transaction fee withdrawal before transaction??? e_e
+- For transfers, should system magically know the name of recipient?
+- For transfers, should transferred money be available right away?
+- Possibility of a 'don't care' character?
+- Enter 'your' account number?
+	- & 'Please' consistency
+	- & New balance consistency
+	
 Test Cases
 
 	Enable - Kathryn
@@ -50,28 +60,9 @@ Test Cases
   [enab009]
   Scenario: Verify transfer can be done with re-enabled accounts
   Test Step: Admin enables an account, then transfers money to it.
-      Next, admin enables an account, then has money transferred from it.
-  Test Input:
-        login
-        admin
-        enable
-        Bran Bob
-        12347
-        transfer
-        John Doe
-        12345
-        12347
-        10.0
-        transfer
-        Bran Bob
-        12347
-        12345
-        10.00
-        logout
+      Next, admin then has money transferred from it.
+			Then, the same thing happens in standard mode.
   Expected Result: Bran Bob is enabled & 10.00 is transferred back and forth between him and John Doe.
-  Expected Output: - Print: "Please enter your session type: "
-           - Print: "Please enter a command admin: "
-           - File: [TODO: after filled everything out]
 
 
 	Withdrawal - Kathryn
