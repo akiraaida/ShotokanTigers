@@ -2,6 +2,7 @@ Test Cases
 
 	Enable - Kathryn
 	================
+	[enab000]
   Scenario: Verify disabled account is then enabled
   Test Step: Admin enables an account which is disabled.
   Test Input:
@@ -21,6 +22,7 @@ Test Cases
            - File: "09 Bran Bob             12347 00000000 00"
 					 - File: "00 admin                00000 00000000 00"
 
+	[enab001]
   Scenario: Verify only disabled accounts may be enabled.
   Test Step: Admin enables an enabled account.
   Test Input:
@@ -38,7 +40,7 @@ Test Cases
            - Print: "Error, account specified is already active."
            - File: "10 admin                00000 00000000 A "
 					 - File: "00                      00000 00000000 00"
-
+  [enab002]
   Scenario: Verify normal users can not access the enable feature.
   Test Step: Normal user attempts to use the enable feature.
   Test Input:
@@ -55,6 +57,7 @@ Test Cases
            - File: "10 John Doe             00000 00000000 S "
 					 - File: "00                      00000 00000000 00"
 
+  [enab003]
   Scenario: Verify account holder's name and account number correspond with each other (Incorrect name, correct number).
   Test Step: Admin enters an incorrect account holder's name but correct account number.
   Test Input:
@@ -73,7 +76,7 @@ Test Cases
            - File: "10 admin                00000 00000000 A "
 					 - File: "00                      00000 00000000 00"
 
-
+  [enab004]
   Scenario: Verify account holder's name and account number correspond with each other (Correct name, incorrect number).
   Test Step: Admin enters a correct account holder's name but incorrect account number.
   Test Input:
@@ -92,6 +95,7 @@ Test Cases
            - File: "10 admin                00000 00000000 A "
 					 - File: "00                      00000 00000000 00"
 
+	[enab005]
   Scenario: Verify account holder's name and account number correspond with each other (Correct name, correct number but not matching).
   Test Step: Admin enters a correct account holder and correct account number but they do not correspond to each other.
   Test Input:
@@ -110,7 +114,7 @@ Test Cases
            - File: "10 admin                00000 00000000 A "
 					 - File: "00                      00000 00000000 00"
 
-
+  [enab006]
   Scenario: Verify user withdraw transaction can now be done to a re-enabled account.
   Test Step: Admin enables an account and then performs admin & standard withdraw.
   Test Input:
@@ -160,6 +164,7 @@ Test Cases
            - File: "01 Bran Bob             12347 00000.10 00"
 					 - File: "00                      00000 00000000 00"
 
+  [enab007]
   Scenario: Verify user deposit transaction can now be done to a re-enabled account.
   Test Step: Admin enables an account and then performs a deposit. Then, user logs in and makes a deposit.
   Test Input:
@@ -209,7 +214,7 @@ Test Cases
            - File: "01 Bran Bob             12347 00000.10 00"
 					 - File: "00                      00000 00000000 00"
 
-
+  [enab008]
   Scenario: Verify user paybill transaction can now be done to a re-enabled account.
   Test Step: Admin enables an account and then admin & standard pays a bill.
   Test Input:
@@ -262,6 +267,7 @@ Test Cases
            - File: "01 Bran Bob             12347 00000.10 00"
 					 - File: "00                      00000 00000000 00"
 
+  [enab009]
   Scenario: Verify transfer can be done with re-enabled accounts
   Test Step: Admin enables an account, then transfers money to it.
       Next, admin enables an account, then has money transferred from it.
