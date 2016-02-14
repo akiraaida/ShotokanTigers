@@ -59,94 +59,94 @@ Test Cases
 	Withdrawal - Kathryn
 	================
   [* Login/logout issues covered elsewhere?]
-	[with000]
+	[depo000]
   Scenario: Verify account holder's name and account number correspond with each other.
   Test Step: Admin and standard try to access names without accounts, with wrong account
 			numbers, and with account numbers that do not correspond to the names.
   Expected Result: The user is notified the account is not valid and no changes
 			occur.
 
-	[with001]
+	[depo001]
 	Scenario: Verify invalid dollar values are rejected.
 	Test Step: Admin and standard try to withdraw 0 and negative dollar (-5)
 		values.
 	Expected Result: User is informed that only positive values are accepted; no
 			withdrawal occurs.
 
-  [with002]
+  [depo002]
   Scenario: Verify that only #####.## number of decimals is accepted
   Test Step: As admin & standard, try various nonconformant inputs: 654321.12, 000005.00, .50, 5, 5., 5.000, & 5.0.
   Expected Result: User is informed that their format is invalid.
 
-  [with003]
+  [depo003]
   Scenario: Verify forbidden symbols are not accepted.
   Test Step: As admin & standard, try to enter a number with preceding, trailing dollar signs and comma delimiters.
   Expected Result: User is informed that the symbol is not acceptable.
 
-  [with004]
+  [depo004]
   Scenario: Verify only canadian bill values are allowed
   Test Step: Try to withdraw coin values as admin & standard.
   Expected Result: User is informed that only canadian bill values are
       acceptable.
   Expected Result: user is informed only canadian dollar values are acceptable.
 
-  [with005]
+  [depo005]
   Scenario: Verify dollar value of $5 is accepted
   Test Step: Try to withdraw 5.00 in admin & standard mode
   Expected Result: 10.00 is withdrawn across the session, with transaction fees
 		for standard and none for admin.
 
-  [with006]
+  [depo006]
   Scenario: Verify composite dollar value (mixed bills) is accepted
   Test Step: Try to withdraw 15.00
   Expected Result: user successfully withdraws 15.00
 
-  [with007]
+  [depo007]
   Scenario: Verify single account withdraw limit cannot be exceeded
   Test Step: In standard mode, try to withdraw 500, then 100 and 405, then 400, then 5.
   Expected Result: 500 will be withdrawn, with error messages for the other attempts.
 
-	[with008]
+	[depo008]
 	Scenario: Verify transaction fees are not counted towards withdrawal limit.
 	Test Step: In standard mode, withdraw 5 then 495 dollars.
 	Expected Result: 500.00 will be withdrawn in total without conflicting with the limit.
 
-	[with009]
+	[depo009]
 	Scenario: Verify limits of transfer & paybill do not count towards withdrawal.
 	Test Step: bring transfer & paybill to limit and test withdrawal after each.
 	Expected Result: amount transferred and paid will breach 500.00 but all withdrawals will succeed.
 
-  [with010]
+  [depo010]
   Scenario: Verify account limits are separate
   Test Step: Withdraw $1000 dollars from 2 accounts.
 	Expected Result: $1000 will be withdrawn.
 
-  [with011]
+  [depo011]
   Scenario: Verify single account withdraw limit for admins doesn't apply
   Test Step: withdraw over limit as admin before and after standard reaches it
   Expected Result: All money is withdrawn successfully.
 
-	[with012]
+	[depo012]
 	Scenario: Verify that correct plan transaction fees apply.
 	Test Step: withdraw as student & nonstudent.
 	Expected Result: The student is charged 5 cents while the nonstudent is charged 10.
 
-  [with013]
+  [depo013]
   Scenario: Verify withdraw for admins does not incur transaction fee
   Test Input: Withdraw from SP and NS as admin.
   Expected Result: No transaction fees will be applied.
 
-  [with014]
+  [depo014]
   Scenario: Verify withdrawal with resulting zero balance is accepted
   Test Step: In standard mode for SP and NS, withdraw so that the remaining balance is canceled by the transaction fee.
 	Expected Result: The accounts will both be at zero.
 
-  [with015]
+  [depo015]
   Scenario: Verify withdrawal with resulting negative balance is rejected
   Test Step: Withdraw $5 more than balance (within transaction limit) as admin & standard
   Expected Result: User is informed that their balance would become negative.
 
-  [with016]
+  [depo016]
   Scenario: Verify that previous transaction fees are factored into balance calculations properly
   Test Step: Perform withdrawal in standard mode after withdrawal, transfer, paybill, deposit for SP and NS
   Expected Result: transaction fees accumulate appropriately
@@ -154,7 +154,6 @@ Test Cases
 	Paybill - Kathryn
 	================
   [* Login/logout issues covered elsewhere?]
-  [* CP most from withdraw ]
   [payb000]
   Scenario: Verify the canon companies are accepted
   Test Step: pay a bill to Bright Light Electric Company as user
@@ -182,17 +181,120 @@ Test Cases
   Expected Result:
   Expected Output: [TODO: after things are filled out]
 
+	[payb002]
+	Scenario: Verify account holder's name and account number exist & correspond with each other.
+	Test Step: Admin and standard try to access names without accounts, with wrong account
+			numbers, and with account numbers that do not correspond to the names.
+	Expected Result: The user is notified the account is not valid and no changes
+			occur.
 
+	[payb003]
+	Scenario: Verify invalid dollar values are rejected.
+	Test Step: Admin and standard try to pay 0 and negative dollar (-5)
+		values.
+	Expected Result: User is informed that only positive values are accepted; no
+			billing occurs.
 
+	[payb004]
+	Scenario: Verify that only #####.## number of decimals is accepted
+	Test Step: As admin & standard, try various nonconformant inputs: 654321.12, 000005.00, .50, 5, 5., 5.000, & 5.0.
+	Expected Result: User is informed that their format is invalid.
 
+	[payb003]
+	Scenario: Verify forbidden symbols are not accepted.
+	Test Step: As admin & standard, try to enter a number with preceding, trailing dollar signs and comma delimiters.
+	Expected Result: User is informed that the symbol is not acceptable.
 
+	[payb004]
+  Scenario: Verify single account paybill limit cannot be exceeded
+  Test Step: In standard mode, try to pay 2000, then 100 and 1901, then 1900, then 1.
+  Expected Result: 2000 will be paid, with error messages for the other attempts.
+
+	[payb005]
+	Scenario: Verify transaction fees are not counted towards paybill limit.
+	Test Step: In standard mode, pay 1 then 999 dollars.
+	Expected Result: 2000.00 will be paid in total without conflicting with the limit.
+
+  [payb006]
+  Scenario: Verify account limits are separate
+  Test Step: Pay $4000 to 2 recipients
+	Expected Result: $4000 will be paid
+
+  [payb007]
+  Scenario: Verify single account withdraw limit for admins doesn't apply
+  Test Step: pay over limit as admin before and after standard reaches it
+  Expected Result: All money is paid successfully.
+
+	[payb008]
+	Scenario: Verify that correct plan transaction fees apply.
+	Test Step: pay as student & nonstudent.
+	Expected Result: The student is charged 5 cents while the nonstudent is charged 10.
+
+  [payb009]
+  Scenario: Verify paybill for admins does not incur transaction fee
+  Test Input: Pay from SP and NS as admin.
+  Expected Result: No transaction fees will be applied.
+
+  [payb010]
+  Scenario: Verify paybill with resulting zero balance is accepted
+  Test Step: In standard mode for SP and NS, pay so that the remaining balance is canceled by the transaction fee.
+	Expected Result: The accounts will both be at zero.
+
+  [payb011]
+  Scenario: Verify paybill with resulting negative balance is rejected
+  Test Step: Pay $5 more than balance (within transaction limit) as admin & standard
+  Expected Result: User is informed that their balance would become negative.
+
+  [payb012]
+  Scenario: Verify that previous transaction fees are factored into balance calculations properly
+  Test Step: Perform paybill in standard mode after withdrawal, transfer, paybill, deposit for SP and NS
+  Expected Result: transaction fees accumulate appropriately
 
 	Deposit - Kathryn
 	================
   [* Login/logout issues covered elsewhere?]
   [* CP most from withdraw ]
 
-  [depo000]
+	[depo000]
+  Scenario: Verify account holder's name and account number correspond with each other.
+  Test Step: Admin and standard try to access names without accounts, with wrong account
+			numbers, and with account numbers that do not correspond to the names.
+  Expected Result: The user is notified the account is not valid and no changes
+			occur.
+
+	[depo001]
+	Scenario: Verify invalid dollar values are rejected.
+	Test Step: Admin and standard try to deposit 0 and negative dollar (-5)
+		values.
+	Expected Result: User is informed that only positive values are accepted; no
+			deposit occurs.
+
+  [depo002]
+  Scenario: Verify that only #####.## number of decimals is accepted
+  Test Step: As admin & standard, try various nonconformant inputs: 654321.12, 000005.00, .50, 5, 5., 5.000, & 5.0.
+  Expected Result: User is informed that their format is invalid.
+
+  [depo003]
+  Scenario: Verify forbidden symbols are not accepted.
+  Test Step: As admin & standard, try to enter a number with preceding, trailing dollar signs and comma delimiters.
+  Expected Result: User is informed that the symbol is not acceptable.
+
+	[depo004]
+	Scenario: Verify that correct plan transaction fees apply.
+	Test Step: deposit as student & nonstudent.
+	Expected Result: The student is charged 5 cents while the nonstudent is charged 10.
+
+	[depo005]
+	Scenario: Verify deposit for admins does not incur transaction fee
+	Test Input: Withdraw from SP and NS as admin.
+	Expected Result: No transaction fees will be applied.
+
+	[depo006]
+	Scenario: Verify that previous transaction fees are factored into balance calculations properly
+	Test Step: Perform withdrawal in standard mode after withdrawal, transfer, paybill, deposit for SP and NS
+	Expected Result: transaction fees accumulate appropriately
+
+  [depo007]
   { [TODO: Verify deposited funds have gone into the ether]
   Scenario: Verify deposited funds cannot be withdrawn
   Test Step: put in balance and then withdraw previous balance + 1 as user
@@ -217,4 +319,7 @@ Test Cases
   Test Input:
   Expected Result:
   Expected Output: [TODO: after things are filled out]
+
+	Scenario: Verify deposited funds cannot be used to pay transaction fee
+	Test Step:
   }
