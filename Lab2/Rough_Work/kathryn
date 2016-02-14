@@ -131,26 +131,20 @@ Test Cases
 	Test Step: withdraw as student & nonstudent.
 	Expected Result: The student is charged 5 cents while the nonstudent is charged 10.
 
-  [with016]
+  [with013]
   Scenario: Verify withdraw for admins does not incur transaction fee
-  Test Step: [TODO: make 2 of these for student & standard plan uggh]
-  Test Input:
-  Expected Result:
-  Expected Output: [TODO: after things are filled out]
+  Test Input: Withdraw from SP and NS as admin.
+  Expected Result: No transaction fees will be applied.
 
-  [with018]
+  [with014]
   Scenario: Verify withdrawal with resulting zero balance is accepted
-  Test Step: [TODO: after transaction fees have been done (which they have been)]]
-  Test Input:
-  Expected Result:
-  Expected Output: [TODO: after things are filled out]
+  Test Step: In standard mode for SP and NS, withdraw so that the remaining balance is canceled by the transaction fee.
+	Expected Result: The accounts will both be at zero.
 
-  [with019]
+  [with015]
   Scenario: Verify withdrawal with resulting negative balance is rejected
-  Test Step: Withdraw $1 more than balance (within transaction limit)
-  Test Input:
-  Expected Result:
-  Expected Output: [TODO: after things are filled out]
+  Test Step: Withdraw $5 more than balance (within transaction limit) as admin & standard
+  Expected Result: User is informed that their balance would become negative.
 
   [with020]
   Scenario: Verify that previous transaction fees are factored into balance calculations
