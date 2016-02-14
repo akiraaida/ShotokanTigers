@@ -23,6 +23,9 @@ Notes:
 - Display prompt after error? (i.e. fail gracefully)?
 - Not sure if I was consistent with withdraw/withdrawal.
 - When print balance?
+- Rearrange test cases to follow usual function order?
+- Give test cases names?
+- add directories to file list?
 
 Test Cases
 
@@ -124,7 +127,7 @@ Test Cases
 
   [with011]
   Scenario: Verify single account withdraw limit for admins doesn't apply
-  Test Step: withdraw over limit as admin before and after standard reaches it
+  Test Step: Withdraw over limit as admin before and after standard reaches it
   Expected Result: All money is withdrawn successfully.
 
 	[with012]
@@ -184,24 +187,14 @@ Test Cases
 	Test Step: As admin & standard, try various nonconformant inputs: 654321.12, 000005.00, .50, 5, 5., 5.000, & 5.0.
 	Expected Result: User is informed that their format is invalid.
 
-	[payb003]
+	[payb005]
 	Scenario: Verify forbidden symbols are not accepted.
 	Test Step: As admin & standard, try to enter a number with preceding, trailing dollar signs and comma delimiters.
 	Expected Result: User is informed that the symbol is not acceptable.
 
-	[payb004]
-  Scenario: Verify single account paybill limit cannot be exceeded
-  Test Step: In standard mode, try to pay 2000, then 100 and 1901, then 1900, then 1.
-  Expected Result: 2000 will be paid, with error messages for the other attempts.
-
-	[payb005]
-	Scenario: Verify transaction fees are not counted towards paybill limit.
-	Test Step: In standard mode, pay 1 then 999 dollars.
-	Expected Result: 2000.00 will be paid in total without conflicting with the limit.
-
-  [payb006]
-  Scenario: Verify account & recipient limits are separate
-  Test Step: Pay $8000 to 2 recipients across 2 accounts
+	[payb006]
+	Scenario: Verify account & recipient limits are separate
+	Test Step: Pay $8000 to 2 recipients across 2 accounts
 	Expected Result: $8000 will be paid
 
   [payb007]
@@ -234,10 +227,19 @@ Test Cases
   Test Step: Perform paybill in standard mode after withdrawal, transfer, paybill, deposit for SP and NS
   Expected Result: transaction fees accumulate appropriately
 
+	[payb013]
+	Scenario: Verify transaction fees are not counted towards paybill limit.
+	Test Step: In standard mode, pay 1 then 1999 dollars.
+	Expected Result: 2000.00 will be paid in total without conflicting with the limit.
+
+	[payb014]
+  Scenario: Verify single account paybill limit cannot be exceeded
+  Test Step: In standard mode, try to pay 2000, then 100 and 1901, then 1900, then 1.
+  Expected Result: 2000 will be paid, with error messages for the other attempts.
+
 	Deposit - Kathryn
 	================
   [* Login/logout issues covered elsewhere?]
-  [* CP most from withdraw ]
 
 	[depo000]
   Scenario: Verify account holder's name and account number correspond with each other.
