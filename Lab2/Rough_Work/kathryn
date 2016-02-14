@@ -70,68 +70,10 @@ Test Cases
 	Expected Result: User is informed that only positive values are accepted; no
 			withdrawal occurs.
 
-  [with005]
+  [with002]
   Scenario: Verify that only #####.## number of decimals is accepted
-  Test Step: Try to enter an excessive value as a user.
-  Test Step: Try to enter a truncated decimal as a user.
-  Test Step: Try to enter a number without a decimal point as a user
-  Test Step: Try to enter a number with 3 fractional parts
-  Test Step: Enter a number with preceding zeroes.
-  Test Step: Enter a number like 5.0
-  Test Input:
-        login
-        John Doe
-        withdrawal
-        12345
-        654321.00
-        logout
-  Test Input:
-        login
-        John Doe
-        withdrawal
-        12345
-        .50
-        logout
-  Test Input:
-        login
-        John Doe
-        withdrawal
-        12345
-        5
-        logout
-  Test Input:
-        login
-        John Doe
-        withdrawal
-        12345
-        5.000
-        logout
-  Test Input:
-        login
-        John Doe
-        withdrawal
-        12345
-        00005.00
-        logout
-  Test Input:
-        login
-        John Doe
-        withdrawal
-        12345
-        5.0
-        logout
+  Test Step: As admin & standard, try various noncomformant inputs: 654321.12, 000005.00, .50, 5, 5., 5.000, & 5.0.
   Expected Result: User is informed that their format is invalid.
-  Expected Result: User is informed that their format is invalid.
-  Expected Result: User is reminded to only use 2 fineness.
-  Expected Result: User is informed that a decimal point is required.
-  Expected Result: User is informed that their number doesn't make sense.
-  Expected Result: User is informed that the incorrect number of zeroes
-  following decimal was used.
-  Expected Output: - Print: "Please enter your session type: "
-           - Print: "Please enter a login name: "
-           - Print: "Please enter a command user: "
-  Expected Output: - Print: [TODO: after filled everything out]
-         - File: [TODO: after filled everything out]
 
   [with006]
   Scenario: Verrify forbidden symbols are not accepted.
