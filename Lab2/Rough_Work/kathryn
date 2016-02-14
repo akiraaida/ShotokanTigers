@@ -146,102 +146,10 @@ Test Cases
   Test Step: Withdraw $5 more than balance (within transaction limit) as admin & standard
   Expected Result: User is informed that their balance would become negative.
 
-  [with020]
-  Scenario: Verify that previous transaction fees are factored into balance calculations
-  Test Step: Verify withdrawal with resulting negative balance accounts is rejected (for previous transaction fee from previous withdrawal)
-  Test Step: Verify withdrawal with resulting negative balance accounts is rejected (for previous transaction fee from previous transfer)
-  Test Step: Verify withdrawal with resulting negative balance accounts is rejected (for previous transaction fee from previous paybill)
-  Test Step: Verify withdrawal with resulting negative balance accounts is rejected (for previous transaction fee from previous deposit)
-  Test Input:
-  Expected Result:
-  Expected Output: [TODO: after things are filled out]
-
-  [with021]
-  Scenario: Verify transaction fees are applied to only successful withdrawals
-  Test Step: Do 5 withdrawals, last of which will fail.
-  Test Input:
-  Expected Result: 4 moneies and 4 transaction fees are removed.
-  Expected Output:
-
-  [with022]
-  Scenario: Verify transaction fees are applied for multiple calls
-  Test Step: Do 5 withdrawals, leaving a positive balance.
-  Test Input:
-  Expected Result: 5 monies and 5 transaction fees are applied.
-  Expected Output:
-
-  [with023]
-  Scenario: Verify withdrawal for resulting negative balance is rejected (on last of multiple calls)
-  Test Step: withdraw $100 then above balance
-  Test Input:
-          login
-          John Doe
-          withdrawal
-          12345
-          100.00
-          withdrawal
-          12345
-          11.00
-          logout
-  Expected Result: $100 is withdrawn.
-  Expected Output: [TODO: after everything is filled out]
-
-  [with024]
-  Scenario: Verify withdrawal for resulting zero balance is accepted (on last of multiple calls)
-  Test Step:
-  [TODO: make 2 of these for student & standard plan? uggh]
-  Test Input:
-  Expected Result:
-  Expected Output: [TODO: after things are filled out]
-
-  [with025]
-  Scenario: Verify withdrawal for resulting positive balance is accepted (on last of multiple calls)
-  Test Step: withdraw multiple times leaving like a $50 buffer or something
-  Test Input:
-          login
-          John Doe
-          withdrawal
-          12345
-          10.00
-          withdrawal
-          12345
-          10.00
-          withdrawal
-          12345
-          10.00
-          logout
-  Expected Result: $30 is withdrawn.
-  Expected Output: [TODO: after everything is filled out.]
-
-  [with026]
-  Scenario: Verify balance is remembered over multiple sessions
-  Test Step: [TODO: after corresponding above is fine]
-  Test Input:
-  Expected Result:
-  Expected Output: [TODO: after things are filled out]
-
-  [with029]
-  Scenario: Verify withdrawal for resulting positive or zero balance is accepted
-  Test Step: Verify withdrawal for resulting positive balance is accepted (over multiple sessions)
-  Test Step: Verify withdrawal for resulting zero balance is accepted (after session as different user)
-  Test Step: Verify withdrawal for resulting positive balance is accepted (after session as different user)
-  Test Step: Verify withdrawal for resulting zero balance is accepted (as admin)
-  Test Step: withdraw as admin with like $50 buffer
-  Test Input:
-          [TODO]
-          login
-          admin
-          withdrawal
-          John Doe
-          12345
-          5.00
-          logout
-  Test Input:
-  Expected Result: $5.00 is deducted.
-  Expected Result: [TODO]
-  Expected Output: [TODO: after things are filled out]
-
-
+  [with016]
+  Scenario: Verify that previous transaction fees are factored into balance calculations properly
+  Test Step: Perform withdrawal in standard mode after withdrawal, transfer, paybill, deposit for SP and NS
+  Expected Result: transaction fees accumulate appropriately
 
 	Paybill - Kathryn
 	================

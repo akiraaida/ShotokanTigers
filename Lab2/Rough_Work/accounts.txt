@@ -8,4 +8,12 @@
 12352 NEET Guy             A 00500.00 N
 12353 Loaded Guy           A 00500.05 S
 12354 Loaded Guy           A 00500.10 N
+12380 Octopus              A 00010.20 N
+12381 Octopus              A 00010.10 S
+12382 Octopus              A 00010.20 N
+12383 Octopus              A 00010.10 S
+12384 Octopus              A 00010.20 N
+12385 Octopus              A 00010.10 S
+12386 Octopus              A 00005.20 N
+12387 Octopus              A 00005.10 S
 00000 END_OF_FILE          A 00000.00 S
