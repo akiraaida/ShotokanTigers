@@ -116,14 +116,10 @@ Test Cases
 	Test Step: bring transfer & paybill to limit and test withdrawal after each.
 	Expected Result: amount transferred and paid will breach 500.00 but all withdrawals will succeed.
 
-  [with014]
+  [with010]
   Scenario: Verify account limits are separate
-  Test Step: Withdraw $200 from one, $100 from another
-  Test Step: Withdraw $200 from one, $400 from another
-  Test Step: Withdraw $600.0 from one acount, $400.0 from another
-  Test Input: [TODO: make a guy with 2 accounts]
-  Expected Result:
-  Expected Output: [TODO: after things are filled out]
+  Test Step: Withdraw $1000 dollars from 2 accounts.
+	Expected Result: $1000 will be withdrawn.
 
   [with015]
   Scenario: Verify single account withdraw limit for admins doesn't apply
