@@ -9,7 +9,6 @@ Notes:
 	- & 'Please' consistency
 	- & New balance consistency
 	--> migrate to 'available balance'
-- typo on specified
 - may have to take consideration of holes somehow(missing enable 4 & 5)
 - Should sessions end with a prompt?
 	- End with "Please enter session type"?
@@ -18,6 +17,8 @@ Notes:
 - do all functions have a positive input combinations/ should works?
 - should nonexistent name then ask for an account number?
 - make list of responses?
+	- typo on specified
+	- do spellcheck in general
 - Display prompt after error? (i.e. fail gracefully)?
 
 Test Cases
@@ -80,67 +81,18 @@ Test Cases
   Test Step: As admin & standard, try to enter a number with preceding, trailing dollar signs and comma delimiters.
   Expected Result: User is informed that the symbol is not acceptable.
 
-  [with007]
-  Scenario: Verify withdrawal input of ###### ## is rejected
-  Test Step: Try to enter a number with space delimiters.
-  Test Input:
-        login
-        John Doe
-        withdrawal
-        12345
-        5 00
-        logout
-  Expected Result: User is informed not to put spaces between their numbers.
-  Expected Output: - Print: "Please enter your session type: "
-           - Print: "Please enter a login name: "
-           - Print: "Please enter a command user: "
-  Expected Output: - Print: [TODO: after filled everything out]
-         - File: "No change"
-
-  [with009]
+  [with004]
   Scenario: Verify only canadian bill values are allowed
-  Test Step: Enter a number like 4.99
-  Test Step: Try to withdraw 7.00
-  Test Input:
-        login
-        John Doe
-        withdrawal
-        12345
-        4.99
-        logout
-  Test Input
-        login
-        John Doe
-        withdrawal
-        12345
-        7.00
-        logout
+  Test Step: Try to withdraw coin values as admin & standard.
   Expected Result: User is informed that only canadian bill values are
       acceptable.
-  Expected Result: user is informed only canadian dollar values are acceptable
-  Expected Output: - Print: "Please enter your session type: "
-           - Print: "Please enter a login name: "
-           - Print: "Please enter a command user: "
-  Expected Output: - Print: [TODO: after filled everything out]
-         - File: "No change"
+  Expected Result: user is informed only canadian dollar values are acceptable.
 
-
-  [with010]
+  [with005]
   Scenario: Verify dollar value of $5 is accepted
-  Test Step: Try to withdraw 5.00 in user mode
-  Test Input:
-        login
-        John Doe
-        withdrawal
-        12345
-        5.00
-        logout
-  Expected Result: user successfully withdraws 5.00
-  Expected Output: - Print: "Please enter your session type: "
-           - Print: "Please enter a login name: "
-           - Print: "Please enter a command user: "
-  Expected Output: - Print: [TODO: after filled everything out]
-         - File: [TODO: samesies]
+  Test Step: Try to withdraw 5.00 in admin & standard mode
+  Expected Result: 10.00 is withdrawn across the session, with transaction fees
+		for standard and none for admin.
 
   [with011]
   Scenario: Verify composite dollar value (mixed bills) is accepted
