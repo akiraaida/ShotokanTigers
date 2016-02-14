@@ -1,3 +1,5 @@
-10 admin                00000 00000.00 A
-05 Lock Lan             13245 00200.00   
-00                      00000 00000.00   
+Please enter your session type: 
+Please enter a command admin:
+Please enter the new account holder's name:
+Please enter their initial balance:
+Success, account created. User's unique account number is 13245.
