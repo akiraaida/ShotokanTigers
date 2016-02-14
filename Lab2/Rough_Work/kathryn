@@ -9,6 +9,7 @@ Notes:
 	- & 'Please' consistency
 	- & New balance consistency
 	--> migrate to 'available balance'
+	- also print remaining withdrawal etc. limit, where appropriate.
 - may have to take consideration of holes somehow(missing enable 4 & 5)
 - Should sessions end with a prompt?
 	- End with "Please enter session type"?
@@ -94,33 +95,15 @@ Test Cases
   Expected Result: 10.00 is withdrawn across the session, with transaction fees
 		for standard and none for admin.
 
-  [with011]
+  [with006]
   Scenario: Verify composite dollar value (mixed bills) is accepted
   Test Step: Try to withdraw 15.00
-  Test Input:
-        login
-        John Doe
-        withdrawal
-        12345
-        15.00
-        logout
   Expected Result: user successfully withdraws 15.00
-  Expected Output: - Print: [TODO: after filled everything out]
-         - File: [TODO: samesies]
 
-  [with012]
+  [with007]
   Scenario: Verify single account withdraw limit cannot be exceeded
-  Test Step: Try to withdraw 505.00 in user mode
-  Test Step: Try to withdraw 100.00 then 400.00 in user mode
-  Test Step: Login and withdraw twice, over limit
-  Test Input: [TODO: invent a rich prince]
-  Expected Result:
-  Expected Output: [TODO: after things are filled out]
-  Scenario: Verify withdrawal transaction fee is applied for standard & are applied for several calls
-  Test Step: Try to withdraw [TODO: make 2 of these for student & standard plan uggh]
-  Test Input:
-  Expected Result:
-  Expected Output: [TODO: after things are filled out]
+  Test Step: In standard mode, try to withdraw 500, then 100 and 400.
+  Expected Result: Only 100 will be withdrawn, with error messages for the other attempts.
 
   [with014]
   Scenario: Verify account limits are separate
@@ -139,7 +122,7 @@ Test Cases
   Expected Output: [TODO: after things are filled out]
 
   [with016]
-  Scenario: Verify single account withdraw limit for admins does not incur transaction fee
+  Scenario: Verify withdraw for admins does not incur transaction fee
   Test Step: [TODO: make 2 of these for student & standard plan uggh]
   Test Input:
   Expected Result:

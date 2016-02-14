@@ -1,0 +1,16 @@
+Please enter your session type:
+Please enter a login name:
+Please enter a command user:
+Please enter the account number:
+Please enter amount to withdraw:
+Error, cannot withdraw 505.00 as that account has only 500.00 left in it's daily withdrawal limit.
+Please enter the account number:
+Please enter amount to withdraw:
+Success, 100.00 has been withdrawn.
+Available Balance (12348):
+9909.90
+Daily Withdrawals Remaining (12348):
+400.00
+Please enter the account number:
+Please enter amount to withdraw:
+Error, cannot withdraw 405.00 as that account has only 400.00 left in it's daily withdrawal limit.
