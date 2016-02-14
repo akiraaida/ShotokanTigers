@@ -13,6 +13,7 @@
 12357 Loaded Guy           A 01000.10 N
 12358 Loaded Guy           A 02000.05 S
 12359 Loaded Guy           A 02000.10 N
+12360 Moth Wallet          A 00000.05 S
 12380 Octopus              A 00010.20 N
 12381 Octopus              A 00010.10 S
 12382 Octopus              A 00010.20 N

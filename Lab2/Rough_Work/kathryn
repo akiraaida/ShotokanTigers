@@ -279,31 +279,6 @@ Test Cases
 	Expected Result: transaction fees accumulate appropriately
 
   [depo007]
-  { [TODO: Verify deposited funds have gone into the ether]
-  Scenario: Verify deposited funds cannot be withdrawn
-  Test Step: put in balance and then withdraw previous balance + 1 as user
-  Test Input:
-  Expected Result:
-  Expected Output: [TODO: after things are filled out]
-
-  Scenario: Verify deposited funds cannot be used with paybill
-  Test Step: put in that amount up there and then pay a bill as user
-  Test Input:
-  Expected Result:
-  Expected Output: [TODO: after things are filled out]
-
-  Scenario: Verify deposited funds cannot be transferred from deposited account to account
-  Test Step: transfer it
-  Test Input:
-  Expected Result:
-  Expected Output: [TODO: after things are filled out]
-
-  Scenario: Verify deposited funds cannot be transferred from account to deposited account
-  Test Step: transfer it
-  Test Input:
-  Expected Result:
-  Expected Output: [TODO: after things are filled out]
-
-	Scenario: Verify deposited funds cannot be used to pay transaction fee
-	Test Step:
-  }
+	Scenario: Verify deposited funds are not available for use.
+  Test Step: Test use of deposited funds with withdraw, paybill, and transfer in standard & admin mode.
+	Expected Result: No transactions besides the initial deposit will complete.
