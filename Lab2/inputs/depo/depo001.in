@@ -1,0 +1,21 @@
+login
+admin
+deposit
+John Doe
+12345
+-5.00
+deposit
+John Doe
+12345
+0.00
+logout
+login
+standard
+John Doe
+deposit
+12345
+-5.00
+deposit
+12345
+0.00
+logout
