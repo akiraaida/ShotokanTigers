@@ -1,13 +1,21 @@
 Notes:
 ----
 - May have to do transaction fee withdrawal before transaction??? e_e
+	- To represent fee, could put marker in MM space for readability?
 - For transfers, should system magically know the name of recipient?
 - For transfers, should transferred money be available right away?
 - Possibility of a 'don't care' character?
 - Enter 'your' account number?
 	- & 'Please' consistency
 	- & New balance consistency
+	--> migrate to 'available balance'
 - typo on specified
+- may have to take consideration of holes somehow(missing enable 4 & 5)
+- Should sessions end with a prompt?
+	- End with "Please enter session type"?
+- transaction width should be 40 but is 41
+- fix confusion between person x being whatever and person's account
+- do all functions have a positive input combinations/ should works?
 
 Test Cases
 
@@ -33,7 +41,14 @@ Test Cases
   Test Step: Admin enters an incorrect account holder's name but correct account number.
 		  			 Admin enters a correct account holder's name but incorrect account number. (Correct name, incorrect number).
 	           Admin enters a correct account holder's name but incorrect account number. (Correct name, correct number but not matching).
-  Expected Result: The admin is notified the account is not valid.s
+  Expected Result: The admin is notified the account is not valid.
+
+	[enab004]
+	Scenario: Verify future transactions can now be done to a re-enabled account.
+	Test Step: Admin enables an account and then withdrawal, transfer,
+	paybill, and deposit transactions are tried in both standard and admin mode.
+	Then, admin tries the changeplan, & disable transactions.
+	Expected Result: The various operations complete sucessfully.
 
   [enab006]
   Scenario: Verify user withdraw transaction can now be done to a re-enabled account.
