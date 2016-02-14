@@ -121,7 +121,7 @@ Test Cases
   Test Step: Withdraw $1000 dollars from 2 accounts.
 	Expected Result: $1000 will be withdrawn.
 
-  [with015]
+  [with011]
   Scenario: Verify single account withdraw limit for admins doesn't apply
   Test Step: As admin, withdraw $600.00
   Test Input: [TODO: invent a rich prince]
@@ -132,14 +132,6 @@ Test Cases
   Scenario: Verify withdraw for admins does not incur transaction fee
   Test Step: [TODO: make 2 of these for student & standard plan uggh]
   Test Input:
-  Expected Result:
-  Expected Output: [TODO: after things are filled out]
-
-  [with017]
-  Scenario: Verify admin withdrawals do not conflict with user's withdrawal limit
-  Test Step: Withdraw $600 from admin then $100 as user
-  Test Step: Withdraw $400 as user and $200 as admin
-  Test Input: [TODO: invent a rich prince]
   Expected Result:
   Expected Output: [TODO: after things are filled out]
 
