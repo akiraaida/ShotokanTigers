@@ -22,6 +22,7 @@ Notes:
 	- do spellcheck in general
 - Display prompt after error? (i.e. fail gracefully)?
 - Not sure if I was consistent with withdraw/withdrawal.
+- When print balance?
 
 Test Cases
 

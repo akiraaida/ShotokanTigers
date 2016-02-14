@@ -9,6 +9,10 @@
 12353 Loaded Guy           A 00500.05 S
 12354 Loaded Guy           A 00500.10 N
 12355 Ashe Ace             A 10000.00 N
+12356 Loaded Guy           A 01000.05 S
+12357 Loaded Guy           A 01000.10 N
+12358 Loaded Guy           A 02000.05 S
+12359 Loaded Guy           A 02000.10 N
 12380 Octopus              A 00010.20 N
 12381 Octopus              A 00010.10 S
 12382 Octopus              A 00010.20 N
