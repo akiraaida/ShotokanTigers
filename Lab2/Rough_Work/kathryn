@@ -18,6 +18,7 @@ Notes:
 - do all functions have a positive input combinations/ should works?
 - should nonexistent name then ask for an account number?
 - make list of responses?
+- Display prompt after error? (i.e. fail gracefully)?
 
 Test Cases
 
@@ -62,42 +63,13 @@ Test Cases
   Expected Result: The user is notified the account is not valid and no changes
 			occur.
 
-  [with003]
-  Scenario: Verify negative dollars input is rejected
-  Test Step: Try to enter a negative value as an admin.
-  Test Step: Try to enter a negative value as a user
-  Test Input:
-        login
-        admin
-        withdrawal
-        John Doe
-        12345
-        -40.00
-        logout
-        [TODO]
-  Expected Result: Admin is informed that negative values are invalid. [TODO]
-  Expected Output: - Print: "Please enter your session type: "
-           - Print: "Please enter a command admin: "
-         - File: [TODO: after filled everything out]
-  [with004]
-  Scenario: Verify input dollars of $0 is rejected
-  Test Step: Try to enter a zero value as an admin.
-  Test Step: Try to enter a negative value as a user
-  Test Input:
-        login
-        admin
-        withdrawal
-        John Doe
-        12345
-        0.00
-        logout
-        [TODO]
-  Expected Result: Admin is informed that zero values are invalid. [TODO]
-  Expected Output: - Print: [TODO: after filled everything out]
-  Expected Output: - Print: "Please enter your session type: "
-           - Print: "Please enter a login name: "
-           - Print: "Please enter a command user: "
-         - File: [TODO: after filled everything out]
+	[with001]
+	Scenario: Verify invalid dollar values are rejected.
+	Test Step: Admin and standard try to withdraw 0 and negative dollar (-5)
+		values.
+	Expected Result: User is informed that only positive values are accepted; no
+			withdrawal occurs.
+
   [with005]
   Scenario: Verify that only #####.## number of decimals is accepted
   Test Step: Try to enter an excessive value as a user.
