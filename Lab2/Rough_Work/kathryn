@@ -16,6 +16,8 @@ Notes:
 - transaction width should be 40 but is 41
 - fix confusion between person x being whatever and person's account
 - do all functions have a positive input combinations/ should works?
+- should nonexistent name then ask for an account number?
+- make list of responses?
 
 Test Cases
 
@@ -50,106 +52,16 @@ Test Cases
 	Then, admin tries the changeplan, & disable transactions.
 	Expected Result: The various operations complete sucessfully.
 
-  [enab006]
-  Scenario: Verify user withdraw transaction can now be done to a re-enabled account.
-  Test Step: Admin enables an account and then performs admin & standard withdraw.
-  Expected Result: 10 dollars is withdrawn.
-
-  [enab007]
-  Scenario: Verify user deposit transaction can now be done to a re-enabled account.
-  Test Step: Admin enables an account and then performs a deposit. Then, user logs in and makes a deposit.
-  Expected Result: 5 dollars is added to the account.
-
-  [enab008]
-  Scenario: Verify user paybill transaction can now be done to a re-enabled account.
-  Test Step: Admin enables an account and then admin & standard pays a bill.
-  Expected Result: 10 dollars is paid to TV
-
-  [enab009]
-  Scenario: Verify transfer can be done with re-enabled accounts
-  Test Step: Admin enables an account, then transfers money to it.
-      Next, admin then has money transferred from it.
-			Then, the same thing happens in standard mode.
-  Expected Result: Bran Bob is enabled & 10.00 is transferred back and forth between him and John Doe.
-
-
 	Withdrawal - Kathryn
 	================
   [* Login/logout issues covered elsewhere?]
 	[with000]
-  Scenario: Verify account holder's name and account number correspond with each other (Incorrect name, correct number).
-  Test Step: Admin enters an incorrect account holder's name but correct account number.
-  Test Input:
-        login
-        admin
-        withdrawal
-        Bob Stevenson
-        12345
-        logout
-  Expected Result: The admin is notified the account is not valid.
-  Expected Output: - Print: "Please enter your session type: "
-           - Print: "Please enter a command admin: "
-           - Print: "Please enter the account holder's name: "
-           - Print: "Please enter the account number: "
-           - Print: "Error, account specificed is not a valid account."
-           - File: "10 admin                00000 00000000 A "
-					 - File: "00                      00000 00000000 00"
+  Scenario: Verify account holder's name and account number correspond with each other.
+  Test Step: Admin and standard try to access names without accounts, with wrong account
+			numbers, and with account numbers that do not correspond to the names.
+  Expected Result: The user is notified the account is not valid and no changes
+			occur.
 
-  [with001]
-  Scenario: Verify that not existing numbers are not accepted by withdrawal (Correct name, incorrect number)
-  Test Step: Admin enters a correct account holder's name but incorrect account number.
-      Next, Logged in user enters an incorrect number.
-  Test Input:
-        login
-        admin
-        withdrawal
-        Bran Bob
-        11111
-        logout
-        login
-        Bran Bob
-        withdrawal
-        12340
-        logout
-  Expected Result: The account number is rejected for both admin & user
-  Expected Output: - Print: "Please enter your session type: "
-           - Print: "Please enter a command admin: "
-           - Print: "Please enter the account holder's name: "
-           - Print: "Please enter the account number: "
-           - Print: "Error, account specificed is not a valid account."
-           - File: No change.
-          - Print: [TODO: after filled everything out]
-         - File: [TODO: after filled everything out]
-
-  [with002]
-  Scenario: Verify that only numbers belonging to the name can be used
-  Test Step: Admin enters a correct account holder and correct account number but they do not correspond to each other.
-  Test Step: Logged in user enters a number to an account that does not belong to them.
-  Test Input:
-        login
-        admin
-        withdrawal
-        Bran Bob
-        12346
-        logout
-  Test Input:
-        login
-        John Doe
-        withdrawal
-        12347
-        logout
-  Expected Result: The admin is notified the account is not valid.
-  Expected Result: The account number is rejected. [Note: should be identical to nonexistent account]
-  Expected Output: - Print: "Please enter your session type: "
-           - Print: "Please enter a command admin: "
-           - Print: "Please enter the account holder's name: "
-           - Print: "Please enter the account number: "
-           - Print: "Error, account specificed is not a valid account."
-           - File: No change.
-  Expected Output: - Print: "Please enter your session type: "
-           - Print: "Please enter a login name: "
-           - Print: "Please enter a command user: "
-           - File: [TODO: after filled everything out]
   [with003]
   Scenario: Verify negative dollars input is rejected
   Test Step: Try to enter a negative value as an admin.
