@@ -97,22 +97,6 @@ Test Cases
   Expected Output: - Print: [TODO: after filled everything out]
          - File: "No change"
 
-  [with008]
-  Scenario: Verify withdrawal input of ######.## (legit) is accepted
-  Test Step: Enter a number like 5.00
-  Test Input:
-        login
-        John Doe
-        withdrawal
-        12345
-        5.00
-        logout
-  Expected Result: Transaction occurs successfully
-  Expected Output: - Print: "Please enter your session type: "
-           - Print: "Please enter a login name: "
-           - Print: "Please enter a command user: "
-  Expected Output - Print: [TODO: after filled everything out]
-         - File: [TODO: same]
   [with009]
   Scenario: Verify only canadian bill values are allowed
   Test Step: Enter a number like 4.99
@@ -171,6 +155,7 @@ Test Cases
   Expected Result: user successfully withdraws 15.00
   Expected Output: - Print: [TODO: after filled everything out]
          - File: [TODO: samesies]
+
   [with012]
   Scenario: Verify single account withdraw limit cannot be exceeded
   Test Step: Try to withdraw 505.00 in user mode
@@ -179,8 +164,6 @@ Test Cases
   Test Input: [TODO: invent a rich prince]
   Expected Result:
   Expected Output: [TODO: after things are filled out]
-
-	[with013]
   Scenario: Verify withdrawal transaction fee is applied for standard & are applied for several calls
   Test Step: Try to withdraw [TODO: make 2 of these for student & standard plan uggh]
   Test Input:
@@ -300,32 +283,9 @@ Test Cases
   Expected Output: [TODO: after everything is filled out.]
 
   [with026]
-  Scenario: Verify withdrawal for resulting negative balance is rejected (over multiple sessions)
+  Scenario: Verify balance is remembered over multiple sessions
   Test Step: [TODO: after corresponding above is fine]
   Test Input:
-  Expected Result:
-  Expected Output: [TODO: after things are filled out]
-
-  [with027]
-  Scenario: Verify withdrawal for resulting zero balance is rejected (over multiple sessions)
-  Test Step: [TODO: after corresponding above is fine]
-  Test Input:
-  Expected Result:
-  Expected Output: [TODO: after things are filled out]
-
-  [with028]
-  Scenario: Verify withdrawals cannot result in a negative balance
-  Test Step: [TODO: after corresponding above is fine]
-  Test Step: withdraw like $1 over balance
-  Test Input:
-          [TODO]
-          login
-          admin
-          withdrawal
-          John Doe
-          12345
-          111.00
-          logout
   Expected Result:
   Expected Output: [TODO: after things are filled out]
 
