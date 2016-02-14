@@ -102,8 +102,18 @@ Test Cases
 
   [with007]
   Scenario: Verify single account withdraw limit cannot be exceeded
-  Test Step: In standard mode, try to withdraw 500, then 100 and 400.
+  Test Step: In standard mode, try to withdraw 500, then 100 and 401.
   Expected Result: Only 100 will be withdrawn, with error messages for the other attempts.
+
+	[with008]
+	Scenario: Verify transaction fees are not counted towards withdrawal limit.
+	Test Step: In standard mode, withdraw 5 then 495 dollars.
+	Expected Result: 500.00 will be withdrawn in total without conflicting with the limit.
+
+	[with009]
+	Scenario: Verify limits of transfer & paybill do not count towards withdrawal.
+	Test Step: bring transfer & paybill to limit and test withdrawal after each.
+	Expected Result: amount transferred and paid will breach 500.00 but all withdrawals will succeed.
 
   [with014]
   Scenario: Verify account limits are separate
