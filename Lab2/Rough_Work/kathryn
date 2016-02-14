@@ -199,9 +199,9 @@ Test Cases
 	Expected Result: 2000.00 will be paid in total without conflicting with the limit.
 
   [payb006]
-  Scenario: Verify account limits are separate
-  Test Step: Pay $4000 to 2 recipients
-	Expected Result: $4000 will be paid
+  Scenario: Verify account & recipient limits are separate
+  Test Step: Pay $8000 to 2 recipients across 2 accounts
+	Expected Result: $8000 will be paid
 
   [payb007]
   Scenario: Verify single account withdraw limit for admins doesn't apply

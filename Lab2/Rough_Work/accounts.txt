@@ -8,6 +8,7 @@
 12352 NEET Guy             A 00500.00 N
 12353 Loaded Guy           A 00500.05 S
 12354 Loaded Guy           A 00500.10 N
+12355 Ashe Ace             A 10000.00 N
 12380 Octopus              A 00010.20 N
 12381 Octopus              A 00010.10 S
 12382 Octopus              A 00010.20 N
