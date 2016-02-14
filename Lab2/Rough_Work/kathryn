@@ -72,43 +72,13 @@ Test Cases
 
   [with002]
   Scenario: Verify that only #####.## number of decimals is accepted
-  Test Step: As admin & standard, try various noncomformant inputs: 654321.12, 000005.00, .50, 5, 5., 5.000, & 5.0.
+  Test Step: As admin & standard, try various nonconformant inputs: 654321.12, 000005.00, .50, 5, 5., 5.000, & 5.0.
   Expected Result: User is informed that their format is invalid.
 
-  [with006]
-  Scenario: Verrify forbidden symbols are not accepted.
-  Test Step: Try to enter a number with preceding dollar sign.
-  Test Step: Try to enter a number with trailing dollar sign.
-  Test Step: Try to enter a number with comma delimiters.
-  Test Input:
-        login
-        John Doe
-        withdrawal
-        12345
-        $5.00
-        logout
-  Test Input:
-        login
-        John Doe
-        withdrawal
-        12345
-        5.00$
-        logout
-  Test Input:
-        login
-        John Doe
-        withdrawal
-        12345
-        5,00
-        logout
-  Expected Result: User is informed that dollar signs are not acceptable.
-  Expected Result: User is informed that dollar signs are not acceptable.
-  Expected Result: User is reminded to use . to represent decimal
-  Expected Output: - Print: "Please enter your session type: "
-           - Print: "Please enter a login name: "
-           - Print: "Please enter a command user: "
-  Expected Output: - Print: [TODO: after filled everything out]
-         - File: "No change"
+  [with003]
+  Scenario: Verify forbidden symbols are not accepted.
+  Test Step: As admin & standard, try to enter a number with preceding, trailing dollar signs and comma delimiters.
+  Expected Result: User is informed that the symbol is not acceptable.
 
   [with007]
   Scenario: Verify withdrawal input of ###### ## is rejected
