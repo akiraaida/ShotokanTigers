@@ -161,18 +161,8 @@ Test Cases
 
   [payb001]
   Scenario: Verify invalid company names are not accepted
-  Test Step: try to pay a bill to BS as user
-  Test Step: try to pay a bill to SBS as user
-  Test Step: try to pay a bill to S as user
-  Test Step: try to pay a bill to TVI as user
-  Test Step: try to pay a bill to BS as admin
-  Test Step: try to pay a bill to SBS as admin
-  Test Step: try to pay a bill to S as admin
-  Test Step: try to pay a bill to TVI as admin
-  Test Step: try to pay a bill to CE as user
-  Test Input:
-  Expected Result:
-  Expected Output: [TODO: after things are filled out]
+  Test Step: In admin & standard mode, try to pay a bill to BS, SBS, S, TVI, and CE
+  Expected Result: User will be informed that these company names are not valid.
 
 	[payb002]
 	Scenario: Verify account holder's name and account number exist & correspond with each other.

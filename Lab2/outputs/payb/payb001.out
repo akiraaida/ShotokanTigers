@@ -7,15 +7,15 @@ Error, BS is not a valid company name.
 Please enter the account holder's name:
 Please enter the account number:
 Please enter recipient to be paid:
-Error, SBS is not a valid company name.
+Error, SBS is not two characters.
 Please enter the account holder's name:
 Please enter the account number:
 Please enter recipient to be paid:
-Error, S is not a valid company name.
+Error, S is not two characters.
 Please enter the account holder's name:
 Please enter the account number:
 Please enter recipient to be paid:
-Error, TVI is not a valid company name.
+Error, TVI is not two characters.
 Please enter the account holder's name:
 Please enter the account number:
 Please enter recipient to be paid:
@@ -28,13 +28,13 @@ Please enter recipient to be paid:
 Error, BS is not a valid company name.
 Please enter the account number:
 Please enter recipient to be paid:
-Error, SBS is not a valid company name.
+Error, SBS is not two characters.
 Please enter the account number:
 Please enter recipient to be paid:
-Error, S is not a valid company name.
+Error, S is not two characters.
 Please enter the account number:
 Please enter recipient to be paid:
-Error, TVI is not a valid company name.
+Error, TVI is not two characters.
 Please enter the account number:
 Please enter recipient to be paid:
 Error, CE is not a valid company name.
