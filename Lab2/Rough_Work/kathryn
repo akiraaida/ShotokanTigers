@@ -21,6 +21,7 @@ Notes:
 	- typo on specified
 	- do spellcheck in general
 - Display prompt after error? (i.e. fail gracefully)?
+- Not sure if I was consistent with withdraw/withdrawal.
 
 Test Cases
 
@@ -102,8 +103,8 @@ Test Cases
 
   [with007]
   Scenario: Verify single account withdraw limit cannot be exceeded
-  Test Step: In standard mode, try to withdraw 500, then 100 and 401.
-  Expected Result: Only 100 will be withdrawn, with error messages for the other attempts.
+  Test Step: In standard mode, try to withdraw 500, then 100 and 405, then 400, then 5.
+  Expected Result: 500 will be withdrawn, with error messages for the other attempts.
 
 	[with008]
 	Scenario: Verify transaction fees are not counted towards withdrawal limit.
