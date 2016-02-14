@@ -4,4 +4,6 @@
 12348 Ashe Ace             A 10010.00 N
 12349 Anon Guy             A 01100.96 S
 12350 Anon Guy             A 00600.80 N
+12351 Student Guy          A 00500.00 S
+12352 NEET Guy             A 00500.00 N
 00000 END_OF_FILE          A 00000.00 S

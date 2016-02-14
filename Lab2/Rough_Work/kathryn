@@ -123,10 +123,13 @@ Test Cases
 
   [with011]
   Scenario: Verify single account withdraw limit for admins doesn't apply
-  Test Step: As admin, withdraw $600.00
-  Test Input: [TODO: invent a rich prince]
-  Expected Result:
-  Expected Output: [TODO: after things are filled out]
+  Test Step: withdraw over limit as admin before and after standard reaches it
+  Expected Result: All money is withdrawn successfully.
+
+	[with012]
+	Scenario: Verify that correct plan transaction fees apply.
+	Test Step: withdraw as student & nonstudent.
+	Expected Result: The student is charged 5 cents while the nonstudent is charged 10.
 
   [with016]
   Scenario: Verify withdraw for admins does not incur transaction fee
