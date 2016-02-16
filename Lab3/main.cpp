@@ -31,7 +31,28 @@ int main(int argc, const char* argv[]) {
     file.open(argv[1]);
     std::string line;
     while(getline(file, line)) {
-      std::cout << line << std::endl;
+
+      std::map<std::string, std::vector<Account> > accounts;
+      std::string num, name, stat, bal, plan;
+
+      for(int i = 0; i < line.length(); i++){
+        if(i < 5) {
+          num = num + line[i];
+        } else if(i > 5 && i < 26) {
+          name = name + line[i];
+        } else if(i > 26 && i < 28) {
+          stat = stat + line[i];
+        } else if(i > 28 && i < 37) {
+          bal = bal + line[i];
+        } else if(i > 37 && i < 39) {
+          plan = plan + line[i];
+        }
+      }
+
+    Account* newAcc = new Account();
+    newAcc.
+
+
     }
     file.close();
   } else {
