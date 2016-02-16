@@ -3,30 +3,16 @@
 #include <map>
 #include <vector>
 
-/**
-* Stores data for 1 bank account
-**/
 class Account {
  public:
-  /**
-  * ctor
-  **/
-  /*Account() {
-    // Initialize limits for this day
-    withdrawalLimitRemaining = 500.0;
-    transferLimitRemaining = 1000.0;
-  }*/
 
-  /**
-  * Class Fields
-  **/
   int number;
   bool isActive;
   double balance;
   bool isStudentPlan;
   double withdrawalLimitRemaining;
   double transferLimitRemaining;
-  // won't put in  paybill limits yet cause ugghh..??
+
 };
 
 /**
@@ -50,4 +36,3 @@ class Commands {
   bool changePlan(std::string name, int account);
   bool logout();
 };
-;

@@ -6,10 +6,6 @@
 #include <string>
 #include "FrontEnd.hpp"
 
-
-
-
-// ./program accounts.txt
 int main(int argc, const char* argv[]) {
 
     std::map<std::string, std::vector<Account*> > accounts;
@@ -19,12 +15,4 @@ int main(int argc, const char* argv[]) {
     } else {
       std::cout << "ERROR" << std::endl;
     }
-
-
-  // for(Account* account : accounts["Ashe Ace            "]) {
-  //   std::cout << account->number << std::endl;
-  // }
-
-
-  return 0;
 }
