@@ -1,4 +1,9 @@
 #include "FrontEnd.hpp"
+#include <iostream>
+#include <fstream>
+#include <stdlib.h>
+#include <stdio.h>
+#include <string>
 
 std::map<std::string, std::vector<Account*> > AccountParser::parse(const char* fpath) {
 

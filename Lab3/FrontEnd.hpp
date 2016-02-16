@@ -19,7 +19,7 @@ class Account {
 * Convert from file to accounts map
 **/
 class AccountParser {
-
+public:
   static std::map<std::string, std::vector<Account*> > parse(const char* fpath);
 };
 
