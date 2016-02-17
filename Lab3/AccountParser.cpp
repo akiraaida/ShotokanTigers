@@ -20,6 +20,13 @@ std::map<std::string, std::vector<Account*> > AccountParser::parse(const char* f
     bal = line.substr(29, 8);
     plan = line.substr(38, 1);
 
+    // trim the name
+    {
+      size_t endpos = name.find_last_not_of(" ");
+      name = name.substr(0, endpos+1);
+      // std::cout << "read \"" << name << "\"" << std::endl;
+    }
+
     Account* newAcc = new Account();
     newAcc->number = atoi(num.c_str());
     if (stat == "A") {

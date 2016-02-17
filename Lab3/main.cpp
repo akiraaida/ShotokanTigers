@@ -25,15 +25,47 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <string>
+#include <string.h>
 #include "FrontEnd.hpp"
 
 int main(int argc, const char* argv[]) {
-
-    std::map<std::string, std::vector<Account*> > accounts;
+    Commands commands;
 
     if(argc == 2) {
-      accounts = AccountParser::parse(argv[1]);
+      commands.setAccounts(AccountParser::parse(argv[1]));
     } else {
-      std::cout << "ERROR" << std::endl;
+      std::cout << "ERROR, ACCOUNTS FILE DID NOT LOAD." << std::endl;
+      return 0;
+    }
+
+    char userCmd[10];
+    while(true){
+      std::cout << "Please enter a command: " << std::endl;
+      std::cin.getline(userCmd, sizeof(userCmd));
+      if(strncmp(userCmd, "login", 10) == 0){
+        commands.login();
+      } else if(strncmp(userCmd, "withdrawal", 10) == 0){
+
+      } else if(strncmp(userCmd, "transfer", 10) == 0){
+
+      } else if(strncmp(userCmd, "paybill", 10) == 0){
+
+      } else if(strncmp(userCmd, "deposit", 10) == 0){
+
+      } else if(strncmp(userCmd, "create", 10) == 0){
+
+      } else if(strncmp(userCmd, "delete", 10) == 0){
+
+      } else if(strncmp(userCmd, "disable", 10) == 0){
+
+      } else if(strncmp(userCmd, "enable", 10) == 0){
+
+      } else if(strncmp(userCmd, "changeplan", 10) == 0){
+
+      } else if(strncmp(userCmd, "logout", 10) == 0){
+
+      } else{
+        std::cout << "ERROR, INVALID COMMAND." << std::endl;
+      }
     }
 }

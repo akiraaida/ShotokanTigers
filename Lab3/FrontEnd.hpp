@@ -1,3 +1,5 @@
+#ifndef FRONTEND_HPP
+#define FRONTEND_HPP
 /******************************************************************************
 * FrontEnd.hpp
 * CSCI 3060u/SOFE 3980u: Course Project Front End
@@ -72,13 +74,22 @@ public:
 **/
 class Commands {
  public:
+
+   Commands();
+
+  /**
+  * Gives map
+  **/
+  void setAccounts(std::map<std::string, std::vector<Account*> >&& accounts);
+
+
   /**
   * Try to login.
   * \param name: name of customer (or "admin")
   * \return whether login was successful.
   **/
-  bool login(std::string name);
-
+  bool login();
+  std::string determineSession();
   /**
   * Withdraw a value from an account.
   * \param name Account holder's moniker.
@@ -134,4 +145,9 @@ class Commands {
     * values.
     **/
     std::map<std::string, std::vector<Account*> > accounts;
+    bool isLoggedIn;
+
 };
+
+
+#endif //FRONTEND_HPP
