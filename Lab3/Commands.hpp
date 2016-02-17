@@ -1,7 +1,7 @@
-#ifndef FRONTEND_HPP
-#define FRONTEND_HPP
+#ifndef COMMANDS_HPP
+#define COMMANDS_HPP
 /******************************************************************************
-* FrontEnd.hpp
+* Commands.hpp
 * CSCI 3060u/SOFE 3980u: Course Project Front End
 * Winter 2016
 *
@@ -15,60 +15,6 @@
 #include <map>
 #include <vector>
 #include <deque>
-
-/**
-* Stores information about a customer's account's balance, etc.
-**/
-class Account {
- public:
-  /**
-  * 'Account number' uniquely identifying item in system
-  **/
-  int number;
-
-  /**
-  * Flag indicating whether or not an account is diabled i.e. A == true, D ==
-  * false
-  **/
-  bool isActive;
-
-  /**
-  * Current value associated with this account in CAD
-  **/
-  double balance;
-
-  /**
-  * Flag corresponding to SP or NS charges.
-  **/
-  bool isStudentPlan;
-
-  /**
-  * Reset at each day; Number of dollars that may be withdrawn this day.
-  **/
-  double withdrawalLimitRemaining;
-
-  /**
-  * Reset at each day; Number of dollars that may be transferred this day.
-  **/
-  double transferLimitRemaining;
-
-  /**
-  * TODO: with above limits, keep track of paybill limits (Each limit may not)
-  * belong in this class but that is later things).
-  **/
-
-};
-
-/**
-* Convert from file to accounts map.
-**/
-class AccountParser {
-public:
-  /**
-  * Parses the info at fpath into a bank accounts directory.
-  **/
-  static std::map<std::string, std::vector<Account*> > parse(const char* fpath);
-};
 
 /**
 * Bank System storing, tracking, and querying the accounts.
@@ -90,7 +36,12 @@ class Commands {
   * \return whether login was successful.
   **/
   bool login();
+
+  /**
+  * TODO
+  **/
   std::string determineSession();
+
   /**
   * Withdraw a value from an account.
   * \param name Account holder's moniker.
@@ -196,4 +147,4 @@ class Commands {
 };
 
 
-#endif //FRONTEND_HPP
+#endif //COMMANDS_HPP

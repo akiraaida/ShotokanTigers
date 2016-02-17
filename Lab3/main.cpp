@@ -26,7 +26,8 @@
 #include <stdio.h>
 #include <string>
 #include <string.h>
-#include "FrontEnd.hpp"
+#include "Account.hpp"
+#include "Commands.hpp"
 
 int main(int argc, const char* argv[]) {
     Commands commands;
