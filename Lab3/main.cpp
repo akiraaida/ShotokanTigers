@@ -45,7 +45,7 @@ int main(int argc, const char* argv[]) {
       return 0;
     }
 
-    char user_cmd[11];
+    char user_cmd[11] = { 0 };
     while(true){
       std::cout << "Please enter a command: " << std::endl;
       std::cin.getline(user_cmd, sizeof(user_cmd));

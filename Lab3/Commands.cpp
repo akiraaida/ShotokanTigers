@@ -35,8 +35,7 @@ std::string Commands::DetermineSession(){
 
 
 void Commands::PushTransactionRecord(int code, std::string name, int account_number, double money, std::string misc) {
-  std::string transaction;
-  misc = "";
+  std::string transaction = "";
   std::string code_string;
   {
     code_string = std::to_string(code);
@@ -77,15 +76,13 @@ void Commands::PushTransactionRecord(int code, std::string name, int account_num
 bool Commands::login() {
 
   if(is_logged_in_ == false){
-    std::string session;
-    session = DetermineSession();
+    std::string session = DetermineSession();
 
     // testing
     PushTransactionRecord(10);
 
     if(session != "" && session != "admin") {
-      std::vector<Account*> temp;
-      temp = accounts_[session];
+      std::vector<Account*> temp = accounts_[session];
       if(temp.empty()){
         std::cout << "ERROR, THAT USER DOES NOT HAVE AN ACCOUNT." << std::endl;
         return false;
@@ -142,16 +139,15 @@ bool Commands::withdrawal() {
 
     if(is_admin_ == true){
       std::cout << "Please enter the account holder's name: " << std::endl;
-      char name[21];
+      char name[21] = { 0 };
       std::cin.getline(name, sizeof(name));
       std::cout << "Please enter the user's account number: " << std::endl;
-      char num[6];
+      char num[6] = { 0 };
       std::cin.getline(num, sizeof(num));
       std::cout << "Please enter an amount to withdraw: " << std::endl;
-      char amount[9];
+      char amount[9] = { 0 };
       std::cin.getline(amount, sizeof(amount));
-      std::vector<Account*> temp;
-      temp = accounts_[name];
+      std::vector<Account*> temp = accounts_[name];
       if(temp.empty()){
         std::cout << "ERROR, THAT USER DOES NOT HAVE AN ACCOUNT." << std::endl;
         return false;

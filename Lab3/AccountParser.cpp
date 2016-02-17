@@ -31,22 +31,22 @@ std::map<std::string, std::vector<Account*> > Parse(const char* fpath) {
       // std::cout << "read \"" << name << "\"" << std::endl;
     }
 
-    Account* newAcc = new Account();
-    newAcc->number = atoi(num.c_str());
+    Account* new_account = new Account();
+    new_account->number = atoi(num.c_str());
     if (stat == "A") {
-      newAcc->is_active = 1;
+      new_account->is_active = 1;
     } else {
-      newAcc->is_active = 0;
+      new_account->is_active = 0;
     }
 
-    newAcc->balance = atof(bal.c_str());
+    new_account->balance = atof(bal.c_str());
     if (plan == "S") {
-      newAcc->is_student_plan = 1;
+      new_account->is_student_plan = 1;
     } else {
-      newAcc->is_student_plan = 0;
+      new_account->is_student_plan = 0;
     }
 
-    accounts[name].push_back(newAcc);
+    accounts[name].push_back(new_account);
 
   }
   file.close();
