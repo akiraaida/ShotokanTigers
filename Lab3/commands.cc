@@ -29,17 +29,17 @@
 #define PROMPT_WITHDRAWAL_VALUE "Please enter an amount to withdraw: "
 
 namespace BankFrontEnd {
-Commands::Commands(){
+Commands::Commands() {
   is_logged_in_ = false;
   is_admin_ = false;
 }
 
 void Commands::SetAccounts(std::map<std::string,
-    std::vector<Account*> >&& accounts) {
+                           std::vector<Account*> >&& accounts) {
   accounts_ = accounts;
 }
 
-std::string Commands::DetermineSession(){
+std::string Commands::DetermineSession() {
   char session[21];
   std::cout << PROMPT_ENTER_SESSION_TYPE  << std::endl;
   std::cin.getline(session, sizeof(session));
@@ -59,7 +59,8 @@ std::string Commands::DetermineSession(){
 
 
 void Commands::PushTransactionRecord(int code, std::string name,
-    int account_number, double money, std::string misc) {
+                                     int account_number, double money,
+                                     std::string misc) {
   std::string transaction = "";
   std::string code_string;
   {
@@ -99,7 +100,6 @@ void Commands::PushTransactionRecord(int code, std::string name,
 
 
 bool Commands::login() {
-
   if(is_logged_in_ == false){
     std::string session = DetermineSession();
 
@@ -159,7 +159,6 @@ bool Commands::login() {
 }
 
 bool Commands::withdrawal() {
-
   if(is_logged_in_ == true){
 
     if(is_admin_ == true){
