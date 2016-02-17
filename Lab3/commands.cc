@@ -100,7 +100,7 @@ void Commands::PushTransactionRecord(int code, std::string name,
 
 
 bool Commands::login() {
-  if(is_logged_in_ == false){
+  if(is_logged_in_ == false) {
     std::string session = DetermineSession();
 
     // testing
@@ -108,7 +108,7 @@ bool Commands::login() {
 
     if(session != "" && session != "admin") {
       std::vector<Account*> temp = accounts_[session];
-      if(temp.empty()){
+      if(temp.empty()) {
         std::cout << ERROR_MESSAGE_ACCOUNTLESS_USER << std::endl;
         return false;
       } else {
@@ -118,7 +118,7 @@ bool Commands::login() {
 
 
         std::string trans = "";
-        for(int i = 0; i < 41; i++){
+        for(int i = 0; i < 41; i++) {
           trans = trans + " ";
         }
         logged_in_name_ = session;
@@ -132,11 +132,11 @@ bool Commands::login() {
 
         return true;
       }
-    } else if(session == "admin"){
+    } else if(session == "admin") {
       is_logged_in_ = true;
       is_admin_ = true;
       std::string trans = "";
-      for(int i = 0; i < 41; i++){
+      for(int i = 0; i < 41; i++) {
         trans = trans + " ";
       }
 
@@ -159,9 +159,9 @@ bool Commands::login() {
 }
 
 bool Commands::withdrawal() {
-  if(is_logged_in_ == true){
+  if(is_logged_in_ == true) {
 
-    if(is_admin_ == true){
+    if(is_admin_ == true) {
       std::cout << PROMPT_ENTER_CUSTOMER_NAME << std::endl;
       char name[21] = { 0 };
       std::cin.getline(name, sizeof(name));
@@ -172,7 +172,7 @@ bool Commands::withdrawal() {
       char amount[9] = { 0 };
       std::cin.getline(amount, sizeof(amount));
       std::vector<Account*> temp = accounts_[name];
-      if(temp.empty()){
+      if(temp.empty()) {
         std::cout << ERROR_MESSAGE_ACCOUNTLESS_USER << std::endl;
         return false;
       } else {
@@ -180,14 +180,14 @@ bool Commands::withdrawal() {
         bool owned_account = UserExists(name);
         Account* temp_account = GetAccount(name, atoi(num));
 
-        if(owned_account == false || temp_account == nullptr){
+        if(owned_account == false || temp_account == nullptr) {
           std::cout << ERROR_MESSAGE_STOLEN_ACCOUNT << std::endl;
         } else {
-          if(temp_account->balance > atof(amount)){
+          if(temp_account->balance > atof(amount)) {
 
             float newBal = temp_account->balance - atof(amount);
             std::string trans = "";
-            for(int i = 0; i < 41; i++){
+            for(int i = 0; i < 41; i++) {
               trans = trans + " ";
             }
             trans.replace(0, 2, "01");
@@ -246,7 +246,7 @@ Account* Commands::GetAccount(std::string name, int number) {
 }
 
 bool Commands::transfer() {
-  if(is_logged_in_ == true){
+  if(is_logged_in_ == true) {
     // get name
     std::string name;
     if(is_admin_) {
@@ -320,7 +320,7 @@ bool Commands::transfer() {
 }
 
 bool Commands::paybill() {
-  if(is_logged_in_ == true){
+  if(is_logged_in_ == true) {
 
   } else {
     std::cout << ERROR_MESSAGE_NO_LOGIN << std::endl;
@@ -330,7 +330,7 @@ bool Commands::paybill() {
 }
 
 bool Commands::deposit() {
-  if(is_logged_in_ == true){
+  if(is_logged_in_ == true) {
 
   } else {
     std::cout << ERROR_MESSAGE_NO_LOGIN << std::endl;
@@ -340,7 +340,7 @@ bool Commands::deposit() {
 }
 
 bool Commands::create() {
-  if(is_logged_in_ == true){
+  if(is_logged_in_ == true) {
 
   } else {
     std::cout << ERROR_MESSAGE_NO_LOGIN << std::endl;
@@ -349,8 +349,8 @@ bool Commands::create() {
   return false;
 }
 
-bool Commands::delete_account(){
-  if(is_logged_in_ == true){
+bool Commands::delete_account() {
+  if(is_logged_in_ == true) {
 
   } else {
     std::cout << ERROR_MESSAGE_NO_LOGIN << std::endl;
@@ -359,8 +359,8 @@ bool Commands::delete_account(){
   return false;
 }
 
-bool Commands::disable(){
-  if(is_logged_in_ == true){
+bool Commands::disable() {
+  if(is_logged_in_ == true) {
 
   } else {
     std::cout << ERROR_MESSAGE_NO_LOGIN << std::endl;
@@ -369,8 +369,8 @@ bool Commands::disable(){
   return false;
 }
 
-bool Commands::changeplan(){
-  if(is_logged_in_ == true){
+bool Commands::changeplan() {
+  if(is_logged_in_ == true) {
 
   } else {
     std::cout << ERROR_MESSAGE_NO_LOGIN << std::endl;
@@ -379,8 +379,8 @@ bool Commands::changeplan(){
   return false;
 }
 
-bool Commands::enable(){
-  if(is_logged_in_ == true){
+bool Commands::enable() {
+  if(is_logged_in_ == true) {
 
   } else {
     std::cout << ERROR_MESSAGE_NO_LOGIN << std::endl;
@@ -389,8 +389,8 @@ bool Commands::enable(){
   return false;
 }
 
-bool Commands::logout(){
-  if(is_logged_in_ == true){
+bool Commands::logout() {
+  if(is_logged_in_ == true) {
 
   } else {
     std::cout << ERROR_MESSAGE_NO_LOGIN << std::endl;

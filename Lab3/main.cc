@@ -50,10 +50,10 @@ int main(int argc, const char* argv[]) {
     }
 
     char user_cmd[11] = { 0 };
-    while(true){
+    while(true) {
       std::cout << PROMPT_ENTER_COMMAND << std::endl;
       std::cin.getline(user_cmd, sizeof(user_cmd));
-      if(strncmp(user_cmd, "login", 10) == 0){
+      if(strncmp(user_cmd, "login", 10) == 0) {
         commands.login();
       } else if(strncmp(user_cmd, "withdrawal", 10) == 0) {
         commands.withdrawal();
