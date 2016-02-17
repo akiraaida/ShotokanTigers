@@ -188,6 +188,7 @@ bool Commands::transfer() {
     // Ask for next name
     std::string recipientName;
     int recipientNumber;
+    Account* recipientAccount;
     {
       std::cout << "Please enter account to transfer to: " << std::endl;
       char num[6];
@@ -195,8 +196,17 @@ bool Commands::transfer() {
       recipientNumber = std::stoi(num);
 
       // find name corresponding
-      std::cout << "\"" << getAccountOwner(recipientNumber) << "\"" << std::endl;
+      recipientName = getAccountOwner(recipientNumber);
+      if(recipientName.empty() || recipientName == name) {
+        std::cout << "Error, " << recipientNumber << " is not a valid recipient." << std::endl;
+        return false;
+      }
+
+      // get account
+      recipientAccount = getAccount(recipientName, recipientNumber);
     }
+
+    // TODO: after withdrawal is done
 
 
 
