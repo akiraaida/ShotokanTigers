@@ -1,7 +1,7 @@
-#ifndef BANK_FRONTEND_COMMANDS_HPP_
-#define BANK_FRONTEND_COMMANDS_HPP_
+#ifndef BANK_FRONTEND_COMMANDS_H_
+#define BANK_FRONTEND_COMMANDS_H_
 /******************************************************************************
-* Commands.hpp
+* commands.h
 * CSCI 3060u/SOFE 3980u: Course Project Front End
 * Winter 2016
 *
@@ -23,7 +23,7 @@
 #include <string>
 #include <vector>
 
-#include "Account.hpp"
+#include "account.h"
 
 namespace BankFrontEnd {
 /**
@@ -157,4 +157,4 @@ class Commands {
 };
 }
 
-#endif //BANK_FRONTEND_COMMANDS_HPP_
+#endif //BANK_FRONTEND_COMMANDS_H_

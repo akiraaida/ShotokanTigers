@@ -1,7 +1,7 @@
-#ifndef BANK_FRONTEND_ACCOUNT_HPP_
-#define BANK_FRONTEND_ACCOUNT_HPP_
+#ifndef BANK_FRONTEND_ACCOUNT_H_
+#define BANK_FRONTEND_ACCOUNT_H_
 /******************************************************************************
-* Account.hpp
+* account.h
 * CSCI 3060u/SOFE 3980u: Course Project Front End
 * Winter 2016
 *
@@ -73,4 +73,4 @@ namespace AccountParser {
 }
 
 
-#endif //BANK_FRONTEND_ACCOUNT_HPP_
+#endif //BANK_FRONTEND_ACCOUNT_H_

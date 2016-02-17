@@ -29,8 +29,8 @@
 #include <iostream>
 #include <string>
 
-#include "Account.hpp"
-#include "Commands.hpp"
+#include "account.h"
+#include "commands.h"
 
 /**
 * Main.
