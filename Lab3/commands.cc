@@ -51,7 +51,7 @@ std::string Commands::DetermineSession() {
     std::cout << PROMPT_ENTER_LOGIN_NAME << std::endl;
     std::cin.getline(login_name, sizeof(login_name));
     return login_name;
-  } else{
+  } else {
     std::cout << ERROR_MESSAGE_INVALID_SESSION << std::endl;
     return "";
   }
@@ -175,7 +175,7 @@ bool Commands::withdrawal() {
       if(temp.empty()){
         std::cout << ERROR_MESSAGE_ACCOUNTLESS_USER << std::endl;
         return false;
-      } else{
+      } else {
 
         bool owned_account = UserExists(name);
         Account* temp_account = GetAccount(name, atoi(num));
@@ -201,7 +201,7 @@ bool Commands::withdrawal() {
         }
       }
 
-    } else{
+    } else {
 
     }
 
@@ -279,7 +279,7 @@ bool Commands::transfer() {
       Account* account = GetAccount(name, number);
       if(account == nullptr) {
         std::cout << "Error, account " << name << ":" << number
-            << " was not found" << std::endl;
+                  << " was not found" << std::endl;
         return false;
       }
     }
@@ -299,8 +299,8 @@ bool Commands::transfer() {
       // find name corresponding
       recipient_name = GetAccountOwner(recipient_number);
       if(recipient_name.empty() || recipient_name == name) {
-        std::cout << "Error, " << recipient_number << " is not a valid recipient."
-            << std::endl;
+        std::cout << "Error, " << recipient_number
+                  << " is not a valid recipient." << std::endl;
         return false;
       }
 
