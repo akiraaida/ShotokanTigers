@@ -124,13 +124,14 @@ bool Commands::withdrawal() {
             for(int i = 0; i < 41; i++){
               trans = trans + " ";
             }
-            trans.replace(0, 2, "01");
-            trans.replace(3, 20, name); // Why does this not work?
-            trans.replace(3 + 21, 5, num);
-            //trans.replace(24 + 6, 8, amount);
-            //std::cout << amount < std::endl;
             std::cout << "\"" << trans << "\"" << std::endl;
-
+            std::cout << name << " " << num << " " << amount << std::endl;
+            // trans.replace(0, 2, "01");
+            trans.replace(3, 20, name); // Why does this not work?
+            // trans.replace(3 + 21, 5, num);
+            // trans.replace(24 + 6, 8, amount);
+            // //std::cout << amount < std::endl;
+            std::cout << "\"" << trans << "\"" << std::endl;
           }
         }
       }
