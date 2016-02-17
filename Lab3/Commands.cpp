@@ -1,7 +1,7 @@
 #include "FrontEnd.hpp"
 #include <iostream>
 #include <string>
-#include <string.h>
+#include <cstring>
 
 Commands::Commands(){
   isLoggedIn = false;
@@ -31,8 +31,29 @@ std::string Commands::determineSession(){
 }
 
 
-void pushTransactionRecord(int code, std::string name, int accountNumber, double money, std::string misc) {
-  //todo
+void Commands::pushTransactionRecord(int code, std::string name, int accountNumber, double money, std::string misc) {
+  std::string trans;
+  std::string moneyStr;
+  {
+    char moneyStrBuff[16] = { 0 };
+    sprintf(moneyStrBuff, "%5.2f", money);
+    std::string moneyStrBuff2(moneyStrBuff);
+    int nzeroes = 8 - moneyStrBuff2.length();
+    nzeroes = nzeroes < 0 ? 0 : nzeroes;
+    moneyStr.insert(0, nzeroes, '0');
+    moneyStr = moneyStr + moneyStrBuff2; // fix later
+  }
+
+  trans.insert(0, 41, ' ');
+  trans.replace(0, 2, std::to_string(code));
+  trans.replace(3, name.length(), name);
+  trans.replace(3 + 21, 5, std::to_string(accountNumber));
+  trans.replace(24 + 6, 8, moneyStr);
+  trans.replace(39, 2, misc);
+  std::cout << "test: \"" << trans << "\"" << std::endl;
+
+  // push
+  transactionOutput.push_front(trans);
 }
 
 
@@ -42,6 +63,7 @@ bool Commands::login() {
     std::string session;
     session = determineSession();
 
+    pushTransactionRecord(10, "test", 54321, 50.0, "NA");
     if(session != "" && session != "admin") {
       std::vector<Account*> temp;
       temp = accounts[session];
@@ -50,6 +72,8 @@ bool Commands::login() {
         return false;
       } else {
         isLoggedIn = true;
+
+        // test the function that I made and stuff
 
         std::string trans = "";
         for(int i = 0; i < 41; i++){
