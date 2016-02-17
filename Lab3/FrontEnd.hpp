@@ -156,6 +156,11 @@ class Commands {
     **/
     Account* getAccount(std::string name, int account);
 
+    /**
+    * Find customer name corresponding to account number
+    * Returns empty string if account was not found
+    **/
+    std::string getAccountOwner(int account);
 
     /**
     * Field with customer names as keys and their associated bank accounts as
