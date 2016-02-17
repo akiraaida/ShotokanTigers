@@ -30,6 +30,12 @@ std::string Commands::determineSession(){
   }
 }
 
+
+void pushTransactionRecord(int code, std::string name == "", int accountNumber = 0, double money = 0.0, std::string misc = "") {
+  //todo
+}
+
+
 bool Commands::login() {
 
   if(isLoggedIn == false){

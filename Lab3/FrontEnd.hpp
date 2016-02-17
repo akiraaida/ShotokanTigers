@@ -157,10 +157,15 @@ class Commands {
     Account* getAccount(std::string name, int account);
 
     /**
-    * Find customer name corresponding to account number
+    * Find customer name corresponding to account number;
     * Returns empty string if account was not found
     **/
     std::string getAccountOwner(int account);
+
+    /**
+    * pushes transaction record with that info onto stack
+    **/
+    void pushTransactionRecord(int code, std::string name == "", int accountNumber = 0, double money = 0.0, std::string misc = "");
 
     /**
     * Field with customer names as keys and their associated bank accounts as
