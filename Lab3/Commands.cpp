@@ -11,8 +11,8 @@ Commands::Commands(){
   is_admin_ = false;
 }
 
-void Commands::setAccounts(std::map<std::string, std::vector<Account*> >&& accounts_) {
-  this->accounts_ = accounts_;
+void Commands::setAccounts(std::map<std::string, std::vector<Account*> >&& accounts) {
+  accounts_ = accounts;
 }
 
 std::string Commands::determineSession(){
@@ -23,10 +23,10 @@ std::string Commands::determineSession(){
   if(strncmp(session, "admin", 20) == 0) {
     return "admin";
   } else if(strncmp(session, "standard", 20) == 0) {
-    char logName[21];
+    char login_name[21];
     std::cout << "Please enter a login name: " << std::endl;
-    std::cin.getline(logName, sizeof(logName));
-    return logName;
+    std::cin.getline(login_name, sizeof(login_name));
+    return login_name;
   } else{
     std::cout << "ERROR, SESSION TYPE IS NOT VALID." << std::endl;
     return "";
@@ -34,43 +34,43 @@ std::string Commands::determineSession(){
 }
 
 
-void Commands::pushTransactionRecord(int code, std::string name, int accountNumber, double money, std::string misc) {
-  std::string trans;
+void Commands::pushTransactionRecord(int code, std::string name, int account_number, double money, std::string misc) {
+  std::string transaction;
   misc = "";
-  std::string codeStr;
+  std::string code_string;
   {
-    codeStr = std::to_string(code);
-    int nzeroes = 2 - codeStr.size();
-    codeStr.insert(0, nzeroes, '0');
+    code_string = std::to_string(code);
+    int zeroes_count = 2 - code_string.size();
+    code_string.insert(0, zeroes_count, '0');
   }
-  std::string moneyStr;
+  std::string money_string;
   {
-    char moneyStrBuff[16] = { 0 };
-    sprintf(moneyStrBuff, "%5.2f", money);
-    std::string moneyStrBuff2(moneyStrBuff);
-    int nzeroes = 8 - moneyStrBuff2.length();
-    nzeroes = nzeroes < 0 ? 0 : nzeroes;
-    moneyStr.insert(0, nzeroes, '0');
-    moneyStr = moneyStr + moneyStrBuff2; // fix later
+    char money_string_buff[16] = { 0 };
+    sprintf(money_string_buff, "%5.2f", money);
+    std::string money_string_buff_2(money_string_buff);
+    int zeroes_count = 8 - money_string_buff_2.length();
+    zeroes_count = zeroes_count < 0 ? 0 : zeroes_count;
+    money_string.insert(0, zeroes_count, '0');
+    money_string = money_string + money_string_buff_2; // fix later
   }
-  std::string accountStr;
+  std::string account_string;
   {
-    int nzeroes = 5 - std::to_string(accountNumber).size();
-    accountStr.insert(0, nzeroes, '0');
-    accountStr = accountStr + std::to_string(accountNumber);
-    std::cout << accountStr << std::endl;
+    int zeroes_count = 5 - std::to_string(account_number).size();
+    account_string.insert(0, zeroes_count, '0');
+    account_string = account_string + std::to_string(account_number);
+    std::cout << account_string << std::endl;
   }
 
-  trans.insert(0, 41, ' ');
-  trans.replace(0, 2, codeStr);
-  trans.replace(3, name.length(), name);
-  trans.replace(3 + 21, 5, accountStr);
-  trans.replace(24 + 6, 8, moneyStr);
-  trans.replace(39, 2, misc);
-  std::cout << "\"" << trans << "\" " << trans.size() <<  std::endl;
+  transaction.insert(0, 41, ' ');
+  transaction.replace(0, 2, code_string);
+  transaction.replace(3, name.length(), name);
+  transaction.replace(3 + 21, 5, account_string);
+  transaction.replace(24 + 6, 8, money_string);
+  transaction.replace(39, 2, misc);
+  std::cout << "\"" << transaction << "\" " << transaction.size() <<  std::endl;
 
   // push
-  transaction_output_.push_front(trans);
+  transaction_output_.push_front(transaction);
 }
 
 
@@ -155,15 +155,15 @@ bool Commands::withdrawal() {
         return false;
       } else{
 
-        bool ownedAcnt = userExists(name);
-        Account* tempAcnt = getAccount(name, atoi(num));
+        bool owned_account = userExists(name);
+        Account* temp_account = getAccount(name, atoi(num));
 
-        if(ownedAcnt == false || tempAcnt == nullptr){
+        if(owned_account == false || temp_account == nullptr){
           std::cout << "ERROR, THE ACCOUNT NUMBER DOESN'T MATCH THE ACCOUNT HOLDER'S NAME." << std::endl;
         } else {
-          if(tempAcnt->balance > atof(amount)){
+          if(temp_account->balance > atof(amount)){
 
-            float newBal = tempAcnt->balance - atof(amount);
+            float newBal = temp_account->balance - atof(amount);
             std::string trans = "";
             for(int i = 0; i < 41; i++){
               trans = trans + " ";
@@ -265,24 +265,24 @@ bool Commands::transfer() {
 
 
     // Ask for next name
-    std::string recipientName;
-    int recipientNumber;
-    Account* recipientAccount;
+    std::string recipient_name;
+    int recipient_number;
+    Account* recipient_account;
     {
       std::cout << "Please enter account to transfer to: " << std::endl;
       char num[6];
       std::cin.getline(num, sizeof(num));
-      recipientNumber = std::stoi(num);
+      recipient_number = std::stoi(num);
 
       // find name corresponding
-      recipientName = getAccountOwner(recipientNumber);
-      if(recipientName.empty() || recipientName == name) {
-        std::cout << "Error, " << recipientNumber << " is not a valid recipient." << std::endl;
+      recipient_name = getAccountOwner(recipient_number);
+      if(recipient_name.empty() || recipient_name == name) {
+        std::cout << "Error, " << recipient_number << " is not a valid recipient." << std::endl;
         return false;
       }
 
       // get account
-      recipientAccount = getAccount(recipientName, recipientNumber);
+      recipient_account = getAccount(recipient_name, recipient_number);
     }
 
     // TODO: after withdrawal is done
