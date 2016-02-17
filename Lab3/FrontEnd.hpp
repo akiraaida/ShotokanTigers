@@ -73,17 +73,59 @@ public:
 class Commands {
  public:
   /**
-  *
+  * Try to login.
+  * \param name: name of customer (or "admin")
+  * \return whether login was successful.
   **/
   bool login(std::string name);
+
+  /**
+  * Withdraw a value from an account.
+  * \param name Account holder's moniker.
+  * \param account Account's index.
+  * \param amount Amount to withdraw.
+  * \return Success of transaction.
+  **/
   bool withdrawal(std::string name, int account, double amount);
+
+  /**
+  * TODO
+  **/
   bool transfer(std::string name, int account1, int account2, double amount);
+
+  /**
+  * TODO
+  **/
   bool paybill(std::string name, int account, std::string company, double amount);
+
+  /**
+  * TODO
+  **/
   bool deposit(std::string name, int account, double amount);
+
+  /**
+  * TODO
+  **/
   bool create(std::string name, double amount);
+
+  /**
+  * TODO
+  **/
   bool deleteAccount(std::string name, int account);
+
+  /**
+  * TODO
+  **/
   bool disable(std::string name, int account);
+
+  /**
+  * TODO
+  **/
   bool changePlan(std::string name, int account);
+
+  /**
+  * TODO
+  **/
   bool logout();
 
  private:
