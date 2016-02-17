@@ -100,6 +100,30 @@ bool Commands::withdrawal() {
       std::cin.getline(amount, sizeof(amount));
       std::cout << amount << std::endl;
 
+      std::vector<Account*> temp;
+      temp = accounts[name];
+      if(temp.empty()){
+        std::cout << "ERROR, THAT USER DOES NOT HAVE AN ACCOUNT." << std::endl;
+        return false;
+      } else{
+
+        bool ownedAcnt = false;
+        Account* tempAcnt;
+        for(int i = 0; i < temp.size(); i++){
+          if(temp[i]->number == atoi(num)){
+            ownedAcnt = true;
+            tempAcnt = temp[i];
+          }
+        }
+        if(ownedAcnt == false){
+          std::cout << "ERROR, THE ACCOUNT NUMBER DOESN'T MATCH THE ACCOUNT HOLDER'S NAME." << std::endl;
+        } else{
+          if(tempAcnt->balance > atof(amount)){
+            std::cout << "This is working" << std::endl;
+          }
+        }
+      }
+
     } else{
 
     }
