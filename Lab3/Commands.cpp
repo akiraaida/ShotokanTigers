@@ -122,13 +122,13 @@ bool Commands::withdrawal() {
             float newBal = tempAcnt->balance - atof(amount);
             std::string trans = "";
             for(int i = 0; i < 41; i++){
-              //trans = trans + " ";
+              trans = trans + " ";
             }
             trans.replace(0, 2, "01");
             trans.replace(3, 20, name); // Why does this not work?
             trans.replace(3 + 21, 5, num);
-            trans.replace(24 + 6, 8, amount);
-
+            //trans.replace(24 + 6, 8, amount);
+            //std::cout << amount < std::endl;
             std::cout << "\"" << trans << "\"" << std::endl;
 
           }
