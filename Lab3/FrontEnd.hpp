@@ -165,7 +165,7 @@ class Commands {
     /**
     * pushes transaction record with that info onto stack
     **/
-    void pushTransactionRecord(int code, std::string name == "", int accountNumber = 0, double money = 0.0, std::string misc = "");
+    void pushTransactionRecord(int code, std::string name = "", int accountNumber = 0, double money = 0.0, std::string misc = "");
 
     /**
     * Field with customer names as keys and their associated bank accounts as
