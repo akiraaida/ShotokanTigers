@@ -68,7 +68,7 @@ class Account {
 * Convert from file to accounts map.
 **/
 namespace AccountParser {
-  std::map<std::string, std::vector<Account*> > parse(const char* fpath);
+  std::map<std::string, std::vector<Account*> > Parse(const char* fpath);
 }
 }
 

@@ -10,6 +10,12 @@
 * Akira Aida          100526064
 * Kathryn McKay       100524201
 * Alexander Wheadon   100514985
+*
+* This is the heart of the bank system.
+*
+* Google style note: chose to keep commands 'login' etc in the cheaper lowercase
+* style, for consistency.
+*
 *******************************************************************************/
 
 #include <deque>
@@ -31,7 +37,7 @@ class Commands {
   /**
   * Gives map
   **/
-  void setAccounts(std::map<std::string, std::vector<Account*> >&& accounts);
+  void SetAccounts(std::map<std::string, std::vector<Account*> >&& accounts);
 
 
   /**
@@ -44,7 +50,7 @@ class Commands {
   /**
   * TODO
   **/
-  std::string determineSession();
+  std::string DetermineSession();
 
   /**
   * Withdraw a value from an account.
@@ -78,7 +84,7 @@ class Commands {
   /**
   * TODO
   **/
-  bool deleteAccount();
+  bool delete_account();
 
   /**
   * TODO
@@ -88,7 +94,7 @@ class Commands {
   /**
   * TODO
   **/
-  bool changePlan();
+  bool changeplan();
 
   /**
   * TODO
@@ -104,23 +110,23 @@ class Commands {
     /**
     * Check if user exists
     **/
-    bool userExists(std::string name);
+    bool UserExists(std::string name);
 
     /**
     * Check if account belongs to user
     **/
-    Account* getAccount(std::string name, int account);
+    Account* GetAccount(std::string name, int account);
 
     /**
     * Find customer name corresponding to account number;
     * Returns empty string if account was not found
     **/
-    std::string getAccountOwner(int account);
+    std::string GetAccountOwner(int account);
 
     /**
     * pushes transaction record with that info onto stack
     **/
-    void pushTransactionRecord(int code, std::string name = "", int account_number = 0, double money = 0.0, std::string misc = "");
+    void PushTransactionRecord(int code, std::string name = "", int account_number = 0, double money = 0.0, std::string misc = "");
 
     /**
     * Field with customer names as keys and their associated bank accounts as

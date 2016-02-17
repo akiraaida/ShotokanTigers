@@ -11,11 +11,11 @@ Commands::Commands(){
   is_admin_ = false;
 }
 
-void Commands::setAccounts(std::map<std::string, std::vector<Account*> >&& accounts) {
+void Commands::SetAccounts(std::map<std::string, std::vector<Account*> >&& accounts) {
   accounts_ = accounts;
 }
 
-std::string Commands::determineSession(){
+std::string Commands::DetermineSession(){
   char session[21];
   std::cout << "Please enter your session type: " << std::endl;
   std::cin.getline(session, sizeof(session));
@@ -34,7 +34,7 @@ std::string Commands::determineSession(){
 }
 
 
-void Commands::pushTransactionRecord(int code, std::string name, int account_number, double money, std::string misc) {
+void Commands::PushTransactionRecord(int code, std::string name, int account_number, double money, std::string misc) {
   std::string transaction;
   misc = "";
   std::string code_string;
@@ -78,9 +78,11 @@ bool Commands::login() {
 
   if(is_logged_in_ == false){
     std::string session;
-    session = determineSession();
+    session = DetermineSession();
 
-    pushTransactionRecord(10);
+    // testing
+    PushTransactionRecord(10);
+
     if(session != "" && session != "admin") {
       std::vector<Account*> temp;
       temp = accounts_[session];
@@ -155,8 +157,8 @@ bool Commands::withdrawal() {
         return false;
       } else{
 
-        bool owned_account = userExists(name);
-        Account* temp_account = getAccount(name, atoi(num));
+        bool owned_account = UserExists(name);
+        Account* temp_account = GetAccount(name, atoi(num));
 
         if(owned_account == false || temp_account == nullptr){
           std::cout << "ERROR, THE ACCOUNT NUMBER DOESN'T MATCH THE ACCOUNT HOLDER'S NAME." << std::endl;
@@ -192,12 +194,12 @@ bool Commands::withdrawal() {
   return false;
 }
 
-bool Commands::userExists(std::string name) {
+bool Commands::UserExists(std::string name) {
   std::vector<Account*> record = accounts_[name];
   return !record.empty();
 }
 
-std::string Commands::getAccountOwner(int number) {
+std::string Commands::GetAccountOwner(int number) {
   for(std::pair<const std::string, std::vector<Account*> > pair : accounts_) {
     for(Account* account : pair.second) {
       if(account->number == number) {
@@ -208,7 +210,7 @@ std::string Commands::getAccountOwner(int number) {
   return "";
 }
 
-Account* Commands::getAccount(std::string name, int number) {
+Account* Commands::GetAccount(std::string name, int number) {
   // lookup user in directory
   std::vector<Account*> record = accounts_[name];
   if(!record.empty()) {
@@ -235,7 +237,7 @@ bool Commands::transfer() {
       name = buffer;
 
       // check name
-      if(!userExists(name)) {
+      if(!UserExists(name)) {
         std::cout << "Error: user " << name << " does not exist" << std::endl;
         return false;
       }
@@ -254,7 +256,7 @@ bool Commands::transfer() {
       number = std::stoi(num);
 
       // check name against account number
-      Account* account = getAccount(name, number);
+      Account* account = GetAccount(name, number);
       if(account == nullptr) {
         std::cout << "Error, account " << name << ":" << number
             << " was not found" << std::endl;
@@ -275,14 +277,14 @@ bool Commands::transfer() {
       recipient_number = std::stoi(num);
 
       // find name corresponding
-      recipient_name = getAccountOwner(recipient_number);
+      recipient_name = GetAccountOwner(recipient_number);
       if(recipient_name.empty() || recipient_name == name) {
         std::cout << "Error, " << recipient_number << " is not a valid recipient." << std::endl;
         return false;
       }
 
       // get account
-      recipient_account = getAccount(recipient_name, recipient_number);
+      recipient_account = GetAccount(recipient_name, recipient_number);
     }
 
     // TODO: after withdrawal is done
@@ -326,7 +328,7 @@ bool Commands::create() {
   return false;
 }
 
-bool Commands::deleteAccount(){
+bool Commands::delete_account(){
   if(is_logged_in_ == true){
 
   } else {
@@ -346,7 +348,7 @@ bool Commands::disable(){
   return false;
 }
 
-bool Commands::changePlan(){
+bool Commands::changeplan(){
   if(is_logged_in_ == true){
 
   } else {

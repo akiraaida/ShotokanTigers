@@ -9,7 +9,7 @@
 
 namespace BankFrontEnd {
 namespace AccountParser {
-std::map<std::string, std::vector<Account*> > parse(const char* fpath) {
+std::map<std::string, std::vector<Account*> > Parse(const char* fpath) {
 
   std::map<std::string, std::vector<Account*> > accounts;
   std::ifstream file;

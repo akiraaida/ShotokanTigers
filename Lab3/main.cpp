@@ -39,7 +39,7 @@ int main(int argc, const char* argv[]) {
     BankFrontEnd::Commands commands;
 
     if(argc == 2) {
-      commands.setAccounts(BankFrontEnd::AccountParser::parse(argv[1]));
+      commands.SetAccounts(BankFrontEnd::AccountParser::Parse(argv[1]));
     } else {
       std::cout << "ERROR, ACCOUNTS FILE DID NOT LOAD." << std::endl;
       return 0;
