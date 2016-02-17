@@ -67,13 +67,9 @@ class Account {
 /**
 * Convert from file to accounts map.
 **/
-class AccountParser {
-public:
-  /**
-  * Parses the info at fpath into a bank accounts directory.
-  **/
-  static std::map<std::string, std::vector<Account*> > parse(const char* fpath);
-};
+namespace AccountParser {
+  std::map<std::string, std::vector<Account*> > parse(const char* fpath);
+}
 }
 
 
