@@ -5,6 +5,7 @@
 #include <iostream>
 #include <string>
 
+namespace FrontEnd {
 Commands::Commands(){
   isLoggedIn = false;
   isAdmin = false;
@@ -373,4 +374,5 @@ bool Commands::logout(){
     return false;
   }
   return false;
+}
 }

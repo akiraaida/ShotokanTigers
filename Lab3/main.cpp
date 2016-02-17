@@ -33,10 +33,10 @@
 #include "Commands.hpp"
 
 int main(int argc, const char* argv[]) {
-    Commands commands;
+    FrontEnd::Commands commands;
 
     if(argc == 2) {
-      commands.setAccounts(AccountParser::parse(argv[1]));
+      commands.setAccounts(FrontEnd::AccountParser::parse(argv[1]));
     } else {
       std::cout << "ERROR, ACCOUNTS FILE DID NOT LOAD." << std::endl;
       return 0;

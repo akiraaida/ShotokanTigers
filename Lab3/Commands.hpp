@@ -19,6 +19,7 @@
 
 #include "Account.hpp"
 
+namespace FrontEnd {
 /**
 * Bank System storing, tracking, and querying the accounts.
 **/
@@ -148,6 +149,6 @@ class Commands {
     std::deque<std::string> transactionOutput;
 
 };
-
+}
 
 #endif //FRONTEND_COMMANDS_HPP_

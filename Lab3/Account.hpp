@@ -20,6 +20,7 @@
 #include <string>
 #include <vector>
 
+namespace FrontEnd {
 /**
 * Stores information about a customer's account's balance, etc.
 **/
@@ -73,7 +74,7 @@ public:
   **/
   static std::map<std::string, std::vector<Account*> > parse(const char* fpath);
 };
-
+}
 
 
 #endif //FRONTEND_ACCOUNT_HPP_

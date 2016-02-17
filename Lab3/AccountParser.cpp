@@ -7,6 +7,7 @@
 #include <iostream>
 #include <string>
 
+namespace FrontEnd {
 std::map<std::string, std::vector<Account*> > AccountParser::parse(const char* fpath) {
 
   std::map<std::string, std::vector<Account*> > accounts;
@@ -49,4 +50,5 @@ std::map<std::string, std::vector<Account*> > AccountParser::parse(const char* f
   }
   file.close();
   return accounts;
+}
 }
