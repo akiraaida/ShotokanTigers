@@ -35,7 +35,7 @@ class Account {
   * Flag indicating whether or not an account is diabled i.e. A == true, D ==
   * false
   **/
-  bool isActive;
+  bool is_active;
 
   /**
   * Current value associated with this account in CAD
@@ -45,17 +45,17 @@ class Account {
   /**
   * Flag corresponding to SP or NS charges.
   **/
-  bool isStudentPlan;
+  bool is_student_plan;
 
   /**
   * Reset at each day; Number of dollars that may be withdrawn this day.
   **/
-  double withdrawalLimitRemaining;
+  double withdrawal_limit_remaining;
 
   /**
   * Reset at each day; Number of dollars that may be transferred this day.
   **/
-  double transferLimitRemaining;
+  double transfer_limit_remaining;
 
   /**
   * TODO: with above limits, keep track of paybill limits (Each limit may not)

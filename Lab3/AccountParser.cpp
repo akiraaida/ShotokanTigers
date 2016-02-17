@@ -34,16 +34,16 @@ std::map<std::string, std::vector<Account*> > parse(const char* fpath) {
     Account* newAcc = new Account();
     newAcc->number = atoi(num.c_str());
     if (stat == "A") {
-      newAcc->isActive = 1;
+      newAcc->is_active = 1;
     } else {
-      newAcc->isActive = 0;
+      newAcc->is_active = 0;
     }
 
     newAcc->balance = atof(bal.c_str());
     if (plan == "S") {
-      newAcc->isStudentPlan = 1;
+      newAcc->is_student_plan = 1;
     } else {
-      newAcc->isStudentPlan = 0;
+      newAcc->is_student_plan = 0;
     }
 
     accounts[name].push_back(newAcc);
