@@ -16,6 +16,8 @@
 #include <vector>
 #include <deque>
 
+#include "Account.hpp"
+
 /**
 * Bank System storing, tracking, and querying the accounts.
 **/
