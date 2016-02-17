@@ -1,5 +1,5 @@
-#ifndef COMMANDS_HPP
-#define COMMANDS_HPP
+#ifndef FRONTEND_COMMANDS_HPP_
+#define FRONTEND_COMMANDS_HPP_
 /******************************************************************************
 * Commands.hpp
 * CSCI 3060u/SOFE 3980u: Course Project Front End
@@ -150,4 +150,4 @@ class Commands {
 };
 
 
-#endif //COMMANDS_HPP
+#endif //FRONTEND_COMMANDS_HPP_

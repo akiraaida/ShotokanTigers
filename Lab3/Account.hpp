@@ -1,5 +1,5 @@
-#ifndef ACCOUNT_HPP
-#define ACCOUNT_HPP
+#ifndef FRONTEND_ACCOUNT_HPP_
+#define FRONTEND_ACCOUNT_HPP_
 /******************************************************************************
 * Account.hpp
 * CSCI 3060u/SOFE 3980u: Course Project Front End
@@ -76,4 +76,4 @@ public:
 
 
 
-#endif //ACCOUNT_HPP
+#endif //FRONTEND_ACCOUNT_HPP_
