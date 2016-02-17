@@ -120,33 +120,33 @@ class Commands {
     /**
     * pushes transaction record with that info onto stack
     **/
-    void pushTransactionRecord(int code, std::string name = "", int accountNumber = 0, double money = 0.0, std::string misc = "");
+    void pushTransactionRecord(int code, std::string name = "", int account_number = 0, double money = 0.0, std::string misc = "");
 
     /**
     * Field with customer names as keys and their associated bank accounts as
     * values.
     **/
-    std::map<std::string, std::vector<Account*> > accounts;
+    std::map<std::string, std::vector<Account*> > accounts_;
 
     /**
     * Tracks whether a session is in progress
     **/
-    bool isLoggedIn;
+    bool is_logged_in_;
 
     /**
     * Name of the current user
     **/
-    std::string loggedInName;
+    std::string logged_in_name_;
 
     /**
     * Tracks whether current session has admin priv or not
     **/
-    bool isAdmin;
+    bool is_admin_;
 
     /**
     * Stack of things to push to output on logout
     **/
-    std::deque<std::string> transactionOutput;
+    std::deque<std::string> transaction_output_;
 
 };
 }

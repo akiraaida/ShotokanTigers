@@ -7,12 +7,12 @@
 
 namespace BankFrontEnd {
 Commands::Commands(){
-  isLoggedIn = false;
-  isAdmin = false;
+  is_logged_in_ = false;
+  is_admin_ = false;
 }
 
-void Commands::setAccounts(std::map<std::string, std::vector<Account*> >&& accounts) {
-  this->accounts = accounts;
+void Commands::setAccounts(std::map<std::string, std::vector<Account*> >&& accounts_) {
+  this->accounts_ = accounts_;
 }
 
 std::string Commands::determineSession(){
@@ -70,25 +70,25 @@ void Commands::pushTransactionRecord(int code, std::string name, int accountNumb
   std::cout << "\"" << trans << "\" " << trans.size() <<  std::endl;
 
   // push
-  transactionOutput.push_front(trans);
+  transaction_output_.push_front(trans);
 }
 
 
 bool Commands::login() {
 
-  if(isLoggedIn == false){
+  if(is_logged_in_ == false){
     std::string session;
     session = determineSession();
 
     pushTransactionRecord(10);
     if(session != "" && session != "admin") {
       std::vector<Account*> temp;
-      temp = accounts[session];
+      temp = accounts_[session];
       if(temp.empty()){
         std::cout << "ERROR, THAT USER DOES NOT HAVE AN ACCOUNT." << std::endl;
         return false;
       } else {
-        isLoggedIn = true;
+        is_logged_in_ = true;
 
         // test the function that I made and stuff
 
@@ -97,7 +97,7 @@ bool Commands::login() {
         for(int i = 0; i < 41; i++){
           trans = trans + " ";
         }
-        loggedInName = session;
+        logged_in_name_ = session;
         trans.replace(0, 2, "10");
         trans.replace(3, session.length(), session);
         trans.replace(3 + 21, 5, "00000");
@@ -109,8 +109,8 @@ bool Commands::login() {
         return true;
       }
     } else if(session == "admin"){
-      isLoggedIn = true;
-      isAdmin = true;
+      is_logged_in_ = true;
+      is_admin_ = true;
       std::string trans = "";
       for(int i = 0; i < 41; i++){
         trans = trans + " ";
@@ -136,9 +136,9 @@ bool Commands::login() {
 
 bool Commands::withdrawal() {
 
-  if(isLoggedIn == true){
+  if(is_logged_in_ == true){
 
-    if(isAdmin == true){
+    if(is_admin_ == true){
       std::cout << "Please enter the account holder's name: " << std::endl;
       char name[21];
       std::cin.getline(name, sizeof(name));
@@ -149,7 +149,7 @@ bool Commands::withdrawal() {
       char amount[9];
       std::cin.getline(amount, sizeof(amount));
       std::vector<Account*> temp;
-      temp = accounts[name];
+      temp = accounts_[name];
       if(temp.empty()){
         std::cout << "ERROR, THAT USER DOES NOT HAVE AN ACCOUNT." << std::endl;
         return false;
@@ -193,12 +193,12 @@ bool Commands::withdrawal() {
 }
 
 bool Commands::userExists(std::string name) {
-  std::vector<Account*> record = accounts[name];
+  std::vector<Account*> record = accounts_[name];
   return !record.empty();
 }
 
 std::string Commands::getAccountOwner(int number) {
-  for(std::pair<const std::string, std::vector<Account*> > pair : accounts) {
+  for(std::pair<const std::string, std::vector<Account*> > pair : accounts_) {
     for(Account* account : pair.second) {
       if(account->number == number) {
         return pair.first;
@@ -210,7 +210,7 @@ std::string Commands::getAccountOwner(int number) {
 
 Account* Commands::getAccount(std::string name, int number) {
   // lookup user in directory
-  std::vector<Account*> record = accounts[name];
+  std::vector<Account*> record = accounts_[name];
   if(!record.empty()) {
     for(Account* account : record) {
       if(account->number == number) {
@@ -224,10 +224,10 @@ Account* Commands::getAccount(std::string name, int number) {
 }
 
 bool Commands::transfer() {
-  if(isLoggedIn == true){
+  if(is_logged_in_ == true){
     // get name
     std::string name;
-    if(isAdmin) {
+    if(is_admin_) {
       // retrieve name
       std::cout << "Please enter the account holder's name: " << std::endl;
       char buffer[20];
@@ -242,7 +242,7 @@ bool Commands::transfer() {
 
     } else {
       // use stored name
-      name = loggedInName;
+      name = logged_in_name_;
     }
 
     // get number
@@ -297,7 +297,7 @@ bool Commands::transfer() {
 }
 
 bool Commands::paybill() {
-  if(isLoggedIn == true){
+  if(is_logged_in_ == true){
 
   } else {
     std::cout << "ERROR, YOU HAVE NOT LOGGED IN YET." << std::endl;
@@ -307,7 +307,7 @@ bool Commands::paybill() {
 }
 
 bool Commands::deposit() {
-  if(isLoggedIn == true){
+  if(is_logged_in_ == true){
 
   } else {
     std::cout << "ERROR, YOU HAVE NOT LOGGED IN YET." << std::endl;
@@ -317,7 +317,7 @@ bool Commands::deposit() {
 }
 
 bool Commands::create() {
-  if(isLoggedIn == true){
+  if(is_logged_in_ == true){
 
   } else {
     std::cout << "ERROR, YOU HAVE NOT LOGGED IN YET." << std::endl;
@@ -327,7 +327,7 @@ bool Commands::create() {
 }
 
 bool Commands::deleteAccount(){
-  if(isLoggedIn == true){
+  if(is_logged_in_ == true){
 
   } else {
     std::cout << "ERROR, YOU HAVE NOT LOGGED IN YET." << std::endl;
@@ -337,7 +337,7 @@ bool Commands::deleteAccount(){
 }
 
 bool Commands::disable(){
-  if(isLoggedIn == true){
+  if(is_logged_in_ == true){
 
   } else {
     std::cout << "ERROR, YOU HAVE NOT LOGGED IN YET." << std::endl;
@@ -347,7 +347,7 @@ bool Commands::disable(){
 }
 
 bool Commands::changePlan(){
-  if(isLoggedIn == true){
+  if(is_logged_in_ == true){
 
   } else {
     std::cout << "ERROR, YOU HAVE NOT LOGGED IN YET." << std::endl;
@@ -357,7 +357,7 @@ bool Commands::changePlan(){
 }
 
 bool Commands::enable(){
-  if(isLoggedIn == true){
+  if(is_logged_in_ == true){
 
   } else {
     std::cout << "ERROR, YOU HAVE NOT LOGGED IN YET." << std::endl;
@@ -367,7 +367,7 @@ bool Commands::enable(){
 }
 
 bool Commands::logout(){
-  if(isLoggedIn == true){
+  if(is_logged_in_ == true){
 
   } else {
     std::cout << "ERROR, YOU HAVE NOT LOGGED IN YET." << std::endl;
