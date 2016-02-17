@@ -30,6 +30,12 @@ std::string Commands::determineSession(){
   }
 }
 
+
+void pushTransactionRecord(int code, std::string name == "", int accountNumber = 0, double money = 0.0, std::string misc = "") {
+  //todo
+}
+
+
 bool Commands::login() {
 
   if(isLoggedIn == false){
@@ -147,6 +153,17 @@ bool Commands::userExists(std::string name) {
   return !record.empty();
 }
 
+std::string Commands::getAccountOwner(int number) {
+  for(std::pair<const std::string, std::vector<Account*> > pair : accounts) {
+    for(Account* account : pair.second) {
+      if(account->number == number) {
+        return pair.first;
+      }
+    }
+  }
+  return "";
+}
+
 Account* Commands::getAccount(std::string name, int number) {
   // lookup user in directory
   std::vector<Account*> record = accounts[name];
@@ -172,23 +189,61 @@ bool Commands::transfer() {
       char buffer[20];
       std::cin.getline(buffer, sizeof(buffer));
       name = buffer;
+
+      // check name
+      if(!userExists(name)) {
+        std::cout << "Error: user " << name << " does not exist" << std::endl;
+        return false;
+      }
+
     } else {
       // use stored name
       name = loggedInName;
     }
-    std::cout << name << " exists? " << userExists(name) << std::endl;
 
     // get number
-    int account;
+    int number;
     {
-      std::cout << "Please enter the user's account number: " << std::endl;
+      std::cout << "Please enter account to transfer from: " << std::endl;
       char num[6];
       std::cin.getline(num, sizeof(num));
-      account = std::stoi(num);
+      number = std::stoi(num);
+
+      // check name against account number
+      Account* account = getAccount(name, number);
+      if(account == nullptr) {
+        std::cout << "Error, account " << name << ":" << number
+            << " was not found" << std::endl;
+        return false;
+      }
     }
 
-    // check name against account number
-    std::cout << "account " << account << "found? " << (getAccount(name, account) != nullptr) << std::endl;
+
+
+    // Ask for next name
+    std::string recipientName;
+    int recipientNumber;
+    Account* recipientAccount;
+    {
+      std::cout << "Please enter account to transfer to: " << std::endl;
+      char num[6];
+      std::cin.getline(num, sizeof(num));
+      recipientNumber = std::stoi(num);
+
+      // find name corresponding
+      recipientName = getAccountOwner(recipientNumber);
+      if(recipientName.empty() || recipientName == name) {
+        std::cout << "Error, " << recipientNumber << " is not a valid recipient." << std::endl;
+        return false;
+      }
+
+      // get account
+      recipientAccount = getAccount(recipientName, recipientNumber);
+    }
+
+    // TODO: after withdrawal is done
+
+
 
   } else {
     std::cout << "ERROR, YOU HAVE NOT LOGGED IN YET." << std::endl;
