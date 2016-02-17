@@ -33,6 +33,13 @@ std::string Commands::determineSession(){
 
 void Commands::pushTransactionRecord(int code, std::string name, int accountNumber, double money, std::string misc) {
   std::string trans;
+  misc = "";
+  std::string codeStr;
+  {
+    codeStr = std::to_string(code);
+    int nzeroes = 2 - codeStr.size();
+    codeStr.insert(0, nzeroes, '0');
+  }
   std::string moneyStr;
   {
     char moneyStrBuff[16] = { 0 };
@@ -43,14 +50,21 @@ void Commands::pushTransactionRecord(int code, std::string name, int accountNumb
     moneyStr.insert(0, nzeroes, '0');
     moneyStr = moneyStr + moneyStrBuff2; // fix later
   }
+  std::string accountStr;
+  {
+    int nzeroes = 5 - std::to_string(accountNumber).size();
+    accountStr.insert(0, nzeroes, '0');
+    accountStr = accountStr + std::to_string(accountNumber);
+    std::cout << accountStr << std::endl;
+  }
 
   trans.insert(0, 41, ' ');
-  trans.replace(0, 2, std::to_string(code));
+  trans.replace(0, 2, codeStr);
   trans.replace(3, name.length(), name);
-  trans.replace(3 + 21, 5, std::to_string(accountNumber));
+  trans.replace(3 + 21, 5, accountStr);
   trans.replace(24 + 6, 8, moneyStr);
   trans.replace(39, 2, misc);
-  std::cout << "test: \"" << trans << "\"" << std::endl;
+  std::cout << "\"" << trans << "\" " << trans.size() <<  std::endl;
 
   // push
   transactionOutput.push_front(trans);
@@ -63,7 +77,7 @@ bool Commands::login() {
     std::string session;
     session = determineSession();
 
-    pushTransactionRecord(10, "test", 54321, 50.0, "NA");
+    pushTransactionRecord(10);
     if(session != "" && session != "admin") {
       std::vector<Account*> temp;
       temp = accounts[session];
@@ -74,6 +88,7 @@ bool Commands::login() {
         isLoggedIn = true;
 
         // test the function that I made and stuff
+
 
         std::string trans = "";
         for(int i = 0; i < 41; i++){
@@ -97,6 +112,8 @@ bool Commands::login() {
       for(int i = 0; i < 41; i++){
         trans = trans + " ";
       }
+
+
       trans.replace(0, 2, "10");
       trans.replace(3, 5, "admin");
       trans.replace(3 + 21, 5, "00000");
