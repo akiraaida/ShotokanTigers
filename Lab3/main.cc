@@ -32,6 +32,10 @@
 #include "account.h"
 #include "commands.h"
 
+#define ERROR_MESSAGE_ACCOUNTS_LOAD_FAIL "ERROR, ACCOUNTS FILE DID NOT LOAD."
+#define ERROR_MESSAGE_INVALID_COMMAND "ERROR, INVALID COMMAND."
+#define PROMPT_ENTER_COMMAND "Please enter a command: "
+
 /**
 * Main.
 **/
@@ -41,13 +45,13 @@ int main(int argc, const char* argv[]) {
     if(argc == 2) {
       commands.SetAccounts(BankFrontEnd::AccountParser::Parse(argv[1]));
     } else {
-      std::cout << "ERROR, ACCOUNTS FILE DID NOT LOAD." << std::endl;
+      std::cout << ERROR_MESSAGE_ACCOUNTS_LOAD_FAIL << std::endl;
       return 0;
     }
 
     char user_cmd[11] = { 0 };
     while(true){
-      std::cout << "Please enter a command: " << std::endl;
+      std::cout << PROMPT_ENTER_COMMAND << std::endl;
       std::cin.getline(user_cmd, sizeof(user_cmd));
       if(strncmp(user_cmd, "login", 10) == 0){
         commands.login();
@@ -72,7 +76,7 @@ int main(int argc, const char* argv[]) {
       } else if(strncmp(user_cmd, "logout", 10) == 0){
 
       } else{
-        std::cout << "ERROR, INVALID COMMAND." << std::endl;
+        std::cout << PROMPT_ENTER_COMMAND << std::endl;
       }
     }
 }

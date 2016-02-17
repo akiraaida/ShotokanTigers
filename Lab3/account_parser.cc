@@ -18,6 +18,9 @@
 #include <iostream>
 #include <string>
 
+#define ADMIN_MODE_FLAG "A"
+#define STANDARD_MODE_FLAG "S"
+
 namespace BankFrontEnd {
 namespace AccountParser {
 std::map<std::string, std::vector<Account*> > Parse(const char* fpath) {
@@ -44,14 +47,14 @@ std::map<std::string, std::vector<Account*> > Parse(const char* fpath) {
 
     Account* new_account = new Account();
     new_account->number = atoi(num.c_str());
-    if (stat == "A") {
+    if (stat == ADMIN_MODE_FLAG) {
       new_account->is_active = 1;
     } else {
       new_account->is_active = 0;
     }
 
     new_account->balance = atof(bal.c_str());
-    if (plan == "S") {
+    if (plan == STANDARD_MODE_FLAG) {
       new_account->is_student_plan = 1;
     } else {
       new_account->is_student_plan = 0;

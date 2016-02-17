@@ -16,6 +16,18 @@
 #include <iostream>
 #include <string>
 
+#define ERROR_MESSAGE_INVALID_SESSION "ERROR, SESSION TYPE IS NOT VALID."
+#define ERROR_MESSAGE_ACCOUNTLESS_USER "ERROR, THAT USER DOES NOT HAVE AN ACCOUNT."
+#define ERROR_MESSAGE_DOUBLE_LOGIN "ERROR, YOU'RE ALREADY LOGGED IN!"
+#define ERROR_MESSAGE_NO_LOGIN "ERROR, YOU HAVE NOT LOGGED IN YET."
+#define ERROR_MESSAGE_STOLEN_ACCOUNT "ERROR, THE ACCOUNT NUMBER DOESN'T MATCH THE ACCOUNT HOLDER'S NAME."
+
+#define PROMPT_ENTER_SESSION_TYPE "Please enter your session type: "
+#define PROMPT_ENTER_LOGIN_NAME "Please enter a login name: "
+#define PROMPT_ENTER_CUSTOMER_NAME "Please enter the account holder's name: "
+#define PROMPT_ENTER_ACCOUNT_NUMBER "Please enter the user's account number: "
+#define PROMPT_WITHDRAWAL_VALUE "Please enter an amount to withdraw: "
+
 namespace BankFrontEnd {
 Commands::Commands(){
   is_logged_in_ = false;
@@ -29,18 +41,18 @@ void Commands::SetAccounts(std::map<std::string,
 
 std::string Commands::DetermineSession(){
   char session[21];
-  std::cout << "Please enter your session type: " << std::endl;
+  std::cout << PROMPT_ENTER_SESSION_TYPE  << std::endl;
   std::cin.getline(session, sizeof(session));
 
   if(strncmp(session, "admin", 20) == 0) {
     return "admin";
   } else if(strncmp(session, "standard", 20) == 0) {
     char login_name[21];
-    std::cout << "Please enter a login name: " << std::endl;
+    std::cout << PROMPT_ENTER_LOGIN_NAME << std::endl;
     std::cin.getline(login_name, sizeof(login_name));
     return login_name;
   } else{
-    std::cout << "ERROR, SESSION TYPE IS NOT VALID." << std::endl;
+    std::cout << ERROR_MESSAGE_INVALID_SESSION << std::endl;
     return "";
   }
 }
@@ -97,7 +109,7 @@ bool Commands::login() {
     if(session != "" && session != "admin") {
       std::vector<Account*> temp = accounts_[session];
       if(temp.empty()){
-        std::cout << "ERROR, THAT USER DOES NOT HAVE AN ACCOUNT." << std::endl;
+        std::cout << ERROR_MESSAGE_ACCOUNTLESS_USER << std::endl;
         return false;
       } else {
         is_logged_in_ = true;
@@ -141,7 +153,7 @@ bool Commands::login() {
     }
     return false;
   } else {
-    std::cout << "ERROR, YOU'RE ALREADY LOGGED IN!" << std::endl;
+    std::cout << ERROR_MESSAGE_DOUBLE_LOGIN << std::endl;
     return false;
   }
 }
@@ -151,18 +163,18 @@ bool Commands::withdrawal() {
   if(is_logged_in_ == true){
 
     if(is_admin_ == true){
-      std::cout << "Please enter the account holder's name: " << std::endl;
+      std::cout << PROMPT_ENTER_CUSTOMER_NAME << std::endl;
       char name[21] = { 0 };
       std::cin.getline(name, sizeof(name));
-      std::cout << "Please enter the user's account number: " << std::endl;
+      std::cout << PROMPT_ENTER_ACCOUNT_NUMBER << std::endl;
       char num[6] = { 0 };
       std::cin.getline(num, sizeof(num));
-      std::cout << "Please enter an amount to withdraw: " << std::endl;
+      std::cout << PROMPT_WITHDRAWAL_VALUE << std::endl;
       char amount[9] = { 0 };
       std::cin.getline(amount, sizeof(amount));
       std::vector<Account*> temp = accounts_[name];
       if(temp.empty()){
-        std::cout << "ERROR, THAT USER DOES NOT HAVE AN ACCOUNT." << std::endl;
+        std::cout << ERROR_MESSAGE_ACCOUNTLESS_USER << std::endl;
         return false;
       } else{
 
@@ -170,8 +182,7 @@ bool Commands::withdrawal() {
         Account* temp_account = GetAccount(name, atoi(num));
 
         if(owned_account == false || temp_account == nullptr){
-          std::cout << "ERROR, THE ACCOUNT NUMBER DOESN'T MATCH THE ACCOUNT HOLDER'S NAME."
-              << std::endl;
+          std::cout << ERROR_MESSAGE_STOLEN_ACCOUNT << std::endl;
         } else {
           if(temp_account->balance > atof(amount)){
 
@@ -197,7 +208,7 @@ bool Commands::withdrawal() {
 
 
   } else {
-    std::cout << "ERROR, YOU HAVE NOT LOGGED IN YET." << std::endl;
+    std::cout << ERROR_MESSAGE_NO_LOGIN << std::endl;
     return false;
   }
 
@@ -303,7 +314,7 @@ bool Commands::transfer() {
 
 
   } else {
-    std::cout << "ERROR, YOU HAVE NOT LOGGED IN YET." << std::endl;
+    std::cout << ERROR_MESSAGE_NO_LOGIN << std::endl;
     return false;
   }
   return false;
@@ -313,7 +324,7 @@ bool Commands::paybill() {
   if(is_logged_in_ == true){
 
   } else {
-    std::cout << "ERROR, YOU HAVE NOT LOGGED IN YET." << std::endl;
+    std::cout << ERROR_MESSAGE_NO_LOGIN << std::endl;
     return false;
   }
   return false;
@@ -323,7 +334,7 @@ bool Commands::deposit() {
   if(is_logged_in_ == true){
 
   } else {
-    std::cout << "ERROR, YOU HAVE NOT LOGGED IN YET." << std::endl;
+    std::cout << ERROR_MESSAGE_NO_LOGIN << std::endl;
     return false;
   }
   return false;
@@ -333,7 +344,7 @@ bool Commands::create() {
   if(is_logged_in_ == true){
 
   } else {
-    std::cout << "ERROR, YOU HAVE NOT LOGGED IN YET." << std::endl;
+    std::cout << ERROR_MESSAGE_NO_LOGIN << std::endl;
     return false;
   }
   return false;
@@ -343,7 +354,7 @@ bool Commands::delete_account(){
   if(is_logged_in_ == true){
 
   } else {
-    std::cout << "ERROR, YOU HAVE NOT LOGGED IN YET." << std::endl;
+    std::cout << ERROR_MESSAGE_NO_LOGIN << std::endl;
     return false;
   }
   return false;
@@ -353,7 +364,7 @@ bool Commands::disable(){
   if(is_logged_in_ == true){
 
   } else {
-    std::cout << "ERROR, YOU HAVE NOT LOGGED IN YET." << std::endl;
+    std::cout << ERROR_MESSAGE_NO_LOGIN << std::endl;
     return false;
   }
   return false;
@@ -363,7 +374,7 @@ bool Commands::changeplan(){
   if(is_logged_in_ == true){
 
   } else {
-    std::cout << "ERROR, YOU HAVE NOT LOGGED IN YET." << std::endl;
+    std::cout << ERROR_MESSAGE_NO_LOGIN << std::endl;
     return false;
   }
   return false;
@@ -373,7 +384,7 @@ bool Commands::enable(){
   if(is_logged_in_ == true){
 
   } else {
-    std::cout << "ERROR, YOU HAVE NOT LOGGED IN YET." << std::endl;
+    std::cout << ERROR_MESSAGE_NO_LOGIN << std::endl;
     return false;
   }
   return false;
@@ -383,7 +394,7 @@ bool Commands::logout(){
   if(is_logged_in_ == true){
 
   } else {
-    std::cout << "ERROR, YOU HAVE NOT LOGGED IN YET." << std::endl;
+    std::cout << ERROR_MESSAGE_NO_LOGIN << std::endl;
     return false;
   }
   return false;
