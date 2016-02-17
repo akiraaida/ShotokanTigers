@@ -32,6 +32,9 @@
 #include "Account.hpp"
 #include "Commands.hpp"
 
+/**
+* Main.
+**/
 int main(int argc, const char* argv[]) {
     BankFrontEnd::Commands commands;
 
@@ -42,31 +45,31 @@ int main(int argc, const char* argv[]) {
       return 0;
     }
 
-    char userCmd[11];
+    char user_cmd[11];
     while(true){
       std::cout << "Please enter a command: " << std::endl;
-      std::cin.getline(userCmd, sizeof(userCmd));
-      if(strncmp(userCmd, "login", 10) == 0){
+      std::cin.getline(user_cmd, sizeof(user_cmd));
+      if(strncmp(user_cmd, "login", 10) == 0){
         commands.login();
-      } else if(strncmp(userCmd, "withdrawal", 10) == 0){
+      } else if(strncmp(user_cmd, "withdrawal", 10) == 0){
         commands.withdrawal();
-      } else if(strncmp(userCmd, "transfer", 10) == 0){
+      } else if(strncmp(user_cmd, "transfer", 10) == 0){
         commands.transfer();
-      } else if(strncmp(userCmd, "paybill", 10) == 0){
+      } else if(strncmp(user_cmd, "paybill", 10) == 0){
 
-      } else if(strncmp(userCmd, "deposit", 10) == 0){
+      } else if(strncmp(user_cmd, "deposit", 10) == 0){
 
-      } else if(strncmp(userCmd, "create", 10) == 0){
+      } else if(strncmp(user_cmd, "create", 10) == 0){
 
-      } else if(strncmp(userCmd, "delete", 10) == 0){
+      } else if(strncmp(user_cmd, "delete", 10) == 0){
 
-      } else if(strncmp(userCmd, "disable", 10) == 0){
+      } else if(strncmp(user_cmd, "disable", 10) == 0){
 
-      } else if(strncmp(userCmd, "enable", 10) == 0){
+      } else if(strncmp(user_cmd, "enable", 10) == 0){
 
-      } else if(strncmp(userCmd, "changeplan", 10) == 0){
+      } else if(strncmp(user_cmd, "changeplan", 10) == 0){
 
-      } else if(strncmp(userCmd, "logout", 10) == 0){
+      } else if(strncmp(user_cmd, "logout", 10) == 0){
 
       } else{
         std::cout << "ERROR, INVALID COMMAND." << std::endl;
