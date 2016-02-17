@@ -31,7 +31,7 @@ std::string Commands::determineSession(){
 }
 
 
-void pushTransactionRecord(int code, std::string name == "", int accountNumber = 0, double money = 0.0, std::string misc = "") {
+void pushTransactionRecord(int code, std::string name, int accountNumber, double money, std::string misc) {
   //todo
 }
 
