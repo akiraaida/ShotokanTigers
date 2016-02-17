@@ -98,8 +98,6 @@ bool Commands::withdrawal() {
       std::cout << "Please enter an amount to withdraw: " << std::endl;
       char amount[9];
       std::cin.getline(amount, sizeof(amount));
-      std::cout << amount << std::endl;
-
       std::vector<Account*> temp;
       temp = accounts[name];
       if(temp.empty()){
@@ -107,19 +105,26 @@ bool Commands::withdrawal() {
         return false;
       } else{
 
-        bool ownedAcnt = false;
-        Account* tempAcnt;
-        for(int i = 0; i < temp.size(); i++){
-          if(temp[i]->number == atoi(num)){
-            ownedAcnt = true;
-            tempAcnt = temp[i];
-          }
-        }
+        bool ownedAcnt = userExists(name);
+        Account* tempAcnt = getAccount(name, atoi(num));
+
         if(ownedAcnt == false){
           std::cout << "ERROR, THE ACCOUNT NUMBER DOESN'T MATCH THE ACCOUNT HOLDER'S NAME." << std::endl;
         } else{
           if(tempAcnt->balance > atof(amount)){
-            std::cout << "This is working" << std::endl;
+
+            float newBal = tempAcnt->balance - atof(amount);
+            std::string trans = "";
+            for(int i = 0; i < 41; i++){
+              trans = trans + " ";
+            }
+            trans.replace(0, 2, "01");
+            trans.replace(3, 20, name); // Why does this not work?
+            trans.replace(3 + 21, 5, num);
+            trans.replace(24 + 6, 8, amount);
+
+            std::cout << trans << std::endl;
+
           }
         }
       }
