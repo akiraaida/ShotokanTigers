@@ -5,7 +5,7 @@
 #include <iostream>
 #include <string>
 
-namespace FrontEnd {
+namespace BankFrontEnd {
 Commands::Commands(){
   isLoggedIn = false;
   isAdmin = false;

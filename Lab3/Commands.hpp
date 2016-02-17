@@ -1,5 +1,5 @@
-#ifndef FRONTEND_COMMANDS_HPP_
-#define FRONTEND_COMMANDS_HPP_
+#ifndef BANK_FRONTEND_COMMANDS_HPP_
+#define BANK_FRONTEND_COMMANDS_HPP_
 /******************************************************************************
 * Commands.hpp
 * CSCI 3060u/SOFE 3980u: Course Project Front End
@@ -19,7 +19,7 @@
 
 #include "Account.hpp"
 
-namespace FrontEnd {
+namespace BankFrontEnd {
 /**
 * Bank System storing, tracking, and querying the accounts.
 **/
@@ -151,4 +151,4 @@ class Commands {
 };
 }
 
-#endif //FRONTEND_COMMANDS_HPP_
+#endif //BANK_FRONTEND_COMMANDS_HPP_

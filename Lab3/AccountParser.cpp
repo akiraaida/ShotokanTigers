@@ -7,7 +7,7 @@
 #include <iostream>
 #include <string>
 
-namespace FrontEnd {
+namespace BankFrontEnd {
 std::map<std::string, std::vector<Account*> > AccountParser::parse(const char* fpath) {
 
   std::map<std::string, std::vector<Account*> > accounts;

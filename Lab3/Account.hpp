@@ -1,5 +1,5 @@
-#ifndef FRONTEND_ACCOUNT_HPP_
-#define FRONTEND_ACCOUNT_HPP_
+#ifndef BANK_FRONTEND_ACCOUNT_HPP_
+#define BANK_FRONTEND_ACCOUNT_HPP_
 /******************************************************************************
 * Account.hpp
 * CSCI 3060u/SOFE 3980u: Course Project Front End
@@ -20,7 +20,7 @@
 #include <string>
 #include <vector>
 
-namespace FrontEnd {
+namespace BankFrontEnd {
 /**
 * Stores information about a customer's account's balance, etc.
 **/
@@ -77,4 +77,4 @@ public:
 }
 
 
-#endif //FRONTEND_ACCOUNT_HPP_
+#endif //BANK_FRONTEND_ACCOUNT_HPP_
