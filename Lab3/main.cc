@@ -1,5 +1,5 @@
 /******************************************************************************
-* main.cpp
+* main.cc
 * CSCI 3060u/SOFE 3980u: Course Project Front End
 * Winter 2016
 *
