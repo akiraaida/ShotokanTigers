@@ -1,7 +1,9 @@
 #include "Commands.hpp"
+
+#include <cstring>
+
 #include <iostream>
 #include <string>
-#include <cstring>
 
 Commands::Commands(){
   isLoggedIn = false;

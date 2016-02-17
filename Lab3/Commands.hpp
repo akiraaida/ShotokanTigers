@@ -11,10 +11,11 @@
 * Kathryn McKay       100524201
 * Alexander Wheadon   100514985
 *******************************************************************************/
-#include <string>
-#include <map>
-#include <vector>
+
 #include <deque>
+#include <map>
+#include <string>
+#include <vector>
 
 #include "Account.hpp"
 

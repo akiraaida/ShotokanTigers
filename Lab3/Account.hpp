@@ -14,10 +14,11 @@
 * Contains Account POD & AccountParser methods
 *
 *******************************************************************************/
-#include <string>
-#include <map>
-#include <vector>
+
 #include <deque>
+#include <map>
+#include <string>
+#include <vector>
 
 /**
 * Stores information about a customer's account's balance, etc.
