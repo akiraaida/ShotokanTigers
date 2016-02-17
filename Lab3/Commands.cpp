@@ -13,14 +13,14 @@ void Commands::setAccounts(std::map<std::string, std::vector<Account*> >&& accou
 }
 
 std::string Commands::determineSession(){
-  char session[20];
+  char session[21];
   std::cout << "Please enter your session type: " << std::endl;
   std::cin.getline(session, sizeof(session));
 
   if(strncmp(session, "admin", 20) == 0) {
     return "admin";
   } else if(strncmp(session, "standard", 20) == 0) {
-    char logName[20];
+    char logName[21];
     std::cout << "Please enter a login name: " << std::endl;
     std::cin.getline(logName, sizeof(logName));
     return logName;
@@ -90,11 +90,15 @@ bool Commands::withdrawal() {
 
     if(isAdmin == true){
       std::cout << "Please enter the account holder's name: " << std::endl;
-      char name[20];
+      char name[21];
       std::cin.getline(name, sizeof(name));
       std::cout << "Please enter the user's account number: " << std::endl;
-      char num[5];
+      char num[6];
       std::cin.getline(num, sizeof(num));
+      std::cout << "Please enter an amount to withdraw: " << std::endl;
+      char amount[9];
+      std::cin.getline(amount, sizeof(amount));
+      std::cout << amount << std::endl;
 
     } else{
 
