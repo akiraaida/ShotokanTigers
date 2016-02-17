@@ -147,6 +147,17 @@ class Commands {
 
  private:
     /**
+    * Check if user exists
+    **/
+    bool userExists(std::string name);
+
+    /**
+    * Check if account belongs to user
+    **/
+    Account* getAccount(std::string name, int account);
+
+
+    /**
     * Field with customer names as keys and their associated bank accounts as
     * values.
     **/

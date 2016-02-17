@@ -137,8 +137,53 @@ bool Commands::withdrawal() {
   return false;
 }
 
+bool Commands::userExists(std::string name) {
+  std::vector<Account*> record = accounts[name];
+  return !record.empty();
+}
+
+Account* Commands::getAccount(std::string name, int number) {
+  // lookup user in directory
+  std::vector<Account*> record = accounts[name];
+  if(!record.empty()) {
+    for(Account* account : record) {
+      if(account->number == number) {
+        return account;
+      }
+    }
+  }
+
+  // failed to lookup account
+  return nullptr;
+}
+
 bool Commands::transfer() {
   if(isLoggedIn == true){
+    // get name
+    std::string name;
+    if(isAdmin) {
+      // retrieve name
+      std::cout << "Please enter the account holder's name: " << std::endl;
+      char buffer[20];
+      std::cin.getline(buffer, sizeof(buffer));
+      name = buffer;
+    } else {
+      // use stored name
+      name = loggedInName;
+    }
+    std::cout << name << " exists? " << userExists(name) << std::endl;
+
+    // get number
+    int account;
+    {
+      std::cout << "Please enter the user's account number: " << std::endl;
+      char num[6];
+      std::cin.getline(num, sizeof(num));
+      account = std::stoi(num);
+    }
+
+    // check name against account number
+    std::cout << "account " << account << "found? " << (getAccount(name, account) != nullptr) << std::endl;
 
   } else {
     std::cout << "ERROR, YOU HAVE NOT LOGGED IN YET." << std::endl;
