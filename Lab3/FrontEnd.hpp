@@ -14,6 +14,7 @@
 #include <string>
 #include <map>
 #include <vector>
+#include <deque>
 
 /**
 * Stores information about a customer's account's balance, etc.
@@ -97,47 +98,52 @@ class Commands {
   * \param amount Amount to withdraw.
   * \return Success of transaction.
   **/
-  bool withdrawal(std::string name, int account, double amount);
+  bool withdrawal();
 
   /**
   * TODO
   **/
-  bool transfer(std::string name, int account1, int account2, double amount);
+  bool transfer();
 
   /**
   * TODO
   **/
-  bool paybill(std::string name, int account, std::string company, double amount);
+  bool paybill();
 
   /**
   * TODO
   **/
-  bool deposit(std::string name, int account, double amount);
+  bool deposit();
 
   /**
   * TODO
   **/
-  bool create(std::string name, double amount);
+  bool create();
 
   /**
   * TODO
   **/
-  bool deleteAccount(std::string name, int account);
+  bool deleteAccount();
 
   /**
   * TODO
   **/
-  bool disable(std::string name, int account);
+  bool disable();
 
   /**
   * TODO
   **/
-  bool changePlan(std::string name, int account);
+  bool changePlan();
 
   /**
   * TODO
   **/
   bool logout();
+
+  /**
+  * TODO
+  **/
+  bool enable();
 
  private:
     /**
@@ -145,7 +151,26 @@ class Commands {
     * values.
     **/
     std::map<std::string, std::vector<Account*> > accounts;
+
+    /**
+    * Tracks whether a session is in progress
+    **/
     bool isLoggedIn;
+
+    /**
+    * Name of the current user
+    **/
+    std::string loggedInUserName;
+
+    /**
+    * Tracks whether current session has admin priv or not
+    **/
+    bool isAdmin;
+
+    /**
+    * Stack of things to push to output on logout
+    **/
+    deque<std::string> transactionOutput;
 
 };
 

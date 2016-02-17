@@ -5,6 +5,7 @@
 
 Commands::Commands(){
   isLoggedIn = false;
+  isAdmin = false;
 }
 
 void Commands::setAccounts(std::map<std::string, std::vector<Account*> >&& accounts) {
@@ -48,6 +49,7 @@ bool Commands::login() {
         for(int i = 0; i < 41; i++){
           trans = trans + " ";
         }
+        loggedInName = session;
         trans.replace(0, 2, "10");
         trans.replace(3, session.length(), session);
         trans.replace(3 + 21, 5, "00000");
@@ -60,7 +62,7 @@ bool Commands::login() {
       }
     } else if(session == "admin"){
       isLoggedIn = true;
-
+      isAdmin = true;
       std::string trans = "";
       for(int i = 0; i < 41; i++){
         trans = trans + " ";
@@ -76,33 +78,124 @@ bool Commands::login() {
       return true;
     }
     return false;
-  } else{
+  } else {
     std::cout << "ERROR, YOU'RE ALREADY LOGGED IN!" << std::endl;
     return false;
   }
 }
 
-bool Commands::withdrawal(std::string name, int account, double amount) {
-  //todo
+bool Commands::withdrawal() {
+
+  if(isLoggedIn == true){
+
+    if(isAdmin == true){
+      std::cout << "Please enter the account holder's name: " << std::endl;
+      char name[20];
+      std::cin.getline(name, sizeof(name));
+      std::cout << "Please enter the user's account number: " << std::endl;
+      char num[5];
+      std::cin.getline(name, sizeof(name));
+
+
+    } else{
+
+    }
+
+
+  } else {
+    std::cout << "ERROR, YOU HAVE NOT LOGGED IN YET." << std::endl;
+    return false;
+  }
+
   return false;
 }
 
-bool Commands::transfer(std::string name, int account1, int account2, double amount) {
-  //todo
+bool Commands::transfer() {
+  if(isLoggedIn == true){
+
+  } else {
+    std::cout << "ERROR, YOU HAVE NOT LOGGED IN YET." << std::endl;
+    return false;
+  }
   return false;
 }
 
-bool Commands::paybill(std::string name, int account, std::string company, double amount) {
-  //todo
+bool Commands::paybill() {
+  if(isLoggedIn == true){
+
+  } else {
+    std::cout << "ERROR, YOU HAVE NOT LOGGED IN YET." << std::endl;
+    return false;
+  }
   return false;
 }
 
-bool Commands::deposit(std::string name, int account, double amount) {
-  //todo
+bool Commands::deposit() {
+  if(isLoggedIn == true){
+
+  } else {
+    std::cout << "ERROR, YOU HAVE NOT LOGGED IN YET." << std::endl;
+    return false;
+  }
   return false;
 }
 
-bool Commands::create(std::string name, double amount) {
-  //todo
+bool Commands::create() {
+  if(isLoggedIn == true){
+
+  } else {
+    std::cout << "ERROR, YOU HAVE NOT LOGGED IN YET." << std::endl;
+    return false;
+  }
   return false;
+}
+
+bool Commands::deleteAccount(){
+    if(isLoggedIn == true)
+
+  } else {
+    std::cout << "ERROR, YOU HAVE NOT LOGGED IN YET." << std::endl;
+    return false;
+  }
+  return false
+}
+
+bool Commands::disable(){
+  if(isLoggedIn == true){
+
+  } else {
+    std::cout << "ERROR, YOU HAVE NOT LOGGED IN YET." << std::endl;
+    return false;
+  }
+  return false
+}
+
+bool Commands::changePlan(){
+  if(isLoggedIn == true){
+
+  } else {
+    std::cout << "ERROR, YOU HAVE NOT LOGGED IN YET." << std::endl;
+    return false;
+  }
+  return false
+}
+
+bool Commands::enable(){
+  if(isLoggedIn == true){
+
+  } else {
+    std::cout << "ERROR, YOU HAVE NOT LOGGED IN YET." << std::endl;
+    return false;
+  }
+  return false
+}
+
+bool Commands::logout(){
+  if(isLoggedIn == true){
+
+  } else {
+    std::cout << "ERROR, YOU HAVE NOT LOGGED IN YET." << std::endl;
+    return false;
+  }
+  return false
 }
