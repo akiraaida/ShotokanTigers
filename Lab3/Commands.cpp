@@ -94,8 +94,7 @@ bool Commands::withdrawal() {
       std::cin.getline(name, sizeof(name));
       std::cout << "Please enter the user's account number: " << std::endl;
       char num[5];
-      std::cin.getline(name, sizeof(name));
-
+      std::cin.getline(num, sizeof(num));
 
     } else{
 
@@ -151,13 +150,13 @@ bool Commands::create() {
 }
 
 bool Commands::deleteAccount(){
-    if(isLoggedIn == true)
+  if(isLoggedIn == true){
 
   } else {
     std::cout << "ERROR, YOU HAVE NOT LOGGED IN YET." << std::endl;
     return false;
   }
-  return false
+  return false;
 }
 
 bool Commands::disable(){
@@ -167,7 +166,7 @@ bool Commands::disable(){
     std::cout << "ERROR, YOU HAVE NOT LOGGED IN YET." << std::endl;
     return false;
   }
-  return false
+  return false;
 }
 
 bool Commands::changePlan(){
@@ -177,7 +176,7 @@ bool Commands::changePlan(){
     std::cout << "ERROR, YOU HAVE NOT LOGGED IN YET." << std::endl;
     return false;
   }
-  return false
+  return false;
 }
 
 bool Commands::enable(){
@@ -187,7 +186,7 @@ bool Commands::enable(){
     std::cout << "ERROR, YOU HAVE NOT LOGGED IN YET." << std::endl;
     return false;
   }
-  return false
+  return false;
 }
 
 bool Commands::logout(){
@@ -197,5 +196,5 @@ bool Commands::logout(){
     std::cout << "ERROR, YOU HAVE NOT LOGGED IN YET." << std::endl;
     return false;
   }
-  return false
+  return false;
 }

@@ -160,7 +160,7 @@ class Commands {
     /**
     * Name of the current user
     **/
-    std::string loggedInUserName;
+    std::string loggedInName;
 
     /**
     * Tracks whether current session has admin priv or not
@@ -170,7 +170,7 @@ class Commands {
     /**
     * Stack of things to push to output on logout
     **/
-    deque<std::string> transactionOutput;
+    std::deque<std::string> transactionOutput;
 
 };
 
