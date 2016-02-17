@@ -22,7 +22,8 @@ Commands::Commands(){
   is_admin_ = false;
 }
 
-void Commands::SetAccounts(std::map<std::string, std::vector<Account*> >&& accounts) {
+void Commands::SetAccounts(std::map<std::string,
+    std::vector<Account*> >&& accounts) {
   accounts_ = accounts;
 }
 
@@ -45,7 +46,8 @@ std::string Commands::DetermineSession(){
 }
 
 
-void Commands::PushTransactionRecord(int code, std::string name, int account_number, double money, std::string misc) {
+void Commands::PushTransactionRecord(int code, std::string name,
+    int account_number, double money, std::string misc) {
   std::string transaction = "";
   std::string code_string;
   {
@@ -168,7 +170,8 @@ bool Commands::withdrawal() {
         Account* temp_account = GetAccount(name, atoi(num));
 
         if(owned_account == false || temp_account == nullptr){
-          std::cout << "ERROR, THE ACCOUNT NUMBER DOESN'T MATCH THE ACCOUNT HOLDER'S NAME." << std::endl;
+          std::cout << "ERROR, THE ACCOUNT NUMBER DOESN'T MATCH THE ACCOUNT HOLDER'S NAME."
+              << std::endl;
         } else {
           if(temp_account->balance > atof(amount)){
 
@@ -286,7 +289,8 @@ bool Commands::transfer() {
       // find name corresponding
       recipient_name = GetAccountOwner(recipient_number);
       if(recipient_name.empty() || recipient_name == name) {
-        std::cout << "Error, " << recipient_number << " is not a valid recipient." << std::endl;
+        std::cout << "Error, " << recipient_number << " is not a valid recipient."
+            << std::endl;
         return false;
       }
 
