@@ -11,7 +11,15 @@
 * Kathryn McKay       100524201
 * Alexander Wheadon   100514985
 *
-* This is the heart of the bank system.
+* This is the heart of the bank system. Each command in the system corresponds
+* to a method here e.g. login, withdrawal, etc. Each of these methods
+* returns whether the command was executed or rejected.
+*
+* Example Usage:
+*   Commands bank;
+*   bank.SetAccounts(accounts);
+*   bank.login();
+*   bank.logout();
 *
 * Google style note: chose to keep commands 'login' etc in the cheaper lowercase
 * style, for consistency.
@@ -36,74 +44,65 @@ class Commands {
    Commands();
 
   /**
-  * Gives map
+  * Gives map to this.
   **/
   void SetAccounts(std::map<std::string, std::vector<Account*> >&& accounts);
 
 
   /**
-  * Try to login.
-  * \param name: name of customer (or "admin")
-  * \return whether login was successful.
+  * Corresponds to 'login' command.
   **/
   bool login();
 
-  /**
-  * TODO
-  **/
-
 
   /**
-  * Withdraw a value from an account.
-  * \param name Account holder's moniker.
-  * \param account Account's index.
-  * \param amount Amount to withdraw.
-  * \return Success of transaction.
+  * Corresponds to 'withdrawal' command.
   **/
   bool withdrawal();
 
   /**
-  * TODO
+  * Corresponds to 'transfer' command.
   **/
   bool transfer();
 
   /**
-  * TODO
+  * Corresponds to 'paybill' command.
   **/
   bool paybill();
 
   /**
-  * TODO
+  * Corresponds to 'deposit' command.
   **/
   bool deposit();
 
   /**
-  * TODO
+  * Corresponds to 'create' command. Admin only.
   **/
   bool create();
 
   /**
-  * TODO
+  * Corresponds to 'delete' command. Admin only.
   **/
   bool delete_account();
 
   /**
-  * TODO
+  * Corresponds to 'disable' command. Admin only.
   **/
   bool disable();
 
   /**
-  * TODO
+  * Corresponds to 'changeplan' command. Admin only.
   **/
   bool changeplan();
 
   /**
-  * TODO
+  * Corresponds to 'logout' command.
+  * Causes output to the transaction file.
   **/
   bool logout();
 
   /**
-  * TODO
+  * Corresponds to 'enable' command. Admin only.
   **/
   bool enable();
 
@@ -113,12 +112,15 @@ class Commands {
     **/
     bool UserExists(std::string name);
 
+    /**
+    * Checks if 'amount' is valid currency.
+    **/
     bool CheckUnit(double amount);
 
     std::string DetermineSession();
 
     /**
-    * Check if account belongs to user
+    * Returns nullptr if the name/account pair is not found in system.
     **/
     Account* GetAccount(std::string name, int account);
 
@@ -129,7 +131,7 @@ class Commands {
     std::string GetAccountOwner(int account);
 
     /**
-    * pushes transaction record with that info onto stack
+    * Pushes transaction record with that info onto stack.
     **/
     void PushTransactionRecord(int code, std::string name = "",
                                int account_number = 0, double money = 0.0,
@@ -156,7 +158,7 @@ class Commands {
 
     /**
     * Prints an error if the user is not logged in.
-    * Prints an error if the user is not admin.
+    * Prints an error if the user is not admin, if admins_only is set to true.
     **/
     bool CheckLogin(bool admins_only = false);
 
