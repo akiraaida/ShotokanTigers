@@ -474,7 +474,7 @@ bool Commands::create() {
   new_account->is_new = 1;
   accounts_[name].push_back(new_account);
   PushTransactionRecord(5, name, new_account->number, atof(init));
-  return false;
+  return true;
 }
 
 int Commands::GenerateNum(){
