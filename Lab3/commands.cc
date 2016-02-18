@@ -261,23 +261,12 @@ Account* Commands::GetAccount(std::string name, int number) {
 bool Commands::transfer() {
   if(is_logged_in_ == true) {
     // get name
-    std::string name;
-    if(is_admin_) {
-      // retrieve name
-      std::cout << PROMPT_ENTER_CUSTOMER_NAME << std::endl;
-      char buffer[20];
-      std::cin.getline(buffer, sizeof(buffer));
-      name = buffer;
+    std::string name = PromptForAccountHolderIfUnknown();
 
-      // check name
-      if(!UserExists(name)) {
-        std::cout << ERROR_MESSAGE_ACCOUNTLESS_USER << std::endl;
-        return false;
-      }
-
-    } else {
-      // use stored name
-      name = logged_in_name_;
+    // check name
+    if(!UserExists(name)) {
+      std::cout << ERROR_MESSAGE_ACCOUNTLESS_USER << std::endl;
+      return false;
     }
 
     // get number
@@ -630,5 +619,16 @@ bool Commands::logout() {
     return false;
   }
   return false;
+}
+
+std::string Commands::PromptForAccountHolderIfUnknown() {
+  if(!is_admin_) {
+    return logged_in_name_;
+  } else {
+      char name[21] = { 0 };
+      std::cout << PROMPT_ENTER_CUSTOMER_NAME << std::endl;
+      std::cin.getline(name, sizeof(name));
+      return std::string(name);
   }
+}
 }

@@ -139,6 +139,12 @@ class Commands {
     std::string FitStringToSpace(std::string string, size_t size,
                                  char fluff, bool align_right = true);
 
+
+    /**
+    * Retrieves the account holder's name based on the session.
+    **/
+    std::string PromptForAccountHolderIfUnknown();
+
     /**
     * Field with customer names as keys and their associated bank accounts as
     * values.
