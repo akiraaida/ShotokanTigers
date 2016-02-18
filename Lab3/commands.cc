@@ -64,23 +64,31 @@ std::string Commands::DetermineSession() {
 void Commands::PushTransactionRecord(int code, std::string name,
                                      int account_number, double money,
                                      std::string misc) {
+
+  // it all goes here
   std::string transaction = "";
+
+  // get the transaction type
   std::string code_string;
   {
     code_string = std::to_string(code);
     int zeroes_count = 2 - code_string.size();
     code_string.insert(0, zeroes_count, '0');
   }
+
+  // get the money
   std::string money_string;
   {
     char money_string_buff[16] = { 0 };
-    sprintf(money_string_buff, "%5.2f", money);
+    sprintf(money_string_buff, "%.2f", money);
     std::string money_string_buff_2(money_string_buff);
     int zeroes_count = 8 - money_string_buff_2.length();
     zeroes_count = zeroes_count < 0 ? 0 : zeroes_count;
     money_string.insert(0, zeroes_count, '0');
     money_string = money_string + money_string_buff_2; // fix later
   }
+
+  // get the account number
   std::string account_string;
   {
     int zeroes_count = 5 - std::to_string(account_number).size();
@@ -89,12 +97,13 @@ void Commands::PushTransactionRecord(int code, std::string name,
     // std::cout << account_string << std::endl;
   }
 
+  // shove it in
   transaction.insert(0, 41, ' ');
   transaction.replace(0, 2, code_string);
   transaction.replace(3, name.length(), name);
   transaction.replace(3 + 21, 5, account_string);
   transaction.replace(24 + 6, 8, money_string);
-  transaction.replace(39, 2, misc); 
+  transaction.replace(39, 2, misc);
   std::cout << "\"" << transaction << "\" " << transaction.size() <<  std::endl;
 
   // push
@@ -155,10 +164,10 @@ bool Commands::withdrawal() {
           if(temp_account->balance > atof(amount) && CheckUnit(atof(amount)) == true) {
             float newBal = temp_account->balance - atof(amount);
             std::string trans = "";
-            PushTransactionRecord(01, name, atoi(num), atof(amount)); 
+            PushTransactionRecord(01, name, atoi(num), atof(amount));
             std::cout << SUCCESS_WITHDRAWAL << std::endl;
             /*TODO
-            
+
               Implement update remaining withdrawal
 
             */
@@ -189,10 +198,10 @@ bool Commands::withdrawal() {
           if(temp_account->balance > atof(amount) && CheckUnit(atof(amount)) == true) {
             float newBal = temp_account->balance - atof(amount);
             std::string trans = "";
-            PushTransactionRecord(01, logged_in_name_, atoi(num), atof(amount)); 
+            PushTransactionRecord(01, logged_in_name_, atoi(num), atof(amount));
             std::cout << SUCCESS_WITHDRAWAL << std::endl;
             /*TODO
-              
+
               Implement account charge for withdraw
               Implement update remaining withdrawal
 
@@ -403,9 +412,9 @@ bool Commands::logout() {
     is_admin_ = false;
 
     /*TODO
-    
+
       Create transactions file w/ all of the dequeu info
-  
+
     */
 
   } else {
@@ -415,4 +424,3 @@ bool Commands::logout() {
   return false;
   }
 }
-
