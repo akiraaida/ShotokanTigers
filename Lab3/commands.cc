@@ -46,15 +46,6 @@ namespace BankFrontEnd {
 Commands::Commands() {
   is_logged_in_ = false;
   is_admin_ = false;
-
-  std::cout << FitStringToSpace("0.0", 3, '0', true) << std::endl;
-  std::cout << FitStringToSpace("0.0", 3, '0', false) << std::endl;
-  std::cout << FitStringToSpace("0.0", 4, '0', true) << std::endl;
-  std::cout << FitStringToSpace("0.0", 4, '0', false) << std::endl;
-  std::cout << FitStringToSpace("0.0", 5, '0', true) << std::endl;
-  std::cout << FitStringToSpace("0.0", 5, '0', false) << std::endl;
-  std::cout << FitStringToSpace("54321", 4, '0', true) << std::endl;
-  std::cout << FitStringToSpace("54321", 4, '0', false) << std::endl;
 }
 
 void Commands::SetAccounts(std::map<std::string,
@@ -89,7 +80,7 @@ std::string Commands::FitStringToSpace(std::string string, size_t size,
     return string.substr(start_point, size);
   } else {
     // pad out
-    int start_point = align_right ? 0 : string.size() - 1;
+    int start_point = align_right ? 0 : string.size();
     return string.insert(start_point, -offset, fluff);
   }
 }
@@ -99,11 +90,24 @@ void Commands::PushTransactionRecord(int code, std::string name,
                                      int account_number, double money,
                                      std::string misc) {
 
-  // it all goes here
-  std::string transaction = "";
+  // figure out the money string
+  char money_string_buff[16] = { 0 };
+  sprintf(money_string_buff, "%.2f", money);
+  std::string money_string(money_string_buff);
+  int chop_point = money_string.size() - 8;
+  if(chop_point > 0)
+    money_string = money_string.substr(chop_point, 8);
+
+  // throw the transaction together
+  std::string transaction = FitStringToSpace(std::to_string(code), 2, '0') + " "
+                            + FitStringToSpace(name, 20, ' ', false) + " "
+                            + FitStringToSpace(std::to_string(account_number),
+                                5, '0') + " "
+                            + FitStringToSpace(money_string, 8, '0') + " "
+                            + FitStringToSpace(misc, 2, ' ', false);
 
   // get the transaction type
-  std::string code_string;
+  /*std::string code_string;
   {
     code_string = std::to_string(code);
     int zeroes_count = 2 - code_string.size();
@@ -137,7 +141,7 @@ void Commands::PushTransactionRecord(int code, std::string name,
   transaction.replace(3, name.length(), name);
   transaction.replace(3 + 21, 5, account_string);
   transaction.replace(24 + 6, 8, money_string);
-  transaction.replace(39, 2, misc);
+  transaction.replace(39, 2, misc);*/
   std::cout << "\"" << transaction << "\" " << transaction.size() <<  std::endl;
 
   // push
