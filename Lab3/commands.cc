@@ -15,22 +15,24 @@
 #include <math.h>
 #include <iostream>
 #include <string>
+#include <ctime>
 
 #define ERROR_MESSAGE_INVALID_SESSION "ERROR, SESSION TYPE IS NOT VALID."
 #define ERROR_MESSAGE_ACCOUNTLESS_USER "ERROR, THAT USER DOES NOT HAVE AN ACCOUNT."
 #define ERROR_MESSAGE_DOUBLE_LOGIN "ERROR, YOU'RE ALREADY LOGGED IN!"
 #define ERROR_MESSAGE_NO_LOGIN "ERROR, YOU HAVE NOT LOGGED IN YET."
-#define ERROR_MESSAGE_INVALID_ACCOUNT "Error, that account is invalid."
+#define ERROR_MESSAGE_INVALID_ACCOUNT "ERROR, THAT ACCOUNT IS INVALID."
 #define ERROR_MESSAGE_STOLEN_ACCOUNT "ERROR, THE ACCOUNT NUMBER DOESN'T MATCH THE ACCOUNT HOLDER'S NAME."
 #define ERROR_BALANCE_INSUFFICIENT "ERROR, THE ACCOUNT DOES NOT HAVE SUFFICIENT FUNDS."
 #define ERROR_ADMIN_PERMISSIONS "ERROR, YOU DO NOT HAVE THE CORRECT PRIVILEGES."
 #define ERROR_DISABLED "ERROR, THAT ACCOUNT IS DISABLED."
 #define ERROR_ENABLED "ERROR, THAT ACCOUNT IS ENABLED ALREADY."
 #define ERROR_DELETED "ERROR, THAT ACCOUNT HAS BEEN DELETED."
-#define ERROR_MESSAGE_HIT_TRANSFER_LIMIT "Error, the value entered is beyond the transfer limit."
-#define ERROR_INVALID_COMPANY "Error, this company is not a valid recipient."
-#define ERROR_MESSAGE_HIT_PAYBILL_LIMIT "Error, the value entered is beyond the paybill limit."
+#define ERROR_MESSAGE_HIT_TRANSFER_LIMIT "ERROR, THE VALUE ENTERED IS BEYOND THE TRANSFER LIMIT."
+#define ERROR_INVALID_COMPANY "ERROR, THAT COMPANY IS NOT A VALID RECIPIENT."
+#define ERROR_MESSAGE_HIT_PAYBILL_LIMIT "ERROR, THE VALUE ENTERED IS BEYOND THE PAYBILL LIMIT."
 #define ERROR_ABOVE_MAX_INIT "ERROR, MAX INITIAL BALANCE EXCEEDED."
+#define ERROR_NEW "ERROR, THAT ACCOUNT HAS BEEN NEWLY CREATED."
 
 #define PROMPT_ENTER_SESSION_TYPE "Please enter your session type: "
 #define PROMPT_ENTER_LOGIN_NAME "Please enter a login name: "
@@ -180,6 +182,9 @@ bool Commands::withdrawal() {
     return false;
   } else if (!temp_account->is_active) {
     std::cout << ERROR_DISABLED << std::endl;
+    return false;
+  } else if (temp_account->is_new){
+    std::cout << ERROR_NEW << std::endl;
     return false;
   }
   float transaction_charge = is_admin_ ? 0.0 : GetTransactionCharge(name, atoi(num));
@@ -431,6 +436,9 @@ bool Commands::deposit() {
   } else if (temp_account->is_deleted) {
     std::cout << ERROR_DELETED << std::endl;
     return false;
+  } else if (temp_account->is_new){
+    std::cout << ERROR_NEW << std::endl;
+    return false;
   }
   float transaction_charge = is_admin_ ? 0.0 : GetTransactionCharge(name, atoi(num));
   if(temp_account->balance + atof(amount) < transaction_charge) {
@@ -470,8 +478,22 @@ bool Commands::create() {
 }
 
 int Commands::GenerateNum(){
-
-  return 1;
+  srand(time(0));
+  int rnd;
+  bool duplicate = true;
+  while(duplicate == true){
+    duplicate = false;
+    rnd = rand() % 99999 + 1;
+    std::map<std::string, std::vector<Account*> >::iterator it;
+    for(it=accounts_.begin(); it != accounts_.end(); it++) {
+      for(int i = 0; i < it->second.size(); i++){
+        if(rnd == it->second[i]->number){
+          duplicate = true;
+        }
+      }
+    }
+  }
+  return rnd;
 }
 
 bool Commands::delete_account() {
@@ -495,6 +517,9 @@ bool Commands::delete_account() {
   }
   if(temp_account->is_deleted) {
     std::cout << ERROR_DELETED << std::endl;
+    return false;
+  } else if (temp_account->is_new){
+    std::cout << ERROR_NEW << std::endl;
     return false;
   }
   PushTransactionRecord(6, name, atoi(num));
@@ -528,6 +553,9 @@ bool Commands::disable() {
   } else if (!temp_account->is_active){
     std::cout << ERROR_DISABLED << std::endl;
     return false;
+  } else if (temp_account->is_new){
+    std::cout << ERROR_NEW << std::endl;
+    return false;
   }
   PushTransactionRecord(7, name, atoi(num));
   temp_account->is_active = false;
@@ -559,6 +587,9 @@ bool Commands::changeplan() {
     return false;
   } else if (temp_account->is_active){
     std::cout << ERROR_DISABLED << std::endl;
+    return false;
+  } else if (temp_account->is_new){
+    std::cout << ERROR_NEW << std::endl;
     return false;
   }
   if(temp_account->is_student_plan){
@@ -595,6 +626,9 @@ bool Commands::enable() {
     return false;
   } else if (temp_account->is_active){
     std::cout << ERROR_ENABLED << std::endl;
+    return false;
+  } else if (temp_account->is_new){
+    std::cout << ERROR_NEW << std::endl;
     return false;
   }
   PushTransactionRecord(9, name, atoi(num));
