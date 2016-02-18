@@ -651,8 +651,6 @@ int Commands::QueryAccountStatus(Account* account) {
     return AccountStatus::kAccountNoExist;
   } else if (account->is_deleted) {
     return AccountStatus::kDeletedAccount;
-  } else if (account->is_new) {
-    return AccountStatus::kNewAccount;
   } else if (!account->is_active) {
     return AccountStatus::kDisabledAccount;
   } else {

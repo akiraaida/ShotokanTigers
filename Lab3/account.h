@@ -58,11 +58,6 @@ class Account {
   bool is_deleted;
 
   /**
-  * Flag for a newly created account.
-  **/
-  bool is_new;
-
-  /**
   * Reset at each day; Number of dollars that may be withdrawn this day.
   **/
   double withdrawal_limit_remaining;

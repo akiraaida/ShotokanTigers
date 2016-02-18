@@ -32,7 +32,6 @@ namespace AccountStatus {
     kActiveAccount,
     kDisabledAccount,
     kDeletedAccount,
-    kNewAccount,
     kAccountNoExist
   };
 }
