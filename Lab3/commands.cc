@@ -20,6 +20,7 @@
 #define ERROR_MESSAGE_ACCOUNTLESS_USER "ERROR, THAT USER DOES NOT HAVE AN ACCOUNT."
 #define ERROR_MESSAGE_DOUBLE_LOGIN "ERROR, YOU'RE ALREADY LOGGED IN!"
 #define ERROR_MESSAGE_NO_LOGIN "ERROR, YOU HAVE NOT LOGGED IN YET."
+#define ERROR_MESSAGE_INVALID_ACCOUNT "Error, that account is invalid."
 #define ERROR_MESSAGE_STOLEN_ACCOUNT "ERROR, THE ACCOUNT NUMBER DOESN'T MATCH THE ACCOUNT HOLDER'S NAME."
 #define ERROR_BALANCE_INSUFFICIENT "ERROR, THE ACCOUNT DOES NOT HAVE SUFFICIENT FUNDS."
 #define ERROR_ADMIN_PERMISSIONS "ERROR, YOU DO NOT HAVE THE CORRECT PRIVILEGES."
@@ -31,6 +32,8 @@
 #define PROMPT_ENTER_LOGIN_NAME "Please enter a login name: "
 #define PROMPT_ENTER_CUSTOMER_NAME "Please enter the account holder's name: "
 #define PROMPT_ENTER_ACCOUNT_NUMBER "Please enter the user's account number: "
+#define PROMPT_TRANSFER_SOURCE "Please enter the transferring account's number: "
+#define PROMPT_TRANSFER_TARGET "Please enter the recipient account's number: "
 #define PROMPT_WITHDRAWAL_VALUE "Please enter an amount to withdraw: "
 #define PROMPT_DEPOSIT_VALUE "Please enter an amount to deposit: "
 
@@ -281,14 +284,14 @@ bool Commands::transfer() {
     std::string name;
     if(is_admin_) {
       // retrieve name
-      std::cout << "Please enter the account holder's name: " << std::endl;
+      std::cout << PROMPT_ENTER_CUSTOMER_NAME << std::endl;
       char buffer[20];
       std::cin.getline(buffer, sizeof(buffer));
       name = buffer;
 
       // check name
       if(!UserExists(name)) {
-        std::cout << "Error: user " << name << " does not exist" << std::endl;
+        std::cout << ERROR_MESSAGE_ACCOUNTLESS_USER << std::endl;
         return false;
       }
 
@@ -300,7 +303,7 @@ bool Commands::transfer() {
     // get number
     int number;
     {
-      std::cout << "Please enter account to transfer from: " << std::endl;
+      std::cout << PROMPT_TRANSFER_SOURCE << std::endl;
       char num[6];
       std::cin.getline(num, sizeof(num));
       number = std::stoi(num);
@@ -308,20 +311,17 @@ bool Commands::transfer() {
       // check name against account number
       Account* account = GetAccount(name, number);
       if(account == nullptr) {
-        std::cout << "Error, account " << name << ":" << number
-                  << " was not found" << std::endl;
+        std::cout << ERROR_MESSAGE_STOLEN_ACCOUNT << std::endl;
         return false;
       }
     }
-
-
 
     // Ask for next name
     std::string recipient_name;
     int recipient_number;
     Account* recipient_account;
     {
-      std::cout << "Please enter account to transfer to: " << std::endl;
+      std::cout << PROMPT_TRANSFER_TARGET << std::endl;
       char num[6];
       std::cin.getline(num, sizeof(num));
       recipient_number = std::stoi(num);
@@ -329,8 +329,7 @@ bool Commands::transfer() {
       // find name corresponding
       recipient_name = GetAccountOwner(recipient_number);
       if(recipient_name.empty() || recipient_name == name) {
-        std::cout << "Error, " << recipient_number
-                  << " is not a valid recipient." << std::endl;
+        std::cout << ERROR_MESSAGE_INVALID_ACCOUNT << std::endl;
         return false;
       }
 
