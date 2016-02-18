@@ -128,9 +128,9 @@ class Commands {
     /**
     * pushes transaction record with that info onto stack
     **/
-    void PushTransactionRecord(int code, std::string name = "                    ",
-                               int account_number = 00000, double money = 00000.00,
-                               std::string misc = "  ");
+    void PushTransactionRecord(int code, std::string name = "",
+                               int account_number = 0, double money = 0.0,
+                               std::string misc = "");
 
     /**
     * Formats string to match certain number of characters, using fluff to fill
