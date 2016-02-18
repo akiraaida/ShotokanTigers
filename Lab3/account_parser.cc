@@ -9,7 +9,7 @@
 * Kathryn McKay       100524201
 * Alexander Wheadon   100514985
 *******************************************************************************/
-#include "account.h"
+#include "account_parser.h"
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -23,8 +23,8 @@
 
 namespace BankFrontEnd {
 namespace AccountParser {
+// Parse
 std::map<std::string, std::vector<Account*> > Parse(const char* fpath) {
-
   std::map<std::string, std::vector<Account*> > accounts;
   std::ifstream file;
   file.open(fpath);

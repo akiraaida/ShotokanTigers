@@ -11,14 +11,25 @@
 * Kathryn McKay       100524201
 * Alexander Wheadon   100514985
 *
+* Defines the assessment of an account's validity e.g. is it available for use.
+* Also provides error messages corresponding to those states.
+* Example Usage:
+*   int status = AccountStatus::QueryAccountStatus(account);
+*   if (status != AccountStatus::kActiveAccount) {
+*     std::cout << AccountStatus::GetErrorMessage(status) << std::endl;
+*     return;
+*   }
+*
 *******************************************************************************/
-
 #include <string>
 
 #include "account.h"
 
 namespace BankFrontEnd {
 namespace AccountStatus {
+/**
+* Representation of various ways an account can be invalid; or valid.
+**/
 enum {
   kActiveAccount = 0,
   kDisabledAccount,
@@ -34,13 +45,11 @@ enum {
 int QueryAccountStatus(Account* account);
 
 /**
-* Returns the message corresponding to an account status
-* Error messages except for active account, which just states that the account
-* is active.
+* Returns the message corresponding to an account status. That means error
+* messages except for when status == kActiveAccount, in which case it's just a
+* statement that the account is active.
 **/
 std::string GetErrorMessage(int status);
-
-
 }
 }
 

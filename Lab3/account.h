@@ -11,7 +11,7 @@
 * Kathryn McKay       100524201
 * Alexander Wheadon   100514985
 *
-* Contains Account POD & AccountParser methods
+* Contains account POD
 *
 *******************************************************************************/
 
@@ -74,13 +74,6 @@ class Account {
   std::map<std::string, double> paybill_limit_remaining;
 
 };
-
-/**
-* Convert from file to accounts map.
-**/
-namespace AccountParser {
-  std::map<std::string, std::vector<Account*> > Parse(const char* fpath);
-}
 }
 
 

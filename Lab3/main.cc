@@ -31,6 +31,7 @@
 
 #include "account.h"
 #include "commands.h"
+#include "account_parser.h"
 
 #define ERROR_MESSAGE_ACCOUNTS_LOAD_FAIL "ERROR, ACCOUNTS FILE DID NOT LOAD."
 #define ERROR_MESSAGE_INVALID_COMMAND "ERROR, INVALID COMMAND."
