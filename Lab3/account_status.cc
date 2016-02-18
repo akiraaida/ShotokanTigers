@@ -12,6 +12,8 @@
 *******************************************************************************/
 #include "account_status.h"
 
+#include <cassert>
+
 #define ACCOUNT_STATUS_INVALID_ACCOUNT "ERROR, THAT ACCOUNT IS INVALID."
 #define ACCOUNT_STATUS_DISABLED "ERROR, THAT ACCOUNT IS DISABLED."
 #define ACCOUNT_STATUS_ENABLED "ERROR, THAT ACCOUNT IS ENABLED ALREADY."
@@ -47,9 +49,7 @@ std::string GetErrorMessage(int status) {
     /*TODO: Rest*/
 
     default:
-      //assert(false);
-      return ACCOUNT_STATUS_INVALID_ACCOUNT;
-      break; //TODO: after enable assertions
+      assert(false);
   }
 }
 

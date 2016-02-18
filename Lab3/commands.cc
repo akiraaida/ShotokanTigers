@@ -61,6 +61,7 @@ namespace BankFrontEnd {
 Commands::Commands() {
   is_logged_in_ = false;
   is_admin_ = false;
+  std::cout << AccountStatus::GetErrorMessage(AccountStatus::kDeletedAccount) << std::endl;
 }
 
 void Commands::SetAccounts(std::map<std::string,
