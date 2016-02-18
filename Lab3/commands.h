@@ -141,6 +141,12 @@ class Commands {
 
 
     /**
+    * Retrieves the account holder's name.
+    **/
+    std::string PromptForAccountHolder();
+
+
+    /**
     * Retrieves the account holder's name based on the session.
     **/
     std::string PromptForAccountHolderIfUnknown();
@@ -150,6 +156,12 @@ class Commands {
     * Prints an error if the user is not admin.
     **/
     bool CheckLogin(bool admins_only = false);
+
+    /**
+    * Retrieves Transaction Charge for a particular account.
+    * Behaviour is undefined if the account doesn't exist.
+    **/
+    double GetTransactionCharge(std::string name, int account_number);
 
     /**
     * Field with customer names as keys and their associated bank accounts as

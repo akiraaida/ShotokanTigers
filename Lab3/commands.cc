@@ -94,7 +94,6 @@ std::string Commands::FitStringToSpace(std::string string, size_t size,
 void Commands::PushTransactionRecord(int code, std::string name,
                                      int account_number, double money,
                                      std::string misc) {
-
   // figure out the money string
   char money_string_buff[16] = { 0 };
   sprintf(money_string_buff, "%.2f", money);
@@ -149,25 +148,12 @@ bool Commands::login() {
 
 bool Commands::withdrawal() {
   // check if logged in
-  if(!is_logged_in_) {
-    std::cout << ERROR_MESSAGE_NO_LOGIN << std::endl;
+  if(!CheckLogin()) {
     return false;
   }
 
-  // retrieve name & transaction charge
-  std::string name;
-  float transaction_charge;
-  if(is_admin_) {
-    std::cout << PROMPT_ENTER_CUSTOMER_NAME << std::endl;
-    char name_buff[21] = { 0 };
-    std::cin.getline(name_buff, sizeof(name_buff));
-    name = name_buff;
-    transaction_charge = 0.0f;
-  } else {
-    name = logged_in_name_;
-    // TODO: Implement account charge for withdraw
-    transaction_charge = 0.0f;
-  }
+  // retrieve name
+  std::string name = PromptForAccountHolderIfUnknown();
 
   // get other stuff
   std::cout << PROMPT_ENTER_ACCOUNT_NUMBER << std::endl;
@@ -201,6 +187,9 @@ bool Commands::withdrawal() {
     return false;
   }
 
+  // figure out transaction charge
+  float transaction_charge = is_admin_ ? 0.0 : GetTransactionCharge(name, atoi(num));
+
   // check withdrawal amount
   float debit = atof(amount) + transaction_charge;
   if(temp_account->balance < debit || CheckUnit(atof(amount)) == false) {
@@ -209,8 +198,8 @@ bool Commands::withdrawal() {
   }
 
   // good to go
-  float newBal = temp_account->balance - atof(amount);
-  PushTransactionRecord(1, name, atoi(num), atof(amount));
+  float newBal = temp_account->balance - debit;
+  PushTransactionRecord(1, name, atoi(num), debit);
   std::cout << SUCCESS_WITHDRAWAL << std::endl;
   /*TODO
 
@@ -619,15 +608,15 @@ bool Commands::logout() {
   return false;
 }
 
+std::string Commands::PromptForAccountHolder() {
+  char name[21] = { 0 };
+  std::cout << PROMPT_ENTER_CUSTOMER_NAME << std::endl;
+  std::cin.getline(name, sizeof(name));
+  return std::string(name);
+}
+
 std::string Commands::PromptForAccountHolderIfUnknown() {
-  if(!is_admin_) {
-    return logged_in_name_;
-  } else {
-      char name[21] = { 0 };
-      std::cout << PROMPT_ENTER_CUSTOMER_NAME << std::endl;
-      std::cin.getline(name, sizeof(name));
-      return std::string(name);
-  }
+  return is_admin_ ? PromptForAccountHolder() : logged_in_name_;
 }
 
 
@@ -640,6 +629,16 @@ bool Commands::CheckLogin(bool admins_only) {
     return false;
   } else {
     return true;
+  }
+}
+
+
+double Commands::GetTransactionCharge(std::string name, int account_number) {
+  Account* account = GetAccount(name, account_number);
+  if(account->is_student_plan){
+    return 0.05;
+  } else {
+    return 0.1;
   }
 }
 }
