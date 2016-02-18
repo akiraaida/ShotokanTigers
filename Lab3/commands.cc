@@ -25,6 +25,7 @@
 #define ERROR_ADMIN_PERMISSIONS "ERROR, YOU DO NOT HAVE THE CORRECT PRIVILEGES."
 #define ERROR_DISABLED "ERROR, THAT ACCOUNT IS DISABLED."
 #define ERROR_ENABLED "ERROR, THAT ACCOUNT IS ENABLED ALREADY."
+#define ERROR_DELETED "ERROR, THAT ACCOUNT HAS BEEN DELETED."
 
 #define PROMPT_ENTER_SESSION_TYPE "Please enter your session type: "
 #define PROMPT_ENTER_LOGIN_NAME "Please enter a login name: "
@@ -39,6 +40,7 @@
 #define SUCCESS_ENABLE "The enable transaction has completed."
 #define SUCCESS_TO_STUDENT "Specified account is now a student account."
 #define SUCCESS_TO_NONSTUDENT "Specified account is now a non-student account."
+#define SUCCESS_DELETE "Specified account has been deleted."
 
 namespace BankFrontEnd {
 Commands::Commands() {
@@ -171,19 +173,23 @@ bool Commands::withdrawal() {
           std::cout << ERROR_MESSAGE_STOLEN_ACCOUNT << std::endl;
         } else {
           if(temp_account->is_active == true){
-            if(temp_account->balance > atof(amount) && CheckUnit(atof(amount)) == true) {
-              float newBal = temp_account->balance - atof(amount);
-              PushTransactionRecord(1, name, atoi(num), atof(amount));
-              std::cout << SUCCESS_WITHDRAWAL << std::endl;
-              /*TODO
+            if(temp_account->is_deleted == false){
+              if(temp_account->balance > atof(amount) && CheckUnit(atof(amount)) == true) {
+                float newBal = temp_account->balance - atof(amount);
+                PushTransactionRecord(1, name, atoi(num), atof(amount));
+                std::cout << SUCCESS_WITHDRAWAL << std::endl;
+                /*TODO
 
-                Implement update remaining withdrawal
+                  Implement update remaining withdrawal
 
-              */
-              return true;
+                */
+                return true;
+              } else {
+                std::cout << ERROR_BALANCE_INSUFFICIENT << std::endl; // Very generalized error message atm, may want to break the error cases down?
+              }                                                       // Errors for not mod 5/10/20/100 and not enough money
             } else {
-              std::cout << ERROR_BALANCE_INSUFFICIENT << std::endl; // Very generalized error message atm, may want to break the error cases down?
-            }                                                       // Errors for not mod 5/10/20/100 and not enough money
+              std::cout << ERROR_DELETED << std::endl;
+            }
           } else {
             std::cout << ERROR_DISABLED << std::endl;
           }
@@ -208,20 +214,24 @@ bool Commands::withdrawal() {
           std::cout << ERROR_MESSAGE_STOLEN_ACCOUNT << std::endl;
         } else {
           if(temp_account->is_active == true){
-            if(temp_account->balance > atof(amount) && CheckUnit(atof(amount)) == true) {
-              float newBal = temp_account->balance - atof(amount);
-              PushTransactionRecord(1, logged_in_name_, atoi(num), atof(amount));
-              std::cout << SUCCESS_WITHDRAWAL << std::endl;
-              /*TODO
+            if(temp_account->is_deleted == false){
+              if(temp_account->balance > atof(amount) && CheckUnit(atof(amount)) == true) {
+                float newBal = temp_account->balance - atof(amount);
+                PushTransactionRecord(1, logged_in_name_, atoi(num), atof(amount));
+                std::cout << SUCCESS_WITHDRAWAL << std::endl;
+                /*TODO
 
-                Implement account charge for withdraw
-                Implement update remaining withdrawal
+                  Implement account charge for withdraw
+                  Implement update remaining withdrawal
 
-              */
-              return true;
+                */
+                return true;
+              } else {
+                std::cout << ERROR_BALANCE_INSUFFICIENT << std::endl;// Very generalized error message atm, may want to break the error cases down?
+              }                                                        // Errors for not mod 5/10/20/100 and not enough money
             } else {
-              std::cout << ERROR_BALANCE_INSUFFICIENT << std::endl;// Very generalized error message atm, may want to break the error cases down?
-            }                                                       // Errors for not mod 5/10/20/100 and not enough money
+              std::cout << ERROR_DELETED << std::endl;
+            }                                                 
           } else {
             std::cout << ERROR_DISABLED << std::endl;
           }
@@ -380,10 +390,14 @@ if(is_logged_in_ == true) {
           std::cout << ERROR_MESSAGE_STOLEN_ACCOUNT << std::endl;
         } else {
           if(temp_account->is_active == true){
-            float newBal = temp_account->balance + atof(amount);
-            PushTransactionRecord(4, name, atoi(num), atof(amount));
-            std::cout << SUCCESS_DEPOSIT << std::endl;
-            return true;
+            if(temp_account->is_deleted == false){
+              float newBal = temp_account->balance + atof(amount);
+              PushTransactionRecord(4, name, atoi(num), atof(amount));
+              std::cout << SUCCESS_DEPOSIT << std::endl;
+              return true;
+            } else {
+              std::cout << ERROR_DELETED << std::endl;
+            }
           } else {
             std::cout << ERROR_DISABLED << std::endl;
           }
@@ -408,17 +422,21 @@ if(is_logged_in_ == true) {
           std::cout << ERROR_MESSAGE_STOLEN_ACCOUNT << std::endl;
         } else {
           if(temp_account->is_active == true){
-            float newBal = temp_account->balance + atof(amount);
-            PushTransactionRecord(4, logged_in_name_, atoi(num), atof(amount));
-            std::cout << SUCCESS_DEPOSIT << std::endl;
+            if(temp_account->is_deleted == false){
+              float newBal = temp_account->balance + atof(amount);
+              PushTransactionRecord(4, logged_in_name_, atoi(num), atof(amount));
+              std::cout << SUCCESS_DEPOSIT << std::endl;
 
-            /*TODO
-              
-              Implement account charge for deposit
+              /*TODO
+                
+                Implement account charge for deposit
 
-            */
+              */
 
-            return true;
+              return true;
+            } else {
+              std::cout << ERROR_DELETED << std::endl;
+            }
           } else {
             std::cout << ERROR_DISABLED << std::endl;
           }
@@ -444,7 +462,31 @@ bool Commands::create() {
 
 bool Commands::delete_account() {
   if(is_logged_in_ == true) {
-
+    if(is_admin_ == true) {
+      std::cout << PROMPT_ENTER_CUSTOMER_NAME << std::endl;
+      char name[21] = { 0 };
+      std::cin.getline(name, sizeof(name));
+      std::cout << PROMPT_ENTER_ACCOUNT_NUMBER << std::endl;
+      char num[6] = { 0 };
+      std::cin.getline(num, sizeof(num));
+      std::vector<Account*> temp = accounts_[name];
+      if(temp.empty()) {
+        std::cout << ERROR_MESSAGE_ACCOUNTLESS_USER << std::endl;
+        return false;
+      } else {
+        bool owned_account = UserExists(name);
+        Account* temp_account = GetAccount(name, atoi(num));
+        if(owned_account == false || temp_account == nullptr) {
+          std::cout << ERROR_MESSAGE_STOLEN_ACCOUNT << std::endl;
+        } else {
+          temp_account->is_deleted = true;
+          PushTransactionRecord(6, name, atoi(num));
+          std::cout << SUCCESS_DELETE << std::endl;
+        }
+      }
+    } else {
+      std::cout << ERROR_ADMIN_PERMISSIONS << std::endl;
+    }
   } else {
     std::cout << ERROR_MESSAGE_NO_LOGIN << std::endl;
     return false;
@@ -472,9 +514,13 @@ bool Commands::disable() {
           std::cout << ERROR_MESSAGE_STOLEN_ACCOUNT << std::endl;
         } else {
           if(temp_account->is_active == true){
-            temp_account->is_active = false;
-            PushTransactionRecord(7, name, atoi(num));
-            std::cout << SUCCESS_DISABLE << std::endl;
+            if(temp_account->is_deleted == false){
+              temp_account->is_active = false;
+              PushTransactionRecord(7, name, atoi(num));
+              std::cout << SUCCESS_DISABLE << std::endl;
+            } else {
+              std::cout << ERROR_DELETED << std::endl;
+            }
           } else {
             std::cout << ERROR_DISABLED << std::endl;
           }
@@ -511,9 +557,13 @@ bool Commands::changeplan() {
         } else {
           if(temp_account->is_active == true){
             if(temp_account->is_student_plan == true){
-              temp_account->is_student_plan = false;
-              PushTransactionRecord(8, name, atoi(num));
-              std::cout << SUCCESS_TO_NONSTUDENT << std::endl;
+              if(temp_account->is_deleted == false){
+                temp_account->is_student_plan = false;
+                PushTransactionRecord(8, name, atoi(num));
+                std::cout << SUCCESS_TO_NONSTUDENT << std::endl;
+              } else {
+                std::cout << ERROR_DELETED << std::endl;
+              }
             } else {
               temp_account->is_student_plan = true;
               PushTransactionRecord(8, name, atoi(num));
@@ -554,9 +604,13 @@ bool Commands::enable() {
           std::cout << ERROR_MESSAGE_STOLEN_ACCOUNT << std::endl;
         } else {
           if(temp_account->is_active == false){
-            temp_account->is_active = true;
-            PushTransactionRecord(9, name, atoi(num));
-            std::cout << SUCCESS_ENABLE << std::endl;
+            if(temp_account->is_deleted == false){
+              temp_account->is_active = true;
+              PushTransactionRecord(9, name, atoi(num));
+              std::cout << SUCCESS_ENABLE << std::endl;
+            } else {
+              std::cout << ERROR_DELETED << std::endl;
+            } 
           } else {
             std::cout << ERROR_ENABLED << std::endl;
           }

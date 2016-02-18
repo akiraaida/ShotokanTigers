@@ -65,8 +65,8 @@ int main(int argc, const char* argv[]) {
         commands.deposit();
       } else if(strncmp(user_cmd, "create", 10) == 0) {             // Create       -
 
-      } else if(strncmp(user_cmd, "delete", 10) == 0) {             // Delete       -
-
+      } else if(strncmp(user_cmd, "delete", 10) == 0) {             // Delete       - Done
+        commands.delete_account();
       } else if(strncmp(user_cmd, "disable", 10) == 0) {            // Disable      - Done
         commands.disable();
       } else if(strncmp(user_cmd, "enable", 10) == 0) {             // Enable       - Done

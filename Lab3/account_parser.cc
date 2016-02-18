@@ -42,7 +42,6 @@ std::map<std::string, std::vector<Account*> > Parse(const char* fpath) {
     {
       size_t endpos = name.find_last_not_of(" ");
       name = name.substr(0, endpos+1);
-      // std::cout << "read \"" << name << "\"" << std::endl;
     }
 
     Account* new_account = new Account();
@@ -59,6 +58,8 @@ std::map<std::string, std::vector<Account*> > Parse(const char* fpath) {
     } else {
       new_account->is_student_plan = 0;
     }
+
+    new_account->is_deleted = 0;
 
     accounts[name].push_back(new_account);
 

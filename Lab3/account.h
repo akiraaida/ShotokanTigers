@@ -48,6 +48,11 @@ class Account {
   bool is_student_plan;
 
   /**
+  * Flag for a deleted account.
+  **/
+  bool is_deleted;
+
+  /**
   * Reset at each day; Number of dollars that may be withdrawn this day.
   **/
   double withdrawal_limit_remaining;
