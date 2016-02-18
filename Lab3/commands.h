@@ -50,7 +50,7 @@ class Commands {
   /**
   * TODO
   **/
-  std::string DetermineSession();
+
 
   /**
   * Withdraw a value from an account.
@@ -60,8 +60,6 @@ class Commands {
   * \return Success of transaction.
   **/
   bool withdrawal();
-
-  bool CheckUnit(double amount);
 
   /**
   * TODO
@@ -113,6 +111,12 @@ class Commands {
     * Check if user exists
     **/
     bool UserExists(std::string name);
+
+    bool CheckUnit(double amount);
+
+    std::string DetermineSession();
+
+    int GenerateNum();
 
     /**
     * Check if account belongs to user
