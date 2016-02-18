@@ -351,17 +351,17 @@ if(is_logged_in_ == true) {
         if(owned_account == false || temp_account == nullptr) {
           std::cout << ERROR_MESSAGE_STOLEN_ACCOUNT << std::endl;
         } else {
-          if(temp_account->is_active == true){
-            if(temp_account->is_deleted == false){
+          if(temp_account->is_deleted == false){
+            if(temp_account->is_active == true){
               float newBal = temp_account->balance + atof(amount);
               PushTransactionRecord(4, name, atoi(num), atof(amount));
               std::cout << SUCCESS_DEPOSIT << std::endl;
               return true;
             } else {
-              std::cout << ERROR_DELETED << std::endl;
+              std::cout << ERROR_DISABLED << std::endl;
             }
           } else {
-            std::cout << ERROR_DISABLED << std::endl;
+            std::cout << ERROR_DELETED << std::endl;
           }
         }
       }
@@ -383,8 +383,8 @@ if(is_logged_in_ == true) {
         if(owned_account == false || temp_account == nullptr) {
           std::cout << ERROR_MESSAGE_STOLEN_ACCOUNT << std::endl;
         } else {
-          if(temp_account->is_active == true){
-            if(temp_account->is_deleted == false){
+          if(temp_account->is_deleted == false){
+            if(temp_account->is_active == true){
               float newBal = temp_account->balance + atof(amount);
               PushTransactionRecord(4, logged_in_name_, atoi(num), atof(amount));
               std::cout << SUCCESS_DEPOSIT << std::endl;
@@ -397,10 +397,10 @@ if(is_logged_in_ == true) {
 
               return true;
             } else {
-              std::cout << ERROR_DELETED << std::endl;
+              std::cout << ERROR_DISABLED << std::endl;
             }
           } else {
-            std::cout << ERROR_DISABLED << std::endl;
+            std::cout << ERROR_DELETED << std::endl;
           }
         }
       }
@@ -441,9 +441,13 @@ bool Commands::delete_account() {
         if(owned_account == false || temp_account == nullptr) {
           std::cout << ERROR_MESSAGE_STOLEN_ACCOUNT << std::endl;
         } else {
-          temp_account->is_deleted = true;
-          PushTransactionRecord(6, name, atoi(num));
-          std::cout << SUCCESS_DELETE << std::endl;
+          if(temp_account->is_deleted == false){
+            temp_account->is_deleted = true;
+            PushTransactionRecord(6, name, atoi(num));
+            std::cout << SUCCESS_DELETE << std::endl;
+          } else {
+            std::cout << ERROR_DELETED << std::endl;
+          }
         }
       }
     } else {
@@ -475,16 +479,16 @@ bool Commands::disable() {
         if(owned_account == false || temp_account == nullptr) {
           std::cout << ERROR_MESSAGE_STOLEN_ACCOUNT << std::endl;
         } else {
-          if(temp_account->is_active == true){
-            if(temp_account->is_deleted == false){
+          if(temp_account->is_deleted == false){
+            if(temp_account->is_active == true){
               temp_account->is_active = false;
               PushTransactionRecord(7, name, atoi(num));
               std::cout << SUCCESS_DISABLE << std::endl;
             } else {
-              std::cout << ERROR_DELETED << std::endl;
+              std::cout << ERROR_DISABLED << std::endl;
             }
           } else {
-            std::cout << ERROR_DISABLED << std::endl;
+            std::cout << ERROR_DELETED << std::endl;
           }
         }
       }
@@ -517,22 +521,22 @@ bool Commands::changeplan() {
         if(owned_account == false || temp_account == nullptr) {
           std::cout << ERROR_MESSAGE_STOLEN_ACCOUNT << std::endl;
         } else {
-          if(temp_account->is_active == true){
-            if(temp_account->is_student_plan == true){
-              if(temp_account->is_deleted == false){
+          if(temp_account->is_deleted == false){
+            if(temp_account->is_active == true){
+              if(temp_account->is_student_plan == true){
                 temp_account->is_student_plan = false;
                 PushTransactionRecord(8, name, atoi(num));
                 std::cout << SUCCESS_TO_NONSTUDENT << std::endl;
               } else {
-                std::cout << ERROR_DELETED << std::endl;
+                temp_account->is_student_plan = true;
+                PushTransactionRecord(8, name, atoi(num));
+                std::cout << SUCCESS_TO_STUDENT << std::endl;
               }
             } else {
-              temp_account->is_student_plan = true;
-              PushTransactionRecord(8, name, atoi(num));
-              std::cout << SUCCESS_TO_STUDENT << std::endl;
+              std::cout << ERROR_DISABLED << std::endl;
             }
           } else {
-            std::cout << ERROR_DISABLED << std::endl;
+            std::cout << ERROR_DELETED << std::endl;
           }
         }
       }
@@ -565,16 +569,16 @@ bool Commands::enable() {
         if(owned_account == false || temp_account == nullptr) {
           std::cout << ERROR_MESSAGE_STOLEN_ACCOUNT << std::endl;
         } else {
-          if(temp_account->is_active == false){
-            if(temp_account->is_deleted == false){
+          if(temp_account->is_deleted == false){
+            if(temp_account->is_active == false){
               temp_account->is_active = true;
               PushTransactionRecord(9, name, atoi(num));
               std::cout << SUCCESS_ENABLE << std::endl;
             } else {
-              std::cout << ERROR_DELETED << std::endl;
+              std::cout << ERROR_ENABLED << std::endl;
             }
           } else {
-            std::cout << ERROR_ENABLED << std::endl;
+            std::cout << ERROR_DELETED << std::endl;
           }
         }
       }
