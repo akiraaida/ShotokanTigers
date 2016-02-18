@@ -12,10 +12,11 @@
 #include "commands.h"
 
 #include <cstring>
+#include <ctime>
 #include <math.h>
+
 #include <iostream>
 #include <string>
-#include <ctime>
 
 #include "account_status.h"
 
