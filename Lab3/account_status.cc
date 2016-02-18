@@ -46,7 +46,15 @@ std::string GetErrorMessage(int status) {
       break;
     }
 
-    /*TODO: Rest*/
+    case kDeletedAccount: {
+      return ACCOUNT_STATUS_DELETED;
+      break;
+    }
+
+    case kDisabledAccount: {
+      return ACCOUNT_STATUS_DISABLED;
+      break;
+    }
 
     default:
       assert(false);

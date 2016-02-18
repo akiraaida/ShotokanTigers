@@ -20,7 +20,7 @@
 namespace BankFrontEnd {
 namespace AccountStatus {
 enum {
-  kActiveAccount,
+  kActiveAccount = 0,
   kDisabledAccount,
   kDeletedAccount,
   kAccountNoExist

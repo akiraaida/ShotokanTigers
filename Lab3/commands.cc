@@ -61,7 +61,6 @@ namespace BankFrontEnd {
 Commands::Commands() {
   is_logged_in_ = false;
   is_admin_ = false;
-  std::cout << AccountStatus::GetErrorMessage(AccountStatus::kDeletedAccount) << std::endl;
 }
 
 void Commands::SetAccounts(std::map<std::string,
@@ -257,27 +256,11 @@ bool Commands::transfer() {
 
     // check name against account number
     Account* account = GetAccount(name, number);
-    switch(AccountStatus::QueryAccountStatus(account)) {
-      case AccountStatus::kDisabledAccount: {
-        std::cout << ERROR_DISABLED << std::endl;
+    {
+      int status = AccountStatus::QueryAccountStatus(account);
+      if (status != AccountStatus::kActiveAccount) {
+        std::cout << AccountStatus::GetErrorMessage(status) << std::endl;
         return false;
-        break;
-      }
-
-      case AccountStatus::kDeletedAccount: {
-        std::cout << ERROR_DELETED << std::endl;
-        return false;
-        break;
-      }
-
-      case AccountStatus::kActiveAccount:
-        break;
-
-      case AccountStatus::kAccountNoExist:
-      default: {
-        std::cout << ERROR_MESSAGE_INVALID_ACCOUNT << std::endl;
-        return false;
-        break;
       }
     }
 
