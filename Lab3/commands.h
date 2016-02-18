@@ -26,6 +26,17 @@
 #include "account.h"
 
 namespace BankFrontEnd {
+
+namespace AccountStatus {
+  enum {
+    kActiveAccount,
+    kDisabledAccount,
+    kDeletedAccount,
+    kNewAccount,
+    kAccountNoExist
+  };
+}
+
 /**
 * Bank System storing, tracking, and querying the accounts.
 **/
@@ -166,6 +177,17 @@ class Commands {
     * Behaviour is undefined if the account doesn't exist.
     **/
     double GetTransactionCharge(std::string name, int account_number);
+
+    /**
+    * Returns one of AccountStatus: Active, disabled, new, etc.
+    * Where a new or deleted account state takes precedence.
+    **/
+    int QueryAccountStatus(Account* account);
+
+    /**
+    * Override of QueryAcountStatus to lookup pointer
+    **/
+    int QueryAccountStatus(std::string name, int account_number);
 
     /**
     * Field with customer names as keys and their associated bank accounts as

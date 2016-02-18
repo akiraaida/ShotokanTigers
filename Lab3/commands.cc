@@ -690,4 +690,22 @@ double Commands::GetTransactionCharge(std::string name, int account_number) {
     return 0.1;
   }
 }
+
+int Commands::QueryAccountStatus(Account* account) {
+  if (account == nullptr) {
+    return AccountStatus::kAccountNoExist;
+  } else if (account->is_deleted) {
+    return AccountStatus::kDeletedAccount;
+  } else if (account->is_new) {
+    return AccountStatus::kNewAccount;
+  } else if (!account->is_active) {
+    return AccountStatus::kDisabledAccount;
+  } else {
+    return AccountStatus::kActiveAccount;
+  }
+}
+
+int Commands::QueryAccountStatus(std::string name, int account_number) {
+  return QueryAccountStatus(GetAccount(name, account_number));
+}
 }
