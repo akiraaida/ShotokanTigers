@@ -46,6 +46,7 @@
 #define SUCCESS_TO_STUDENT "Specified account is now a student account."
 #define SUCCESS_TO_NONSTUDENT "Specified account is now a non-student account."
 #define SUCCESS_DELETE "Specified account has been deleted."
+#define SUCCESS_TRANSFER "Amount has been transfered successfully."
 
 namespace BankFrontEnd {
 Commands::Commands() {
@@ -282,12 +283,32 @@ bool Commands::transfer() {
       amount = std::stod(num);
     }
 
-    // check transfer amount
+    // check transfer limit
+    double charge = is_admin_ ? 0.0 : GetTransactionCharge(name, number);
     if(account->transfer_limit_remaining < amount) {
       std::cout << ERROR_MESSAGE_HIT_TRANSFER_LIMIT << std::endl;
       std::cout << account->transfer_limit_remaining << "<" << amount << std::endl;
       return false;
     }
+
+    // check transfer amount
+    if(account->balance < (amount + charge)) {
+      std::cout << ERROR_BALANCE_INSUFFICIENT << std::endl;
+      return false;
+    }
+
+    // perform deduction
+    account->balance -= amount + charge;
+    recipient_account->balance += amount;
+    account->transfer_limit_remaining -= amount;
+
+    // create transaction records
+    PushTransactionRecord(2, name, number, amount);
+    PushTransactionRecord(2, recipient_name, recipient_number, amount);
+    PushTransactionRecord(1, name, number, charge);
+
+    // did it
+    std::cout << SUCCESS_TRANSFER << std::endl;
 
     // done
     return true;
