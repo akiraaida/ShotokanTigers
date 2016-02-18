@@ -68,7 +68,7 @@ int main(int argc, const char* argv[]) {
       } else if(strncmp(user_cmd, "delete", 10) == 0) {
 
       } else if(strncmp(user_cmd, "disable", 10) == 0) {
-
+        commands.disable();
       } else if(strncmp(user_cmd, "enable", 10) == 0) {
 
       } else if(strncmp(user_cmd, "changeplan", 10) == 0) {
