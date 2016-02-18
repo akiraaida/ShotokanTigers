@@ -71,9 +71,9 @@ int main(int argc, const char* argv[]) {
         commands.disable();
       } else if(strncmp(user_cmd, "enable", 10) == 0) {             // Enable       - Done
         commands.enable();
-      } else if(strncmp(user_cmd, "changeplan", 10) == 0) {         // Change Plan  -
-
-      } else if(strncmp(user_cmd, "logout", 10) == 0) {             // Logout       - Done
+      } else if(strncmp(user_cmd, "changeplan", 10) == 0) {         // Change Plan  - Done
+        commands.changeplan();
+      } else if(strncmp(user_cmd, "logout", 10) == 0) {             // Logout       - Kinda Done
         commands.logout();
       } else {
         std::cout << ERROR_MESSAGE_INVALID_COMMAND << std::endl;

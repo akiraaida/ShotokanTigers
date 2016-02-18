@@ -37,6 +37,8 @@
 #define SUCCESS_DEPOSIT "The deposit transaction has completed."
 #define SUCCESS_DISABLE "The disable transaction has completed."
 #define SUCCESS_ENABLE "The enable transaction has completed."
+#define SUCCESS_TO_STUDENT "Specified account is now a student account."
+#define SUCCESS_TO_NONSTUDENT "Specified account is now a non-student account."
 
 namespace BankFrontEnd {
 Commands::Commands() {
@@ -490,7 +492,41 @@ bool Commands::disable() {
 
 bool Commands::changeplan() {
   if(is_logged_in_ == true) {
-
+    if(is_admin_ == true) {
+      std::cout << PROMPT_ENTER_CUSTOMER_NAME << std::endl;
+      char name[21] = { 0 };
+      std::cin.getline(name, sizeof(name));
+      std::cout << PROMPT_ENTER_ACCOUNT_NUMBER << std::endl;
+      char num[6] = { 0 };
+      std::cin.getline(num, sizeof(num));
+      std::vector<Account*> temp = accounts_[name];
+      if(temp.empty()) {
+        std::cout << ERROR_MESSAGE_ACCOUNTLESS_USER << std::endl;
+        return false;
+      } else {
+        bool owned_account = UserExists(name);
+        Account* temp_account = GetAccount(name, atoi(num));
+        if(owned_account == false || temp_account == nullptr) {
+          std::cout << ERROR_MESSAGE_STOLEN_ACCOUNT << std::endl;
+        } else {
+          if(temp_account->is_active == true){
+            if(temp_account->is_student_plan == true){
+              temp_account->is_student_plan = false;
+              PushTransactionRecord(8, name, atoi(num));
+              std::cout << SUCCESS_TO_NONSTUDENT << std::endl;
+            } else {
+              temp_account->is_student_plan = true;
+              PushTransactionRecord(8, name, atoi(num));
+              std::cout << SUCCESS_TO_STUDENT << std::endl;
+            }
+          } else {
+            std::cout << ERROR_DISABLED << std::endl;
+          }
+        }
+      }
+    } else {
+      std::cout << ERROR_ADMIN_PERMISSIONS << std::endl;
+    }
   } else {
     std::cout << ERROR_MESSAGE_NO_LOGIN << std::endl;
     return false;
@@ -519,7 +555,7 @@ bool Commands::enable() {
         } else {
           if(temp_account->is_active == false){
             temp_account->is_active = true;
-            PushTransactionRecord(8, name, atoi(num));
+            PushTransactionRecord(9, name, atoi(num));
             std::cout << SUCCESS_ENABLE << std::endl;
           } else {
             std::cout << ERROR_ENABLED << std::endl;
