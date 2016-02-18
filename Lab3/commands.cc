@@ -124,11 +124,11 @@ void Commands::PushTransactionRecord(int code, std::string name,
                             + FitStringToSpace(misc, 2, ' ', false);
 
   // test output
-  std::cout << "pushed \"" << transaction << "\" size: " << transaction.size()
-    << std::endl;
+  /*std::cout << "pushed \"" << transaction << "\" size: " << transaction.size()
+    << std::endl;*/
 
   // push
-  transaction_output_.push_front(transaction);
+  transaction_output_.push_back(transaction);
 }
 
 
