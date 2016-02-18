@@ -12,8 +12,7 @@
 * Alexander Wheadon   100514985
 *
 * This is the heart of the bank system. Each command in the system corresponds
-* to a method here e.g. login, withdrawal, etc. Each of these methods
-* returns whether the command was executed or rejected.
+* to a method here e.g. login, withdrawal, etc. 
 *
 * Example Usage:
 *   Commands bank;
@@ -52,59 +51,59 @@ class Commands {
   /**
   * Corresponds to 'login' command.
   **/
-  bool login();
+  void login();
 
 
   /**
   * Corresponds to 'withdrawal' command.
   **/
-  bool withdrawal();
+  void withdrawal();
 
   /**
   * Corresponds to 'transfer' command.
   **/
-  bool transfer();
+  void transfer();
 
   /**
   * Corresponds to 'paybill' command.
   **/
-  bool paybill();
+  void paybill();
 
   /**
   * Corresponds to 'deposit' command.
   **/
-  bool deposit();
+  void deposit();
 
   /**
   * Corresponds to 'create' command. Admin only.
   **/
-  bool create();
+  void create();
 
   /**
   * Corresponds to 'delete' command. Admin only.
   **/
-  bool delete_account();
+  void delete_account();
 
   /**
   * Corresponds to 'disable' command. Admin only.
   **/
-  bool disable();
+  void disable();
 
   /**
   * Corresponds to 'changeplan' command. Admin only.
   **/
-  bool changeplan();
+  void changeplan();
 
   /**
   * Corresponds to 'logout' command.
   * Causes output to the transaction file.
   **/
-  bool logout();
+  void logout();
 
   /**
   * Corresponds to 'enable' command. Admin only.
   **/
-  bool enable();
+  void enable();
 
  private:
     /**
