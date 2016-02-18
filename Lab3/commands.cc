@@ -83,7 +83,7 @@ void Commands::PushTransactionRecord(int code, std::string name,
     int zeroes_count = 5 - std::to_string(account_number).size();
     account_string.insert(0, zeroes_count, '0');
     account_string = account_string + std::to_string(account_number);
-    std::cout << account_string << std::endl;
+    // std::cout << account_string << std::endl;
   }
 
   transaction.insert(0, 41, ' ');
@@ -91,7 +91,7 @@ void Commands::PushTransactionRecord(int code, std::string name,
   transaction.replace(3, name.length(), name);
   transaction.replace(3 + 21, 5, account_string);
   transaction.replace(24 + 6, 8, money_string);
-  transaction.replace(39, 2, misc);
+  transaction.replace(39, 2, misc); 
   std::cout << "\"" << transaction << "\" " << transaction.size() <<  std::endl;
 
   // push
@@ -103,9 +103,6 @@ bool Commands::login() {
   if(is_logged_in_ == false) {
     std::string session = DetermineSession();
 
-    // testing
-    PushTransactionRecord(10);
-
     if(session != "" && session != "admin") {
       std::vector<Account*> temp = accounts_[session];
       if(temp.empty()) {
@@ -113,42 +110,14 @@ bool Commands::login() {
         return false;
       } else {
         is_logged_in_ = true;
-
-        // test the function that I made and stuff
-
-
-        std::string trans = "";
-        for(int i = 0; i < 41; i++) {
-          trans = trans + " ";
-        }
         logged_in_name_ = session;
-        trans.replace(0, 2, "10");
-        trans.replace(3, session.length(), session);
-        trans.replace(3 + 21, 5, "00000");
-        trans.replace(24 + 6, 8, "00000.00");
-        trans.replace(30 + 9, 1, "S");
-        // Send this to a file
-        std::cout << trans << std::endl;
-
+        PushTransactionRecord(10, session, 00000, 00000.00, "S ");
         return true;
       }
     } else if(session == "admin") {
       is_logged_in_ = true;
       is_admin_ = true;
-      std::string trans = "";
-      for(int i = 0; i < 41; i++) {
-        trans = trans + " ";
-      }
-
-
-      trans.replace(0, 2, "10");
-      trans.replace(3, 5, "admin");
-      trans.replace(3 + 21, 5, "00000");
-      trans.replace(24 + 6, 8, "00000.00");
-      trans.replace(30 + 9, 1, "A");
-      // Send this to a file
-      std::cout << trans << std::endl;
-
+      PushTransactionRecord(10, "admin", 00000, 00000.00, "A ");
       return true;
     }
     return false;
@@ -176,26 +145,16 @@ bool Commands::withdrawal() {
         std::cout << ERROR_MESSAGE_ACCOUNTLESS_USER << std::endl;
         return false;
       } else {
-
         bool owned_account = UserExists(name);
         Account* temp_account = GetAccount(name, atoi(num));
-
         if(owned_account == false || temp_account == nullptr) {
           std::cout << ERROR_MESSAGE_STOLEN_ACCOUNT << std::endl;
         } else {
           if(temp_account->balance > atof(amount)) {
-
             float newBal = temp_account->balance - atof(amount);
             std::string trans = "";
-            for(int i = 0; i < 41; i++) {
-              trans = trans + " ";
-            }
-            trans.replace(0, 2, "01");
-            trans.replace(3, 20, name); // Why does this not work?
-            trans.replace(3 + 21, 5, num);
-            //trans.replace(24 + 6, 8, amount);
-            //std::cout << amount < std::endl;
-            std::cout << "\"" << trans << "\"" << std::endl;
+            PushTransactionRecord(01, name, atoi(num), atof(amount)); 
+          } else {
 
           }
         }

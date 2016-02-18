@@ -128,7 +128,7 @@ class Commands {
     **/
     void PushTransactionRecord(int code, std::string name = "",
                                int account_number = 0, double money = 0.0,
-                               std::string misc = "");
+                               std::string misc = "  ");
 
     /**
     * Field with customer names as keys and their associated bank accounts as
