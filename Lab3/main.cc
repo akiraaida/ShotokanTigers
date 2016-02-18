@@ -53,27 +53,27 @@ int main(int argc, const char* argv[]) {
     while(true) {
       std::cout << PROMPT_ENTER_COMMAND << std::endl;
       std::cin.getline(user_cmd, sizeof(user_cmd));
-      if(strncmp(user_cmd, "login", 10) == 0) {
+      if(strncmp(user_cmd, "login", 10) == 0) {                     // Login        - Done
         commands.login();
-      } else if(strncmp(user_cmd, "withdrawal", 10) == 0) {
+      } else if(strncmp(user_cmd, "withdrawal", 10) == 0) {         // Withdrawal   - Kinda Done
         commands.withdrawal();
-      } else if(strncmp(user_cmd, "transfer", 10) == 0) {
-        commands.transfer();
-      } else if(strncmp(user_cmd, "paybill", 10) == 0) {
+      } else if(strncmp(user_cmd, "transfer", 10) == 0) {           // Transfer     -
+        commands.transfer(); 
+      } else if(strncmp(user_cmd, "paybill", 10) == 0) {            // Paybill      -
 
-      } else if(strncmp(user_cmd, "deposit", 10) == 0) {
+      } else if(strncmp(user_cmd, "deposit", 10) == 0) {            // Deposit      - Kinda Done
         commands.deposit();
-      } else if(strncmp(user_cmd, "create", 10) == 0) {
+      } else if(strncmp(user_cmd, "create", 10) == 0) {             // Create       -
 
-      } else if(strncmp(user_cmd, "delete", 10) == 0) {
+      } else if(strncmp(user_cmd, "delete", 10) == 0) {             // Delete       -
 
-      } else if(strncmp(user_cmd, "disable", 10) == 0) {
+      } else if(strncmp(user_cmd, "disable", 10) == 0) {            // Disable      - Done
         commands.disable();
-      } else if(strncmp(user_cmd, "enable", 10) == 0) {
+      } else if(strncmp(user_cmd, "enable", 10) == 0) {             // Enable       - Done
+        commands.enable();
+      } else if(strncmp(user_cmd, "changeplan", 10) == 0) {         // Change Plan  -
 
-      } else if(strncmp(user_cmd, "changeplan", 10) == 0) {
-
-      } else if(strncmp(user_cmd, "logout", 10) == 0) {
+      } else if(strncmp(user_cmd, "logout", 10) == 0) {             // Logout       - Done
         commands.logout();
       } else {
         std::cout << ERROR_MESSAGE_INVALID_COMMAND << std::endl;
