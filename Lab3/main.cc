@@ -62,7 +62,7 @@ int main(int argc, const char* argv[]) {
       } else if(strncmp(user_cmd, "paybill", 10) == 0) {
 
       } else if(strncmp(user_cmd, "deposit", 10) == 0) {
-
+        commands.deposit();
       } else if(strncmp(user_cmd, "create", 10) == 0) {
 
       } else if(strncmp(user_cmd, "delete", 10) == 0) {

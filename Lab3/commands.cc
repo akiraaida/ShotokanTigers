@@ -28,8 +28,10 @@
 #define PROMPT_ENTER_CUSTOMER_NAME "Please enter the account holder's name: "
 #define PROMPT_ENTER_ACCOUNT_NUMBER "Please enter the user's account number: "
 #define PROMPT_WITHDRAWAL_VALUE "Please enter an amount to withdraw: "
+#define PROMPT_DEPOSIT_VALUE "Please enter an amount to deposit: "
 
-#define SUCCESS_WITHDRAWAL "Your withdrawal transaction has completed."
+#define SUCCESS_WITHDRAWAL "The withdrawal transaction has completed."
+#define SUCCESS_DEPOSIT "The deposit transaction has completed."
 
 namespace BankFrontEnd {
 Commands::Commands() {
@@ -163,7 +165,6 @@ bool Commands::withdrawal() {
         } else {
           if(temp_account->balance > atof(amount) && CheckUnit(atof(amount)) == true) {
             float newBal = temp_account->balance - atof(amount);
-            std::string trans = "";
             PushTransactionRecord(01, name, atoi(num), atof(amount));
             std::cout << SUCCESS_WITHDRAWAL << std::endl;
             /*TODO
@@ -197,7 +198,6 @@ bool Commands::withdrawal() {
         } else {
           if(temp_account->balance > atof(amount) && CheckUnit(atof(amount)) == true) {
             float newBal = temp_account->balance - atof(amount);
-            std::string trans = "";
             PushTransactionRecord(01, logged_in_name_, atoi(num), atof(amount));
             std::cout << SUCCESS_WITHDRAWAL << std::endl;
             /*TODO
@@ -213,8 +213,6 @@ bool Commands::withdrawal() {
         }
       }
     }
-
-
   } else {
     std::cout << ERROR_MESSAGE_NO_LOGIN << std::endl;
     return false;
@@ -345,8 +343,65 @@ bool Commands::paybill() {
 }
 
 bool Commands::deposit() {
-  if(is_logged_in_ == true) {
+if(is_logged_in_ == true) {
+    if(is_admin_ == true) {
+      std::cout << PROMPT_ENTER_CUSTOMER_NAME << std::endl;
+      char name[21] = { 0 };
+      std::cin.getline(name, sizeof(name));
+      std::cout << PROMPT_ENTER_ACCOUNT_NUMBER << std::endl;
+      char num[6] = { 0 };
+      std::cin.getline(num, sizeof(num));
+      std::cout << PROMPT_DEPOSIT_VALUE << std::endl;
+      char amount[9] = { 0 };
+      std::cin.getline(amount, sizeof(amount));
+      std::vector<Account*> temp = accounts_[name];
+      if(temp.empty()) {
+        std::cout << ERROR_MESSAGE_ACCOUNTLESS_USER << std::endl;
+        return false;
+      } else {
+        bool owned_account = UserExists(name);
+        Account* temp_account = GetAccount(name, atoi(num));
+        if(owned_account == false || temp_account == nullptr) {
+          std::cout << ERROR_MESSAGE_STOLEN_ACCOUNT << std::endl;
+        } else {
+          float newBal = temp_account->balance + atof(amount);
+          PushTransactionRecord(04, name, atoi(num), atof(amount));
+          std::cout << SUCCESS_DEPOSIT << std::endl;
+          return true;
+        }
+      }
 
+    } else {
+      std::cout << PROMPT_ENTER_ACCOUNT_NUMBER << std::endl;
+      char num[6] = { 0 };
+      std::cin.getline(num, sizeof(num));
+      std::cout << PROMPT_DEPOSIT_VALUE << std::endl;
+      char amount[9] = { 0 };
+      std::cin.getline(amount, sizeof(amount));
+      std::vector<Account*> temp = accounts_[logged_in_name_];
+      if(temp.empty()) {
+        std::cout << ERROR_MESSAGE_ACCOUNTLESS_USER << std::endl;
+        return false;
+      } else {
+        bool owned_account = UserExists(logged_in_name_);
+        Account* temp_account = GetAccount(logged_in_name_, atoi(num));
+        if(owned_account == false || temp_account == nullptr) {
+          std::cout << ERROR_MESSAGE_STOLEN_ACCOUNT << std::endl;
+        } else {
+          float newBal = temp_account->balance + atof(amount);
+          PushTransactionRecord(04, logged_in_name_, atoi(num), atof(amount));
+          std::cout << SUCCESS_DEPOSIT << std::endl;
+
+          /*TODO
+            
+            Implement account charge for deposit
+
+          */
+
+          return true;
+        }
+      }
+    }
   } else {
     std::cout << ERROR_MESSAGE_NO_LOGIN << std::endl;
     return false;
