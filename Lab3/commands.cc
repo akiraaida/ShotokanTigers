@@ -38,6 +38,8 @@
 #define PROMPT_TRANSFER_VALUE "Please enter an amount to transfer: "
 #define PROMPT_WITHDRAWAL_VALUE "Please enter an amount to withdraw: "
 #define PROMPT_DEPOSIT_VALUE "Please enter an amount to deposit: "
+#define PROMPT_PAYBILL_VALUE "Please enter an amount to pay: "
+#define PROMPT_PAYBILL_RECIPIENT "Please enter a recipient to be paid: "
 
 #define SUCCESS_WITHDRAWAL "The withdrawal transaction has completed."
 #define SUCCESS_DEPOSIT "The deposit transaction has completed."
@@ -341,13 +343,55 @@ bool Commands::transfer() {
 }
 
 bool Commands::paybill() {
-  if(is_logged_in_ == true) {
-
-  } else {
-    std::cout << ERROR_MESSAGE_NO_LOGIN << std::endl;
+  // check if logged in
+  if(!CheckLogin()) {
     return false;
   }
-  return false;
+
+  // get name
+  std::string name = PromptForAccountHolderIfUnknown();
+  if(is_admin_ && !UserExists(name)) {
+    std::cout << ERROR_MESSAGE_ACCOUNTLESS_USER << std::endl;
+    return false;
+  }
+
+  // get account number
+  int account_number;
+  {
+    std::cout << PROMPT_TRANSFER_SOURCE << std::endl;
+    char num[6];
+    std::cin.getline(num, sizeof(num));
+    account_number = std::stoi(num);
+  }
+
+  // get account
+  Account* account = GetAccount(name, number);
+  if(account == nullptr) {
+    std::cout << ERROR_MESSAGE_STOLEN_ACCOUNT << std::endl;
+    return false;
+  }
+
+  // get company name
+  std::string company;
+  {
+    std::cout << PROMPT_PAYBILL_RECIPIENT << std::endl;
+    char buffer[256];
+    std::cin.getline(buffer, sizeof(buffer));
+    company = std::string(buffer);
+
+  }
+
+  // get amount to transfer
+  double amount;
+  {
+    std::cout << PROMPT_PAYBILL_VALUE << std::endl;
+    char num[9];
+    std::cin.getline(num, sizeof(num));
+    amount = std::stod(num);
+  }
+
+  // good
+  return true;
 }
 
 bool Commands::deposit() {
