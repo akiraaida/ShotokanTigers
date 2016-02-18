@@ -35,7 +35,7 @@ int QueryAccountStatus(Account* account) {
 }
 
 std::string GetErrorMessage(int status) {
-  switch(status) {
+  switch (status) {
     case kActiveAccount: {
       return ACCOUNT_STATUS_ACTIVE;
       break;

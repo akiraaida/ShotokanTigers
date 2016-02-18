@@ -73,9 +73,9 @@ std::string Commands::DetermineSession() {
   std::cout << PROMPT_ENTER_SESSION_TYPE  << std::endl;
   std::cin.getline(session, sizeof(session));
 
-  if(strncmp(session, "admin", 20) == 0) {
+  if (strncmp(session, "admin", 20) == 0) {
     return "admin";
-  } else if(strncmp(session, "standard", 20) == 0) {
+  } else if (strncmp(session, "standard", 20) == 0) {
     char login_name[21];
     std::cout << PROMPT_ENTER_LOGIN_NAME << std::endl;
     std::cin.getline(login_name, sizeof(login_name));
@@ -89,7 +89,7 @@ std::string Commands::DetermineSession() {
 std::string Commands::FitStringToSpace(std::string string, size_t size,
                              char fluff, bool align_right) {
   int offset = string.size() - size;
-  if(offset > 0) {
+  if (offset > 0) {
     // truncate
     int start_point = align_right ? offset : 0;
     return string.substr(start_point, size);
@@ -109,7 +109,7 @@ void Commands::PushTransactionRecord(int code, std::string name,
   sprintf(money_string_buff, "%.2f", money);
   std::string money_string(money_string_buff);
   int chop_point = money_string.size() - 8;
-  if(chop_point > 0)
+  if (chop_point > 0)
     money_string = money_string.substr(chop_point, 8);
 
   // throw the transaction together
@@ -129,12 +129,12 @@ void Commands::PushTransactionRecord(int code, std::string name,
 
 
 bool Commands::login() {
-  if(is_logged_in_ == false) {
+  if (is_logged_in_ == false) {
     std::string session = DetermineSession();
 
-    if(session != "" && session != "admin") {
+    if (session != "" && session != "admin") {
       std::vector<Account*> temp = accounts_[session];
-      if(temp.empty()) {
+      if (temp.empty()) {
         std::cout << ERROR_MESSAGE_ACCOUNTLESS_USER << std::endl;
         return false;
       } else {
@@ -143,7 +143,7 @@ bool Commands::login() {
         PushTransactionRecord(10, session, 00000, 00000.00, "S ");
         return true;
       }
-    } else if(session == "admin") {
+    } else if (session == "admin") {
       is_logged_in_ = true;
       is_admin_ = true;
       PushTransactionRecord(10, "admin", 00000, 00000.00, "A ");
@@ -157,7 +157,7 @@ bool Commands::login() {
 }
 
 bool Commands::withdrawal() {
-  if(!CheckLogin()) {
+  if (!CheckLogin()) {
     return false;
   }
   std::string name = PromptForAccountHolderIfUnknown();
@@ -168,17 +168,17 @@ bool Commands::withdrawal() {
   char amount[9] = { 0 };
   std::cin.getline(amount, sizeof(amount));
   std::vector<Account*> temp = accounts_[name];
-  if(temp.empty()) {
+  if (temp.empty()) {
     std::cout << ERROR_MESSAGE_ACCOUNTLESS_USER << std::endl;
     return false;
   }
   bool owned_account = UserExists(name);
   Account* temp_account = GetAccount(name, atoi(num));
-  if(owned_account == false || temp_account == nullptr) {
+  if (owned_account == false || temp_account == nullptr) {
     std::cout << ERROR_MESSAGE_STOLEN_ACCOUNT << std::endl;
     return false;
   }
-  if(temp_account->is_deleted) {
+  if (temp_account->is_deleted) {
     std::cout << ERROR_DELETED << std::endl;
     return false;
   } else if (!temp_account->is_active) {
@@ -187,7 +187,7 @@ bool Commands::withdrawal() {
   }
   float transaction_charge = is_admin_ ? 0.0 : GetTransactionCharge(name, atoi(num));
   float debit = atof(amount) + transaction_charge;
-  if(temp_account->balance < debit || CheckUnit(atof(amount)) == false) {
+  if (temp_account->balance < debit || CheckUnit(atof(amount)) == false) {
     std::cout << ERROR_BALANCE_INSUFFICIENT << std::endl; // Very generalized error message atm, may want to break the error cases down?
     return false;                                         // Errors for not mod 5/10/20/100 and not enough money
   }
@@ -197,8 +197,8 @@ bool Commands::withdrawal() {
   return true;
 }
 
-bool Commands::CheckUnit(double amount){
-  if(fmod(amount,5) == 0 || fmod(amount, 10) == 0 || fmod(amount, 20) == 0 || fmod(amount, 100) == 0){
+bool Commands::CheckUnit(double amount) {
+  if (fmod(amount,5) == 0 || fmod(amount, 10) == 0 || fmod(amount, 20) == 0 || fmod(amount, 100) == 0) {
     return true;
   }
   return false;
@@ -210,9 +210,9 @@ bool Commands::UserExists(std::string name) {
 }
 
 std::string Commands::GetAccountOwner(int number) {
-  for(std::pair<const std::string, std::vector<Account*> > pair : accounts_) {
-    for(Account* account : pair.second) {
-      if(account->number == number) {
+  for (std::pair<const std::string, std::vector<Account*> > pair : accounts_) {
+    for (Account* account : pair.second) {
+      if (account->number == number) {
         return pair.first;
       }
     }
@@ -223,9 +223,9 @@ std::string Commands::GetAccountOwner(int number) {
 Account* Commands::GetAccount(std::string name, int number) {
   // lookup user in directory
   std::vector<Account*> record = accounts_[name];
-  if(!record.empty()) {
-    for(Account* account : record) {
-      if(account->number == number) {
+  if (!record.empty()) {
+    for (Account* account : record) {
+      if (account->number == number) {
         return account;
       }
     }
@@ -235,12 +235,12 @@ Account* Commands::GetAccount(std::string name, int number) {
 }
 
 bool Commands::transfer() {
-  if(CheckLogin()) {
+  if (CheckLogin()) {
     // get name
     std::string name = PromptForAccountHolderIfUnknown();
 
     // check name
-    if(!UserExists(name)) {
+    if (!UserExists(name)) {
       std::cout << ERROR_MESSAGE_ACCOUNTLESS_USER << std::endl;
       return false;
     }
@@ -306,14 +306,14 @@ bool Commands::transfer() {
 
     // check transfer limit
     double charge = is_admin_ ? 0.0 : GetTransactionCharge(name, number);
-    if(account->transfer_limit_remaining < amount) {
+    if (account->transfer_limit_remaining < amount) {
       std::cout << ERROR_MESSAGE_HIT_TRANSFER_LIMIT << std::endl;
       std::cout << account->transfer_limit_remaining << "<" << amount << std::endl;
       return false;
     }
 
     // check transfer amount
-    if(account->balance < (amount + charge)) {
+    if (account->balance < (amount + charge)) {
       std::cout << ERROR_BALANCE_INSUFFICIENT << std::endl;
       return false;
     }
@@ -340,13 +340,13 @@ bool Commands::transfer() {
 
 bool Commands::paybill() {
   // check if logged in
-  if(!CheckLogin()) {
+  if (!CheckLogin()) {
     return false;
   }
 
   // get name
   std::string name = PromptForAccountHolderIfUnknown();
-  if(is_admin_ && !UserExists(name)) {
+  if (is_admin_ && !UserExists(name)) {
     std::cout << ERROR_MESSAGE_ACCOUNTLESS_USER << std::endl;
     return false;
   }
@@ -363,7 +363,7 @@ bool Commands::paybill() {
   // get account
   Account* account = GetAccount(name, account_number);
   int account_status = AccountStatus::QueryAccountStatus(account);
-  if(account_status != AccountStatus::kActiveAccount) {
+  if (account_status != AccountStatus::kActiveAccount) {
     std::cout << AccountStatus::GetErrorMessage(account_status) << std::endl;
     return false;
   }
@@ -379,7 +379,7 @@ bool Commands::paybill() {
   }
 
   // check company name
-  if(account->paybill_limit_remaining.find(company)
+  if (account->paybill_limit_remaining.find(company)
       == account->paybill_limit_remaining.end()) {
     std::cout << ERROR_INVALID_COMPANY << std::endl;
     return false;
@@ -395,14 +395,14 @@ bool Commands::paybill() {
   }
 
   // check transfer limit
-  if(account->paybill_limit_remaining[company] < amount) {
+  if (account->paybill_limit_remaining[company] < amount) {
     std::cout << ERROR_MESSAGE_HIT_PAYBILL_LIMIT << std::endl;
     return false;
   }
 
   // check balance
   double charge = is_admin_ ? 0.0 : GetTransactionCharge(name, account_number);
-  if(account->balance < (amount + charge)) {
+  if (account->balance < (amount + charge)) {
     std::cout << ERROR_BALANCE_INSUFFICIENT << std::endl;
     return false;
   }
@@ -420,7 +420,7 @@ bool Commands::paybill() {
 }
 
 bool Commands::deposit() {
-  if(!CheckLogin()) {
+  if (!CheckLogin()) {
     return false;
   }
   std::string name = PromptForAccountHolderIfUnknown();
@@ -431,17 +431,17 @@ bool Commands::deposit() {
   char amount[9] = { 0 };
   std::cin.getline(amount, sizeof(amount));
   std::vector<Account*> temp = accounts_[name];
-  if(temp.empty()) {
+  if (temp.empty()) {
     std::cout << ERROR_MESSAGE_ACCOUNTLESS_USER << std::endl;
     return false;
   }
   bool owned_account = UserExists(name);
   Account* temp_account = GetAccount(name, atoi(num));
-  if(owned_account == false || temp_account == nullptr) {
+  if (owned_account == false || temp_account == nullptr) {
     std::cout << ERROR_MESSAGE_STOLEN_ACCOUNT << std::endl;
     return false;
   }
-  if(!temp_account->is_active) {
+  if (!temp_account->is_active) {
     std::cout << ERROR_DISABLED << std::endl;
     return false;
   } else if (temp_account->is_deleted) {
@@ -449,12 +449,12 @@ bool Commands::deposit() {
     return false;
   }
   float transaction_charge = is_admin_ ? 0.0 : GetTransactionCharge(name, atoi(num));
-  if(temp_account->balance + atof(amount) < transaction_charge) {
+  if (temp_account->balance + atof(amount) < transaction_charge) {
     std::cout << ERROR_BALANCE_INSUFFICIENT << std::endl;
     return false;
   }
   PushTransactionRecord(4, name, atoi(num), atof(amount));
-  if(!is_admin_){
+  if (!is_admin_) {
     PushTransactionRecord(1, name, atoi(num), transaction_charge);
   }
   std::cout << SUCCESS_DEPOSIT << std::endl;
@@ -462,14 +462,14 @@ bool Commands::deposit() {
 }
 
 bool Commands::create() {
-  if(!CheckLogin(1)) {
+  if (!CheckLogin(1)) {
     return false;
   }
   std::string name = PromptForAccountHolderIfUnknown();
   char init[9] = { 0 };
   std::cout << PROMPT_INIT_BALANCE << std::endl;
   std::cin.getline(init, sizeof(init));
-  if(atof(init) > 99999.99){
+  if (atof(init) > 99999.99) {
     std::cout << ERROR_ABOVE_MAX_INIT << std::endl;
     return false;
   }
@@ -478,7 +478,7 @@ bool Commands::create() {
 }
 
 bool Commands::delete_account() {
-  if(!CheckLogin(1)) {
+  if (!CheckLogin(1)) {
     return false;
   }
   std::string name = PromptForAccountHolderIfUnknown();
@@ -486,17 +486,17 @@ bool Commands::delete_account() {
   char num[6] = { 0 };
   std::cin.getline(num, sizeof(num));
   std::vector<Account*> temp = accounts_[name];
-  if(temp.empty()) {
+  if (temp.empty()) {
     std::cout << ERROR_MESSAGE_ACCOUNTLESS_USER << std::endl;
     return false;
   }
   bool owned_account = UserExists(name);
   Account* temp_account = GetAccount(name, atoi(num));
-  if(owned_account == false || temp_account == nullptr) {
+  if (owned_account == false || temp_account == nullptr) {
     std::cout << ERROR_MESSAGE_STOLEN_ACCOUNT << std::endl;
     return false;
   }
-  if(temp_account->is_deleted) {
+  if (temp_account->is_deleted) {
     std::cout << ERROR_DELETED << std::endl;
     return false;
   }
@@ -507,7 +507,7 @@ bool Commands::delete_account() {
 }
 
 bool Commands::disable() {
-  if(!CheckLogin(1)) {
+  if (!CheckLogin(1)) {
     return false;
   }
   std::string name = PromptForAccountHolderIfUnknown();
@@ -515,20 +515,20 @@ bool Commands::disable() {
   char num[6] = { 0 };
   std::cin.getline(num, sizeof(num));
   std::vector<Account*> temp = accounts_[name];
-  if(temp.empty()) {
+  if (temp.empty()) {
     std::cout << ERROR_MESSAGE_ACCOUNTLESS_USER << std::endl;
     return false;
   }
   bool owned_account = UserExists(name);
   Account* temp_account = GetAccount(name, atoi(num));
-  if(owned_account == false || temp_account == nullptr) {
+  if (owned_account == false || temp_account == nullptr) {
     std::cout << ERROR_MESSAGE_STOLEN_ACCOUNT << std::endl;
     return false;
   }
-  if(temp_account->is_deleted) {
+  if (temp_account->is_deleted) {
     std::cout << ERROR_DELETED << std::endl;
     return false;
-  } else if (!temp_account->is_active){
+  } else if (!temp_account->is_active) {
     std::cout << ERROR_DISABLED << std::endl;
     return false;
   }
@@ -539,7 +539,7 @@ bool Commands::disable() {
 }
 
 bool Commands::changeplan() {
-  if(!CheckLogin(1)) {
+  if (!CheckLogin(1)) {
     return false;
   }
   std::string name = PromptForAccountHolderIfUnknown();
@@ -547,24 +547,24 @@ bool Commands::changeplan() {
   char num[6] = { 0 };
   std::cin.getline(num, sizeof(num));
   std::vector<Account*> temp = accounts_[name];
-  if(temp.empty()) {
+  if (temp.empty()) {
     std::cout << ERROR_MESSAGE_ACCOUNTLESS_USER << std::endl;
     return false;
   }
   bool owned_account = UserExists(name);
   Account* temp_account = GetAccount(name, atoi(num));
-  if(owned_account == false || temp_account == nullptr) {
+  if (owned_account == false || temp_account == nullptr) {
     std::cout << ERROR_MESSAGE_STOLEN_ACCOUNT << std::endl;
     return false;
   }
-  if(temp_account->is_deleted) {
+  if (temp_account->is_deleted) {
     std::cout << ERROR_DELETED << std::endl;
     return false;
-  } else if (temp_account->is_active){
+  } else if (temp_account->is_active) {
     std::cout << ERROR_DISABLED << std::endl;
     return false;
   }
-  if(temp_account->is_student_plan){
+  if (temp_account->is_student_plan) {
     PushTransactionRecord(8, name, atoi(num));
     std::cout << SUCCESS_TO_NONSTUDENT << std::endl;
   } else {
@@ -575,7 +575,7 @@ bool Commands::changeplan() {
 }
 
 bool Commands::enable() {
-  if(!CheckLogin(1)) {
+  if (!CheckLogin(1)) {
     return false;
   }
   std::string name = PromptForAccountHolderIfUnknown();
@@ -583,20 +583,20 @@ bool Commands::enable() {
   char num[6] = { 0 };
   std::cin.getline(num, sizeof(num));
   std::vector<Account*> temp = accounts_[name];
-  if(temp.empty()) {
+  if (temp.empty()) {
     std::cout << ERROR_MESSAGE_ACCOUNTLESS_USER << std::endl;
     return false;
   }
   bool owned_account = UserExists(name);
   Account* temp_account = GetAccount(name, atoi(num));
-  if(owned_account == false || temp_account == nullptr) {
+  if (owned_account == false || temp_account == nullptr) {
     std::cout << ERROR_MESSAGE_STOLEN_ACCOUNT << std::endl;
     return false;
   }
-  if(temp_account->is_deleted) {
+  if (temp_account->is_deleted) {
     std::cout << ERROR_DELETED << std::endl;
     return false;
-  } else if (temp_account->is_active){
+  } else if (temp_account->is_active) {
     std::cout << ERROR_ENABLED << std::endl;
     return false;
   }
@@ -607,7 +607,7 @@ bool Commands::enable() {
 }
 
 bool Commands::logout() {
-  if(is_logged_in_ == true) {
+  if (is_logged_in_ == true) {
     PushTransactionRecord(00);
     is_logged_in_ = false;
     logged_in_name_ = "";
@@ -639,7 +639,7 @@ std::string Commands::PromptForAccountHolderIfUnknown() {
 
 
 bool Commands::CheckLogin(bool admins_only) {
-  if(!is_logged_in_) {
+  if (!is_logged_in_) {
     std::cout << ERROR_MESSAGE_NO_LOGIN << std::endl;
     return false;
   } else if (admins_only && !is_admin_) {
@@ -653,7 +653,7 @@ bool Commands::CheckLogin(bool admins_only) {
 
 double Commands::GetTransactionCharge(std::string name, int account_number) {
   Account* account = GetAccount(name, account_number);
-  if(account->is_student_plan){
+  if (account->is_student_plan) {
     return 0.05;
   } else {
     return 0.1;

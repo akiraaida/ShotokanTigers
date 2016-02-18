@@ -30,7 +30,7 @@ std::map<std::string, std::vector<Account*> > Parse(const char* fpath) {
   file.open(fpath);
   std::string line;
 
-  while(getline(file, line)) {
+  while (getline(file, line)) {
     std::string num, name, stat, bal, plan;
     num = line.substr(0,5);
     name = line.substr(6, 20);
