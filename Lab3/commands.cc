@@ -11,6 +11,7 @@
 *******************************************************************************/
 #include "commands.h"
 
+#include <cassert>
 #include <cstring>
 #include <ctime>
 #include <math.h>
@@ -19,6 +20,7 @@
 #include <string>
 
 #include "account_status.h"
+#include "transaction_io.h"
 
 #define ERROR_MESSAGE_INVALID_SESSION "ERROR, SESSION TYPE IS NOT VALID."
 #define ERROR_MESSAGE_ACCOUNTLESS_USER "ERROR, THAT USER DOES NOT HAVE AN ACCOUNT."
@@ -620,11 +622,8 @@ bool Commands::logout() {
     logged_in_name_ = "";
     is_admin_ = false;
 
-    /*TODO
-
-      Create transactions file w/ all of the dequeu info
-
-    */
+    TransactionIO::PrintToTransactionFile(&transaction_output_);
+    assert(transaction_output_.size() == 0);
 
   } else {
     std::cout << ERROR_MESSAGE_NO_LOGIN << std::endl;
