@@ -276,13 +276,23 @@ bool Commands::transfer() {
 
       // find name corresponding
       recipient_name = GetAccountOwner(recipient_number);
-      if(recipient_name.empty() || recipient_name == name) {
-        std::cout << ERROR_MESSAGE_INVALID_ACCOUNT << std::endl;
+      if (recipient_name.empty() || recipient_name == name) {
+        std::cout <<
+                  AccountStatus::GetErrorMessage(AccountStatus::kAccountNoExist)
+                  << std::endl;
         return false;
       }
 
       // get account
       recipient_account = GetAccount(recipient_name, recipient_number);
+
+      // check recieving account status
+      int status = AccountStatus::QueryAccountStatus(recipient_account);
+      if (status != AccountStatus::kActiveAccount) {
+        std::cout << AccountStatus::GetErrorMessage(status) << std::endl;
+        return false;
+      }
+
     }
 
     // get amount to transfer
@@ -352,8 +362,9 @@ bool Commands::paybill() {
 
   // get account
   Account* account = GetAccount(name, account_number);
-  if(account == nullptr) {
-    std::cout << ERROR_MESSAGE_STOLEN_ACCOUNT << std::endl;
+  int account_status = AccountStatus::QueryAccountStatus(account);
+  if(account_status != AccountStatus::kActiveAccount) {
+    std::cout << AccountStatus::GetErrorMessage(account_status) << std::endl;
     return false;
   }
 

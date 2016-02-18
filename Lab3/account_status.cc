@@ -41,6 +41,7 @@ std::string GetErrorMessage(int status) {
       break;
     }
 
+    case kInvalidAccount:
     case kAccountNoExist: {
       return ACCOUNT_STATUS_INVALID_ACCOUNT;
       break;

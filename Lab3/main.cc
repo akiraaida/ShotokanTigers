@@ -57,9 +57,9 @@ int main(int argc, const char* argv[]) {
         commands.login();
       } else if(strncmp(user_cmd, "withdrawal", 10) == 0) {         // Withdrawal   - Done
         commands.withdrawal();
-      } else if(strncmp(user_cmd, "transfer", 10) == 0) {           // Transfer     - Done (Is there error checking for is_active, and is_deleted?)
+      } else if(strncmp(user_cmd, "transfer", 10) == 0) {           // Transfer     - Done
         commands.transfer();
-      } else if(strncmp(user_cmd, "paybill", 10) == 0) {            // Paybill      - Done (Is there error checking for is_active, and is_deleted?)
+      } else if(strncmp(user_cmd, "paybill", 10) == 0) {            // Paybill      - Done 
         commands.paybill();
       } else if(strncmp(user_cmd, "deposit", 10) == 0) {            // Deposit      - Done
         commands.deposit();

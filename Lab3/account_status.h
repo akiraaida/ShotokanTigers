@@ -23,7 +23,8 @@ enum {
   kActiveAccount = 0,
   kDisabledAccount,
   kDeletedAccount,
-  kAccountNoExist
+  kAccountNoExist,
+  kInvalidAccount
 };
 
 /**
