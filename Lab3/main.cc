@@ -64,7 +64,7 @@ int main(int argc, const char* argv[]) {
       } else if(strncmp(user_cmd, "deposit", 10) == 0) {            // Deposit      - Done
         commands.deposit();
       } else if(strncmp(user_cmd, "create", 10) == 0) {             // Create       -
-
+        commands.create();
       } else if(strncmp(user_cmd, "delete", 10) == 0) {             // Delete       - Done
         commands.delete_account();
       } else if(strncmp(user_cmd, "disable", 10) == 0) {            // Disable      - Done

@@ -28,6 +28,7 @@
 #define ERROR_ENABLED "ERROR, THAT ACCOUNT IS ENABLED ALREADY."
 #define ERROR_DELETED "ERROR, THAT ACCOUNT HAS BEEN DELETED."
 #define ERROR_MESSAGE_HIT_TRANSFER_LIMIT "Error, the value entered is beyond the transfer limit."
+#define ERROR_ABOVE_MAX_INIT "ERROR, MAX INITIAL BALANCE EXCEEDED."
 
 #define PROMPT_ENTER_SESSION_TYPE "Please enter your session type: "
 #define PROMPT_ENTER_LOGIN_NAME "Please enter a login name: "
@@ -38,6 +39,7 @@
 #define PROMPT_TRANSFER_VALUE "Please enter an amount to transfer: "
 #define PROMPT_WITHDRAWAL_VALUE "Please enter an amount to withdraw: "
 #define PROMPT_DEPOSIT_VALUE "Please enter an amount to deposit: "
+#define PROMPT_INIT_BALANCE "Please enter an initial balance: "
 
 #define SUCCESS_WITHDRAWAL "The withdrawal transaction has completed."
 #define SUCCESS_DEPOSIT "The deposit transaction has completed."
@@ -370,13 +372,32 @@ bool Commands::deposit() {
 }
 
 bool Commands::create() {
-  if(is_logged_in_ == true) {
-
-  } else {
-    std::cout << ERROR_MESSAGE_NO_LOGIN << std::endl;
+  if(!CheckLogin(1)) {
     return false;
   }
+  std::string name = PromptForAccountHolderIfUnknown();
+  char init[9] = { 0 };
+  std::cout << PROMPT_INIT_BALANCE << std::endl;
+  std::cin.getline(init, sizeof(init));
+  if(atof(init) > 99999.99){
+    std::cout << ERROR_ABOVE_MAX_INIT << std::endl;
+    return false;
+  }
+  Account* new_account = new Account();
+  new_account->number = GenerateNum();
+  new_account->is_active = 1;
+  new_account->balance = atof(init);
+  new_account->is_student_plan = 0;
+  new_account->is_deleted = 0;
+  new_account->is_new = 1;
+  accounts_[name].push_back(new_account);
+  PushTransactionRecord(5, name, new_account->number, atof(init));
   return false;
+}
+
+int Commands::GenerateNum(){
+
+  return 1;
 }
 
 bool Commands::delete_account() {
