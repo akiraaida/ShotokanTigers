@@ -246,18 +246,36 @@ bool Commands::transfer() {
 
     // get number
     int number;
-    Account* account;
     {
       std::cout << PROMPT_TRANSFER_SOURCE << std::endl;
       char num[6];
       std::cin.getline(num, sizeof(num));
       number = std::stoi(num);
+    }
 
-      // check name against account number
-      account = GetAccount(name, number);
-      if(account == nullptr) {
-        std::cout << ERROR_MESSAGE_STOLEN_ACCOUNT << std::endl;
+    // check name against account number
+    Account* account = GetAccount(name, number);
+    switch(QueryAccountStatus(account)) {
+      case AccountStatus::kDisabledAccount: {
+        std::cout << ERROR_DISABLED << std::endl;
         return false;
+        break;
+      }
+
+      case AccountStatus::kDeletedAccount: {
+        std::cout << ERROR_DELETED << std::endl;
+        return false;
+        break;
+      }
+
+      case AccountStatus::kActiveAccount:
+        break;
+
+      case AccountStatus::kAccountNoExist:
+      default: {
+        std::cout << ERROR_MESSAGE_INVALID_ACCOUNT << std::endl;
+        return false;
+        break;
       }
     }
 
