@@ -46,6 +46,15 @@ namespace BankFrontEnd {
 Commands::Commands() {
   is_logged_in_ = false;
   is_admin_ = false;
+
+  std::cout << FitStringToSpace("0.0", 3, '0', true) << std::endl;
+  std::cout << FitStringToSpace("0.0", 3, '0', false) << std::endl;
+  std::cout << FitStringToSpace("0.0", 4, '0', true) << std::endl;
+  std::cout << FitStringToSpace("0.0", 4, '0', false) << std::endl;
+  std::cout << FitStringToSpace("0.0", 5, '0', true) << std::endl;
+  std::cout << FitStringToSpace("0.0", 5, '0', false) << std::endl;
+  std::cout << FitStringToSpace("54321", 4, '0', true) << std::endl;
+  std::cout << FitStringToSpace("54321", 4, '0', false) << std::endl;
 }
 
 void Commands::SetAccounts(std::map<std::string,
@@ -68,6 +77,20 @@ std::string Commands::DetermineSession() {
   } else {
     std::cout << ERROR_MESSAGE_INVALID_SESSION << std::endl;
     return "";
+  }
+}
+
+std::string Commands::FitStringToSpace(std::string string, size_t size,
+                             char fluff, bool align_right) {
+  int offset = string.size() - size;
+  if(offset > 0) {
+    // truncate
+    int start_point = align_right ? offset : 0;
+    return string.substr(start_point, size);
+  } else {
+    // pad out
+    int start_point = align_right ? 0 : string.size() - 1;
+    return string.insert(start_point, -offset, fluff);
   }
 }
 
@@ -231,7 +254,7 @@ bool Commands::withdrawal() {
               }                                                        // Errors for not mod 5/10/20/100 and not enough money
             } else {
               std::cout << ERROR_DELETED << std::endl;
-            }                                                 
+            }
           } else {
             std::cout << ERROR_DISABLED << std::endl;
           }
@@ -428,7 +451,7 @@ if(is_logged_in_ == true) {
               std::cout << SUCCESS_DEPOSIT << std::endl;
 
               /*TODO
-                
+
                 Implement account charge for deposit
 
               */
@@ -610,7 +633,7 @@ bool Commands::enable() {
               std::cout << SUCCESS_ENABLE << std::endl;
             } else {
               std::cout << ERROR_DELETED << std::endl;
-            } 
+            }
           } else {
             std::cout << ERROR_ENABLED << std::endl;
           }

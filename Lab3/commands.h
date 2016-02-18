@@ -133,6 +133,13 @@ class Commands {
                                std::string misc = "  ");
 
     /**
+    * Formats string to match certain number of characters, using fluff to fill
+    * space.
+    **/
+    std::string FitStringToSpace(std::string string, size_t size,
+                                 char fluff, bool align_right = true);
+
+    /**
     * Field with customer names as keys and their associated bank accounts as
     * values.
     **/

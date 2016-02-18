@@ -58,7 +58,7 @@ int main(int argc, const char* argv[]) {
       } else if(strncmp(user_cmd, "withdrawal", 10) == 0) {         // Withdrawal   - Kinda Done
         commands.withdrawal();
       } else if(strncmp(user_cmd, "transfer", 10) == 0) {           // Transfer     -
-        commands.transfer(); 
+        commands.transfer();
       } else if(strncmp(user_cmd, "paybill", 10) == 0) {            // Paybill      -
 
       } else if(strncmp(user_cmd, "deposit", 10) == 0) {            // Deposit      - Kinda Done
