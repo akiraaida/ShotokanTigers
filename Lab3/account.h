@@ -27,6 +27,11 @@ namespace BankFrontEnd {
 class Account {
  public:
   /**
+  * Constructor
+  **/
+  Account();
+
+  /**
   * 'Account number' uniquely identifying item in system
   **/
   int number;
@@ -63,9 +68,10 @@ class Account {
   double transfer_limit_remaining;
 
   /**
-  * TODO: with above limits, keep track of paybill limits (Each limit may not)
-  * belong in this class but that is later things).
+  * Reset at each day; Number of dollars that may be paid to each company this
+  * day.
   **/
+  std::map<std::string, double> paybill_limit_remaining;
 
 };
 
