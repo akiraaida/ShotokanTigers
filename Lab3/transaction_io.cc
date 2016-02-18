@@ -33,5 +33,5 @@ void PrintToTransactionFile(std::deque<std::string>* transactions,
     transactions->pop_front();
   }
 }
-}
-}
+} //namespace TransactionIO
+} //namespace BankFrontEnd

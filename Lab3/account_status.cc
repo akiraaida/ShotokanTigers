@@ -61,6 +61,5 @@ std::string GetErrorMessage(int status) {
       assert(false);
   }
 }
-
-}
-}
+} //namespace AccountStatus
+} //namespace BankFrontEnd

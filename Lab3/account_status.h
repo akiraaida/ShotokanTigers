@@ -50,7 +50,7 @@ int QueryAccountStatus(Account* account);
 * statement that the account is active.
 **/
 std::string GetErrorMessage(int status);
-}
-}
+} //namespace AccountStatus
+} //namespace BankFrontEnd
 
 #endif //BANK_FRONTEND_ACCOUNT_STATUS_H_

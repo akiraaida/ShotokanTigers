@@ -22,8 +22,8 @@ namespace AccountParser {
 * Convert from file to accounts map.
 **/
 std::map<std::string, std::vector<Account*> > Parse(const char* fpath);
-}
-}
+} //namespace AccountParser
+} //namespace BankFrontEnd
 
 
 #endif //BANK_FRONTEND_ACCOUNT_PARSER_H_

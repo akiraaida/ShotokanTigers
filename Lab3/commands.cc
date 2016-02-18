@@ -665,4 +665,4 @@ double Commands::GetTransactionCharge(std::string name, int account_number) {
     return 0.1;
   }
 }
-}
+} //namespace BankFrontEnd

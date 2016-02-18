@@ -12,7 +12,7 @@
 * Alexander Wheadon   100514985
 *
 * This is the heart of the bank system. Each command in the system corresponds
-* to a method here e.g. login, withdrawal, etc. 
+* to a method here e.g. login, withdrawal, etc.
 *
 * Example Usage:
 *   Commands bank;
@@ -194,6 +194,6 @@ class Commands {
     std::deque<std::string> transaction_output_;
 
 };
-}
+} //namespace BankFrontEnd
 
 #endif //BANK_FRONTEND_COMMANDS_H_

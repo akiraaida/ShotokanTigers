@@ -67,5 +67,5 @@ std::map<std::string, std::vector<Account*> > Parse(const char* fpath) {
   file.close();
   return accounts;
 }
-}
-}
+} //namespace AccountParser
+} //namespace BankFrontEnd

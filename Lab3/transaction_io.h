@@ -30,7 +30,7 @@ void PrintToTransactionFile(std::deque<std::string>* transactions,
                             std::string fpath = FPATH_TRANSACTIONS_FILE);
 
 
-}
-}
+} //namespace TransactionIO
+} //namespace BankFrontEnd
 
 #endif //BANK_FRONTEND_TRANSACTION_IO_H_

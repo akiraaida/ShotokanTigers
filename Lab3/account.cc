@@ -12,11 +12,11 @@
 #include "account.h"
 #include <iostream>
 namespace BankFrontEnd {
-  Account::Account() {
-    withdrawal_limit_remaining = 500.0;
-    transfer_limit_remaining = 1000.0;
-    paybill_limit_remaining["EC"] = 2000.0;
-    paybill_limit_remaining["CQ"] = 2000.0;
-    paybill_limit_remaining["TV"] = 2000.0;
-  }
+Account::Account() {
+  withdrawal_limit_remaining = 500.0;
+  transfer_limit_remaining = 1000.0;
+  paybill_limit_remaining["EC"] = 2000.0;
+  paybill_limit_remaining["CQ"] = 2000.0;
+  paybill_limit_remaining["TV"] = 2000.0;
 }
+} //namespace BankFrontEnd

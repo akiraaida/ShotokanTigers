@@ -72,9 +72,8 @@ class Account {
   * day.
   **/
   std::map<std::string, double> paybill_limit_remaining;
-
 };
-}
+} //namespace BankFrontEnd
 
 
 #endif //BANK_FRONTEND_ACCOUNT_H_
