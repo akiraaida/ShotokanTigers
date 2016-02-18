@@ -57,13 +57,13 @@ int main(int argc, const char* argv[]) {
         commands.login();
       } else if(strncmp(user_cmd, "withdrawal", 10) == 0) {         // Withdrawal   - Done
         commands.withdrawal();
-      } else if(strncmp(user_cmd, "transfer", 10) == 0) {           // Transfer     - Done
+      } else if(strncmp(user_cmd, "transfer", 10) == 0) {           // Transfer     - Done (Is there error checking for is_new, is_active, and is_deleted?)
         commands.transfer();
-      } else if(strncmp(user_cmd, "paybill", 10) == 0) {            // Paybill      - Done
+      } else if(strncmp(user_cmd, "paybill", 10) == 0) {            // Paybill      - Done (Is there error checking for is_new, is_active, and is_deleted?)
         commands.paybill();
       } else if(strncmp(user_cmd, "deposit", 10) == 0) {            // Deposit      - Done
         commands.deposit();
-      } else if(strncmp(user_cmd, "create", 10) == 0) {             // Create       -
+      } else if(strncmp(user_cmd, "create", 10) == 0) {             // Create       - Done
         commands.create();
       } else if(strncmp(user_cmd, "delete", 10) == 0) {             // Delete       - Done
         commands.delete_account();
