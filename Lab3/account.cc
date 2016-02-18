@@ -10,7 +10,7 @@
 * Alexander Wheadon   100514985
 *******************************************************************************/
 #include "account.h"
-
+#include <iostream>
 namespace BankFrontEnd {
   Account::Account() {
     withdrawal_limit_remaining = 500.0;

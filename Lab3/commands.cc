@@ -27,6 +27,7 @@
 #define ERROR_DISABLED "ERROR, THAT ACCOUNT IS DISABLED."
 #define ERROR_ENABLED "ERROR, THAT ACCOUNT IS ENABLED ALREADY."
 #define ERROR_DELETED "ERROR, THAT ACCOUNT HAS BEEN DELETED."
+#define ERROR_MESSAGE_HIT_TRANSFER_LIMIT "Error, the value entered is beyond the transfer limit."
 
 #define PROMPT_ENTER_SESSION_TYPE "Please enter your session type: "
 #define PROMPT_ENTER_LOGIN_NAME "Please enter a login name: "
@@ -34,6 +35,7 @@
 #define PROMPT_ENTER_ACCOUNT_NUMBER "Please enter the user's account number: "
 #define PROMPT_TRANSFER_SOURCE "Please enter the transferring account's number: "
 #define PROMPT_TRANSFER_TARGET "Please enter the recipient account's number: "
+#define PROMPT_TRANSFER_VALUE "Please enter an amount to transfer: "
 #define PROMPT_WITHDRAWAL_VALUE "Please enter an amount to withdraw: "
 #define PROMPT_DEPOSIT_VALUE "Please enter an amount to deposit: "
 
@@ -302,6 +304,7 @@ bool Commands::transfer() {
 
     // get number
     int number;
+    Account* account;
     {
       std::cout << PROMPT_TRANSFER_SOURCE << std::endl;
       char num[6];
@@ -309,7 +312,7 @@ bool Commands::transfer() {
       number = std::stoi(num);
 
       // check name against account number
-      Account* account = GetAccount(name, number);
+      account = GetAccount(name, number);
       if(account == nullptr) {
         std::cout << ERROR_MESSAGE_STOLEN_ACCOUNT << std::endl;
         return false;
@@ -337,7 +340,21 @@ bool Commands::transfer() {
       recipient_account = GetAccount(recipient_name, recipient_number);
     }
 
-    // TODO: after withdrawal is done
+    // get amount to transfer
+    double amount;
+    {
+      std::cout << PROMPT_TRANSFER_VALUE << std::endl;
+      char num[9];
+      std::cin.getline(num, sizeof(num));
+      amount = std::stod(num);
+    }
+
+    // check transfer amount
+    if(account->transfer_limit_remaining < amount) {
+      std::cout << ERROR_MESSAGE_HIT_TRANSFER_LIMIT << std::endl;
+      std::cout << account->transfer_limit_remaining << "<" << amount << std::endl;
+      return false;
+    }
 
 
 
