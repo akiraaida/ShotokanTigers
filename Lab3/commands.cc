@@ -121,7 +121,8 @@ void Commands::PushTransactionRecord(int code, std::string name,
                             + FitStringToSpace(misc, 2, ' ', false);
 
   // test output
-  std::cout << "pushed \"" << transaction << "\" size: " << transaction.size() <<  std::endl;
+  std::cout << "pushed \"" << transaction << "\" size: " << transaction.size()
+    << std::endl;
 
   // push
   transaction_output_.push_front(transaction);
@@ -185,7 +186,8 @@ bool Commands::withdrawal() {
     std::cout << ERROR_DISABLED << std::endl;
     return false;
   }
-  float transaction_charge = is_admin_ ? 0.0 : GetTransactionCharge(name, atoi(num));
+  float transaction_charge =
+      is_admin_ ? 0.0 : GetTransactionCharge(name, atoi(num));
   float debit = atof(amount) + transaction_charge;
   if (temp_account->balance < debit || CheckUnit(atof(amount)) == false) {
     std::cout << ERROR_BALANCE_INSUFFICIENT << std::endl; // Very generalized error message atm, may want to break the error cases down?
@@ -193,12 +195,14 @@ bool Commands::withdrawal() {
   }
   PushTransactionRecord(1, name, atoi(num), debit);
   std::cout << SUCCESS_WITHDRAWAL << std::endl;
-  temp_account->withdrawal_limit_remaining = temp_account->withdrawal_limit_remaining - atof(amount);
+  temp_account->withdrawal_limit_remaining =
+      temp_account->withdrawal_limit_remaining - atof(amount);
   return true;
 }
 
 bool Commands::CheckUnit(double amount) {
-  if (fmod(amount,5) == 0 || fmod(amount, 10) == 0 || fmod(amount, 20) == 0 || fmod(amount, 100) == 0) {
+  if (fmod(amount,5) == 0 || fmod(amount, 10) == 0 || fmod(amount, 20) == 0
+      || fmod(amount, 100) == 0) {
     return true;
   }
   return false;
@@ -308,7 +312,8 @@ bool Commands::transfer() {
     double charge = is_admin_ ? 0.0 : GetTransactionCharge(name, number);
     if (account->transfer_limit_remaining < amount) {
       std::cout << ERROR_MESSAGE_HIT_TRANSFER_LIMIT << std::endl;
-      std::cout << account->transfer_limit_remaining << "<" << amount << std::endl;
+      std::cout << account->transfer_limit_remaining << "<" << amount
+                << std::endl;
       return false;
     }
 
@@ -448,7 +453,8 @@ bool Commands::deposit() {
     std::cout << ERROR_DELETED << std::endl;
     return false;
   }
-  float transaction_charge = is_admin_ ? 0.0 : GetTransactionCharge(name, atoi(num));
+  float transaction_charge =
+      is_admin_ ? 0.0 : GetTransactionCharge(name, atoi(num));
   if (temp_account->balance + atof(amount) < transaction_charge) {
     std::cout << ERROR_BALANCE_INSUFFICIENT << std::endl;
     return false;
