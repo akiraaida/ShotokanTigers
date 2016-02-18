@@ -127,8 +127,6 @@ class Commands {
 
     std::string DetermineSession();
 
-    int GenerateNum();
-
     /**
     * Check if account belongs to user
     **/

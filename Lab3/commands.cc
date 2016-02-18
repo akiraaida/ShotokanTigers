@@ -183,9 +183,6 @@ bool Commands::withdrawal() {
   } else if (!temp_account->is_active) {
     std::cout << ERROR_DISABLED << std::endl;
     return false;
-  } else if (temp_account->is_new){
-    std::cout << ERROR_NEW << std::endl;
-    return false;
   }
   float transaction_charge = is_admin_ ? 0.0 : GetTransactionCharge(name, atoi(num));
   float debit = atof(amount) + transaction_charge;
@@ -436,9 +433,6 @@ bool Commands::deposit() {
   } else if (temp_account->is_deleted) {
     std::cout << ERROR_DELETED << std::endl;
     return false;
-  } else if (temp_account->is_new){
-    std::cout << ERROR_NEW << std::endl;
-    return false;
   }
   float transaction_charge = is_admin_ ? 0.0 : GetTransactionCharge(name, atoi(num));
   if(temp_account->balance + atof(amount) < transaction_charge) {
@@ -465,35 +459,8 @@ bool Commands::create() {
     std::cout << ERROR_ABOVE_MAX_INIT << std::endl;
     return false;
   }
-  Account* new_account = new Account();
-  new_account->number = GenerateNum();
-  new_account->is_active = 1;
-  new_account->balance = atof(init);
-  new_account->is_student_plan = 0;
-  new_account->is_deleted = 0;
-  new_account->is_new = 1;
-  accounts_[name].push_back(new_account);
-  PushTransactionRecord(5, name, new_account->number, atof(init));
+  PushTransactionRecord(5, name, 00000, atof(init));
   return true;
-}
-
-int Commands::GenerateNum(){
-  srand(time(0));
-  int rnd;
-  bool duplicate = true;
-  while(duplicate == true){
-    duplicate = false;
-    rnd = rand() % 99999 + 1;
-    std::map<std::string, std::vector<Account*> >::iterator it;
-    for(it=accounts_.begin(); it != accounts_.end(); it++) {
-      for(int i = 0; i < it->second.size(); i++){
-        if(rnd == it->second[i]->number){
-          duplicate = true;
-        }
-      }
-    }
-  }
-  return rnd;
 }
 
 bool Commands::delete_account() {
@@ -517,9 +484,6 @@ bool Commands::delete_account() {
   }
   if(temp_account->is_deleted) {
     std::cout << ERROR_DELETED << std::endl;
-    return false;
-  } else if (temp_account->is_new){
-    std::cout << ERROR_NEW << std::endl;
     return false;
   }
   PushTransactionRecord(6, name, atoi(num));
@@ -553,9 +517,6 @@ bool Commands::disable() {
   } else if (!temp_account->is_active){
     std::cout << ERROR_DISABLED << std::endl;
     return false;
-  } else if (temp_account->is_new){
-    std::cout << ERROR_NEW << std::endl;
-    return false;
   }
   PushTransactionRecord(7, name, atoi(num));
   temp_account->is_active = false;
@@ -587,9 +548,6 @@ bool Commands::changeplan() {
     return false;
   } else if (temp_account->is_active){
     std::cout << ERROR_DISABLED << std::endl;
-    return false;
-  } else if (temp_account->is_new){
-    std::cout << ERROR_NEW << std::endl;
     return false;
   }
   if(temp_account->is_student_plan){
@@ -626,9 +584,6 @@ bool Commands::enable() {
     return false;
   } else if (temp_account->is_active){
     std::cout << ERROR_ENABLED << std::endl;
-    return false;
-  } else if (temp_account->is_new){
-    std::cout << ERROR_NEW << std::endl;
     return false;
   }
   PushTransactionRecord(9, name, atoi(num));

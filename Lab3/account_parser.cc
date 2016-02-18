@@ -60,7 +60,6 @@ std::map<std::string, std::vector<Account*> > Parse(const char* fpath) {
     }
 
     new_account->is_deleted = 0;
-    new_account->is_new = 0;
 
     accounts[name].push_back(new_account);
 
