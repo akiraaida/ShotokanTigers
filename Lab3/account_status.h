@@ -31,6 +31,15 @@ enum {
 * deleted account state takes precedence.
 **/
 int QueryAccountStatus(Account* account);
+
+/**
+* Returns the message corresponding to an account status
+* Error messages except for active account, which just states that the account
+* is active.
+**/
+std::string GetErrorMessage(int status);
+
+
 }
 }
 

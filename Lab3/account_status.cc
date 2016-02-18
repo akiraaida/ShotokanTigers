@@ -12,19 +12,46 @@
 *******************************************************************************/
 #include "account_status.h"
 
+#define ACCOUNT_STATUS_INVALID_ACCOUNT "ERROR, THAT ACCOUNT IS INVALID."
+#define ACCOUNT_STATUS_DISABLED "ERROR, THAT ACCOUNT IS DISABLED."
+#define ACCOUNT_STATUS_ENABLED "ERROR, THAT ACCOUNT IS ENABLED ALREADY."
+#define ACCOUNT_STATUS_DELETED "ERROR, THAT ACCOUNT HAS BEEN DELETED."
+#define ACCOUNT_STATUS_ACTIVE "This account is active."
 namespace BankFrontEnd {
 namespace AccountStatus {
 // Query Account Status
 int QueryAccountStatus(Account* account) {
   if (account == nullptr) {
-    return AccountStatus::kAccountNoExist;
+    return kAccountNoExist;
   } else if (account->is_deleted) {
-    return AccountStatus::kDeletedAccount;
+    return kDeletedAccount;
   } else if (!account->is_active) {
-    return AccountStatus::kDisabledAccount;
+    return kDisabledAccount;
   } else {
-    return AccountStatus::kActiveAccount;
+    return kActiveAccount;
   }
 }
+
+std::string GetErrorMessage(int status) {
+  switch(status) {
+    case kActiveAccount: {
+      return ACCOUNT_STATUS_ACTIVE;
+      break;
+    }
+
+    case kAccountNoExist: {
+      return ACCOUNT_STATUS_INVALID_ACCOUNT;
+      break;
+    }
+
+    /*TODO: Rest*/
+
+    default:
+      //assert(false);
+      return ACCOUNT_STATUS_INVALID_ACCOUNT;
+      break; //TODO: after enable assertions
+  }
+}
+
 }
 }
