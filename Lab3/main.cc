@@ -74,9 +74,9 @@ int main(int argc, const char* argv[]) {
       } else if(strncmp(user_cmd, "changeplan", 10) == 0) {
 
       } else if(strncmp(user_cmd, "logout", 10) == 0) {
-
+        commands.logout();
       } else {
-        std::cout << PROMPT_ENTER_COMMAND << std::endl;
+        std::cout << ERROR_MESSAGE_INVALID_COMMAND << std::endl;
       }
     }
 }

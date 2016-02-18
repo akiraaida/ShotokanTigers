@@ -61,6 +61,8 @@ class Commands {
   **/
   bool withdrawal();
 
+  bool CheckUnit(double amount);
+
   /**
   * TODO
   **/
@@ -126,8 +128,8 @@ class Commands {
     /**
     * pushes transaction record with that info onto stack
     **/
-    void PushTransactionRecord(int code, std::string name = "",
-                               int account_number = 0, double money = 0.0,
+    void PushTransactionRecord(int code, std::string name = "                    ",
+                               int account_number = 00000, double money = 00000.00,
                                std::string misc = "  ");
 
     /**

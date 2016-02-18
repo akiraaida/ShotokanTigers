@@ -12,7 +12,7 @@
 #include "commands.h"
 
 #include <cstring>
-
+#include <math.h>
 #include <iostream>
 #include <string>
 
@@ -21,12 +21,15 @@
 #define ERROR_MESSAGE_DOUBLE_LOGIN "ERROR, YOU'RE ALREADY LOGGED IN!"
 #define ERROR_MESSAGE_NO_LOGIN "ERROR, YOU HAVE NOT LOGGED IN YET."
 #define ERROR_MESSAGE_STOLEN_ACCOUNT "ERROR, THE ACCOUNT NUMBER DOESN'T MATCH THE ACCOUNT HOLDER'S NAME."
+#define ERROR_BALANCE_INSUFFICIENT "ERROR, THE ACCOUNT DOES NOT HAVE SUFFICIENT FUNDS."
 
 #define PROMPT_ENTER_SESSION_TYPE "Please enter your session type: "
 #define PROMPT_ENTER_LOGIN_NAME "Please enter a login name: "
 #define PROMPT_ENTER_CUSTOMER_NAME "Please enter the account holder's name: "
 #define PROMPT_ENTER_ACCOUNT_NUMBER "Please enter the user's account number: "
 #define PROMPT_WITHDRAWAL_VALUE "Please enter an amount to withdraw: "
+
+#define SUCCESS_WITHDRAWAL "Your withdrawal transaction has completed."
 
 namespace BankFrontEnd {
 Commands::Commands() {
@@ -129,7 +132,6 @@ bool Commands::login() {
 
 bool Commands::withdrawal() {
   if(is_logged_in_ == true) {
-
     if(is_admin_ == true) {
       std::cout << PROMPT_ENTER_CUSTOMER_NAME << std::endl;
       char name[21] = { 0 };
@@ -150,18 +152,57 @@ bool Commands::withdrawal() {
         if(owned_account == false || temp_account == nullptr) {
           std::cout << ERROR_MESSAGE_STOLEN_ACCOUNT << std::endl;
         } else {
-          if(temp_account->balance > atof(amount)) {
+          if(temp_account->balance > atof(amount) && CheckUnit(atof(amount)) == true) {
             float newBal = temp_account->balance - atof(amount);
             std::string trans = "";
             PushTransactionRecord(01, name, atoi(num), atof(amount)); 
-          } else {
+            std::cout << SUCCESS_WITHDRAWAL << std::endl;
+            /*TODO
+            
+              Implement update remaining withdrawal
 
-          }
+            */
+            return true;
+          } else {
+            std::cout << ERROR_BALANCE_INSUFFICIENT << std::endl; // Very generalized error message atm, may want to break the error cases down?
+          }                                                       // Errors for not mod 5/10/20/100 and not enough money
         }
       }
 
     } else {
+      std::cout << PROMPT_ENTER_ACCOUNT_NUMBER << std::endl;
+      char num[6] = { 0 };
+      std::cin.getline(num, sizeof(num));
+      std::cout << PROMPT_WITHDRAWAL_VALUE << std::endl;
+      char amount[9] = { 0 };
+      std::cin.getline(amount, sizeof(amount));
+      std::vector<Account*> temp = accounts_[logged_in_name_];
+      if(temp.empty()) {
+        std::cout << ERROR_MESSAGE_ACCOUNTLESS_USER << std::endl;
+        return false;
+      } else {
+        bool owned_account = UserExists(logged_in_name_);
+        Account* temp_account = GetAccount(logged_in_name_, atoi(num));
+        if(owned_account == false || temp_account == nullptr) {
+          std::cout << ERROR_MESSAGE_STOLEN_ACCOUNT << std::endl;
+        } else {
+          if(temp_account->balance > atof(amount) && CheckUnit(atof(amount)) == true) {
+            float newBal = temp_account->balance - atof(amount);
+            std::string trans = "";
+            PushTransactionRecord(01, logged_in_name_, atoi(num), atof(amount)); 
+            std::cout << SUCCESS_WITHDRAWAL << std::endl;
+            /*TODO
+              
+              Implement account charge for withdraw
+              Implement update remaining withdrawal
 
+            */
+            return true;
+          } else {
+            std::cout << ERROR_BALANCE_INSUFFICIENT << std::endl;// Very generalized error message atm, may want to break the error cases down?
+          }                                                       // Errors for not mod 5/10/20/100 and not enough money
+        }
+      }
     }
 
 
@@ -169,7 +210,13 @@ bool Commands::withdrawal() {
     std::cout << ERROR_MESSAGE_NO_LOGIN << std::endl;
     return false;
   }
+  return false;
+}
 
+bool Commands::CheckUnit(double amount){
+  if(fmod(amount,5) == 0 || fmod(amount, 10) == 0 || fmod(amount, 20) == 0 || fmod(amount, 100) == 0){
+    return true;
+  }
   return false;
 }
 
@@ -350,11 +397,22 @@ bool Commands::enable() {
 
 bool Commands::logout() {
   if(is_logged_in_ == true) {
+    PushTransactionRecord(00);
+    is_logged_in_ = false;
+    logged_in_name_ = "";
+    is_admin_ = false;
+
+    /*TODO
+    
+      Create transactions file w/ all of the dequeu info
+  
+    */
 
   } else {
     std::cout << ERROR_MESSAGE_NO_LOGIN << std::endl;
     return false;
   }
   return false;
+  }
 }
-}
+
