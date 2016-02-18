@@ -28,6 +28,8 @@
 #define ERROR_ENABLED "ERROR, THAT ACCOUNT IS ENABLED ALREADY."
 #define ERROR_DELETED "ERROR, THAT ACCOUNT HAS BEEN DELETED."
 #define ERROR_MESSAGE_HIT_TRANSFER_LIMIT "Error, the value entered is beyond the transfer limit."
+#define ERROR_INVALID_COMPANY "Error, this company is not a valid recipient."
+#define ERROR_MESSAGE_HIT_PAYBILL_LIMIT "Error, the value entered is beyond the paybill limit."
 
 #define PROMPT_ENTER_SESSION_TYPE "Please enter your session type: "
 #define PROMPT_ENTER_LOGIN_NAME "Please enter a login name: "
@@ -335,14 +337,14 @@ bool Commands::paybill() {
   // get account number
   int account_number;
   {
-    std::cout << PROMPT_TRANSFER_SOURCE << std::endl;
+    std::cout << PROMPT_ENTER_ACCOUNT_NUMBER << std::endl;
     char num[6];
     std::cin.getline(num, sizeof(num));
     account_number = std::stoi(num);
   }
 
   // get account
-  Account* account = GetAccount(name, number);
+  Account* account = GetAccount(name, account_number);
   if(account == nullptr) {
     std::cout << ERROR_MESSAGE_STOLEN_ACCOUNT << std::endl;
     return false;
@@ -358,6 +360,13 @@ bool Commands::paybill() {
 
   }
 
+  // check company name
+  if(account->paybill_limit_remaining.find(company)
+      == account->paybill_limit_remaining.end()) {
+    std::cout << ERROR_INVALID_COMPANY << std::endl;
+    return false;
+  }
+
   // get amount to transfer
   double amount;
   {
@@ -366,6 +375,27 @@ bool Commands::paybill() {
     std::cin.getline(num, sizeof(num));
     amount = std::stod(num);
   }
+
+  // check transfer limit
+  if(account->paybill_limit_remaining[company] < amount) {
+    std::cout << ERROR_MESSAGE_HIT_PAYBILL_LIMIT << std::endl;
+    return false;
+  }
+
+  // check balance
+  double charge = is_admin_ ? 0.0 : GetTransactionCharge(name, account_number);
+  if(account->balance < (amount + charge)) {
+    std::cout << ERROR_BALANCE_INSUFFICIENT << std::endl;
+    return false;
+  }
+
+  // do it
+  account->balance -= amount + charge;
+  account->paybill_limit_remaining[company] -= amount;
+
+  // print out transaction
+  PushTransactionRecord(3, name, account_number, amount, company);
+  PushTransactionRecord(1, name, account_number, charge);
 
   // good
   return true;
