@@ -148,98 +148,76 @@ bool Commands::login() {
 }
 
 bool Commands::withdrawal() {
-  if(is_logged_in_ == true) {
-    if(is_admin_ == true) {
-      std::cout << PROMPT_ENTER_CUSTOMER_NAME << std::endl;
-      char name[21] = { 0 };
-      std::cin.getline(name, sizeof(name));
-      std::cout << PROMPT_ENTER_ACCOUNT_NUMBER << std::endl;
-      char num[6] = { 0 };
-      std::cin.getline(num, sizeof(num));
-      std::cout << PROMPT_WITHDRAWAL_VALUE << std::endl;
-      char amount[9] = { 0 };
-      std::cin.getline(amount, sizeof(amount));
-      std::vector<Account*> temp = accounts_[name];
-      if(temp.empty()) {
-        std::cout << ERROR_MESSAGE_ACCOUNTLESS_USER << std::endl;
-        return false;
-      } else {
-        bool owned_account = UserExists(name);
-        Account* temp_account = GetAccount(name, atoi(num));
-        if(owned_account == false || temp_account == nullptr) {
-          std::cout << ERROR_MESSAGE_STOLEN_ACCOUNT << std::endl;
-        } else {
-          if(temp_account->is_active == true){
-            if(temp_account->is_deleted == false){
-              if(temp_account->balance > atof(amount) && CheckUnit(atof(amount)) == true) {
-                float newBal = temp_account->balance - atof(amount);
-                PushTransactionRecord(1, name, atoi(num), atof(amount));
-                std::cout << SUCCESS_WITHDRAWAL << std::endl;
-                /*TODO
-
-                  Implement update remaining withdrawal
-
-                */
-                return true;
-              } else {
-                std::cout << ERROR_BALANCE_INSUFFICIENT << std::endl; // Very generalized error message atm, may want to break the error cases down?
-              }                                                       // Errors for not mod 5/10/20/100 and not enough money
-            } else {
-              std::cout << ERROR_DELETED << std::endl;
-            }
-          } else {
-            std::cout << ERROR_DISABLED << std::endl;
-          }
-        }
-      }
-
-    } else {
-      std::cout << PROMPT_ENTER_ACCOUNT_NUMBER << std::endl;
-      char num[6] = { 0 };
-      std::cin.getline(num, sizeof(num));
-      std::cout << PROMPT_WITHDRAWAL_VALUE << std::endl;
-      char amount[9] = { 0 };
-      std::cin.getline(amount, sizeof(amount));
-      std::vector<Account*> temp = accounts_[logged_in_name_];
-      if(temp.empty()) {
-        std::cout << ERROR_MESSAGE_ACCOUNTLESS_USER << std::endl;
-        return false;
-      } else {
-        bool owned_account = UserExists(logged_in_name_);
-        Account* temp_account = GetAccount(logged_in_name_, atoi(num));
-        if(owned_account == false || temp_account == nullptr) {
-          std::cout << ERROR_MESSAGE_STOLEN_ACCOUNT << std::endl;
-        } else {
-          if(temp_account->is_active == true){
-            if(temp_account->is_deleted == false){
-              if(temp_account->balance > atof(amount) && CheckUnit(atof(amount)) == true) {
-                float newBal = temp_account->balance - atof(amount);
-                PushTransactionRecord(1, logged_in_name_, atoi(num), atof(amount));
-                std::cout << SUCCESS_WITHDRAWAL << std::endl;
-                /*TODO
-
-                  Implement account charge for withdraw
-                  Implement update remaining withdrawal
-
-                */
-                return true;
-              } else {
-                std::cout << ERROR_BALANCE_INSUFFICIENT << std::endl;// Very generalized error message atm, may want to break the error cases down?
-              }                                                        // Errors for not mod 5/10/20/100 and not enough money
-            } else {
-              std::cout << ERROR_DELETED << std::endl;
-            }
-          } else {
-            std::cout << ERROR_DISABLED << std::endl;
-          }
-        }
-      }
-    }
-  } else {
+  // check if logged in
+  if(!is_logged_in_) {
     std::cout << ERROR_MESSAGE_NO_LOGIN << std::endl;
     return false;
   }
-  return false;
+
+  // retrieve name & transaction charge
+  std::string name;
+  float transaction_charge;
+  if(is_admin_) {
+    std::cout << PROMPT_ENTER_CUSTOMER_NAME << std::endl;
+    char name_buff[21] = { 0 };
+    std::cin.getline(name_buff, sizeof(name_buff));
+    name = name_buff;
+    transaction_charge = 0.0f;
+  } else {
+    name = logged_in_name_;
+    // TODO: Implement account charge for withdraw
+    transaction_charge = 0.0f;
+  }
+
+  // get other stuff
+  std::cout << PROMPT_ENTER_ACCOUNT_NUMBER << std::endl;
+  char num[6] = { 0 };
+  std::cin.getline(num, sizeof(num));
+  std::cout << PROMPT_WITHDRAWAL_VALUE << std::endl;
+  char amount[9] = { 0 };
+  std::cin.getline(amount, sizeof(amount));
+
+  // verify name
+  std::vector<Account*> temp = accounts_[name];
+  if(temp.empty()) {
+    std::cout << ERROR_MESSAGE_ACCOUNTLESS_USER << std::endl;
+    return false;
+  }
+
+  // verify account number
+  bool owned_account = UserExists(name);
+  Account* temp_account = GetAccount(name, atoi(num));
+  if(owned_account == false || temp_account == nullptr) {
+    std::cout << ERROR_MESSAGE_STOLEN_ACCOUNT << std::endl;
+    return false;
+  }
+
+  // check if account is valid
+  if(!temp_account->is_active) {
+    std::cout << ERROR_DELETED << std::endl;
+    return false;
+  } else if (temp_account->is_deleted) {
+    std::cout << ERROR_DISABLED << std::endl;
+    return false;
+  }
+
+  // check withdrawal amount
+  float debit = atof(amount) + transaction_charge;
+  if(temp_account->balance < debit || CheckUnit(atof(amount)) == false) {
+    std::cout << ERROR_BALANCE_INSUFFICIENT << std::endl; // Very generalized error message atm, may want to break the error cases down?
+    return false;                                         // Errors for not mod 5/10/20/100 and not enough money
+  }
+
+  // good to go
+  float newBal = temp_account->balance - atof(amount);
+  PushTransactionRecord(1, name, atoi(num), atof(amount));
+  std::cout << SUCCESS_WITHDRAWAL << std::endl;
+  /*TODO
+
+    Implement update remaining withdrawal
+
+  */
+  return true;
 }
 
 bool Commands::CheckUnit(double amount){
