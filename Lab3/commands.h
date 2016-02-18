@@ -146,6 +146,12 @@ class Commands {
     std::string PromptForAccountHolderIfUnknown();
 
     /**
+    * Prints an error if the user is not logged in.
+    * Prints an error if the user is not admin.
+    **/
+    bool CheckLogin(bool admins_only = false);
+
+    /**
     * Field with customer names as keys and their associated bank accounts as
     * values.
     **/

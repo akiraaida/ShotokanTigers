@@ -259,7 +259,7 @@ Account* Commands::GetAccount(std::string name, int number) {
 }
 
 bool Commands::transfer() {
-  if(is_logged_in_ == true) {
+  if(CheckLogin()) {
     // get name
     std::string name = PromptForAccountHolderIfUnknown();
 
@@ -323,13 +323,11 @@ bool Commands::transfer() {
       return false;
     }
 
-
-
+    // done
+    return true;
   } else {
-    std::cout << ERROR_MESSAGE_NO_LOGIN << std::endl;
     return false;
   }
-  return false;
 }
 
 bool Commands::paybill() {
@@ -629,6 +627,19 @@ std::string Commands::PromptForAccountHolderIfUnknown() {
       std::cout << PROMPT_ENTER_CUSTOMER_NAME << std::endl;
       std::cin.getline(name, sizeof(name));
       return std::string(name);
+  }
+}
+
+
+bool Commands::CheckLogin(bool admins_only) {
+  if(!is_logged_in_) {
+    std::cout << ERROR_MESSAGE_NO_LOGIN << std::endl;
+    return false;
+  } else if (admins_only && !is_admin_) {
+    std::cout << ERROR_ADMIN_PERMISSIONS << std::endl;
+    return false;
+  } else {
+    return true;
   }
 }
 }
