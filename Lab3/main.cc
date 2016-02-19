@@ -39,6 +39,12 @@
 
 /**
 * Main.
+* The program allows for a user to access their bank account(s) and make simple, everyday transactions.
+* It will also allow the admins to modify, create and perform more advanced transactions that a normal user cannot.
+* Input: accounts.txt
+* Output: transactions.txt
+* Usage: make
+* Usage: .\frontend.exe accounts.txt
 **/
 int main(int argc, const char* argv[]) {
     BankFrontEnd::Commands commands;
@@ -54,27 +60,27 @@ int main(int argc, const char* argv[]) {
     while (true) {
       std::cout << PROMPT_ENTER_COMMAND << std::endl;
       std::cin.getline(user_cmd, sizeof(user_cmd));
-      if (strncmp(user_cmd, "login", 10) == 0) {                     // Login        - Done
+      if (strncmp(user_cmd, "login", 10) == 0) {                    
         commands.login();
-      } else if (strncmp(user_cmd, "withdrawal", 10) == 0) {         // Withdrawal   - Done
+      } else if (strncmp(user_cmd, "withdrawal", 10) == 0) {         
         commands.withdrawal();
-      } else if (strncmp(user_cmd, "transfer", 10) == 0) {           // Transfer     - Done
+      } else if (strncmp(user_cmd, "transfer", 10) == 0) {           
         commands.transfer();
-      } else if (strncmp(user_cmd, "paybill", 10) == 0) {            // Paybill      - Done
+      } else if (strncmp(user_cmd, "paybill", 10) == 0) {           
         commands.paybill();
-      } else if (strncmp(user_cmd, "deposit", 10) == 0) {            // Deposit      - Done
+      } else if (strncmp(user_cmd, "deposit", 10) == 0) {           
         commands.deposit();
-      } else if (strncmp(user_cmd, "create", 10) == 0) {             // Create       - Done
+      } else if (strncmp(user_cmd, "create", 10) == 0) {            
         commands.create();
-      } else if (strncmp(user_cmd, "delete", 10) == 0) {             // Delete       - Done
+      } else if (strncmp(user_cmd, "delete", 10) == 0) {            
         commands.delete_account();
-      } else if (strncmp(user_cmd, "disable", 10) == 0) {            // Disable      - Done
+      } else if (strncmp(user_cmd, "disable", 10) == 0) {            
         commands.disable();
-      } else if (strncmp(user_cmd, "enable", 10) == 0) {             // Enable       - Done
+      } else if (strncmp(user_cmd, "enable", 10) == 0) {            
         commands.enable();
-      } else if (strncmp(user_cmd, "changeplan", 10) == 0) {         // Change Plan  - Done
+      } else if (strncmp(user_cmd, "changeplan", 10) == 0) {        
         commands.changeplan();
-      } else if (strncmp(user_cmd, "logout", 10) == 0) {             // Logout       - Kinda Done
+      } else if (strncmp(user_cmd, "logout", 10) == 0) {           
         commands.logout();
       } else {
         std::cout << ERROR_MESSAGE_INVALID_COMMAND << std::endl;

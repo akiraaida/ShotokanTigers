@@ -39,7 +39,7 @@ enum {
 };
 
 /**
-* Returns one of AccountStatus: Active, disabled, new, etc. Where a new or
+* Returns one of AccountStatus: Active, disabled, etc. Where a
 * deleted account state takes precedence.
 **/
 int QueryAccountStatus(Account* account);

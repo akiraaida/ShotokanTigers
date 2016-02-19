@@ -40,10 +40,13 @@ namespace BankFrontEnd {
 class Commands {
  public:
 
+  /*
+  * Constructor
+  */
    Commands();
 
   /**
-  * Gives map to this.
+  * Gives map created from the Parse method to this class.
   **/
   void SetAccounts(std::map<std::string, std::vector<Account*> >&& accounts);
 
@@ -116,6 +119,9 @@ class Commands {
     **/
     bool CheckUnit(double amount);
 
+    /*
+    * Determines if it's a standard or admin session
+    */
     std::string DetermineSession();
 
     /**
@@ -124,7 +130,7 @@ class Commands {
     Account* GetAccount(std::string name, int account);
 
     /**
-    * Find customer name corresponding to account number;
+    * Find customer name corresponding to account number
     * Returns empty string if account was not found
     **/
     std::string GetAccountOwner(int account);
