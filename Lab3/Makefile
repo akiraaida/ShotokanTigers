@@ -1,16 +1,16 @@
-CC = clang++
-CFLAGS = -std=c++11
+CXX = g++
+CXXFLAGS = -Wall -Wextra -std=c++11
 SOURCES = main.cc account.cc commands.cc account_parser.cc account_status.cc transaction_io.cc
-INCLUDES = account.h commands.h
+INCLUDES = account.h commands.h account_parser.h
 OBJECTS = $(subst .cc,.o,$(SOURCES))
 EXE = frontend.exe
 .PHONY: clean help
 
 frontend.exe : $(OBJECTS)
-	$(CC) $(CFLAGS) $^ $(LIBS) -o $@
+	$(CXX) $(CXXFLAGS) $^ $(LIBS) -o $@
 
 %.o : %.cc $(INCLUDES)
-	$(CC) $(CFLAGS) -c $<
+	$(CXX) $(CXXFLAGS) -c $<
 
 all : $(EXE)
 
