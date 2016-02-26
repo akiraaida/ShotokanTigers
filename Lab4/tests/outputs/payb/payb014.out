@@ -1,0 +1,31 @@
+Please enter your session type:
+Please enter a login name:
+Please enter a command user:
+Please enter the account number:
+Please enter recipient to be paid:
+Please enter amount to pay:
+Error, cannot pay 2005.00 as that account has only 2000.00 left in it's daily transfer limit to that recipient.
+Please enter the account number:
+Please enter recipient to be paid:
+Please enter amount to pay:
+Success, 100.00 has been paid to TV.
+Available Balance (12348):
+9909.90
+Daily Payment Limit to TV Remaining (12348):
+1900.00
+Please enter the account number:
+Please enter recipient to be paid:
+Please enter amount to pay:
+Error, cannot pay 1905.00 as that account has only 1900.00 left in it's daily transfer limit to that recipient.
+Please enter the account number:
+Please enter recipient to be paid:
+Please enter amount to pay:
+Success, 1900.00 has been paid to TV.
+Available Balance (12348):
+8009.80
+Daily Payment Limit to TV Remaining (12348):
+0.00
+Please enter the account number:
+Please enter recipient to be paid:
+Please enter amount to pay:
+Error, cannot pay 5.00 as that account has only 0.00 left in it's daily transfer limit to that recipient.
