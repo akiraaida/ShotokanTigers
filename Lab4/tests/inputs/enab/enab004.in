@@ -1,0 +1,64 @@
+login
+admin
+enable
+Bran Bob
+12347
+withdrawal
+Bran Bob
+12347
+5.00
+transfer
+John Doe
+12345
+12347
+5.00
+transfer
+Bran Bob
+12347
+12345
+5.00
+paybill
+Bran Bob
+12347
+TV
+5.00
+deposit
+Bran Bob
+12347
+5.00
+logout
+login
+standard
+Bran Bob
+withdrawal
+12347
+5.00
+transfer
+12347
+12345
+5.00
+paybill
+12347
+TV
+5.00
+deposit
+12347
+5.00
+logout
+login
+standard
+John Doe
+transfer
+12345
+12347
+5.00
+logout
+login
+admin
+changeplan
+Bran Bob
+12347
+disable
+Bran Bob
+12347
+logout

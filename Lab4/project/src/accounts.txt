@@ -1,0 +1,25 @@
+12345 John Doe             A 00110.00 S
+12346 Matt Cow             A 00110.00 N
+12347 Bran Bob             D 00110.00 N
+12348 Ashe Ace             A 10010.00 N
+12349 Anon Guy             A 01100.96 S
+12350 Anon Guy             A 00600.80 N
+12351 Student Guy          A 00500.00 S
+12352 NEET Guy             A 00500.00 N
+12353 Loaded Guy           A 00500.05 S
+12354 Loaded Guy           A 00500.10 N
+12355 Ashe Ace             A 10000.00 N
+12356 Loaded Guy           A 01000.05 S
+12357 Loaded Guy           A 01000.10 N
+12358 Loaded Guy           A 02000.05 S
+12359 Loaded Guy           A 02000.10 N
+12360 Moth Wallet          A 00000.05 S
+12380 Octopus              A 00010.20 N
+12381 Octopus              A 00010.10 S
+12382 Octopus              A 00010.20 N
+12383 Octopus              A 00010.10 S
+12384 Octopus              A 00010.20 N
+12385 Octopus              A 00010.10 S
+12386 Octopus              A 00005.20 N
+12387 Octopus              A 00005.10 S
+00000 END_OF_FILE          A 00000.00 S

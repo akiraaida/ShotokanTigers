@@ -1,0 +1,25 @@
+login
+admin
+paybill
+John Doe
+12345
+TV
+-5.00
+paybill
+John Doe
+12345
+TV
+0.00
+logout
+login
+standard
+John Doe
+paybill
+12345
+TV
+-5.00
+paybill
+12345
+TV
+0.00
+logout
