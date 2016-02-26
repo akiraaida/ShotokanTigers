@@ -60,7 +60,6 @@ int main(int argc, const char* argv[]) {
     while (true) {
       std::cout << PROMPT_ENTER_COMMAND << std::endl;
       std::cin.getline(user_cmd, sizeof(user_cmd));
-      std::cout << user_cmd << std::endl;
       if (strncmp(user_cmd, "login", 10) == 0) {                    
         commands.login();
       } else if (strncmp(user_cmd, "withdrawal", 10) == 0) {         
@@ -85,7 +84,6 @@ int main(int argc, const char* argv[]) {
         commands.logout();
       } else {
         std::cout << ERROR_MESSAGE_INVALID_COMMAND << std::endl;
-        break;
       }
     }
 }
