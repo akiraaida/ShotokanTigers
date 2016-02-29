@@ -7,13 +7,11 @@ tempCons="../../tempCons.txt"
 cd inputs
 cd chng
 
-# Change text colour to default
-echo -e "\033[0m"
 # For loop for all of the chng files
 for f in *.in;
 do
     # Output the test being run in white
-    echo -e "\033[37m [ Running Test: $f ]"
+    echo -e "\t\e[1;30;47m[ Running Test: $f ]\e[0m"
     # Pipe the input file into the program and then output the
     # console output to the tempCons file
     cat $f | $exe $accounts > $tempCons 
@@ -23,14 +21,11 @@ do
     if [ "$checkCons" == "" ]
     then
         # Output the test has passed in green
-        echo -e "\033[32m Test Case Has Passed"
+        echo -e "\t\e[1;32;42m[ Test Case Has Passed ]\e[0m"
     else
         # Output the test has failed in red
-        echo -e "\033[31m Test Case Has Failed"
+        echo -e "\t\e[1;31;41m[ Test Case Has Failed ]\e[0m"
     fi
     # Output the test ended in white 
-    echo -e "\033[37m [ Finished Test: $f ]"
-    echo -e "\033[34m ------------------------------"
+    echo -e "\t\e[1;30;47m[ Finished Test: $f ]\e[0m\n"
 done
-# Change text colour back to default
-echo -e "\033[0m"
