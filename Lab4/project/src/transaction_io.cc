@@ -24,12 +24,12 @@ void PrintToTransactionFile(std::deque<std::string>* transactions,
   file.open(fpath, std::ios_base::app);
 
   // unwind queue
-  std::cout << "Printing to file: " << std::endl; //TODO: remove later
+//   std::cout << "Printing to file: " << std::endl; //TODO: remove later
   while (!transactions->empty()) {
     std::string current_transaction = transactions->front();
     file << current_transaction << std::endl;
-    std::cout << "\""<< current_transaction << "\" size: "
-              << current_transaction.size() << std::endl; // TODO: remove later
+//     std::cout << "\""<< current_transaction << "\" size: "
+//               << current_transaction.size() << std::endl; // TODO: remove later
     transactions->pop_front();
   }
 }
