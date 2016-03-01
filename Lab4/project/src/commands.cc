@@ -64,13 +64,15 @@ namespace BankFrontEnd {
 Commands::Commands() {
   is_logged_in_ = false;
   is_admin_ = false;
-  //todo:remove this V
-  transactions_file = "tempp";
 }
 
 void Commands::SetAccounts(std::map<std::string,
                            std::vector<Account*> >&& accounts) {
   accounts_ = accounts;
+}
+
+void Commands::SetTransactionPath(const std::string& path) {
+  transactions_file_ = path;
 }
 
 std::string Commands::DetermineSession() {
@@ -624,7 +626,9 @@ void Commands::logout() {
     logged_in_name_ = "";
     is_admin_ = false;
 
-    TransactionIO::PrintToTransactionFile(&transaction_output_, transactions_file);
+    assert(!transactions_file_.empty());
+    TransactionIO::PrintToTransactionFile(&transaction_output_,
+                                          transactions_file_);
     assert(transaction_output_.size() == 0);
 
   } else {

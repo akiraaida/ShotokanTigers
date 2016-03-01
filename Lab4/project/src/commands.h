@@ -50,6 +50,10 @@ class Commands {
   **/
   void SetAccounts(std::map<std::string, std::vector<Account*> >&& accounts);
 
+  /**
+  * Gives filepath to print to.
+  **/
+  void SetTransactionPath(const std::string& path);
 
   /**
   * Corresponds to 'login' command.
@@ -202,7 +206,7 @@ class Commands {
     /**
     * filepath to the transactions file
     **/
-    std::string transactions_file;
+    std::string transactions_file_;
 
 };
 } //namespace BankFrontEnd

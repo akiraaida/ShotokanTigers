@@ -49,11 +49,11 @@
 int main(int argc, const char* argv[]) {
     // commands
     BankFrontEnd::Commands commands;
-    const char* transactions_fpath;
 
+    // take in arguments if possible
     if (argc >= 3) {
       commands.SetAccounts(BankFrontEnd::AccountParser::Parse(argv[1]));
-      transactions_fpath = argv[2];
+      commands.SetTransactionPath(argv[2]);
     } else {
       std::cout << ERROR_MESSAGE_ACCOUNTS_LOAD_FAIL << std::endl;
       return 0;
