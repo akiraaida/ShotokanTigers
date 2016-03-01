@@ -33,7 +33,7 @@
 #include "commands.h"
 #include "account_parser.h"
 
-#define ERROR_MESSAGE_ACCOUNTS_LOAD_FAIL "ERROR, ACCOUNTS FILE DID NOT LOAD."
+#define ERROR_MESSAGE_ACCOUNTS_LOAD_FAIL "Usage: banksys [accounts file] [transaction file]"
 #define ERROR_MESSAGE_INVALID_COMMAND "ERROR, INVALID COMMAND."
 #define PROMPT_ENTER_COMMAND "Please enter a command: "
 
@@ -47,10 +47,13 @@
 * Usage: .\frontend.exe accounts.txt
 **/
 int main(int argc, const char* argv[]) {
+    // commands
     BankFrontEnd::Commands commands;
+    const char* transactions_fpath;
 
-    if (argc == 2) {
+    if (argc >= 3) {
       commands.SetAccounts(BankFrontEnd::AccountParser::Parse(argv[1]));
+      transactions_fpath = argv[2];
     } else {
       std::cout << ERROR_MESSAGE_ACCOUNTS_LOAD_FAIL << std::endl;
       return 0;
