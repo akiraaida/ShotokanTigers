@@ -18,8 +18,6 @@
 #include <deque>
 #include <string>
 
-#define FPATH_TRANSACTIONS_FILE "transactions.txt"
-
 
 namespace BankFrontEnd {
 namespace TransactionIO {
@@ -27,7 +25,7 @@ namespace TransactionIO {
 * Consumes deque; appends to transactions file.
 **/
 void PrintToTransactionFile(std::deque<std::string>* transactions,
-                            std::string fpath = FPATH_TRANSACTIONS_FILE);
+                            std::string fpath);
 
 
 } //namespace TransactionIO

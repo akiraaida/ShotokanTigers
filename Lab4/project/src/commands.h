@@ -199,6 +199,11 @@ class Commands {
     **/
     std::deque<std::string> transaction_output_;
 
+    /**
+    * filepath to the transactions file
+    **/
+    std::string transactions_file;
+
 };
 } //namespace BankFrontEnd
 

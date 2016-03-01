@@ -64,6 +64,8 @@ namespace BankFrontEnd {
 Commands::Commands() {
   is_logged_in_ = false;
   is_admin_ = false;
+  //todo:remove this V
+  transactions_file = "tempp";
 }
 
 void Commands::SetAccounts(std::map<std::string,
@@ -622,7 +624,7 @@ void Commands::logout() {
     logged_in_name_ = "";
     is_admin_ = false;
 
-    TransactionIO::PrintToTransactionFile(&transaction_output_);
+    TransactionIO::PrintToTransactionFile(&transaction_output_, transactions_file);
     assert(transaction_output_.size() == 0);
 
   } else {
