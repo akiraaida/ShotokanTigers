@@ -6,7 +6,7 @@ tempCons="../tempCons.txt"
 # Switch to the inputs directory
 cd inputs
 # For loop for all of the chng files
-for f in crte006.in;
+for f in *.in;
 do
     # Output the test being run in white
     echo -e "\t\e[1;30;47m[ Running Test: $f ]\e[0m"
@@ -29,8 +29,8 @@ do
     else
         # Output the test has failed in red
         echo -e "\t\e[1;30;41m[ Test Case Has Failed ]\e[0m"
-        echo $checkCons
-        echo $checkTrans
+        # echo $checkCons
+        # echo $checkTrans
     fi
     # Output the test ended in white 
     echo -e "\t\e[1;30;47m[ Finished Test: $f ]\e[0m\n"
