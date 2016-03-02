@@ -1,0 +1,86 @@
+Please enter your session type:
+Please enter a command admin:
+Please enter the account holder's name:
+Please enter the account number:
+Success, Bran Bob's account is now enabled.
+Please enter the account holder's name:
+Please enter the account number:
+Please enter amount to withdraw:
+Success, 5.00 has been withdrawn.
+Available Balance (12347):
+105.00
+Please enter the account holder's name:
+Please enter the account number:
+Enter account number to transfer to:
+Enter amount:
+Success, 5.00 has been transferred to 12347.
+Available Balance (12345):
+105.00
+Available Balance (12347):
+110.00
+Please enter the account holder's name:
+Please enter the account number:
+Enter account number to transfer to:
+Enter amount:
+Success, 5.00 has been transferred to 12345.
+Available Balance (12347):
+105.00
+Available Balance (12345):
+110.00
+Please enter the account holder's name:
+Please enter the account number:
+Please enter recipient to be paid:
+Please enter amount to pay:
+Success, 5.00 has been paid to TV.
+Available Balance (12347):
+100.00
+Please enter the account holder's name:
+Please enter the account number:
+Please enter amount to deposit:
+Success, 5.00 has been deposited.
+Available Balance (12347):
+100.00
+Please enter your session type:
+Please enter a login name:
+Please enter a command user:
+Please enter the account number:
+Please enter amount to withdraw:
+Success, 5.00 has been withdrawn.
+Available Balance (12347):
+94.90
+Enter account number to transfer to:
+Enter amount:
+Success, 5.00 has been transferred to 12345.
+Available Balance (12347):
+89.80
+Available Balance (12345):
+115.00
+Please enter the account number:
+Please enter recipient to be paid:
+Please enter amount to pay:
+Success, 5.00 has been paid to TV.
+Available Balance (12347):
+84.70
+Please enter the account number:
+Please enter amount to deposit:
+Success, 5.00 has been deposited.
+Available Balance (12347):
+84.60
+Please enter your session type:
+Please enter a login name:
+Please enter a command user:
+Enter account number to transfer to:
+Enter amount:
+Success, 5.00 has been transferred to 12347.
+Available Balance (12345):
+109.95
+Available Balance (12347):
+89.60
+Please enter your session type:
+Please enter a command admin:
+Please enter the account holder's name:
+Please enter the account number:
+Success, Bran Bob is now on a student payment plan.
+Please enter the account holder's name:
+Please enter the account number:
+Success, Bran Bob's account is now disabled.
