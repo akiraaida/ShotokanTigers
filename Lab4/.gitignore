@@ -1,4 +1,4 @@
-*.out
 *.exe
 *.o
 transactions.txt
+tempCons.txt
