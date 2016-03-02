@@ -17,6 +17,8 @@ do
     then
         rm $trans       
     fi
+    # Create an empty transaction file
+    touch $trans
     # Pipe the input file into the program and then output the console output to the tempCons file
     cat $f | $exe $accounts $trans > $tempCons 
     # Check if there is a difference between the correct output and the output of the test case
