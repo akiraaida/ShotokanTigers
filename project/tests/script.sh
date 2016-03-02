@@ -1,12 +1,10 @@
 #!/bin/bash
-
 exe="../../src/./frontend.exe"
 accounts="../../src/accounts.txt"
 trans="../../src/transactions.txt"
 tempCons="../tempCons.txt"
-
+# Switch to the inputs directory
 cd inputs
-
 # For loop for all of the chng files
 for f in *.in;
 do
