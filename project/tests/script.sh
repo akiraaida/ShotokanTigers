@@ -29,6 +29,8 @@ do
     else
         # Output the test has failed in red
         echo -e "\t\e[1;30;41m[ Test Case Has Failed ]\e[0m"
+        # echo $checkCons
+        # echo $checkTrans
     fi
     # Output the test ended in white 
     echo -e "\t\e[1;30;47m[ Finished Test: $f ]\e[0m\n"
