@@ -573,7 +573,7 @@ void Commands::changeplan() {
   if (temp_account->is_deleted) {
     std::cout << ERROR_DELETED << std::endl;
     return;
-  } else if (temp_account->is_active) {
+  } else if (!temp_account->is_active) {
     std::cout << ERROR_DISABLED << std::endl;
     return;
   }
