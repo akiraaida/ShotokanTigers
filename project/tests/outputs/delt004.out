@@ -1,5 +1,7 @@
+Please enter a command: 
 Please enter your session type: 
-Please enter a command admin: 
+Please enter a command: 
 Please enter the account holder's name: 
-Please enter the account number: 
-Success, John Doe's account is now deleted.
+Please enter the user's account number: 
+Specified account has been deleted.
+Please enter a command: 

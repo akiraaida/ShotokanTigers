@@ -1,6 +1,12 @@
+Please enter a command: 
 Please enter your session type: 
-Please enter a command admin: 
+Please enter a command: 
 Please enter the account holder's name: 
-Please enter the account number: 
-Enter the amount of money you wish to withdraw: 
-Error, that account does not exist.
+Please enter the user's account number: 
+Specified account has been deleted.
+Please enter a command: 
+Please enter the account holder's name: 
+Please enter the user's account number: 
+Please enter an amount to withdraw: 
+ERROR, THAT ACCOUNT HAS BEEN DELETED.
+Please enter a command: 
