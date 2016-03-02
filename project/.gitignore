@@ -1,4 +1,5 @@
 *.exe
 *.o
+*.swp
 transactions.txt
 tempCons.txt
