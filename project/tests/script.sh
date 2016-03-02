@@ -35,4 +35,12 @@ do
     # Output the test ended in white 
     echo -e "\t\e[1;30;47m[ Finished Test: $f ]\e[0m\n"
 done
-rm $tempCons
+# Delete files made during tests
+if [ -f $tempCons ]
+then
+    rm $tempCons
+fi
+if [ -f $trans ]
+then
+    rm $trans       
+fi
