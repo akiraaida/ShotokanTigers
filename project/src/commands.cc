@@ -28,6 +28,7 @@
 #define ERROR_MESSAGE_NO_LOGIN "ERROR, YOU HAVE NOT LOGGED IN YET."
 #define ERROR_MESSAGE_INVALID_ACCOUNT "ERROR, THAT ACCOUNT IS INVALID."
 #define ERROR_MESSAGE_STOLEN_ACCOUNT "ERROR, THE ACCOUNT NUMBER DOESN'T MATCH THE ACCOUNT HOLDER'S NAME."
+#define ERROR_INVALID_INPUT "ERROR, INVALID INPUT."
 #define ERROR_BALANCE_INSUFFICIENT "ERROR, THE ACCOUNT DOES NOT HAVE SUFFICIENT FUNDS."
 #define ERROR_ADMIN_PERMISSIONS "ERROR, YOU DO NOT HAVE THE CORRECT PRIVILEGES."
 #define ERROR_DISABLED "ERROR, THAT ACCOUNT IS DISABLED."
@@ -440,8 +441,12 @@ void Commands::deposit() {
   char num[6] = { 0 };
   std::cin.getline(num, sizeof(num));
   std::cout << PROMPT_DEPOSIT_VALUE << std::endl;
-  char amount[9] = { 0 };
-  std::cin.getline(amount, sizeof(amount));
+  std::string amount;
+  std::getline(std::cin, amount);
+  if (amount.length() > 8 || stod(amount) < 0) {
+    std::cout << ERROR_INVALID_INPUT << std::endl;
+    return;
+  }
   std::vector<Account*> temp = accounts_[name];
   if (temp.empty()) {
     std::cout << ERROR_MESSAGE_ACCOUNTLESS_USER << std::endl;
@@ -462,11 +467,11 @@ void Commands::deposit() {
   }
   float transaction_charge =
       is_admin_ ? 0.0 : GetTransactionCharge(name, atoi(num));
-  if (temp_account->balance + atof(amount) < transaction_charge) {
+  if (temp_account->balance + stod(amount) < transaction_charge) {
     std::cout << ERROR_BALANCE_INSUFFICIENT << std::endl;
     return;
   }
-  PushTransactionRecord(4, name, atoi(num), atof(amount));
+  PushTransactionRecord(4, name, atoi(num), stod(amount));
   if (!is_admin_) {
     PushTransactionRecord(1, name, atoi(num), transaction_charge);
   }

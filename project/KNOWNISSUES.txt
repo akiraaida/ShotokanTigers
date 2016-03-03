@@ -10,11 +10,11 @@ General
     - NEEDS TO BE FIXED URGENTLY
 
 Deposit
-1. Takes negative values and 0. Need to change it to greater than 0.
-2. Takes non numeral characters. After investigation on slack, I don't believe it matters the exact format as long as the invalid characters are removed.
+1. Takes non numeral characters. After investigation on slack, I don't believe it matters the exact format as long as the invalid characters are removed.
     - eg. $5.00, 5,00, 5$, abc, etc. should all error with the command "ERROR, INVALID INPUT." whereas 5, 5.00, .5, etc. is manageable.
-3. Unconfirmed issue: Not sure what happens if a non-student account deposits 0.05 when the withdrawal fee is 0.10 (if the account was initially at 0).    
-4. Failing test cases due to General's #1
+    - not sure how to parse for solely a number
+2. Unconfirmed issue: Not sure what happens if a non-student account deposits 0.05 when the withdrawal fee is 0.10 (if the account was initially at 0).    
+3. Failing test cases due to General's #1
 
 Create
 1. Program terminates early if the input for the name is greater than 20 characters
