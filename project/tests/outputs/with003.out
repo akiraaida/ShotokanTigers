@@ -25,3 +25,4 @@ Error, input cannot contain dollar signs.
 Please enter the account number:
 Please enter amount to withdraw:
 Error, input cannot contain commas; for decimal point please use . instead
+Please enter a command: 

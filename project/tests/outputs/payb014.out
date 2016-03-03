@@ -29,3 +29,4 @@ Please enter the account number:
 Please enter recipient to be paid:
 Please enter amount to pay:
 Error, cannot pay 5.00 as that account has only 0.00 left in it's daily transfer limit to that recipient.
+Please enter a command: 

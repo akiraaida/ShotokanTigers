@@ -3,34 +3,14 @@ When an issue is fixed or confirmed not an issue any longer, delete it.
 ISSUES
 =================
 
-General
-1. Issue with "ERROR, INVALID COMMAND" when piping some commands in. Appears to be something to do with the input buffers.
-    - Does not happen for every test case
-    - Causes alot of correct test cases to fail
-    - NEEDS TO BE FIXED URGENTLY
-
 Deposit
 1. Takes non numeral characters. After investigation on slack, I don't believe it matters the exact format as long as the invalid characters are removed.
     - eg. $5.00, 5,00, 5$, abc, etc. should all error with the command "ERROR, INVALID INPUT." whereas 5, 5.00, .5, etc. is manageable.
     - not sure how to parse for solely a number
-2. Unconfirmed issue: Not sure what happens if a non-student account deposits 0.05 when the withdrawal fee is 0.10 (if the account was initially at 0).    
-3. Failing test cases due to General's #1
-
-Create
-1. Program terminates early if the input for the name is greater than 20 characters
-  - Should truncate instead of erroring according to slack
-2. Terminating early when max initial balance error occurs
-3. Failing test cases due to General's #1
+2. Failing test cases due to General's #1
 
 Delete
-1. Failing test cases due to General's #1
-2. Uncomfirmed issue: Not sure if users can log into a deleted account or not. In the current implementation they can.
-
-Disable
-1. Failing test cases due to General's #1
-
-Enable
-1. Failing test cases due to General's #1
+1. Uncomfirmed clarification: Not sure if users can log into a deleted account or not. In the current implementation they can.
 
 NOT TESTED
 =================
@@ -42,6 +22,10 @@ NOT TESTED
 NO KNOWN ISSUES
 =================
 
+- General
 - Login
 - Change Plan
 - Logout
+- Create
+- Disable
+- Enable

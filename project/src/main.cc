@@ -20,11 +20,9 @@
 * ----
 *
 *******************************************************************************/
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-
 #include <iostream>
 #include <fstream>
 #include <string>
@@ -36,6 +34,7 @@
 #define ERROR_MESSAGE_ACCOUNTS_LOAD_FAIL "Usage: banksys [accounts file] [transaction file]"
 #define ERROR_MESSAGE_INVALID_COMMAND "ERROR, INVALID COMMAND."
 #define PROMPT_ENTER_COMMAND "Please enter a command: "
+
 /**
 * Main.
 * The program allows for a user to access their bank account(s) and make simple, everyday transactions.
@@ -58,9 +57,13 @@ int main(int argc, const char* argv[]) {
       return 0;
     }
     std::string user_cmd;
-    while (std::cin.good()) {
+    while (std::cin) {
       std::cout << PROMPT_ENTER_COMMAND << std::endl;
       std::getline(std::cin, user_cmd);
+      if(!std::cin){
+        exit(0);
+      }
+      //std::cout << user_cmd << std::endl;
       if (user_cmd.compare("login") == 0) {
         commands.login();
       } else if (user_cmd.compare("withdrawal") == 0) {
@@ -86,5 +89,5 @@ int main(int argc, const char* argv[]) {
       } else {
         std::cout << ERROR_MESSAGE_INVALID_COMMAND << std::endl;
       }
-    }
+   }
 }

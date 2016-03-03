@@ -18,7 +18,7 @@ do
     # Create an empty transaction file
     touch $trans
     # Pipe the input file into the program and then output the console output to the tempCons file
-    cat $f | $exe $accounts $trans > $tempCons
+    $exe $accounts $trans < $f > $tempCons
     # Check if there is a difference between the correct output and the output of the test case
     checkCons=$(diff $tempCons ../outputs/${f%%.*}.out)
     checkTrans=$(diff $trans ../outputs/${f%%.*}.trans)
@@ -29,8 +29,10 @@ do
     else
         # Output the test has failed in red
         echo -e "\t\e[1;30;41m[ Test Case Has Failed ]\e[0m"
-       # echo $checkCons
-       # echo $checkTrans
+        #echo $checkCons
+        #echo $checkTrans
+        #cat $tempCons
+        #cat $trans
     fi
     # Output the test ended in white 
     echo -e "\t\e[1;30;47m[ Finished Test: $f ]\e[0m\n"

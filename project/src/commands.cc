@@ -484,14 +484,14 @@ void Commands::create() {
     return;
   }
   std::string name = PromptForAccountHolderIfUnknown();
-  char init[9] = { 0 };
   std::cout << PROMPT_INIT_BALANCE << std::endl;
-  std::cin.getline(init, sizeof(init));
-  if (atof(init) > 99999.99) {
+  std::string init;
+  std::getline(std::cin, init);
+  if (stod(init) > 99999.99) {
     std::cout << ERROR_ABOVE_MAX_INIT << std::endl;
     return;
   }
-  PushTransactionRecord(5, name, 00000, atof(init));
+  PushTransactionRecord(5, name, 00000, stod(init));
   return;
 }
 
@@ -644,9 +644,12 @@ void Commands::logout() {
 }
 
 std::string Commands::PromptForAccountHolder() {
-  char name[21] = { 0 };
   std::cout << PROMPT_ENTER_CUSTOMER_NAME << std::endl;
-  std::cin.getline(name, sizeof(name));
+  std::string name;
+  std::getline(std::cin, name);
+  if(name.length() > 20){
+    name = name.substr(0,20);
+  }
   return std::string(name);
 }
 
