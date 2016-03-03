@@ -3,18 +3,23 @@ admin
 deposit
 Bob Stevenson
 12345
+100.00
 deposit
 John Doe
 11111
+100.00
 deposit
 John Doe
 12346
+100.00
 logout
 login
 standard
 John Doe
 deposit
 11111
+100.00
 deposit
 12346
+100.00
 logout

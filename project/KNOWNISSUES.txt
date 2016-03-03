@@ -1,0 +1,44 @@
+When an issue is fixed or confirmed not happening, remove it.
+
+General
+1. Issue with "ERROR, INVALID COMMAND" when piping some commands in. Appears to be something to do with the input buffers.
+    - Does not happen for every test case
+    - Causes alot of correct test cases to fail
+    - NEEDS TO BE FIXED URGENTLY
+
+Login
+No known issues at this time.
+
+Withdrawal
+Untested.
+
+Transfer
+Untested.
+
+Paybill
+Untested.
+
+Deposit
+1. Takes negative values and 0. Need to change it to greater than 0.
+2. Takes non numeral characters. After investigation, I don't believe it matters the exact format as long as the invalid characters are removed.
+    - eg. $5.00, 5,00, 5$, abc, etc. should all error with the command "ERROR, INVALID INPUT." whereas 5, 5.00, .5, etc. is manageable.
+3. Unconfirmed issue: Not sure what happens if a non-student account deposits 0.05 when the withdrawal fee is 0.10 (if the account was initially at 0).    
+
+Delete
+Untested.
+
+Disable
+Untested.
+
+Change Plan
+No known issues at this time.
+
+Logout
+No known issues at this time.
+
+Enable
+Untested.
+
+Create
+1. Program terminates early if the input for the name is greater than 20 characters. 
+    - Should truncate instead of erroring according to slack

@@ -11,10 +11,6 @@ John Doe
 deposit
 John Doe
 12345
-.50
-deposit
-John Doe
-12345
 5
 deposit
 John Doe
@@ -38,9 +34,6 @@ deposit
 deposit
 12345
 000005.00
-deposit
-12345
-.50
 deposit
 12345
 5
