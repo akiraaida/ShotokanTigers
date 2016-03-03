@@ -1,6 +1,8 @@
-Please enter your session type:
-Please enter a command admin:
-Please enter the account holder's name:
-Please enter the account number:
-Please enter the account number to receive money: 
-Error, that account has been is disabled.
+Please enter a command: 
+Please enter your session type: 
+Please enter a command: 
+Please enter the account holder's name: 
+Please enter the transferring account's number: 
+Please enter the recipient account's number: 
+ERROR, THAT ACCOUNT IS DISABLED.
+Please enter a command: 

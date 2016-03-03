@@ -1,6 +1,8 @@
+Please enter a command: 
 Please enter your session type: 
-Please enter a command admin: 
+Please enter a command: 
 Please enter the account holder's name: 
-Please enter the account number: 
-Enter the amount of money you wish to deposit: 
-Error, that account has been disabled.
+Please enter the user's account number: 
+Please enter an amount to deposit: 
+ERROR, THAT ACCOUNT IS DISABLED.
+Please enter a command: 
