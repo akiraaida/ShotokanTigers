@@ -1,5 +1,7 @@
-Please enter your session type:
-Please enter a command admin:
-Please enter the account holder's name:
-Please enter the account number:
-Error, account specified is already active.
+Please enter a command: 
+Please enter your session type: 
+Please enter a command: 
+Please enter the account holder's name: 
+Please enter the user's account number: 
+ERROR, THAT ACCOUNT IS ENABLED ALREADY.
+Please enter a command: 
