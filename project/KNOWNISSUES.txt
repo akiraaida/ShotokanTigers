@@ -4,10 +4,7 @@ ISSUES
 =================
 
 Deposit
-1. Takes non numeral characters. After investigation on slack, I don't believe it matters the exact format as long as the invalid characters are removed.
-    - eg. $5.00, 5,00, 5$, abc, etc. should all error with the command "ERROR, INVALID INPUT." whereas 5, 5.00, .5, etc. is manageable.
-    - not sure how to parse for solely a number
-2. Failing test cases due to General's #1
+1. Generalized user input to allow for 5, 0000005, 5.0, 5.000, etc. since Jeremy said you can interpret the small details as you like.
 
 Delete
 1. Uncomfirmed clarification: Not sure if users can log into a deleted account or not. In the current implementation they can.

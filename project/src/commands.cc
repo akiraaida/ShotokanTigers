@@ -35,6 +35,8 @@
 #define ERROR_ENABLED "ERROR, THAT ACCOUNT IS ENABLED ALREADY."
 #define ERROR_DELETED "ERROR, THAT ACCOUNT HAS BEEN DELETED."
 #define ERROR_MESSAGE_HIT_TRANSFER_LIMIT "ERROR, THE VALUE ENTERED IS BEYOND THE TRANSFER LIMIT."
+#define ERROR_MIN_INPUT "ERROR, INPUT VALUE IS TOO SMALL."
+#define ERROR_MAX_INPUT "ERROR, INPUT VALUE IS TOO LARGE."
 #define ERROR_INVALID_COMPANY "ERROR, THAT COMPANY IS NOT A VALID RECIPIENT."
 #define ERROR_MESSAGE_HIT_PAYBILL_LIMIT "ERROR, THE VALUE ENTERED IS BEYOND THE PAYBILL LIMIT."
 #define ERROR_ABOVE_MAX_INIT "ERROR, MAX INITIAL BALANCE EXCEEDED."
@@ -443,40 +445,49 @@ void Commands::deposit() {
   std::cout << PROMPT_DEPOSIT_VALUE << std::endl;
   std::string amount;
   std::getline(std::cin, amount);
-  if (amount.length() > 8 || stod(amount) < 0) {
-    std::cout << ERROR_INVALID_INPUT << std::endl;
-    return;
-  }
-  std::vector<Account*> temp = accounts_[name];
-  if (temp.empty()) {
-    std::cout << ERROR_MESSAGE_ACCOUNTLESS_USER << std::endl;
-    return;
-  }
-  bool owned_account = UserExists(name);
-  Account* temp_account = GetAccount(name, atoi(num));
-  if (owned_account == false || temp_account == nullptr) {
+  try {
+    if (stod(amount) <= 0) {
+      std::cout << ERROR_MIN_INPUT << std::endl;
+      return;
+    }
+    if (stod(amount) > 99999.99){
+      std::cout << ERROR_MAX_INPUT << std::endl;
+      return;
+    }
+    std::vector<Account*> temp = accounts_[name];
+    if (temp.empty()) {
+      std::cout << ERROR_MESSAGE_ACCOUNTLESS_USER << std::endl;
+      return;
+    }
+    bool owned_account = UserExists(name);
+    Account* temp_account = GetAccount(name, atoi(num));
+    if (owned_account == false || temp_account == nullptr) {
     std::cout << ERROR_MESSAGE_STOLEN_ACCOUNT << std::endl;
-    return;
-  }
-  if (!temp_account->is_active) {
-    std::cout << ERROR_DISABLED << std::endl;
-    return;
-  } else if (temp_account->is_deleted) {
-    std::cout << ERROR_DELETED << std::endl;
-    return;
-  }
-  float transaction_charge =
+      return;
+    }
+    if (!temp_account->is_active) {
+      std::cout << ERROR_DISABLED << std::endl;
+      return;
+    } else if (temp_account->is_deleted) {
+      std::cout << ERROR_DELETED << std::endl;
+      return;
+    }
+    float transaction_charge =
       is_admin_ ? 0.0 : GetTransactionCharge(name, atoi(num));
-  if (temp_account->balance + stod(amount) < transaction_charge) {
-    std::cout << ERROR_BALANCE_INSUFFICIENT << std::endl;
+    if (temp_account->balance + stod(amount) < transaction_charge) {
+      std::cout << ERROR_BALANCE_INSUFFICIENT << std::endl;
+      return;
+    }
+    PushTransactionRecord(4, name, atoi(num), stod(amount));
+    if (!is_admin_) {
+      PushTransactionRecord(1, name, atoi(num), transaction_charge);
+    }
+    std::cout << SUCCESS_DEPOSIT << std::endl;
     return;
+  } catch(std::exception& e) {
+      std::cout << ERROR_INVALID_INPUT << std::endl;
+      return;
   }
-  PushTransactionRecord(4, name, atoi(num), stod(amount));
-  if (!is_admin_) {
-    PushTransactionRecord(1, name, atoi(num), transaction_charge);
-  }
-  std::cout << SUCCESS_DEPOSIT << std::endl;
-  return;
 }
 
 void Commands::create() {

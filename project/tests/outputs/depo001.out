@@ -4,12 +4,12 @@ Please enter a command:
 Please enter the account holder's name: 
 Please enter the user's account number: 
 Please enter an amount to deposit: 
-ERROR, INVALID INPUT.
+ERROR, INPUT VALUE IS TOO SMALL.
 Please enter a command: 
 Please enter the account holder's name: 
 Please enter the user's account number: 
 Please enter an amount to deposit: 
-ERROR, INVALID INPUT.
+ERROR, INPUT VALUE IS TOO SMALL.
 Please enter a command: 
 Please enter a command: 
 Please enter your session type: 
@@ -17,10 +17,10 @@ Please enter a login name:
 Please enter a command: 
 Please enter the user's account number: 
 Please enter an amount to deposit: 
-ERROR, INVALID INPUT.
+ERROR, INPUT VALUE IS TOO SMALL.
 Please enter a command: 
 Please enter the user's account number: 
 Please enter an amount to deposit: 
-ERROR, INVALID INPUT.
+ERROR, INPUT VALUE IS TOO SMALL.
 Please enter a command: 
 Please enter a command: 
