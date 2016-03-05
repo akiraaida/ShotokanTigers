@@ -97,6 +97,12 @@ class Account {
   * day.
   **/
   std::map<std::string, double> paybill_limit_remaining;
+
+ private:
+  /**
+  * Print a currency to line.
+  **/
+  void PrintMoney(double amount) const;
 };
 } //namespace BankFrontEnd
 

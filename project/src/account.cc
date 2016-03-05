@@ -25,23 +25,24 @@ Account::Account() {
 }
 
 void Account::PrintBalance() const {
-  printf("Current Balance[%d]: %.2f\n", number, balance);
+  printf("Available Balance (%d):\n", number);
+  PrintMoney(balance);
 }
 
 /**
 * Output remaining deposit limit to console.
 **/
 void Account::PrintWithdrawalLimit() const {
-  printf("Daily Withdrawals Remaining[%d]: %.2f\n", number,
-         withdrawal_limit_remaining);
+  printf("Daily Withdrawals Remaining (%d):\n", number);
+  PrintMoney(withdrawal_limit_remaining);
 }
 
 /**
 * Output remaining transfer limit to console.
 **/
 void Account::PrintTransferLimit() const {
-  printf("Daily Transfers Remaining[%d]: %.2f\n", number,
-         transfer_limit_remaining);
+  printf("Daily Transfers Remaining (%d):\n", number);
+  PrintMoney(transfer_limit_remaining);
 }
 
 /**
@@ -49,15 +50,20 @@ void Account::PrintTransferLimit() const {
 **/
 void Account::PrintPaybillLimit(const std::string& recipient) const {
   assert(TransferRecipientExists(recipient));
-  printf("Daily Transfers to '%s' Remaining[%d]: %.2f\n", recipient.c_str(),
-         number,
-         paybill_limit_remaining.at(recipient));
+  printf("Daily Transfers to %s Remaining (%d):\n", recipient.c_str(),
+         number);
+  PrintMoney(paybill_limit_remaining.at(recipient));
 }
 
 
 bool Account::TransferRecipientExists(const std::string& recipient) const {
   return paybill_limit_remaining.find(recipient)
          == paybill_limit_remaining.end();
+}
+
+
+void Account::PrintMoney(double amount) const {
+  printf("%.2f\n", amount);
 }
 
 

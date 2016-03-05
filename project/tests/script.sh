@@ -9,11 +9,11 @@ cd inputs
 for f in *.in;
 do
     # Output the test being run in white
-    echo -e "\t\e[1;30;47m[ Running Test: $f ]\e[0m"
+    #echo -e "\t\e[1;30;47m[ Running Test: $f ]\e[0m"
     # If the transactions file exists, delete it since it will have output for other test cases
     if [ -f $trans ]
     then
-        rm $trans       
+        rm $trans
     fi
     # Create an empty transaction file
     touch $trans
@@ -25,17 +25,21 @@ do
     if [ "$checkCons" == "" ] && [ "$checkTrans" == "" ]
     then
         # Output the test has passed in green
-        echo -e "\t\e[1;30;42m[ Test Case Has Passed ]\e[0m"
+        echo -e "\e[1;30;42m[ '$f' Test Case Has Passed ]\e[0m"
     else
         # Output the test has failed in red
-        echo -e "\t\e[1;30;41m[ Test Case Has Failed ]\e[0m"
+        echo -e "\e[1;30;41m[ '$f' Test Case Has Failed ]\e[0m"
         #echo $checkCons
         #echo $checkTrans
         #cat $tempCons
         #cat $trans
+        echo -e "[ output ]"
+        diff $tempCons ../outputs/${f%%.*}.out -d -y
+        echo -e "[ transactions ]"
+        diff $trans ../outputs/${f%%.*}.trans -d -y
     fi
-    # Output the test ended in white 
-    echo -e "\t\e[1;30;47m[ Finished Test: $f ]\e[0m\n"
+    # Output the test ended in white
+    #echo -e "\t\e[1;30;47m[ Finished Test: $f ]\e[0m\n"
 done
 # Delete files made during tests
 if [ -f $tempCons ]
@@ -44,5 +48,5 @@ then
 fi
 if [ -f $trans ]
 then
-    rm $trans       
+    rm $trans
 fi

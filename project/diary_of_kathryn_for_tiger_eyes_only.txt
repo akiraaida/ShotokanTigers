@@ -23,3 +23,36 @@
     parse failed. Then, in deposit, I removed the try/catch loop and had the
     program check for these error values. As a result, the test no longer
     failed.
+3. Certain test cases failed as the program was not yet printing out account
+balances.
+  - depo002
+  - depo004
+  - depo005
+  - depo006
+  - depo007
+  - enab004
+  - payb006
+  - payb007
+  - payb008
+  - payb009
+  - payb010
+  - payb012
+  - payb013
+  - payb014
+  - with005
+  - with006
+  - with007
+  - with008
+  - with009
+  - with010
+  - with011
+  - with012
+  - with013
+  - with014
+  - with016
+Since each of these cases made a call to a function that affected the balance, a
+printout of the balance was expected.
+4. To resolve this issue, a function was created. This created function calls in
+  the correct places. While the function call was implemented, none of the above
+  test cases was corrected by this fix alone.
+  

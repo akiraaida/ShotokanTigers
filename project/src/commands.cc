@@ -65,6 +65,7 @@
 #define SUCCESS_TO_NONSTUDENT "Specified account is now a non-student account."
 #define SUCCESS_DELETE "Specified account has been deleted."
 #define SUCCESS_TRANSFER "Amount has been transfered successfully."
+#define SUCCESS_PAYBILL "Amount has been paid successfully."
 
 namespace BankFrontEnd {
 Commands::Commands() {
@@ -139,28 +140,22 @@ void Commands::PushTransactionRecord(int code, std::string name,
 void Commands::login() {
   if (is_logged_in_ == false) {
     std::string session = DetermineSession();
-
     if (session != "" && session != "admin") {
       std::vector<Account*> temp = accounts_[session];
       if (temp.empty()) {
         std::cout << ERROR_MESSAGE_ACCOUNTLESS_USER << std::endl;
-        return;
       } else {
         is_logged_in_ = true;
         logged_in_name_ = session;
         PushTransactionRecord(10, session, 00000, 00000.00, "S ");
-        return;
       }
     } else if (session == "admin") {
       is_logged_in_ = true;
       is_admin_ = true;
       PushTransactionRecord(10, "admin", 00000, 00000.00, "A ");
-      return;
     }
-    return;
   } else {
     std::cout << ERROR_MESSAGE_DOUBLE_LOGIN << std::endl;
-    return;
   }
 }
 
@@ -202,7 +197,8 @@ void Commands::withdrawal() {
   std::cout << SUCCESS_WITHDRAWAL << std::endl;
   temp_account->withdrawal_limit_remaining
       = temp_account->withdrawal_limit_remaining - amount;
-  return;
+  temp_account->PrintBalance();
+  temp_account->PrintWithdrawalLimit();
 }
 
 bool Commands::CheckUnit(double amount) {
@@ -328,6 +324,9 @@ void Commands::transfer() {
 
     // did it
     std::cout << SUCCESS_TRANSFER << std::endl;
+    account->PrintBalance();
+    recipient_account->PrintBalance();
+    account->PrintTransferLimit();
 
     // done
     return;
@@ -397,6 +396,10 @@ void Commands::paybill() {
   PushTransactionRecord(3, name, account_number, amount, company);
   PushTransactionRecord(1, name, account_number, charge);
 
+  std::cout << SUCCESS_PAYBILL << std::endl;
+  account->PrintBalance();
+  account->PrintPaybillLimit(company);
+
   // good
   return;
 }
@@ -451,6 +454,7 @@ void Commands::deposit() {
     PushTransactionRecord(1, name, number, transaction_charge);
   }
   std::cout << SUCCESS_DEPOSIT << std::endl;
+  temp_account->PrintBalance();
 }
 
 void Commands::create() {
