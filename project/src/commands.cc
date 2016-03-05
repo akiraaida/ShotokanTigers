@@ -12,6 +12,8 @@
 #include "commands.h"
 
 #include <cassert>
+#include <cfloat>
+#include <climits>
 #include <cstring>
 #include <ctime>
 #include <math.h>
@@ -408,49 +410,47 @@ void Commands::deposit() {
   int number = ConsoleInput::GetInteger();
   std::cout << PROMPT_DEPOSIT_VALUE << std::endl;
   double amount = ConsoleInput::GetDouble();
-  try {
-    if (amount <= 0) {
-      std::cout << ERROR_MIN_INPUT << std::endl;
-      return;
-    }
-    if (amount > 99999.99){
-      std::cout << ERROR_MAX_INPUT << std::endl;
-      return;
-    }
-    std::vector<Account*> temp = accounts_[name];
-    if (temp.empty()) {
-      std::cout << ERROR_MESSAGE_ACCOUNTLESS_USER << std::endl;
-      return;
-    }
-    bool owned_account = UserExists(name);
-    Account* temp_account = GetAccount(name, number);
-    if (owned_account == false || temp_account == nullptr) {
-    std::cout << ERROR_MESSAGE_STOLEN_ACCOUNT << std::endl;
-      return;
-    }
-    if (!temp_account->is_active) {
-      std::cout << ERROR_DISABLED << std::endl;
-      return;
-    } else if (temp_account->is_deleted) {
-      std::cout << ERROR_DELETED << std::endl;
-      return;
-    }
-    float transaction_charge =
-      is_admin_ ? 0.0 : GetTransactionCharge(name, number);
-    if (temp_account->balance + amount < transaction_charge) {
-      std::cout << ERROR_BALANCE_INSUFFICIENT << std::endl;
-      return;
-    }
-    PushTransactionRecord(4, name, number, amount);
-    if (!is_admin_) {
-      PushTransactionRecord(1, name, number, transaction_charge);
-    }
-    std::cout << SUCCESS_DEPOSIT << std::endl;
+  if(number == INT_MIN || amount == FLT_MIN) {
+    std::cout << ERROR_INVALID_INPUT << std::endl;
     return;
-  } catch(std::exception& e) {
-      std::cout << ERROR_INVALID_INPUT << std::endl;
-      return;
   }
+  if (amount <= 0) {
+    std::cout << ERROR_MIN_INPUT << std::endl;
+    return;
+  }
+  if (amount > 99999.99){
+    std::cout << ERROR_MAX_INPUT << std::endl;
+    return;
+  }
+  std::vector<Account*> temp = accounts_[name];
+  if (temp.empty()) {
+    std::cout << ERROR_MESSAGE_ACCOUNTLESS_USER << std::endl;
+    return;
+  }
+  bool owned_account = UserExists(name);
+  Account* temp_account = GetAccount(name, number);
+  if (owned_account == false || temp_account == nullptr) {
+  std::cout << ERROR_MESSAGE_STOLEN_ACCOUNT << std::endl;
+    return;
+  }
+  if (!temp_account->is_active) {
+    std::cout << ERROR_DISABLED << std::endl;
+    return;
+  } else if (temp_account->is_deleted) {
+    std::cout << ERROR_DELETED << std::endl;
+    return;
+  }
+  float transaction_charge =
+    is_admin_ ? 0.0 : GetTransactionCharge(name, number);
+  if (temp_account->balance + amount < transaction_charge) {
+    std::cout << ERROR_BALANCE_INSUFFICIENT << std::endl;
+    return;
+  }
+  PushTransactionRecord(4, name, number, amount);
+  if (!is_admin_) {
+    PushTransactionRecord(1, name, number, transaction_charge);
+  }
+  std::cout << SUCCESS_DEPOSIT << std::endl;
 }
 
 void Commands::create() {

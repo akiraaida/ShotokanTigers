@@ -8,4 +8,18 @@
     c. Reduces clutter in the code due to the 2+ lines needed for this behaviour
     d. If our new std::getline approach causes issues in future, all instances
         of the pattern can be fixed at once.
-   
+2. Failures found after I made those changes (before the last 3 funcs):
+  - depo003
+    This test case tests for invalid symbols, and failed where it had passed
+    before as a result of the change in console input extraction; instead of
+    notifying the user that it's input was nonnumeric, it would instead claim
+    that the value was too small. The implementation of the "GetDouble" call in
+    the deposit function was faulty in two ways: Firstly, it was placed outside
+    of the try/catch loop, and thus could not trigger the invalid number
+    response; Secondly, the implementation of "GetDouble" switched from the use
+    of stod, which throws an exception, to atof, which does not. To squash this
+    bug I changed the implementation of GetDouble and GetInteger to use the
+    exception throwing functions, and to return an error value when the number
+    parse failed. Then, in deposit, I removed the try/catch loop and had the
+    program check for these error values. As a result, the test no longer
+    failed.

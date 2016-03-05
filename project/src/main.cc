@@ -27,10 +27,10 @@
 #include <fstream>
 #include <string>
 
-#include "commands.h"
-#include "console_input.h"
 #include "account.h"
 #include "account_parser.h"
+#include "commands.h"
+#include "console_input.h"
 
 #define ERROR_MESSAGE_ACCOUNTS_LOAD_FAIL "Usage: banksys [accounts file] [transaction file]"
 #define ERROR_MESSAGE_INVALID_COMMAND "ERROR, INVALID COMMAND."

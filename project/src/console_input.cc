@@ -12,6 +12,9 @@
 *******************************************************************************/
 #include "console_input.h"
 
+#include <cfloat>
+#include <climits>
+
 #include <iostream>
 
 namespace BankFrontEnd {
@@ -23,11 +26,23 @@ std::string GetString() {
 }
 
 int GetInteger() { // turn string from cin into an integer
-  return std::atoi(GetString().c_str());
+  int destination;
+  try {
+    destination = std::stoi(GetString());
+  } catch(std::exception& e) {
+    return INT_MIN;
+  }
+  return destination;
 }
 
 double GetDouble() { // turn string from cin into a double
-  return std::atof(GetString().c_str());
+  double destination;
+  try {
+    destination = std::stof(GetString());
+  } catch(std::exception& e) {
+    return FLT_MIN;
+  }
+  return destination;
 }
 } // namespace ConsoleInput
 } // namespace BankFrontEnd

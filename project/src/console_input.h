@@ -33,12 +33,14 @@ std::string GetString();
 /**
 * Extracts a number from std::cin.
 * Consumes a newline.
+* Returns INT_MIN on failure.
 **/
 int GetInteger();
 
 /**
 * Extracts a floating-point value from std::cin.
 * Consumes a newline.
+* Returns FLT_MIN on failure.
 **/
 double GetDouble();
 
