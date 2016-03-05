@@ -32,13 +32,38 @@ class Account {
   Account();
 
   /**
+  * Output current dollars in account to console.
+  **/
+  void PrintBalance() const;
+
+  /**
+  * Output remaining withdrawal limit to console.
+  **/
+  void PrintWithdrawalLimit() const;
+
+  /**
+  * Output remaining transfer limit to console.
+  **/
+  void PrintTransferLimit() const;
+
+  /**
+  * Output remaining paybill limit to indicated recieving company.
+  **/
+  void PrintPaybillLimit(const std::string& recipient) const;
+
+  /**
+  * Returns true when a company limit is filed.
+  **/
+  bool TransferRecipientExists(const std::string& recipient) const;
+
+  /**
   * 'Account number' uniquely identifying item in system
   **/
   int number;
 
   /**
-  * Flag indicating whether or not an account is diabled i.e. A == true, D ==
-  * false
+  * Flag indicating whether or not an account is disabled i.e.
+  * A == true, D == false
   **/
   bool is_active;
 
