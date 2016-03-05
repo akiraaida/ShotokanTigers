@@ -55,6 +55,8 @@ printout of the balance was expected.
 4. To resolve this issue, a function was created. This created function calls in
   the correct places. While the function call was implemented, none of the above
   test cases was corrected by this fix alone.
+  
+
 5. While fixing test cases, I uncovered another error similar to the newline 
   issue covered before: my text editor was stripping trailing whitespace from my
   .out files. This became an issue for prompts such as 'Please enter the account
@@ -76,4 +78,29 @@ printout of the balance was expected.
    Solution:s
     The solve for this was to have the
     loop terminate when end of file was found.
+    
+7. Account Balance Forgotten
+  Problem:
+    Certain test cases did not check account balance, and needed to account for
+    it.
+  Solution:
+    The following test files needed to be changed:
+    - depo002.in
+    - 
+    
+8. Deposit Prompt
+- commands.cc:
+  - For the deposits in the program, I changed the prompt style to
+   "Please enter amount to deposit: ", as used in the test cases. This affected
+   the following .out files:
+   - all deposit cases
+   - 
+  
+Various things:
+----
+- depo004
+  depo004.out:
+  - initial prompt was not 'Please enter a command:'
+  - changed 'enter the user's number' to 'enter the user's account number" for 
+    consistency
   
