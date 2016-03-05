@@ -34,9 +34,9 @@ do
         #cat $tempCons
         #cat $trans
         echo -e "[ output ]"
-        diff $tempCons ../outputs/${f%%.*}.out -d -y
+        diff $tempCons ../outputs/${f%%.*}.out -y
         echo -e "[ transactions ]"
-        diff $trans ../outputs/${f%%.*}.trans -d -y
+        diff $trans ../outputs/${f%%.*}.trans -y
     fi
     # Output the test ended in white
     #echo -e "\t\e[1;30;47m[ Finished Test: $f ]\e[0m\n"

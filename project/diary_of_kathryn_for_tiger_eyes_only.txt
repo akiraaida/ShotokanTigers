@@ -55,4 +55,25 @@ printout of the balance was expected.
 4. To resolve this issue, a function was created. This created function calls in
   the correct places. While the function call was implemented, none of the above
   test cases was corrected by this fix alone.
+5. While fixing test cases, I uncovered another error similar to the newline 
+  issue covered before: my text editor was stripping trailing whitespace from my
+  .out files. This became an issue for prompts such as 'Please enter the account
+  number: ' which have a space in output as part of the formatting in the
+  program. Since there was no specification in our test cases for how the input
+  should look as it was being typed, and my intention at the time was warped by
+  this automatic behaviour, I elected to have the single trailing whitespace be
+  the correct behaviour. Accordingly, for each of the test cases I worked on
+  (deposit, enable, paybill, withdrawal) this was an issue.
+  
+  The solution was to correct the amount of whitespace in the .out files.
+  
+6. Double Prompt 
+  Problem:
+    The problem was that some of our test
+    cases were failing because there was a double prompt at the end.
+   Affected:
+    This must have been an issue for all test cases. 
+   Solution:s
+    The solve for this was to have the
+    loop terminate when end of file was found.
   
