@@ -1,0 +1,11 @@
+1. In response to failures related to buffer overflows, I decided to make
+  functions GetString, GetInteger, and GetDouble. Since the commands class is
+  pretty crowded and the functionality is relevant to main, I elected to place
+  it in a new class/namespace as "ConsoleInput", implemented as static
+  functions. The use of this function accomplishes the following:
+    a. Resolves the bug revealed by our tests
+    b. Prevents this bug from occuring in locations not revealed in our tests
+    c. Reduces clutter in the code due to the 2+ lines needed for this behaviour
+    d. If our new std::getline approach causes issues in future, all instances
+        of the pattern can be fixed at once.
+   

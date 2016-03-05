@@ -1,7 +1,7 @@
 CXX = g++
 CXXFLAGS = -Wall -Wextra -std=c++11
-SOURCES = main.cc account.cc commands.cc account_parser.cc account_status.cc transaction_io.cc
-INCLUDES = account.h commands.h account_parser.h
+SOURCES = main.cc account.cc commands.cc account_parser.cc account_status.cc transaction_io.cc console_input.cc
+INCLUDES = account.h commands.h account_parser.h console_input.h
 OBJECTS = $(subst .cc,.o,$(SOURCES))
 EXE = frontend.exe
 .PHONY: clean help
