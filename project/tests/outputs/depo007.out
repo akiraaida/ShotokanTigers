@@ -1,5 +1,5 @@
 Please enter your session type: 
-Please enter a command admin: 
+Please enter a commandadmin: 
 Please enter the account holder's name: 
 Please enter the account number: 
 Please enter amount to deposit: 
@@ -22,7 +22,7 @@ Enter amount:
 Error, cannot transfer 115.00; negative balance will result
 Please enter your session type: 
 Please enter a login name: 
-Please enter a command user: 
+Please enter a command: 
 Please enter the account number: 
 Please enter amount to deposit: 
 Success, 10.00 has been deposited.
@@ -41,7 +41,7 @@ Enter amount:
 Error, cannot transfer 115.00; negative balance will result
 Please enter your session type: 
 Please enter a login name: 
-Please enter a command user: 
+Please enter a command: 
 Please enter the account number: 
 Please enter amount to deposit: 
 Success, 5.05 has been deposited.
@@ -61,3 +61,4 @@ Please enter the account number:
 Enter account number to transfer to: 
 Enter amount: 
 Error, cannot transfer 5.00; negative balance will result
+Please enter a command: 

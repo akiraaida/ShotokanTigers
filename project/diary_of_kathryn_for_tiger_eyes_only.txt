@@ -94,7 +94,7 @@ printout of the balance was expected.
    "Please enter amount to deposit: ", as used in the test cases. This affected
    the following .out files:
    - all deposit cases
-   - 
+   - dsbl013.out
   
 Various things:
 ----
@@ -103,4 +103,3 @@ Various things:
   - initial prompt was not 'Please enter a command:'
   - changed 'enter the user's number' to 'enter the user's account number" for 
     consistency
-  
