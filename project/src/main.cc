@@ -27,8 +27,9 @@
 #include <fstream>
 #include <string>
 
-#include "account.h"
 #include "commands.h"
+#include "console_input.h"
+#include "account.h"
 #include "account_parser.h"
 
 #define ERROR_MESSAGE_ACCOUNTS_LOAD_FAIL "Usage: banksys [accounts file] [transaction file]"
@@ -56,10 +57,9 @@ int main(int argc, const char* argv[]) {
       std::cout << ERROR_MESSAGE_ACCOUNTS_LOAD_FAIL << std::endl;
       return 0;
     }
-    std::string user_cmd;
     while (std::cin) {
       std::cout << PROMPT_ENTER_COMMAND << std::endl;
-      std::getline(std::cin, user_cmd);
+      std::string user_cmd = BankFrontEnd::ConsoleInput::GetString();
       if(!std::cin){
         exit(0);
       }

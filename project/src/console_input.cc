@@ -16,17 +16,17 @@
 
 namespace BankFrontEnd {
 namespace ConsoleInput {
-static std::string GetString() {
+std::string GetString() {
   std::string destination;
   std::getline(std::cin, destination);
   return destination;
 }
 
-static int GetInteger() { // turn string from cin into an integer
+int GetInteger() { // turn string from cin into an integer
   return std::atoi(GetString().c_str());
 }
 
-static double GetDouble() { // turn string from cin into a double
+double GetDouble() { // turn string from cin into a double
   return std::atof(GetString().c_str());
 }
 } // namespace ConsoleInput

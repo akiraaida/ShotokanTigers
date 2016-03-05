@@ -28,22 +28,22 @@ namespace ConsoleInput {
 /**
 * Extracts a line of input from std::cin.
 **/
-static std::string GetString();
+std::string GetString();
 
 /**
 * Extracts a number from std::cin.
 * Consumes a newline.
 **/
-static int GetInteger();
+int GetInteger();
 
 /**
 * Extracts a floating-point value from std::cin.
 * Consumes a newline.
 **/
-static double GetDouble();
+double GetDouble();
 
-}
-}
+} //namespace ConsoleInput
+} //namespace BankFrontEnd
 
 
 #endif //FRONTEND_CONSOLE_INPUT_H_
