@@ -3,12 +3,115 @@ Please enter your session type:
 Please enter a command: 
 Please enter the account holder's name: 
 Please enter the user's account number: 
-Please enter an amount to deposit: 
+Please enter amount to deposit: 
 The deposit transaction has completed.
+Available Balance (12346):
+110.00
 Please enter a command: 
 Please enter the account holder's name: 
 Please enter the user's account number: 
-Please enter an amount to withdraw: 
+Please enter amount to withdraw: 
 ERROR, THE ACCOUNT DOES NOT HAVE SUFFICIENT FUNDS.
+Available Balance (12346):
+110.00
 Please enter a command: 
+Please enter the account holder's name: 
+Please enter the user's account number: 
+Please enter recipient to be paid: 
+Please enter amount to pay: 
+ERROR, THE ACCOUNT DOES NOT HAVE SUFFICIENT FUNDS.
+Available Balance (12346):
+110.00
+Please enter a command: 
+Please enter the account holder's name: 
+Please enter the transferring account's number: 
+Please enter the recipient account's number: 
+Please enter amount to transfer: 
+ERROR, THE ACCOUNT DOES NOT HAVE SUFFICIENT FUNDS.
+Available Balance (12346):
+110.00
+Available Balance (12345):
+110.00
+Please enter a command: 
+Please enter a command: 
+Please enter your session type: 
+Please enter a login name: 
+Please enter a command: 
+Please enter the user's account number: 
+Please enter amount to deposit: 
+The deposit transaction has completed.
+Available Balance (12345):
+109.95
+Please enter a command: 
+Please enter the user's account number: 
+Please enter amount to withdraw: 
+ERROR, THE ACCOUNT DOES NOT HAVE SUFFICIENT FUNDS.
+Available Balance (12345):
+109.95
+Daily Withdrawals Remaining (12345):
+500.00
+Please enter a command: 
+Please enter the user's account number: 
+Please enter recipient to be paid: 
+Please enter amount to pay: 
+ERROR, THE ACCOUNT DOES NOT HAVE SUFFICIENT FUNDS.
+Available Balance (12345):
+109.95
+Daily Payment Limit to TV Remaining (12345):
+2000.00
+Please enter a command: 
+Please enter the transferring account's number: 
+Please enter the recipient account's number: 
+Please enter amount to transfer: 
+ERROR, THE ACCOUNT DOES NOT HAVE SUFFICIENT FUNDS.
+Available Balance (12345):
+109.95
+Available Balance (12346):
+110.00
+Daily Transfer Limit Remaining (12345):
+1000.00
+Please enter a command: 
+Please enter a command: 
+Please enter your session type: 
+Please enter a login name: 
+Please enter a command: 
+Please enter the user's account number: 
+Please enter amount to deposit: 
+The deposit transaction has completed.
+Available Balance (12360):
+0.00
+Please enter a command: 
+Please enter the user's account number: 
+Please enter amount to deposit: 
+ERROR, THE ACCOUNT DOES NOT HAVE SUFFICIENT FUNDS.
+Available Balance (12360):
+0.00
+Please enter a command: 
+Please enter the user's account number: 
+Please enter amount to withdraw: 
+ERROR, THE ACCOUNT DOES NOT HAVE SUFFICIENT FUNDS.
+Available Balance (12360):
+0.00
+Daily Withdrawals Remaining (12360):
+500.00
+Please enter a command: 
+Please enter the user's account number: 
+Please enter recipient to be paid: 
+Please enter amount to pay: 
+ERROR, THE ACCOUNT DOES NOT HAVE SUFFICIENT FUNDS.
+Available Balance (12360):
+0.00
+Daily Payment Limit to TV Remaining (12360):
+2000.00
+Please enter a command: 
+Please enter the transferring account's number: 
+Please enter the recipient account's number: 
+Please enter amount to transfer: 
+ERROR, THE ACCOUNT DOES NOT HAVE SUFFICIENT FUNDS.
+Available Balance (12360):
+0.00
+Available Balance (12345):
+109.95
+Daily Transfer Limit Remaining (12360):
+1000.00
 Please enter a command: 

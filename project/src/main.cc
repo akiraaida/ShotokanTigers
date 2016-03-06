@@ -57,13 +57,10 @@ int main(int argc, const char* argv[]) {
       std::cout << ERROR_MESSAGE_ACCOUNTS_LOAD_FAIL << std::endl;
       return 0;
     }
-    while (std::cin) {
+    while (std::cin && !std::cin.eof()) {
       std::cout << PROMPT_ENTER_COMMAND << std::endl;
       std::string user_cmd = BankFrontEnd::ConsoleInput::GetString();
-      if(!std::cin){
-        exit(0);
-      }
-      //std::cout << user_cmd << std::endl;
+      
       if (user_cmd.compare("login") == 0) {
         commands.login();
       } else if (user_cmd.compare("withdrawal") == 0) {

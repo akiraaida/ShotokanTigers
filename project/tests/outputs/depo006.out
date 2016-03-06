@@ -3,15 +3,118 @@ Please enter your session type:
 Please enter a login name: 
 Please enter a command: 
 Please enter the user's account number: 
-Please enter an amount to deposit: 
-The deposit transaction has completed.
-Please enter a command: 
-Please enter a command: 
-Please enter your session type: 
-Please enter a login name: 
+Please enter amount to withdraw: 
+The withdrawal transaction has completed.
+Available Balance (12380):
+5.10
+Daily Withdrawals Remaining (12380):
+495.00
 Please enter a command: 
 Please enter the user's account number: 
-Please enter an amount to deposit: 
+Please enter amount to deposit: 
 The deposit transaction has completed.
+Available Balance (12380):
+5.00
 Please enter a command: 
+Please enter the user's account number: 
+Please enter amount to withdraw: 
+The withdrawal transaction has completed.
+Available Balance (12381):
+5.05
+Daily Withdrawals Remaining (12381):
+495.00
+Please enter a command: 
+Please enter the user's account number: 
+Please enter amount to deposit: 
+The deposit transaction has completed.
+Available Balance (12381):
+5.00
+Please enter a command: 
+Please enter the transferring account's number: 
+Please enter the recipient account's number: 
+Please enter amount to transfer: 
+Amount has been transferred successfully.
+Available Balance (12382):
+5.10
+Available Balance (12345):
+115.00
+Daily Transfer Limit Remaining (12382):
+995.00
+Please enter a command: 
+Please enter the user's account number: 
+Please enter amount to deposit: 
+The deposit transaction has completed.
+Available Balance (12382):
+5.00
+Please enter a command: 
+Please enter the transferring account's number: 
+Please enter the recipient account's number: 
+Please enter amount to transfer: 
+Amount has been transferred successfully.
+Available Balance (12383):
+5.05
+Available Balance (12345):
+120.00
+Daily Transfer Limit Remaining (12383):
+995.00
+Please enter a command: 
+Please enter the user's account number: 
+Please enter amount to deposit: 
+The deposit transaction has completed.
+Available Balance (12383):
+5.00
+Please enter a command: 
+Please enter the user's account number: 
+Please enter recipient to be paid: 
+Please enter amount to pay: 
+Amount has been paid successfully.
+Available Balance (12384):
+5.10
+Daily Payment Limit to TV Remaining (12384):
+1995.00
+Please enter a command: 
+Please enter the user's account number: 
+Please enter amount to deposit: 
+The deposit transaction has completed.
+Available Balance (12384):
+5.00
+Please enter a command: 
+Please enter the user's account number: 
+Please enter recipient to be paid: 
+Please enter amount to pay: 
+Amount has been paid successfully.
+Available Balance (12385):
+5.05
+Daily Payment Limit to TV Remaining (12385):
+1995.00
+Please enter a command: 
+Please enter the user's account number: 
+Please enter amount to deposit: 
+The deposit transaction has completed.
+Available Balance (12385):
+5.00
+Please enter a command: 
+Please enter the user's account number: 
+Please enter amount to deposit: 
+The deposit transaction has completed.
+Available Balance (12386):
+5.10
+Please enter a command: 
+Please enter the user's account number: 
+Please enter amount to deposit: 
+The deposit transaction has completed.
+Available Balance (12386):
+5.00
+Please enter a command: 
+Please enter the user's account number: 
+Please enter amount to deposit: 
+The deposit transaction has completed.
+Available Balance (12387):
+5.05
+Please enter a command: 
+Please enter the user's account number: 
+Please enter amount to deposit: 
+The deposit transaction has completed.
+Available Balance (12387):
+5.00
 Please enter a command: 

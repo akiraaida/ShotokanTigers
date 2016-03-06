@@ -1,11 +1,60 @@
 login
 admin
 deposit
-Moth Wallet
-12360
+Matt Cow
+12346
 10.00
 withdrawal
-Moth Wallet
-12360
+Matt Cow
+12346
+115.00
+paybill
+Matt Cow
+12346
+TV
+115.00
+transfer
+Matt Cow
+12346
+12345
+115.00
+logout
+login
+standard
+John Doe
+deposit
+12345
 10.00
+withdrawal
+12345
+115.00
+paybill
+12345
+TV
+115.00
+transfer
+12345
+12346
+115.00
+logout
+login
+standard
+Moth Wallet
+deposit
+12360
+5.05
+deposit
+12360
+5.00
+withdrawal
+12360
+5.00
+paybill
+12360
+TV
+5.00
+transfer
+12360
+12345
+5.00
 logout
