@@ -30,7 +30,8 @@ Here are the test runs:
     --> Some test failures are due to actual balance not matching expected
   - Test Iter 7 (Current?) :
     - Fixing sources of calculation discrepencies.
-  
+- enab004
+    - found that withdrawal deducted from limit as admin
 Buffer Overflows (Test Iter 1)
 ====
 Problem:

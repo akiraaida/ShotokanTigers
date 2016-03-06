@@ -198,8 +198,10 @@ void Commands::withdrawal() {
       PushTransactionRecord(1, name, number, transaction_charge);
     temp_account->balance -= debit;
     std::cout << SUCCESS_WITHDRAWAL << std::endl;
-    temp_account->withdrawal_limit_remaining
-        = temp_account->withdrawal_limit_remaining - amount;
+    if(!is_admin_) {
+      temp_account->withdrawal_limit_remaining
+          = temp_account->withdrawal_limit_remaining - amount;
+    }
   }
   // Print account state
   temp_account->PrintBalance();
