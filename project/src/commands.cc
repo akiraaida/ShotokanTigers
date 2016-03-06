@@ -39,6 +39,7 @@
 #define ERROR_DELETED "ERROR, THAT ACCOUNT HAS BEEN DELETED."
 #define ERROR_MESSAGE_HIT_TRANSFER_LIMIT "ERROR, THE VALUE ENTERED IS BEYOND THE TRANSFER LIMIT."
 #define ERROR_MESSAGE_HIT_PAYBILL_LIMIT "ERROR, THE VALUE ENTERED IS BEYOND THE PAYBILL LIMIT."
+#define ERROR_MESSAGE_HIT_WITHDRAWAL_LIMIT "ERROR, THE VALUE ENTERED IS BEYOND THE WITHDRAWAL LIMIT."
 #define ERROR_ABOVE_MAX_INIT "ERROR, MAX INITIAL BALANCE EXCEEDED."
 #define ERROR_BAD_COMPANY_SIZE "ERROR, %s IS NOT TWO CHARACTERS.\n"
 #define ERROR_INVALID_COMPANY "ERROR, %s IS NOT A VALID COMPANY NAME.\n"
@@ -162,12 +163,34 @@ void Commands::login() {
 }
 
 void Commands::withdrawal() {
+  // check for login
   if (!CheckLogin()) {
     return;
   }
+  
+  // get name
   std::string name = PromptForAccountHolderIfUnknown();
+  if (!UserExists(name)) {
+    std::cout << ERROR_MESSAGE_ACCOUNTLESS_USER << std::endl;
+    return;
+  }
+  
+  // get account
   std::cout << PROMPT_ENTER_ACCOUNT_NUMBER << std::endl;
   int number = ConsoleInput::GetInteger();
+  Account* account = GetAccount(name, number);
+  if (account == nullptr) {
+    std::cout << ERROR_MESSAGE_STOLEN_ACCOUNT << std::endl;
+    return;
+  } else if (account->is_deleted) {
+    std::cout << ERROR_DELETED << std::endl;
+    return;
+  } else if (!account->is_active) {
+    std::cout << ERROR_DISABLED << std::endl;
+    return;
+  }
+  
+  // get withdrawal value
   std::cout << PROMPT_WITHDRAWAL_VALUE << std::endl;
   int amount_status;
   double amount = ConsoleInput::GetDouble(&amount_status);
@@ -177,45 +200,31 @@ void Commands::withdrawal() {
     return;
   }
   
-  std::vector<Account*> temp = accounts_[name];
-  if (temp.empty()) {
-    std::cout << ERROR_MESSAGE_ACCOUNTLESS_USER << std::endl;
-    return;
-  }
-  bool owned_account = UserExists(name);
-  Account* temp_account = GetAccount(name, number);
-  if (owned_account == false || temp_account == nullptr) {
-    std::cout << ERROR_MESSAGE_STOLEN_ACCOUNT << std::endl;
-    return;
-  }
-  if (temp_account->is_deleted) {
-    std::cout << ERROR_DELETED << std::endl;
-    return;
-  } else if (!temp_account->is_active) {
-    std::cout << ERROR_DISABLED << std::endl;
-    return;
-  }
   float transaction_charge =
       is_admin_ ? 0.0 : GetTransactionCharge(name, number);
   float debit = amount + transaction_charge;
-  if (temp_account->balance < debit) {
+  if (account->balance - debit <= -0.01) {
     std::cout << ERROR_BALANCE_INSUFFICIENT << std::endl; // Very generalized error message atm, may want to break the error cases down?
                                                   // Errors for not mod 5/10/20/100 and not enough money
+  } else if (!is_admin_ && account->withdrawal_limit_remaining < amount) {
+    std::cout << ERROR_MESSAGE_HIT_WITHDRAWAL_LIMIT << std::endl;
   } else { // perform withdrawal
     PushTransactionRecord(1, name, number, amount);
     if(transaction_charge > 0.0)
       PushTransactionRecord(1, name, number, transaction_charge);
-    temp_account->balance -= debit;
+    account->balance -= debit;
+    if(account->balance < 0.0 && account->balance > -0.01)
+      account->balance = 0.0;
     std::cout << SUCCESS_WITHDRAWAL << std::endl;
     if(!is_admin_) {
-      temp_account->withdrawal_limit_remaining
-          = temp_account->withdrawal_limit_remaining - amount;
+      account->withdrawal_limit_remaining
+          = account->withdrawal_limit_remaining - amount;
     }
   }
   // Print account state
-  temp_account->PrintBalance();
+  account->PrintBalance();
   if(!is_admin_)
-    temp_account->PrintWithdrawalLimit();
+    account->PrintWithdrawalLimit();
 }
 
 bool Commands::UserExists(std::string name) {
@@ -456,29 +465,29 @@ void Commands::deposit() {
     return;
   }
   bool owned_account = UserExists(name);
-  Account* temp_account = GetAccount(name, number);
-  if (owned_account == false || temp_account == nullptr) {
+  Account* account = GetAccount(name, number);
+  if (owned_account == false || account == nullptr) {
   std::cout << ERROR_MESSAGE_STOLEN_ACCOUNT << std::endl;
     return;
   }
-  if (!temp_account->is_active) {
+  if (!account->is_active) {
     std::cout << ERROR_DISABLED << std::endl;
     return;
-  } else if (temp_account->is_deleted) {
+  } else if (account->is_deleted) {
     std::cout << ERROR_DELETED << std::endl;
     return;
   }
   double transaction_charge =
     is_admin_ ? 0.0 : GetTransactionCharge(name, number);
-  if (temp_account->balance < transaction_charge) {
+  if (account->balance < transaction_charge) {
     std::cout << ERROR_BALANCE_INSUFFICIENT << std::endl;
-  } else if (temp_account->balance + temp_account->held_funds + amount
+  } else if (account->balance + account->held_funds + amount
              - transaction_charge > 99999.99) {
     std::cout << ERROR_BALANCE_CAP_EXCEEDED << std::endl;
   } else {
     // finish up
-    temp_account->held_funds += amount;
-    temp_account->balance -= transaction_charge;
+    account->held_funds += amount;
+    account->balance -= transaction_charge;
     PushTransactionRecord(4, name, number, amount);
     if (!is_admin_) {
       PushTransactionRecord(1, name, number, transaction_charge);
@@ -487,7 +496,7 @@ void Commands::deposit() {
   }
   
   // print account balance
-  temp_account->PrintBalance();
+  account->PrintBalance();
 }
 
 void Commands::create() {
@@ -523,17 +532,17 @@ void Commands::delete_account() {
     return;
   }
   bool owned_account = UserExists(name);
-  Account* temp_account = GetAccount(name, number);
-  if (owned_account == false || temp_account == nullptr) {
+  Account* account = GetAccount(name, number);
+  if (owned_account == false || account == nullptr) {
     std::cout << ERROR_MESSAGE_STOLEN_ACCOUNT << std::endl;
     return;
   }
-  if (temp_account->is_deleted) {
+  if (account->is_deleted) {
     std::cout << ERROR_DELETED << std::endl;
     return;
   }
   PushTransactionRecord(6, name, number);
-  temp_account->is_deleted = true;
+  account->is_deleted = true;
   std::cout << SUCCESS_DELETE << std::endl;
   return;
 }
@@ -551,20 +560,20 @@ void Commands::disable() {
     return;
   }
   bool owned_account = UserExists(name);
-  Account* temp_account = GetAccount(name, number);
-  if (owned_account == false || temp_account == nullptr) {
+  Account* account = GetAccount(name, number);
+  if (owned_account == false || account == nullptr) {
     std::cout << ERROR_MESSAGE_STOLEN_ACCOUNT << std::endl;
     return;
   }
-  if (temp_account->is_deleted) {
+  if (account->is_deleted) {
     std::cout << ERROR_DELETED << std::endl;
     return;
-  } else if (!temp_account->is_active) {
+  } else if (!account->is_active) {
     std::cout << ERROR_DISABLED << std::endl;
     return;
   }
   PushTransactionRecord(7, name, number);
-  temp_account->is_active = false;
+  account->is_active = false;
   std::cout << SUCCESS_DISABLE << std::endl;
   return;
 }
@@ -582,19 +591,19 @@ void Commands::changeplan() {
     return;
   }
   bool owned_account = UserExists(name);
-  Account* temp_account = GetAccount(name, number);
-  if (owned_account == false || temp_account == nullptr) {
+  Account* account = GetAccount(name, number);
+  if (owned_account == false || account == nullptr) {
     std::cout << ERROR_MESSAGE_STOLEN_ACCOUNT << std::endl;
     return;
   }
-  if (temp_account->is_deleted) {
+  if (account->is_deleted) {
     std::cout << ERROR_DELETED << std::endl;
     return;
-  } else if (!temp_account->is_active) {
+  } else if (!account->is_active) {
     std::cout << ERROR_DISABLED << std::endl;
     return;
   }
-  if (temp_account->is_student_plan) {
+  if (account->is_student_plan) {
     PushTransactionRecord(8, name, number);
     std::cout << SUCCESS_TO_NONSTUDENT << std::endl;
   } else {
@@ -617,20 +626,20 @@ void Commands::enable() {
     return;
   }
   bool owned_account = UserExists(name);
-  Account* temp_account = GetAccount(name, number);
-  if (owned_account == false || temp_account == nullptr) {
+  Account* account = GetAccount(name, number);
+  if (owned_account == false || account == nullptr) {
     std::cout << ERROR_MESSAGE_STOLEN_ACCOUNT << std::endl;
     return;
   }
-  if (temp_account->is_deleted) {
+  if (account->is_deleted) {
     std::cout << ERROR_DELETED << std::endl;
     return;
-  } else if (temp_account->is_active) {
+  } else if (account->is_active) {
     std::cout << ERROR_ENABLED << std::endl;
     return;
   }
   PushTransactionRecord(9, name, number);
-  temp_account->is_active = true;
+  account->is_active = true;
   std::cout << SUCCESS_ENABLE << std::endl;
   return;
 }

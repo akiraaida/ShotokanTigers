@@ -1,16 +1,22 @@
+Please enter a command: 
 Please enter your session type: 
 Please enter a command: 
 Please enter the account holder's name: 
 Please enter the user's account number: 
 Please enter amount to withdraw: 
-Success, 5.00 has been withdrawn.
-Available Balance (12347):
+The withdrawal transaction has completed.
+Available Balance (12345):
 105.00
+Please enter a command: 
+Please enter a command: 
 Please enter your session type: 
 Please enter a login name: 
 Please enter a command: 
 Please enter the user's account number: 
 Please enter amount to withdraw: 
-Success, 5.00 has been withdrawn.
-Available Balance (12347):
+The withdrawal transaction has completed.
+Available Balance (12345):
 99.95
+Daily Withdrawals Remaining (12345):
+495.00
+Please enter a command: 

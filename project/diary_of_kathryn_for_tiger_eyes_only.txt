@@ -286,3 +286,13 @@ Various things:
 - noted that transferred funds should not go over the limit.
   - response: added new test cases for transfer and deposit (trans009, depo008)
               and programmed checks into those functions to pass them.
+- with000
+  - found that program asked for withdrawal before rejecting account.
+- with003
+  - found that program had less descriptive error symbol things
+- with007
+  - found that withdrawal did not check own limit.
+- with011
+  - found that withdrawal limit was being applied to admins
+- with014
+  - failed to withdraw 500 from nonstudent account

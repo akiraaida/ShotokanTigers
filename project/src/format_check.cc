@@ -21,6 +21,8 @@
 #define ERROR_INPUT_BELOW_ONE "ERROR, VALUE MUST HAVE AT LEAST 1 DIGIT PRECEDING THE DECIMAL."
 #define ERROR_INPUT_LOTS_FRACTIONALS "ERROR, VALUE CAN HAVE AT MOST 2 DIGITS FOLLOWING THE DECIMAL."
 #define ERROR_INVALID_SYMBOL "ERROR, INPUT CONTAINS ONE OR MORE OF FORBIDDEN SYMBOLS [$ ,]"
+#define ERROR_CONTAINS_DOLLAR_SIGN "ERROR, INPUT CANNOT CONTAIN DOLLAR SIGNS."
+#define ERROR_CONTAINS_COMMA "ERROR, INPUT CANNOT CONTAIN COMMAS; FOR DECIMAL POINT PLEASE USE . INSTEAD."
 #define ERROR_INVALID_INPUT "ERROR, INVALID INPUT."
 #define ERROR_MIN_INPUT "ERROR, INPUT VALUE IS TOO SMALL."
 #define ERROR_MAX_INPUT "ERROR, INPUT VALUE IS TOO LARGE."
@@ -36,12 +38,16 @@ double CheckCurrency(const std::string& number, int* status) {
   
   // check for invalid symbols
   std::vector<std::string> invalid_symbols = {"$", ","};
-  for(std::string invalid_symbol : invalid_symbols) {
-    if(number.find(invalid_symbol) != std::string::npos) {
-      *status = CurrencyError::kInvalidSymbol;
+  std::vector<int> invalid_symbol_errors = { CurrencyError::kContainsDollarSign,
+                                            CurrencyError::kContainsComma};
+  assert(invalid_symbols.size() == invalid_symbol_errors.size());
+  for(unsigned int i = 0; i < invalid_symbols.size(); i++) {
+    if(number.find(invalid_symbols[i]) != std::string::npos) {
+      *status = invalid_symbol_errors[i];
       return value;
     }
   }
+  
   
   // test formatting
   std::string::size_type decimal_point_position = number.find(".");
@@ -91,10 +97,14 @@ bool CheckUnit(double amount) {
 
 std::string GetCurrencyErrorMessage(int error) {
   switch(error) {
-   case CurrencyError::kInvalidSymbol: {
-      return ERROR_INVALID_SYMBOL;
+   case CurrencyError::kContainsDollarSign: {
+      return ERROR_CONTAINS_DOLLAR_SIGN;
    }
-    
+   
+   case CurrencyError::kContainsComma:
+   {
+     return ERROR_CONTAINS_COMMA;
+   }    
    case CurrencyError::kInvalid: {
       return ERROR_INVALID_INPUT;
    }

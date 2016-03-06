@@ -5,19 +5,19 @@ Please enter the account holder's name:
 Please enter the user's account number: 
 Please enter recipient to be paid: 
 Please enter amount to pay: 
-ERROR, INPUT CONTAINS ONE OR MORE OF FORBIDDEN SYMBOLS [$ ,]
+ERROR, INPUT CANNOT CONTAIN DOLLAR SIGNS.
 Please enter a command: 
 Please enter the account holder's name: 
 Please enter the user's account number: 
 Please enter recipient to be paid: 
 Please enter amount to pay: 
-ERROR, INPUT CONTAINS ONE OR MORE OF FORBIDDEN SYMBOLS [$ ,]
+ERROR, INPUT CANNOT CONTAIN DOLLAR SIGNS.
 Please enter a command: 
 Please enter the account holder's name: 
 Please enter the user's account number: 
 Please enter recipient to be paid: 
 Please enter amount to pay: 
-ERROR, INPUT CONTAINS ONE OR MORE OF FORBIDDEN SYMBOLS [$ ,]
+ERROR, INPUT CANNOT CONTAIN COMMAS; FOR DECIMAL POINT PLEASE USE . INSTEAD.
 Please enter a command: 
 Please enter a command: 
 Please enter your session type: 
@@ -26,15 +26,15 @@ Please enter a command:
 Please enter the user's account number: 
 Please enter recipient to be paid: 
 Please enter amount to pay: 
-ERROR, INPUT CONTAINS ONE OR MORE OF FORBIDDEN SYMBOLS [$ ,]
+ERROR, INPUT CANNOT CONTAIN DOLLAR SIGNS.
 Please enter a command: 
 Please enter the user's account number: 
 Please enter recipient to be paid: 
 Please enter amount to pay: 
-ERROR, INPUT CONTAINS ONE OR MORE OF FORBIDDEN SYMBOLS [$ ,]
+ERROR, INPUT CANNOT CONTAIN DOLLAR SIGNS.
 Please enter a command: 
 Please enter the user's account number: 
 Please enter recipient to be paid: 
 Please enter amount to pay: 
-ERROR, INPUT CONTAINS ONE OR MORE OF FORBIDDEN SYMBOLS [$ ,]
+ERROR, INPUT CANNOT CONTAIN COMMAS; FOR DECIMAL POINT PLEASE USE . INSTEAD.
 Please enter a command: 

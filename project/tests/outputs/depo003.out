@@ -4,7 +4,7 @@ Please enter a command:
 Please enter the account holder's name: 
 Please enter the user's account number: 
 Please enter amount to deposit: 
-ERROR, INPUT CONTAINS ONE OR MORE OF FORBIDDEN SYMBOLS [$ ,]
+ERROR, INPUT CANNOT CONTAIN DOLLAR SIGNS.
 Please enter a command: 
 Please enter a command: 
 Please enter your session type: 
@@ -12,5 +12,5 @@ Please enter a login name:
 Please enter a command: 
 Please enter the user's account number: 
 Please enter amount to deposit: 
-ERROR, INPUT CONTAINS ONE OR MORE OF FORBIDDEN SYMBOLS [$ ,]
+ERROR, INPUT CANNOT CONTAIN DOLLAR SIGNS.
 Please enter a command: 

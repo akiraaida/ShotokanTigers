@@ -1,18 +1,24 @@
+Please enter a command: 
 Please enter your session type: 
 Please enter a command: 
 Please enter the account holder's name: 
-Please enter the user's account number: 
-Error, account specified is not a valid account.
+ERROR, THAT USER DOES NOT HAVE AN ACCOUNT.
+Please enter a command: 
 Please enter the account holder's name: 
 Please enter the user's account number: 
-Error, account specified is not a valid account.
+ERROR, THE ACCOUNT NUMBER DOESN'T MATCH THE ACCOUNT HOLDER'S NAME.
+Please enter a command: 
 Please enter the account holder's name: 
 Please enter the user's account number: 
-Error, account specified is not a valid account.
+ERROR, THE ACCOUNT NUMBER DOESN'T MATCH THE ACCOUNT HOLDER'S NAME.
+Please enter a command: 
+Please enter a command: 
 Please enter your session type: 
 Please enter a login name: 
 Please enter a command: 
 Please enter the user's account number: 
-Error, account specified is not a valid account.
+ERROR, THE ACCOUNT NUMBER DOESN'T MATCH THE ACCOUNT HOLDER'S NAME.
+Please enter a command: 
 Please enter the user's account number: 
-Error, account specified is not a valid account.
+ERROR, THE ACCOUNT NUMBER DOESN'T MATCH THE ACCOUNT HOLDER'S NAME.
+Please enter a command: 

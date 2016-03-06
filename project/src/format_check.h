@@ -46,9 +46,14 @@ enum {
    kTooLongFractional,
    
    /**
-   * Input contained non-numerical, non point symbols.
+   * Input contained dollar sign
    **/
-   kInvalidSymbol,
+   kContainsDollarSign,
+   
+   /**
+   * Input used commas
+   **/
+   kContainsComma,
    
    /**
    * Input was negative.
