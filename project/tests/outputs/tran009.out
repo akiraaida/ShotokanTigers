@@ -1,0 +1,56 @@
+Please enter a command: 
+Please enter your session type: 
+Please enter a command: 
+Please enter the account holder's name: 
+Please enter the transferring account's number: 
+Please enter the recipient account's number: 
+Please enter amount to transfer: 
+ERROR, THAT VALUE WOULD CAUSE ACCOUNT TO EXCEED THE MAXIMUM BALANCE.
+Available Balance (12345):
+110.00
+Available Balance (12361):
+99996.00
+Please enter a command: 
+Please enter the account holder's name: 
+Please enter the user's account number: 
+Please enter amount to deposit: 
+The deposit transaction has completed.
+Available Balance (12360):
+99999.05
+Please enter a command: 
+Please enter the account holder's name: 
+Please enter the transferring account's number: 
+Please enter the recipient account's number: 
+Please enter amount to transfer: 
+ERROR, THAT VALUE WOULD CAUSE ACCOUNT TO EXCEED THE MAXIMUM BALANCE.
+Available Balance (12345):
+110.00
+Available Balance (12360):
+0.05
+Please enter a command: 
+Please enter a command: 
+Please enter your session type: 
+Please enter a login name: 
+Please enter a command: 
+Please enter the transferring account's number: 
+Please enter the recipient account's number: 
+Please enter amount to transfer: 
+ERROR, THAT VALUE WOULD CAUSE ACCOUNT TO EXCEED THE MAXIMUM BALANCE.
+Available Balance (12345):
+110.00
+Available Balance (12361):
+99996.00
+Daily Transfer Limit Remaining (12345):
+1000.00
+Please enter a command: 
+Please enter the transferring account's number: 
+Please enter the recipient account's number: 
+Please enter amount to transfer: 
+ERROR, THAT VALUE WOULD CAUSE ACCOUNT TO EXCEED THE MAXIMUM BALANCE.
+Available Balance (12345):
+110.00
+Available Balance (12360):
+0.05
+Daily Transfer Limit Remaining (12345):
+1000.00
+Please enter a command: 

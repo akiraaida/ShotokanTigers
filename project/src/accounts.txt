@@ -14,6 +14,8 @@
 12358 Loaded Guy           A 02000.05 S
 12359 Loaded Guy           A 02000.10 N
 12360 Moth Wallet          A 00000.05 S
+12361 Ashe Ace             A 99996.00 N
+12362 Ashe Ace             A 99996.00 N
 12380 Octopus              A 00010.20 N
 12381 Octopus              A 00010.10 S
 12382 Octopus              A 00010.20 N

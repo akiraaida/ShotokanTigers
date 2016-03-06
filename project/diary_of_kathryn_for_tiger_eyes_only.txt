@@ -284,3 +284,4 @@ Various things:
     I elected to allow them; that limit only realistically applies to withdrawal.
       - changed values to be lower as well.
 - noted that transferred funds should not go over the limit.
+  - response: added new test cases for transfer and deposit (trans009, depo008)

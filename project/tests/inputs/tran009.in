@@ -1,0 +1,29 @@
+login
+admin
+transfer
+John Doe
+12345
+12361
+5.00
+deposit
+Moth Wallet
+12360
+99999.00
+transfer
+John Doe
+12345
+12360
+5.00
+logout
+login
+standard
+John Doe
+transfer
+12345
+12361
+5.00
+transfer
+12345
+12360
+5.00
+logout
