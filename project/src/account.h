@@ -71,6 +71,11 @@ class Account {
   * Current value associated with this account in CAD
   **/
   double balance;
+  
+  /**
+  * Deposited funds unavailable in this session
+  **/
+  double held_funds;
 
   /**
   * Flag corresponding to SP or NS charges.

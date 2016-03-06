@@ -44,6 +44,7 @@
 #define ERROR_INVALID_COMPANY "ERROR, %s IS NOT A VALID COMPANY NAME.\n"
 #define ERROR_SELF_TRANSFER "ERROR, CANNOT TRANSFER TO SAME ACCOUNT."
 #define ERROR_TRANSFER_ZERO "ERROR, YOU CANNOT TRANSFER ZERO DOLLARS."
+#define ERROR_BALANCE_CAP_EXCEEDED "ERROR, THAT VALUE WOULD CAUSE ACCOUNT TO EXCEED THE MAXIMUM BALANCE."
 
 #define PROMPT_ENTER_SESSION_TYPE "Please enter your session type: "
 #define PROMPT_ENTER_LOGIN_NAME "Please enter a login name: "
@@ -325,6 +326,9 @@ void Commands::transfer() {
       std::cout << ERROR_MESSAGE_HIT_TRANSFER_LIMIT << std::endl;
     } else if (account->balance < (amount + charge)) {
       std::cout << ERROR_BALANCE_INSUFFICIENT << std::endl;
+    } else if (recipient_account->balance + recipient_account->held_funds
+               + amount > 99999.99) {
+      std::cout << ERROR_BALANCE_CAP_EXCEEDED << std::endl;
     } else {
       // perform deduction
       account->balance -= amount + charge;
@@ -468,8 +472,12 @@ void Commands::deposit() {
     is_admin_ ? 0.0 : GetTransactionCharge(name, number);
   if (temp_account->balance < transaction_charge) {
     std::cout << ERROR_BALANCE_INSUFFICIENT << std::endl;
+  } else if (temp_account->balance + temp_account->held_funds + amount
+             - transaction_charge > 99999.99) {
+    std::cout << ERROR_BALANCE_CAP_EXCEEDED << std::endl;
   } else {
     // finish up
+    temp_account->held_funds += amount;
     temp_account->balance -= transaction_charge;
     PushTransactionRecord(4, name, number, amount);
     if (!is_admin_) {

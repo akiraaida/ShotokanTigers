@@ -23,6 +23,7 @@ Account::Account() {
   paybill_limit_remaining["EC"] = 2000.0;
   paybill_limit_remaining["CQ"] = 2000.0;
   paybill_limit_remaining["TV"] = 2000.0;
+  held_funds = 0.0;
 }
 
 void Account::PrintBalance() const {
