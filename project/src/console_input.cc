@@ -17,6 +17,8 @@
 
 #include <iostream>
 
+#include "format_check.h"
+
 namespace BankFrontEnd {
 namespace ConsoleInput {
 std::string GetString() {
@@ -35,10 +37,18 @@ int GetInteger() { // turn string from cin into an integer
   return destination;
 }
 
-double GetDouble() { // turn string from cin into a double
+double GetDouble(int* status) { // turn string from cin into a double
+  // get string
+  std::string number = GetString();
+  
+  // status
+  if(status)
+    *status = FormatCheck::CheckCurrency(number);
+    
+  // convert
   double destination;
   try {
-    destination = std::stof(GetString());
+    destination = std::stof(number);
   } catch(std::exception& e) {
     return FLT_MIN;
   }

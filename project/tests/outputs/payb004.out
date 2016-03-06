@@ -1,69 +1,102 @@
-Please enter your session type:
-Please enter a command admin:
-Please enter the account holder's name:
-Please enter the account number:
-Please enter recipient to be paid:
-Please enter amount to pay:
-Error, value has more than 5 digits preceding decimal.
-Please enter the account holder's name:
-Please enter the account number:
-Please enter recipient to be paid:
-Please enter amount to pay:
-Error, value has more than 5 digits preceding decimal.
-Please enter the account holder's name:
-Please enter the account number:
-Please enter recipient to be paid:
-Please enter amount to pay:
-Error, value must have at least 1 value preceding decimal.
-Please enter the account holder's name:
-Please enter the account number:
-Please enter recipient to be paid:
-Please enter amount to pay:
-Error, value must have exactly 2 digits following decimal.
-Please enter the account holder's name:
-Please enter the account number:
-Please enter recipient to be paid:
-Please enter amount to pay:
-Error, value must have exactly 2 digits following decimal.
-Please enter the account holder's name:
-Please enter the account number:
-Please enter recipient to be paid:
-Please enter amount to pay:
-Error, value has more than 2 digits following decimal.
-Please enter the account holder's name:
-Please enter the account number:
-Please enter recipient to be paid:
-Please enter amount to pay:
-Error, value has less than 2 digits following decimal.
-Please enter your session type:
-Please enter your session type:
-Please enter a login name:
-Please enter a command user:
-Please enter the account number:
-Please enter recipient to be paid:
-Please enter amount to pay:
-Error, value has more than 5 digits preceding decimal.
-Please enter the account number:
-Please enter recipient to be paid:
-Please enter amount to pay:
-Error, value has more than 5 digits preceding decimal.
-Please enter the account number:
-Please enter recipient to be paid:
-Please enter amount to pay:
-Error, value must have at least 1 value preceding decimal.
-Please enter the account number:
-Please enter recipient to be paid:
-Please enter amount to pay:
-Error, value must have exactly 2 digits following decimal.
-Please enter the account number:
-Please enter recipient to be paid:
-Please enter amount to pay:
-Error, value must have exactly 2 digits following decimal.
-Please enter the account number:
-Please enter recipient to be paid:
-Please enter amount to pay:
-Error, value has more than 2 digits following decimal.
-Please enter the account number:
-Please enter recipient to be paid:
-Please enter amount to pay:
-Error, value has less than 2 digits following decimal.
+Please enter a command: 
+Please enter your session type: 
+Please enter a command: 
+Please enter the account holder's name: 
+Please enter the user's account number: 
+Please enter recipient to be paid: 
+Please enter amount to pay: 
+ERROR, VALUE HAS MORE THAN 5 DIGITS PRECEDING THE DECIMAL.
+Please enter a command: 
+Please enter the account holder's name: 
+Please enter the user's account number: 
+Please enter recipient to be paid: 
+Please enter amount to pay: 
+ERROR, VALUE HAS MORE THAN 5 DIGITS PRECEDING THE DECIMAL.
+Please enter a command: 
+Please enter the account holder's name: 
+Please enter the user's account number: 
+Please enter recipient to be paid: 
+Please enter amount to pay: 
+ERROR, VALUE MUST HAVE AT LEAST 1 DIGIT PRECEDING THE DECIMAL.
+Please enter a command: 
+Please enter the account holder's name: 
+Please enter the user's account number: 
+Please enter recipient to be paid: 
+Please enter amount to pay: 
+Amount has been paid successfully.
+Available Balance (12345):
+105.00
+Please enter a command: 
+Please enter the account holder's name: 
+Please enter the user's account number: 
+Please enter recipient to be paid: 
+Please enter amount to pay: 
+Amount has been paid successfully.
+Available Balance (12345):
+100.00
+Please enter a command: 
+Please enter the account holder's name: 
+Please enter the user's account number: 
+Please enter recipient to be paid: 
+Please enter amount to pay: 
+ERROR, VALUE CAN HAVE AT MOST 2 DIGITS FOLLOWING THE DECIMAL.
+Please enter a command: 
+Please enter the account holder's name: 
+Please enter the user's account number: 
+Please enter recipient to be paid: 
+Please enter amount to pay: 
+Amount has been paid successfully.
+Available Balance (12345):
+95.00
+Please enter a command: 
+Please enter a command: 
+Please enter your session type: 
+Please enter a login name: 
+Please enter a command: 
+Please enter the user's account number: 
+Please enter recipient to be paid: 
+Please enter amount to pay: 
+ERROR, VALUE HAS MORE THAN 5 DIGITS PRECEDING THE DECIMAL.
+Please enter a command: 
+Please enter the user's account number: 
+Please enter recipient to be paid: 
+Please enter amount to pay: 
+ERROR, VALUE HAS MORE THAN 5 DIGITS PRECEDING THE DECIMAL.
+Please enter a command: 
+Please enter the user's account number: 
+Please enter recipient to be paid: 
+Please enter amount to pay: 
+ERROR, VALUE MUST HAVE AT LEAST 1 DIGIT PRECEDING THE DECIMAL.
+Please enter a command: 
+Please enter the user's account number: 
+Please enter recipient to be paid: 
+Please enter amount to pay: 
+Amount has been paid successfully.
+Available Balance (12345):
+89.95
+Daily Payment Limit to TV Remaining (12345):
+1995.00
+Please enter a command: 
+Please enter the user's account number: 
+Please enter recipient to be paid: 
+Please enter amount to pay: 
+Amount has been paid successfully.
+Available Balance (12345):
+84.90
+Daily Payment Limit to TV Remaining (12345):
+1990.00
+Please enter a command: 
+Please enter the user's account number: 
+Please enter recipient to be paid: 
+Please enter amount to pay: 
+ERROR, VALUE CAN HAVE AT MOST 2 DIGITS FOLLOWING THE DECIMAL.
+Please enter a command: 
+Please enter the user's account number: 
+Please enter recipient to be paid: 
+Please enter amount to pay: 
+Amount has been paid successfully.
+Available Balance (12345):
+79.85
+Daily Payment Limit to TV Remaining (12345):
+1985.00
+Please enter a command: 

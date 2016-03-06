@@ -1,131 +1,144 @@
-Please enter your session type:
-Please enter a login name:
-Please enter a command user:
-Please enter the account number:
-Please enter amount to withdraw:
-Success, 5.00 has been withdrawn.
+Please enter a command: 
+Please enter your session type: 
+Please enter a login name: 
+Please enter a command: 
+Please enter the user's account number: 
+Please enter amount to withdraw: 
+The withdrawal transaction has completed.
 Available Balance (12380):
 5.10
 Daily Withdrawals Remaining (12380):
 495.00
-Please enter the account number:
-Please enter recipient to be paid:
-Please enter amount to pay:
-Success, 5.00 has been paid to TV.
+Please enter a command: 
+Please enter the user's account number: 
+Please enter recipient to be paid: 
+Please enter amount to pay: 
+Amount has been paid successfully.
 Available Balance (12380):
 0.00
 Daily Payment Limit to TV Remaining (12380):
 1995.00
-Please enter the account number:
-Please enter amount to withdraw:
-Success, 5.00 has been withdrawn.
+Please enter a command: 
+Please enter the user's account number: 
+Please enter amount to withdraw: 
+The withdrawal transaction has completed.
 Available Balance (12381):
 5.05
 Daily Withdrawals Remaining (12381):
 495.00
-Please enter the account number:
-Please enter recipient to be paid:
-Please enter amount to pay:
-Success, 5.00 has been paid to TV.
+Please enter a command: 
+Please enter the user's account number: 
+Please enter recipient to be paid: 
+Please enter amount to pay: 
+Amount has been paid successfully.
 Available Balance (12381):
 0.00
 Daily Payment Limit to TV Remaining (12381):
-1990.00
-Please enter the account holder's name:
-Please enter the account number:
-Enter account number to transfer to:
-Enter amount:
-Success, 5.00 has been transferred to 12345.
+1995.00
+Please enter a command: 
+Please enter the transferring account's number: 
+Please enter the recipient account's number: 
+Please enter amount to transfer: 
+Amount has been transferred successfully.
 Available Balance (12382):
 5.10
 Available Balance (12345):
 115.00
 Daily Transfer Limit Remaining (12382):
 995.00
-Please enter the account number:
-Please enter recipient to be paid:
-Please enter amount to pay:
-Success, 5.00 has been paid to TV.
+Please enter a command: 
+Please enter the user's account number: 
+Please enter recipient to be paid: 
+Please enter amount to pay: 
+Amount has been paid successfully.
 Available Balance (12382):
 0.00
 Daily Payment Limit to TV Remaining (12382):
-1985.00
-Please enter the account holder's name:
-Please enter the account number:
-Enter account number to transfer to:
-Enter amount:
-Success, 5.00 has been transferred to 12345.
+1995.00
+Please enter a command: 
+Please enter the transferring account's number: 
+Please enter the recipient account's number: 
+Please enter amount to transfer: 
+Amount has been transferred successfully.
 Available Balance (12383):
 5.05
 Available Balance (12345):
 120.00
 Daily Transfer Limit Remaining (12383):
 995.00
-Please enter the account number:
-Please enter recipient to be paid:
-Please enter amount to pay:
-Success, 5.00 has been paid to TV.
+Please enter a command: 
+Please enter the user's account number: 
+Please enter recipient to be paid: 
+Please enter amount to pay: 
+Amount has been paid successfully.
 Available Balance (12383):
 0.00
 Daily Payment Limit to TV Remaining (12383):
-1980.00
-Please enter the account number:
-Please enter recipient to be paid:
-Please enter amount to pay:
-Success, 5.00 has been paid to TV.
+1995.00
+Please enter a command: 
+Please enter the user's account number: 
+Please enter recipient to be paid: 
+Please enter amount to pay: 
+Amount has been paid successfully.
 Available Balance (12384):
 5.10
 Daily Payment Limit to TV Remaining (12384):
-1975.00
-Please enter the account number:
-Please enter recipient to be paid:
-Please enter amount to pay:
-Success, 5.00 has been paid to TV.
+1995.00
+Please enter a command: 
+Please enter the user's account number: 
+Please enter recipient to be paid: 
+Please enter amount to pay: 
+Amount has been paid successfully.
 Available Balance (12384):
 0.00
 Daily Payment Limit to TV Remaining (12384):
-1970.00
-Please enter the account number:
-Please enter recipient to be paid:
-Please enter amount to pay:
-Success, 5.00 has been paid to TV.
+1990.00
+Please enter a command: 
+Please enter the user's account number: 
+Please enter recipient to be paid: 
+Please enter amount to pay: 
+Amount has been paid successfully.
 Available Balance (12385):
 5.05
 Daily Payment Limit to TV Remaining (12385):
-1965.00
-Please enter the account number:
-Please enter recipient to be paid:
-Please enter amount to pay:
-Success, 5.00 has been paid to TV.
+1995.00
+Please enter a command: 
+Please enter the user's account number: 
+Please enter recipient to be paid: 
+Please enter amount to pay: 
+Amount has been paid successfully.
 Available Balance (12385):
 0.00
 Daily Payment Limit to TV Remaining (12385):
-1960.00
-Please enter the account holder's name:
-Please enter the account number:
-Please enter amount to deposit:
-Success, 5.00 has been deposited.
+1990.00
+Please enter a command: 
+Please enter the user's account number: 
+Please enter amount to deposit: 
+The deposit transaction has completed.
 Available Balance (12386):
 5.10
-Please enter the account number:
-Please enter recipient to be paid:
-Please enter amount to pay:
-Success, 5.00 has been paid to TV.
+Please enter a command: 
+Please enter the user's account number: 
+Please enter recipient to be paid: 
+Please enter amount to pay: 
+Amount has been paid successfully.
 Available Balance (12386):
 0.00
 Daily Payment Limit to TV Remaining (12386):
-1955.00
-Please enter the account holder's name:
-Please enter the account number:
-Please enter amount to deposit:
-Success, 5.00 has been deposited.
+1995.00
+Please enter a command: 
+Please enter the user's account number: 
+Please enter amount to deposit: 
+The deposit transaction has completed.
 Available Balance (12387):
 5.05
-Please enter the account number:
-Please enter recipient to be paid:
-Please enter amount to pay:
-Success, 5.00 has been paid to TV.
+Please enter a command: 
+Please enter the user's account number: 
+Please enter recipient to be paid: 
+Please enter amount to pay: 
+Amount has been paid successfully.
 Available Balance (12387):
 0.00
 Daily Payment Limit to TV Remaining (12387):
-1950.00
+1995.00
+Please enter a command: 

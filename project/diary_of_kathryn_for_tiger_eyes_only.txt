@@ -32,6 +32,22 @@ Here are the test runs:
     - Fixing sources of calculation discrepencies.
 - enab004
     - found that withdrawal deducted from limit as admin
+- payb000
+    - found that paybill deducted from limit as admin
+    - found that paybill pushed 0 value withdrawals as admin
+- payb001
+    - found that paybill errors were not as specific as test.
+- payb003
+    - found that there was no checking for negative inputs
+- payb004
+    - found that value trap is for limit rather than formatting.
+      - response: created a format checker.
+- payb007
+    - found that paybill limit was being applied to admins.
+- payb012
+    - found that increasing precision of charge in paybill was not sufficient
+      to prevent rounding errors 
+      - fix: consider balance 0 if greater than $-0.01
 Buffer Overflows (Test Iter 1)
 ====
 Problem:

@@ -40,9 +40,11 @@ int GetInteger();
 /**
 * Extracts a floating-point value from std::cin.
 * Consumes a newline.
+* if status is not nullptr, it will be set to the result of the operation
+* e.g. FormatCheck::CurrencyError::kValid on success.
 * Returns FLT_MIN on failure.
 **/
-double GetDouble();
+double GetDouble(int* status = nullptr);
 
 } //namespace ConsoleInput
 } //namespace BankFrontEnd

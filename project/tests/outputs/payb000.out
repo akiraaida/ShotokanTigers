@@ -3,32 +3,56 @@ Please enter your session type:
 Please enter a command: 
 Please enter the account holder's name: 
 Please enter the user's account number: 
-Please enter a recipient to be paid: 
-Please enter an amount to pay: 
+Please enter recipient to be paid: 
+Please enter amount to pay: 
+Amount has been paid successfully.
+Available Balance (12345):
+105.00
 Please enter a command: 
 Please enter the account holder's name: 
 Please enter the user's account number: 
-Please enter a recipient to be paid: 
-Please enter an amount to pay: 
+Please enter recipient to be paid: 
+Please enter amount to pay: 
+Amount has been paid successfully.
+Available Balance (12345):
+100.00
 Please enter a command: 
 Please enter the account holder's name: 
 Please enter the user's account number: 
-Please enter a recipient to be paid: 
-Please enter an amount to pay: 
+Please enter recipient to be paid: 
+Please enter amount to pay: 
+Amount has been paid successfully.
+Available Balance (12345):
+95.00
 Please enter a command: 
 Please enter a command: 
 Please enter your session type: 
 Please enter a login name: 
 Please enter a command: 
 Please enter the user's account number: 
-Please enter a recipient to be paid: 
-Please enter an amount to pay: 
+Please enter recipient to be paid: 
+Please enter amount to pay: 
+Amount has been paid successfully.
+Available Balance (12345):
+89.95
+Daily Payment Limit to EC Remaining (12345):
+1995.00
 Please enter a command: 
 Please enter the user's account number: 
-Please enter a recipient to be paid: 
-Please enter an amount to pay: 
+Please enter recipient to be paid: 
+Please enter amount to pay: 
+Amount has been paid successfully.
+Available Balance (12345):
+84.90
+Daily Payment Limit to CQ Remaining (12345):
+1995.00
 Please enter a command: 
 Please enter the user's account number: 
-Please enter a recipient to be paid: 
-Please enter an amount to pay: 
+Please enter recipient to be paid: 
+Please enter amount to pay: 
+Amount has been paid successfully.
+Available Balance (12345):
+79.85
+Daily Payment Limit to TV Remaining (12345):
+1995.00
 Please enter a command: 

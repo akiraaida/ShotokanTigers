@@ -1,36 +1,36 @@
-10 Octopus              00000 00000000 S
-01 Octopus              12380 00005.00
-01 Octopus              12380 00000.10
+10 Octopus              00000 00000.00 S 
+01 Octopus              12380 00005.00   
+01 Octopus              12380 00000.10   
 03 Octopus              12380 00005.00 TV
-01 Octopus              12380 00000.10
-01 Octopus              12381 00005.00
-01 Octopus              12381 00000.05
+01 Octopus              12380 00000.10   
+01 Octopus              12381 00005.00   
+01 Octopus              12381 00000.05   
 03 Octopus              12381 00005.00 TV
-01 Octopus              12381 00000.05
-02 Octopus              12382 00005.00
-02 John Doe             12345 00005.00
-01 Octopus              12382 00000.10
+01 Octopus              12381 00000.05   
+02 Octopus              12382 00005.00   
+02 John Doe             12345 00005.00   
+01 Octopus              12382 00000.10   
 03 Octopus              12382 00005.00 TV
-01 Octopus              12382 00000.10
-02 Octopus              12383 00005.00
-02 John Doe             12345 00005.00
-01 Octopus              12383 00000.05
+01 Octopus              12382 00000.10   
+02 Octopus              12383 00005.00   
+02 John Doe             12345 00005.00   
+01 Octopus              12383 00000.05   
 03 Octopus              12383 00005.00 TV
-01 Octopus              12383 00000.05
+01 Octopus              12383 00000.05   
 03 Octopus              12384 00005.00 TV
-01 Octopus              12384 00000.10
+01 Octopus              12384 00000.10   
 03 Octopus              12384 00005.00 TV
-01 Octopus              12384 00000.10
+01 Octopus              12384 00000.10   
 03 Octopus              12385 00005.00 TV
-01 Octopus              12385 00000.05
+01 Octopus              12385 00000.05   
 03 Octopus              12385 00005.00 TV
-01 Octopus              12385 00000.05
-04 Octopus              12386 00005.00
-01 Octopus              12386 00000.10
+01 Octopus              12385 00000.05   
+04 Octopus              12386 00005.00   
+01 Octopus              12386 00000.10   
 03 Octopus              12386 00005.00 TV
-01 Octopus              12386 00000.10
-04 Octopus              12387 00005.00
-01 Octopus              12387 00000.05
+01 Octopus              12386 00000.10   
+04 Octopus              12387 00005.00   
+01 Octopus              12387 00000.05   
 03 Octopus              12387 00005.00 TV
-01 Octopus              12387 00000.05
-00                      00000 00000.00
+01 Octopus              12387 00000.05   
+00                      00000 00000.00   

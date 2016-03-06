@@ -23,6 +23,7 @@
 
 #include "account_status.h"
 #include "console_input.h"
+#include "format_check.h"
 #include "transaction_io.h"
 
 #define ERROR_MESSAGE_INVALID_SESSION "ERROR, SESSION TYPE IS NOT VALID."
@@ -40,9 +41,15 @@
 #define ERROR_MESSAGE_HIT_TRANSFER_LIMIT "ERROR, THE VALUE ENTERED IS BEYOND THE TRANSFER LIMIT."
 #define ERROR_MIN_INPUT "ERROR, INPUT VALUE IS TOO SMALL."
 #define ERROR_MAX_INPUT "ERROR, INPUT VALUE IS TOO LARGE."
-#define ERROR_INVALID_COMPANY "ERROR, THAT COMPANY IS NOT A VALID RECIPIENT."
 #define ERROR_MESSAGE_HIT_PAYBILL_LIMIT "ERROR, THE VALUE ENTERED IS BEYOND THE PAYBILL LIMIT."
 #define ERROR_ABOVE_MAX_INIT "ERROR, MAX INITIAL BALANCE EXCEEDED."
+#define ERROR_BAD_COMPANY_SIZE "ERROR, %s IS NOT TWO CHARACTERS.\n"
+#define ERROR_INVALID_COMPANY "ERROR, %s IS NOT A VALID COMPANY NAME.\n"
+#define ERROR_NEGATIVE_INPUT "ERROR, ONLY POSITIVE VALUES ARE ACCEPTED."
+#define ERROR_LARGE_INPUT "ERROR, VALUE HAS MORE THAN 5 DIGITS PRECEDING THE DECIMAL."
+#define ERROR_INPUT_BELOW_ONE "ERROR, VALUE MUST HAVE AT LEAST 1 DIGIT PRECEDING THE DECIMAL."
+#define ERROR_INPUT_LOTS_FRACTIONALS "ERROR, VALUE CAN HAVE AT MOST 2 DIGITS FOLLOWING THE DECIMAL."
+#define ERROR_INVALID_SYMBOL "ERROR, INPUT CONTAINS ONE OR MORE OF FORBIDDEN SYMBOLS [$ ,]"
 
 #define PROMPT_ENTER_SESSION_TYPE "Please enter your session type: "
 #define PROMPT_ENTER_LOGIN_NAME "Please enter a login name: "
@@ -366,31 +373,75 @@ void Commands::paybill() {
   std::string company = ConsoleInput::GetString();
 
   // check company name
-  if (!account->CompanyExists(company)) {
-    std::cout << ERROR_INVALID_COMPANY << std::endl;
+  if(company.size() != 2U){
+    printf(ERROR_BAD_COMPANY_SIZE, company.c_str());
+    return;
+  } else if (!account->CompanyExists(company)) {
+    printf(ERROR_INVALID_COMPANY, company.c_str());
     return;
   }
 
   // get amount to transfer
+  int status;
   std::cout << PROMPT_PAYBILL_VALUE << std::endl;
-  double amount = ConsoleInput::GetDouble();
+  double amount = ConsoleInput::GetDouble(&status);
+  switch(status) {
+    case FormatCheck::CurrencyError::kInvalidSymbol: {
+      std::cout << ERROR_INVALID_SYMBOL << std::endl;
+      return;
+    }
+    
+    case FormatCheck::CurrencyError::kInvalid: {
+      std::cout << ERROR_INVALID_INPUT << std::endl;
+      return;
+    }
+      
+    case FormatCheck::CurrencyError::kTooLong: {
+      std::cout << ERROR_LARGE_INPUT << std::endl;
+      return;
+    }
+    
+    case FormatCheck::CurrencyError::kBelowOne: {
+      std::cout << ERROR_INPUT_BELOW_ONE << std::endl;
+      return;
+    }
+    
+    case FormatCheck::CurrencyError::kTooLongFractional: {
+      std::cout << ERROR_INPUT_LOTS_FRACTIONALS << std::endl;
+      return;
+    }
+      
+    default:
+      break;
+  }
+  
+  // check amount
+  if(amount <= 0.0) {
+    std::cout << ERROR_NEGATIVE_INPUT << std::endl;
+    return;
+  }
+
 
   // get charge
   double charge = is_admin_ ? 0.0 : GetTransactionCharge(name, account_number);
 
   // check transfer limit
-  if (account->paybill_limit_remaining[company] < amount) {
+  if (!is_admin_ && account->paybill_limit_remaining[company] < amount) {
     std::cout << ERROR_MESSAGE_HIT_PAYBILL_LIMIT << std::endl;
-  } else if (account->balance < (amount + charge)) {
+  } else if (account->balance - (amount + charge) <= -0.01) {
     std::cout << ERROR_BALANCE_INSUFFICIENT << std::endl;
   } else {
     // do it
     account->balance -= amount + charge;
-    account->paybill_limit_remaining[company] -= amount;
+    if(account->balance < 0.0 && account->balance > -0.01)
+      account->balance = 0.0;
+    if(!is_admin_)
+      account->paybill_limit_remaining[company] -= amount;
     
     // print out transaction
     PushTransactionRecord(3, name, account_number, amount, company);
-    PushTransactionRecord(1, name, account_number, charge);
+    if(!is_admin_)
+      PushTransactionRecord(1, name, account_number, charge);
     std::cout << SUCCESS_PAYBILL << std::endl;
   }
 
