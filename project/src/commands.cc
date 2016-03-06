@@ -50,10 +50,10 @@
 #define PROMPT_ENTER_ACCOUNT_NUMBER "Please enter the user's account number: "
 #define PROMPT_TRANSFER_SOURCE "Please enter the transferring account's number: "
 #define PROMPT_TRANSFER_TARGET "Please enter the recipient account's number: "
-#define PROMPT_TRANSFER_VALUE "Please enter an amount to transfer: "
-#define PROMPT_WITHDRAWAL_VALUE "Please enter an amount to withdraw: "
+#define PROMPT_TRANSFER_VALUE "Please enter amount to transfer: "
+#define PROMPT_WITHDRAWAL_VALUE "Please enter amount to withdraw: "
 #define PROMPT_DEPOSIT_VALUE "Please enter amount to deposit: "
-#define PROMPT_PAYBILL_VALUE "Please enter an amount to pay: "
+#define PROMPT_PAYBILL_VALUE "Please enter amount to pay: "
 #define PROMPT_PAYBILL_RECIPIENT "Please enter a recipient to be paid: "
 #define PROMPT_INIT_BALANCE "Please enter an initial balance: "
 
