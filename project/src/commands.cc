@@ -54,7 +54,7 @@
 #define PROMPT_WITHDRAWAL_VALUE "Please enter amount to withdraw: "
 #define PROMPT_DEPOSIT_VALUE "Please enter amount to deposit: "
 #define PROMPT_PAYBILL_VALUE "Please enter amount to pay: "
-#define PROMPT_PAYBILL_RECIPIENT "Please enter a recipient to be paid: "
+#define PROMPT_PAYBILL_RECIPIENT "Please enter recipient to be paid: "
 #define PROMPT_INIT_BALANCE "Please enter an initial balance: "
 
 #define SUCCESS_WITHDRAWAL "The withdrawal transaction has completed."
@@ -64,7 +64,7 @@
 #define SUCCESS_TO_STUDENT "Specified account is now a student account."
 #define SUCCESS_TO_NONSTUDENT "Specified account is now a non-student account."
 #define SUCCESS_DELETE "Specified account has been deleted."
-#define SUCCESS_TRANSFER "Amount has been transfered successfully."
+#define SUCCESS_TRANSFER "Amount has been transferred successfully."
 #define SUCCESS_PAYBILL "Amount has been paid successfully."
 
 namespace BankFrontEnd {
@@ -191,14 +191,20 @@ void Commands::withdrawal() {
   float debit = amount + transaction_charge;
   if (temp_account->balance < debit || CheckUnit(amount) == false) {
     std::cout << ERROR_BALANCE_INSUFFICIENT << std::endl; // Very generalized error message atm, may want to break the error cases down?
-    return;                                         // Errors for not mod 5/10/20/100 and not enough money
+                                                  // Errors for not mod 5/10/20/100 and not enough money
+  } else { // perform withdrawal
+    PushTransactionRecord(1, name, number, amount);
+    if(transaction_charge > 0.0)
+      PushTransactionRecord(1, name, number, transaction_charge);
+    temp_account->balance -= debit;
+    std::cout << SUCCESS_WITHDRAWAL << std::endl;
+    temp_account->withdrawal_limit_remaining
+        = temp_account->withdrawal_limit_remaining - amount;
   }
-  PushTransactionRecord(1, name, number, debit);
-  std::cout << SUCCESS_WITHDRAWAL << std::endl;
-  temp_account->withdrawal_limit_remaining
-      = temp_account->withdrawal_limit_remaining - amount;
+  // Print account state
   temp_account->PrintBalance();
-  temp_account->PrintWithdrawalLimit();
+  if(!is_admin_)
+    temp_account->PrintWithdrawalLimit();
 }
 
 bool Commands::CheckUnit(double amount) {
@@ -303,35 +309,28 @@ void Commands::transfer() {
       std::cout << ERROR_MESSAGE_HIT_TRANSFER_LIMIT << std::endl;
       std::cout << account->transfer_limit_remaining << "<" << amount
                 << std::endl;
-      return;
-    }
-
-    // check transfer amount
-    if (account->balance < (amount + charge)) {
+    } else if (account->balance < (amount + charge)) {
       std::cout << ERROR_BALANCE_INSUFFICIENT << std::endl;
-      return;
+    } else {
+      // perform deduction
+      account->balance -= amount + charge;
+      recipient_account->balance += amount;
+      account->transfer_limit_remaining -= amount;
+
+      // create transaction records
+      PushTransactionRecord(2, name, number, amount);
+      PushTransactionRecord(2, recipient_name, recipient_number, amount);
+      PushTransactionRecord(1, name, number, charge);
+
+      // did it
+      std::cout << SUCCESS_TRANSFER << std::endl;
     }
 
-    // perform deduction
-    account->balance -= amount + charge;
-    recipient_account->balance += amount;
-    account->transfer_limit_remaining -= amount;
-
-    // create transaction records
-    PushTransactionRecord(2, name, number, amount);
-    PushTransactionRecord(2, recipient_name, recipient_number, amount);
-    PushTransactionRecord(1, name, number, charge);
-
-    // did it
-    std::cout << SUCCESS_TRANSFER << std::endl;
+    // print balances
     account->PrintBalance();
     recipient_account->PrintBalance();
-    account->PrintTransferLimit();
-
-    // done
-    return;
-  } else {
-    return;
+    if(!is_admin_)
+      account->PrintTransferLimit();
   }
 }
 
@@ -365,8 +364,7 @@ void Commands::paybill() {
   std::string company = ConsoleInput::GetString();
 
   // check company name
-  if (account->paybill_limit_remaining.find(company)
-      == account->paybill_limit_remaining.end()) {
+  if (!account->CompanyExists(company)) {
     std::cout << ERROR_INVALID_COMPANY << std::endl;
     return;
   }
@@ -375,30 +373,29 @@ void Commands::paybill() {
   std::cout << PROMPT_PAYBILL_VALUE << std::endl;
   double amount = ConsoleInput::GetDouble();
 
+  // get charge
+  double charge = is_admin_ ? 0.0 : GetTransactionCharge(name, account_number);
+
   // check transfer limit
   if (account->paybill_limit_remaining[company] < amount) {
     std::cout << ERROR_MESSAGE_HIT_PAYBILL_LIMIT << std::endl;
-    return;
-  }
-
-  // check balance
-  double charge = is_admin_ ? 0.0 : GetTransactionCharge(name, account_number);
-  if (account->balance < (amount + charge)) {
+  } else if (account->balance < (amount + charge)) {
     std::cout << ERROR_BALANCE_INSUFFICIENT << std::endl;
-    return;
+  } else {
+    // do it
+    account->balance -= amount + charge;
+    account->paybill_limit_remaining[company] -= amount;
+    
+    // print out transaction
+    PushTransactionRecord(3, name, account_number, amount, company);
+    PushTransactionRecord(1, name, account_number, charge);
+    std::cout << SUCCESS_PAYBILL << std::endl;
   }
 
-  // do it
-  account->balance -= amount + charge;
-  account->paybill_limit_remaining[company] -= amount;
-
-  // print out transaction
-  PushTransactionRecord(3, name, account_number, amount, company);
-  PushTransactionRecord(1, name, account_number, charge);
-
-  std::cout << SUCCESS_PAYBILL << std::endl;
+  // print out details
   account->PrintBalance();
-  account->PrintPaybillLimit(company);
+  if(!is_admin_)
+    account->PrintPaybillLimit(company);
 
   // good
   return;
@@ -443,17 +440,21 @@ void Commands::deposit() {
     std::cout << ERROR_DELETED << std::endl;
     return;
   }
-  float transaction_charge =
+  double transaction_charge =
     is_admin_ ? 0.0 : GetTransactionCharge(name, number);
-  if (temp_account->balance + amount < transaction_charge) {
+  if (temp_account->balance < transaction_charge) {
     std::cout << ERROR_BALANCE_INSUFFICIENT << std::endl;
-    return;
+  } else {
+    // finish up
+    temp_account->balance -= transaction_charge;
+    PushTransactionRecord(4, name, number, amount);
+    if (!is_admin_) {
+      PushTransactionRecord(1, name, number, transaction_charge);
+    }
+    std::cout << SUCCESS_DEPOSIT << std::endl;
   }
-  PushTransactionRecord(4, name, number, amount);
-  if (!is_admin_) {
-    PushTransactionRecord(1, name, number, transaction_charge);
-  }
-  std::cout << SUCCESS_DEPOSIT << std::endl;
+  
+  // print account balance
   temp_account->PrintBalance();
 }
 

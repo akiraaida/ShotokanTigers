@@ -12,6 +12,7 @@
 #include "account.h"
 
 #include <cassert>
+#include <cmath>
 
 #include <iostream>
 
@@ -25,8 +26,9 @@ Account::Account() {
 }
 
 void Account::PrintBalance() const {
+  assert(balance >= 0.0);
   printf("Available Balance (%d):\n", number);
-  PrintMoney(balance);
+  PrintMoney(std::abs(balance));
 }
 
 /**
@@ -41,7 +43,7 @@ void Account::PrintWithdrawalLimit() const {
 * Output remaining transfer limit to console.
 **/
 void Account::PrintTransferLimit() const {
-  printf("Daily Transfers Remaining (%d):\n", number);
+  printf("Daily Transfer Limit Remaining (%d):\n", number);
   PrintMoney(transfer_limit_remaining);
 }
 
@@ -49,16 +51,16 @@ void Account::PrintTransferLimit() const {
 * Output remaining paybill limit to indicated recieving company.
 **/
 void Account::PrintPaybillLimit(const std::string& recipient) const {
-  assert(TransferRecipientExists(recipient));
-  printf("Daily Transfers to %s Remaining (%d):\n", recipient.c_str(),
+  assert(CompanyExists(recipient));
+  printf("Daily Payment Limit to %s Remaining (%d):\n", recipient.c_str(),
          number);
   PrintMoney(paybill_limit_remaining.at(recipient));
 }
 
 
-bool Account::TransferRecipientExists(const std::string& recipient) const {
+bool Account::CompanyExists(const std::string& recipient) const {
   return paybill_limit_remaining.find(recipient)
-         == paybill_limit_remaining.end();
+         != paybill_limit_remaining.end();
 }
 
 

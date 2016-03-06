@@ -54,7 +54,7 @@ class Account {
   /**
   * Returns true when a company limit is filed.
   **/
-  bool TransferRecipientExists(const std::string& recipient) const;
+  bool CompanyExists(const std::string& recipient) const;
 
   /**
   * 'Account number' uniquely identifying item in system

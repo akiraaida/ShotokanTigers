@@ -177,6 +177,22 @@ Solution:
 ----
 Update the .out files to contain the balances.
     
+Deposit fees not applied (Test Iter 6)
+====
+Problem:
+----
+Account balance output did not match account balance input.
+
+Cases Affected:
+----
+- depo002
+- 
+
+Typos
+----
+- Noticed typo on transfer success message while trying to pass 'depo006.out'
+Not directly involved in failures.
+- Typo in depo007 on 'withdraw' contributed to failure.
 Deposit Prompt
 ====
 - commands.cc:
@@ -189,8 +205,45 @@ Deposit Prompt
   
 Various things:
 ----
+- depo002
+  - bug in .out file: expected charges for admin but not for user
+    - balance values were corrected 
 - depo004
   depo004.out:
   - initial prompt was not 'Please enter a command:'
   - changed 'enter the user's number' to 'enter the user's account number" for 
     consistency
+- depo006
+  - depo006.in
+    - missing 'standard' login spec
+    - found that withdrawal did not deduct from balance
+  - depo006.out
+    - found that depo006.out sometimes prompted for name in standard mode
+  - depo006.trans
+    - found that account fees were not accounted for
+  - commands.cc
+    - found that paybill does not check for company validity
+      - fix: added statements to reject transaction if company does not exist
+    - found that withdrawal did not print transaction fees separately.
+        - fix: split up PushTransactionRecord calls into two, one for amount and other for 
+          transaction fees
+  - console_input.cc
+    - found that function checking company existence was returning flipped result
+      - fix: changed == to !=
+- depo007
+  - found that negative balances could be printed
+    - response: added negative balance assertion to print function, and changed the value
+      to an absolute one for -0.00.
+  - found that held funds were factored into calculation of sufficient balance for deposit
+    fee
+    - fix: removed amount from calculation
+  - couldn't figure out why depo007 was failing after all this
+    - fix: moved print of balance to before success/failure for depo, transfer,
+      paybill and withdrawal.
+    - also found that transfer limit would print for admins, inappropriately, so
+      made that behaviour dependent on the admin.
+    - found that transaction charge was being stored as a float
+      - fix: changed transaction charge type in deposit to double to match
+        balance type  
+        - depo007.trans
+          - transaction charge listed as 04 instead of 01

@@ -2,108 +2,119 @@ Please enter a command:
 Please enter your session type: 
 Please enter a login name: 
 Please enter a command: 
-Please enter the account number: 
+Please enter the user's account number: 
 Please enter amount to withdraw: 
-Success, 5.00 has been withdrawn.
-Available Balance (12380): 
+The withdrawal transaction has completed.
+Available Balance (12380):
 5.10
-Daily Withdrawals Remaining (12380): 
+Daily Withdrawals Remaining (12380):
 495.00
-Please enter the account number: 
+Please enter a command: 
+Please enter the user's account number: 
 Please enter amount to deposit: 
-Success, 5.00 has been deposited.
-Available Balance (12380): 
+The deposit transaction has completed.
+Available Balance (12380):
 5.00
-Please enter the account number: 
+Please enter a command: 
+Please enter the user's account number: 
 Please enter amount to withdraw: 
-Success, 5.00 has been withdrawn.
-Available Balance (12381): 
+The withdrawal transaction has completed.
+Available Balance (12381):
 5.05
-Daily Withdrawals Remaining (12381): 
+Daily Withdrawals Remaining (12381):
 495.00
-Please enter the account number: 
-Please enter amount to withdraw: 
-Success, 5.00 has been withdrawn.
-Available Balance (12381): 
+Please enter a command: 
+Please enter the user's account number: 
+Please enter amount to deposit: 
+The deposit transaction has completed.
+Available Balance (12381):
 5.00
-Please enter the account holder's name: 
-Please enter the account number: 
-Enter account number to transfer to: 
-Enter amount: 
-Success, 5.00 has been transferred to 12345.
-Available Balance (12382): 
+Please enter a command: 
+Please enter the transferring account's number: 
+Please enter the recipient account's number: 
+Please enter amount to transfer: 
+Amount has been transferred successfully.
+Available Balance (12382):
 5.10
-Available Balance (12345): 
+Available Balance (12345):
 115.00
-Daily Transfer Limit Remaining (12382): 
+Daily Transfer Limit Remaining (12382):
 995.00
-Please enter the account number: 
+Please enter a command: 
+Please enter the user's account number: 
 Please enter amount to deposit: 
-Success, 5.00 has been deposited.
-Available Balance (12382): 
+The deposit transaction has completed.
+Available Balance (12382):
 5.00
-Please enter the account holder's name: 
-Please enter the account number: 
-Enter account number to transfer to: 
-Enter amount: 
-Success, 5.00 has been transferred to 12345.
-Available Balance (12383): 
+Please enter a command: 
+Please enter the transferring account's number: 
+Please enter the recipient account's number: 
+Please enter amount to transfer: 
+Amount has been transferred successfully.
+Available Balance (12383):
 5.05
-Available Balance (12345): 
+Available Balance (12345):
 120.00
-Daily Transfer Limit Remaining (12383): 
+Daily Transfer Limit Remaining (12383):
 995.00
-Please enter the account number: 
+Please enter a command: 
+Please enter the user's account number: 
 Please enter amount to deposit: 
-Success, 5.00 has been deposited.
-Available Balance (12383): 
+The deposit transaction has completed.
+Available Balance (12383):
 5.00
-Please enter the account number: 
+Please enter a command: 
+Please enter the user's account number: 
 Please enter recipient to be paid: 
 Please enter amount to pay: 
-Success, 5.00 has been paid to TV.
-Available Balance (12384): 
+Amount has been paid successfully.
+Available Balance (12384):
 5.10
-Daily Payment Limit to TV Remaining (12384): 
+Daily Payment Limit to TV Remaining (12384):
 1995.00
-Please enter the account number: 
+Please enter a command: 
+Please enter the user's account number: 
 Please enter amount to deposit: 
-Success, 5.00 has been deposited.
-Available Balance (12384): 
+The deposit transaction has completed.
+Available Balance (12384):
 5.00
-Please enter the account number: 
+Please enter a command: 
+Please enter the user's account number: 
 Please enter recipient to be paid: 
 Please enter amount to pay: 
-Success, 5.00 has been paid to TV.
-Available Balance (12385): 
+Amount has been paid successfully.
+Available Balance (12385):
 5.05
-Daily Payment Limit to TV Remaining (12385): 
+Daily Payment Limit to TV Remaining (12385):
 1995.00
-Please enter the account number: 
+Please enter a command: 
+Please enter the user's account number: 
 Please enter amount to deposit: 
-Success, 5.00 has been deposited.
-Available Balance (12385): 
+The deposit transaction has completed.
+Available Balance (12385):
 5.00
-Please enter the account holder's name: 
-Please enter the account number: 
+Please enter a command: 
+Please enter the user's account number: 
 Please enter amount to deposit: 
-Success, 5.00 has been deposited.
-Available Balance (12386): 
+The deposit transaction has completed.
+Available Balance (12386):
 5.10
-Please enter the account number: 
+Please enter a command: 
+Please enter the user's account number: 
 Please enter amount to deposit: 
-Success, 5.00 has been deposited.
-Available Balance (12386): 
+The deposit transaction has completed.
+Available Balance (12386):
 5.00
-Please enter the account holder's name: 
-Please enter the account number: 
+Please enter a command: 
+Please enter the user's account number: 
 Please enter amount to deposit: 
-Success, 5.00 has been deposited.
-Available Balance (12387): 
+The deposit transaction has completed.
+Available Balance (12387):
 5.05
-Please enter the account number: 
+Please enter a command: 
+Please enter the user's account number: 
 Please enter amount to deposit: 
-Success, 5.00 has been deposited.
-Available Balance (12387): 
+The deposit transaction has completed.
+Available Balance (12387):
 5.00
 Please enter a command: 
