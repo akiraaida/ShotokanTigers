@@ -1,6 +1,8 @@
+Please enter a command: 
 Please enter your session type: 
 Please enter a login name: 
 Please enter a command: 
-Enter your account number: 
-Enter account number to transfer to: 
-Error, cannot transfer to same account.
+Please enter the transferring account's number: 
+Please enter the recipient account's number: 
+ERROR, CANNOT TRANSFER TO SAME ACCOUNT.
+Please enter a command: 

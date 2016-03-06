@@ -264,3 +264,23 @@ Various things:
         balance type  
         - depo007.trans
           - transaction charge listed as 04 instead of 01
+ - tran001
+  - found that error message was not specific about the accounts matching being
+    the problem.
+    - also found that owners could not transfer between different accounts that
+      they own.
+    - response: create new test case to confirm accounts can transfer to themselves.(tran008)
+ - tran002
+  - found that transfer accepted zero dollars,
+- tran003
+  - found that transfer printed 0 charge for admins
+  - changed expected to be lower since the account used does not have that kind of cash
+- tran005
+  - found that some injected code had been left in & forgotten about
+- tran007
+  - revealed that character values are not rejected
+    - response: reject character values & standardize currency checks somehow
+  - on considering whether transfers were beholden to the canadian currency limits,
+    I elected to allow them; that limit only realistically applies to withdrawal.
+      - changed values to be lower as well.
+- noted that transferred funds should not go over the limit.

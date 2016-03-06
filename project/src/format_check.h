@@ -36,9 +36,9 @@ enum {
    kInvalid,
    
    /**
-   * data was longer than 8 characters.
+   * Data value exceeded 99999.99
    **/
-   kTooLong,
+   kTooLarge,
    
    /**
    * Too many values following the decimal point.
@@ -51,16 +51,45 @@ enum {
    kInvalidSymbol,
    
    /**
-   * Input had only fractional part
+   * Input was negative.
    **/
-   kBelowOne
+   kNegativeOrZero,
+   
+   /**
+   * Input was fine in all ways, except it was not canadian.
+   * Note that where canadian bill values are NOT a concern, this is
+   * synonymous with kValid.
+   **/
+   kNonCanadian,
+   
+   /**
+   * Uncaught somehow
+   **/
+   kUnset
 };
 } // namespace CurrencyError
 
 /**
-* returns CurrencyError::kValid if the string checks out.
+* Parses currency. If not set to nullptr, status is CurrencyError::kValid or
+* CurrencyError::kNonCanadian when the string checks out and an error otherwise. 
 **/
-int CheckCurrency(const std::string& number);
+double CheckCurrency(const std::string& number, int* status);
+
+/**
+* Confirms whether the error indicates a correct value when conformance to
+* canadian currency is not a constraint.
+**/
+bool NonBillValueIsValid(int error);
+
+/**
+* Checks if 'amount' is valid currency.
+**/
+bool CheckUnit(double value);
+
+/**
+* get string corresponding to currency error
+**/
+std::string GetCurrencyErrorMessage(int error);
 } //namespace FormatCheck
 } //namespace BankFrontEnd
 

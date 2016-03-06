@@ -5,19 +5,7 @@ Please enter the account holder's name:
 Please enter the user's account number: 
 Please enter recipient to be paid: 
 Please enter amount to pay: 
-ERROR, VALUE HAS MORE THAN 5 DIGITS PRECEDING THE DECIMAL.
-Please enter a command: 
-Please enter the account holder's name: 
-Please enter the user's account number: 
-Please enter recipient to be paid: 
-Please enter amount to pay: 
-ERROR, VALUE HAS MORE THAN 5 DIGITS PRECEDING THE DECIMAL.
-Please enter a command: 
-Please enter the account holder's name: 
-Please enter the user's account number: 
-Please enter recipient to be paid: 
-Please enter amount to pay: 
-ERROR, VALUE MUST HAVE AT LEAST 1 DIGIT PRECEDING THE DECIMAL.
+ERROR, INPUT VALUE IS TOO LARGE.
 Please enter a command: 
 Please enter the account holder's name: 
 Please enter the user's account number: 
@@ -33,7 +21,23 @@ Please enter recipient to be paid:
 Please enter amount to pay: 
 Amount has been paid successfully.
 Available Balance (12345):
-100.00
+104.50
+Please enter a command: 
+Please enter the account holder's name: 
+Please enter the user's account number: 
+Please enter recipient to be paid: 
+Please enter amount to pay: 
+Amount has been paid successfully.
+Available Balance (12345):
+99.50
+Please enter a command: 
+Please enter the account holder's name: 
+Please enter the user's account number: 
+Please enter recipient to be paid: 
+Please enter amount to pay: 
+Amount has been paid successfully.
+Available Balance (12345):
+94.50
 Please enter a command: 
 Please enter the account holder's name: 
 Please enter the user's account number: 
@@ -47,7 +51,7 @@ Please enter recipient to be paid:
 Please enter amount to pay: 
 Amount has been paid successfully.
 Available Balance (12345):
-95.00
+89.50
 Please enter a command: 
 Please enter a command: 
 Please enter your session type: 
@@ -56,24 +60,14 @@ Please enter a command:
 Please enter the user's account number: 
 Please enter recipient to be paid: 
 Please enter amount to pay: 
-ERROR, VALUE HAS MORE THAN 5 DIGITS PRECEDING THE DECIMAL.
-Please enter a command: 
-Please enter the user's account number: 
-Please enter recipient to be paid: 
-Please enter amount to pay: 
-ERROR, VALUE HAS MORE THAN 5 DIGITS PRECEDING THE DECIMAL.
-Please enter a command: 
-Please enter the user's account number: 
-Please enter recipient to be paid: 
-Please enter amount to pay: 
-ERROR, VALUE MUST HAVE AT LEAST 1 DIGIT PRECEDING THE DECIMAL.
+ERROR, INPUT VALUE IS TOO LARGE.
 Please enter a command: 
 Please enter the user's account number: 
 Please enter recipient to be paid: 
 Please enter amount to pay: 
 Amount has been paid successfully.
 Available Balance (12345):
-89.95
+84.45
 Daily Payment Limit to TV Remaining (12345):
 1995.00
 Please enter a command: 
@@ -82,9 +76,27 @@ Please enter recipient to be paid:
 Please enter amount to pay: 
 Amount has been paid successfully.
 Available Balance (12345):
-84.90
+83.90
 Daily Payment Limit to TV Remaining (12345):
-1990.00
+1994.50
+Please enter a command: 
+Please enter the user's account number: 
+Please enter recipient to be paid: 
+Please enter amount to pay: 
+Amount has been paid successfully.
+Available Balance (12345):
+78.85
+Daily Payment Limit to TV Remaining (12345):
+1989.50
+Please enter a command: 
+Please enter the user's account number: 
+Please enter recipient to be paid: 
+Please enter amount to pay: 
+Amount has been paid successfully.
+Available Balance (12345):
+73.80
+Daily Payment Limit to TV Remaining (12345):
+1984.50
 Please enter a command: 
 Please enter the user's account number: 
 Please enter recipient to be paid: 
@@ -96,7 +108,7 @@ Please enter recipient to be paid:
 Please enter amount to pay: 
 Amount has been paid successfully.
 Available Balance (12345):
-79.85
+68.75
 Daily Payment Limit to TV Remaining (12345):
-1985.00
+1979.50
 Please enter a command: 

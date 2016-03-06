@@ -5,13 +5,13 @@ Please enter the account holder's name:
 Please enter the user's account number: 
 Please enter recipient to be paid: 
 Please enter amount to pay: 
-ERROR, ONLY POSITIVE VALUES ARE ACCEPTED.
+ERROR, INPUT VALUE IS TOO SMALL.
 Please enter a command: 
 Please enter the account holder's name: 
 Please enter the user's account number: 
 Please enter recipient to be paid: 
 Please enter amount to pay: 
-ERROR, ONLY POSITIVE VALUES ARE ACCEPTED.
+ERROR, INPUT VALUE IS TOO SMALL.
 Please enter a command: 
 Please enter a command: 
 Please enter your session type: 
@@ -20,10 +20,10 @@ Please enter a command:
 Please enter the user's account number: 
 Please enter recipient to be paid: 
 Please enter amount to pay: 
-ERROR, ONLY POSITIVE VALUES ARE ACCEPTED.
+ERROR, INPUT VALUE IS TOO SMALL.
 Please enter a command: 
 Please enter the user's account number: 
 Please enter recipient to be paid: 
 Please enter amount to pay: 
-ERROR, ONLY POSITIVE VALUES ARE ACCEPTED.
+ERROR, INPUT VALUE IS TOO SMALL.
 Please enter a command: 

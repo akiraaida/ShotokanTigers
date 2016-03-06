@@ -1,9 +1,15 @@
 10 admin                00000 00000.00 A 
 03 John Doe             12345 00005.00 TV
+03 John Doe             12345 00000.50 TV
+03 John Doe             12345 00005.00 TV
 03 John Doe             12345 00005.00 TV
 03 John Doe             12345 00005.00 TV
 00                      00000 00000.00   
 10 John Doe             00000 00000.00 S 
+03 John Doe             12345 00005.00 TV
+01 John Doe             12345 00000.05   
+03 John Doe             12345 00000.50 TV
+01 John Doe             12345 00000.05   
 03 John Doe             12345 00005.00 TV
 01 John Doe             12345 00000.05   
 03 John Doe             12345 00005.00 TV

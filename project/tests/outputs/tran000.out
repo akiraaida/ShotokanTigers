@@ -1,5 +1,7 @@
+Please enter a command: 
 Please enter your session type: 
 Please enter a login name: 
 Please enter a command: 
-Enter your account number: 
-Error, account specified is not a valid account.
+Please enter the transferring account's number: 
+ERROR, THAT ACCOUNT IS INVALID.
+Please enter a command: 

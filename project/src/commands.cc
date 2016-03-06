@@ -32,24 +32,18 @@
 #define ERROR_MESSAGE_NO_LOGIN "ERROR, YOU HAVE NOT LOGGED IN YET."
 #define ERROR_MESSAGE_INVALID_ACCOUNT "ERROR, THAT ACCOUNT IS INVALID."
 #define ERROR_MESSAGE_STOLEN_ACCOUNT "ERROR, THE ACCOUNT NUMBER DOESN'T MATCH THE ACCOUNT HOLDER'S NAME."
-#define ERROR_INVALID_INPUT "ERROR, INVALID INPUT."
 #define ERROR_BALANCE_INSUFFICIENT "ERROR, THE ACCOUNT DOES NOT HAVE SUFFICIENT FUNDS."
 #define ERROR_ADMIN_PERMISSIONS "ERROR, YOU DO NOT HAVE THE CORRECT PRIVILEGES."
 #define ERROR_DISABLED "ERROR, THAT ACCOUNT IS DISABLED."
 #define ERROR_ENABLED "ERROR, THAT ACCOUNT IS ENABLED ALREADY."
 #define ERROR_DELETED "ERROR, THAT ACCOUNT HAS BEEN DELETED."
 #define ERROR_MESSAGE_HIT_TRANSFER_LIMIT "ERROR, THE VALUE ENTERED IS BEYOND THE TRANSFER LIMIT."
-#define ERROR_MIN_INPUT "ERROR, INPUT VALUE IS TOO SMALL."
-#define ERROR_MAX_INPUT "ERROR, INPUT VALUE IS TOO LARGE."
 #define ERROR_MESSAGE_HIT_PAYBILL_LIMIT "ERROR, THE VALUE ENTERED IS BEYOND THE PAYBILL LIMIT."
 #define ERROR_ABOVE_MAX_INIT "ERROR, MAX INITIAL BALANCE EXCEEDED."
 #define ERROR_BAD_COMPANY_SIZE "ERROR, %s IS NOT TWO CHARACTERS.\n"
 #define ERROR_INVALID_COMPANY "ERROR, %s IS NOT A VALID COMPANY NAME.\n"
-#define ERROR_NEGATIVE_INPUT "ERROR, ONLY POSITIVE VALUES ARE ACCEPTED."
-#define ERROR_LARGE_INPUT "ERROR, VALUE HAS MORE THAN 5 DIGITS PRECEDING THE DECIMAL."
-#define ERROR_INPUT_BELOW_ONE "ERROR, VALUE MUST HAVE AT LEAST 1 DIGIT PRECEDING THE DECIMAL."
-#define ERROR_INPUT_LOTS_FRACTIONALS "ERROR, VALUE CAN HAVE AT MOST 2 DIGITS FOLLOWING THE DECIMAL."
-#define ERROR_INVALID_SYMBOL "ERROR, INPUT CONTAINS ONE OR MORE OF FORBIDDEN SYMBOLS [$ ,]"
+#define ERROR_SELF_TRANSFER "ERROR, CANNOT TRANSFER TO SAME ACCOUNT."
+#define ERROR_TRANSFER_ZERO "ERROR, YOU CANNOT TRANSFER ZERO DOLLARS."
 
 #define PROMPT_ENTER_SESSION_TYPE "Please enter your session type: "
 #define PROMPT_ENTER_LOGIN_NAME "Please enter a login name: "
@@ -174,7 +168,14 @@ void Commands::withdrawal() {
   std::cout << PROMPT_ENTER_ACCOUNT_NUMBER << std::endl;
   int number = ConsoleInput::GetInteger();
   std::cout << PROMPT_WITHDRAWAL_VALUE << std::endl;
-  double amount = ConsoleInput::GetDouble();
+  int amount_status;
+  double amount = ConsoleInput::GetDouble(&amount_status);
+  if(amount_status != FormatCheck::CurrencyError::kValid) {
+    std::cout << FormatCheck::GetCurrencyErrorMessage(amount_status)
+              << std::endl;
+    return;
+  }
+  
   std::vector<Account*> temp = accounts_[name];
   if (temp.empty()) {
     std::cout << ERROR_MESSAGE_ACCOUNTLESS_USER << std::endl;
@@ -196,7 +197,7 @@ void Commands::withdrawal() {
   float transaction_charge =
       is_admin_ ? 0.0 : GetTransactionCharge(name, number);
   float debit = amount + transaction_charge;
-  if (temp_account->balance < debit || CheckUnit(amount) == false) {
+  if (temp_account->balance < debit) {
     std::cout << ERROR_BALANCE_INSUFFICIENT << std::endl; // Very generalized error message atm, may want to break the error cases down?
                                                   // Errors for not mod 5/10/20/100 and not enough money
   } else { // perform withdrawal
@@ -214,14 +215,6 @@ void Commands::withdrawal() {
   temp_account->PrintBalance();
   if(!is_admin_)
     temp_account->PrintWithdrawalLimit();
-}
-
-bool Commands::CheckUnit(double amount) {
-  if (fmod(amount, 5) == 0 || fmod(amount, 10) == 0 || fmod(amount, 20) == 0
-      || fmod(amount, 100) == 0) {
-    return true;
-  }
-  return false;
 }
 
 bool Commands::UserExists(std::string name) {
@@ -289,10 +282,13 @@ void Commands::transfer() {
 
       // find name corresponding
       recipient_name = GetAccountOwner(recipient_number);
-      if (recipient_name.empty() || recipient_name == name) {
+      if (recipient_name.empty()) {
         std::cout <<
                   AccountStatus::GetErrorMessage(AccountStatus::kAccountNoExist)
                   << std::endl;
+        return;
+      } else if (recipient_number == number) {
+        std::cout << ERROR_SELF_TRANSFER << std::endl;
         return;
       }
 
@@ -310,14 +306,23 @@ void Commands::transfer() {
 
     // get amount to transfer
     std::cout << PROMPT_TRANSFER_VALUE << std::endl;
-    double amount = ConsoleInput::GetDouble();
+    int amount_status;
+    double amount = ConsoleInput::GetDouble(&amount_status);
+    if(amount_status == FormatCheck::CurrencyError::kNegativeOrZero
+       && amount == 0.0) {
+      std::cout << ERROR_TRANSFER_ZERO << std::endl;
+      return;
+    } else if (!FormatCheck::NonBillValueIsValid(amount_status)) {
+      std::cout << FormatCheck::GetCurrencyErrorMessage(amount_status)
+                << std::endl;
+      return;
+    }
+    
 
     // check transfer limit
     double charge = is_admin_ ? 0.0 : GetTransactionCharge(name, number);
     if (account->transfer_limit_remaining < amount) {
       std::cout << ERROR_MESSAGE_HIT_TRANSFER_LIMIT << std::endl;
-      std::cout << account->transfer_limit_remaining << "<" << amount
-                << std::endl;
     } else if (account->balance < (amount + charge)) {
       std::cout << ERROR_BALANCE_INSUFFICIENT << std::endl;
     } else {
@@ -329,7 +334,8 @@ void Commands::transfer() {
       // create transaction records
       PushTransactionRecord(2, name, number, amount);
       PushTransactionRecord(2, recipient_name, recipient_number, amount);
-      PushTransactionRecord(1, name, number, charge);
+      if(!is_admin_)
+        PushTransactionRecord(1, name, number, charge);
 
       // did it
       std::cout << SUCCESS_TRANSFER << std::endl;
@@ -385,39 +391,9 @@ void Commands::paybill() {
   int status;
   std::cout << PROMPT_PAYBILL_VALUE << std::endl;
   double amount = ConsoleInput::GetDouble(&status);
-  switch(status) {
-    case FormatCheck::CurrencyError::kInvalidSymbol: {
-      std::cout << ERROR_INVALID_SYMBOL << std::endl;
-      return;
-    }
-    
-    case FormatCheck::CurrencyError::kInvalid: {
-      std::cout << ERROR_INVALID_INPUT << std::endl;
-      return;
-    }
-      
-    case FormatCheck::CurrencyError::kTooLong: {
-      std::cout << ERROR_LARGE_INPUT << std::endl;
-      return;
-    }
-    
-    case FormatCheck::CurrencyError::kBelowOne: {
-      std::cout << ERROR_INPUT_BELOW_ONE << std::endl;
-      return;
-    }
-    
-    case FormatCheck::CurrencyError::kTooLongFractional: {
-      std::cout << ERROR_INPUT_LOTS_FRACTIONALS << std::endl;
-      return;
-    }
-      
-    default:
-      break;
-  }
-  
-  // check amount
-  if(amount <= 0.0) {
-    std::cout << ERROR_NEGATIVE_INPUT << std::endl;
+  if(!FormatCheck::NonBillValueIsValid(status)) {
+    std::cout << FormatCheck::GetCurrencyErrorMessage(status)
+              << std::endl;
     return;
   }
 
@@ -462,19 +438,14 @@ void Commands::deposit() {
   std::cout << PROMPT_ENTER_ACCOUNT_NUMBER << std::endl;
   int number = ConsoleInput::GetInteger();
   std::cout << PROMPT_DEPOSIT_VALUE << std::endl;
-  double amount = ConsoleInput::GetDouble();
-  if(number == INT_MIN || amount == FLT_MIN) {
-    std::cout << ERROR_INVALID_INPUT << std::endl;
+  int amount_status;
+  double amount = ConsoleInput::GetDouble(&amount_status);
+  if(!FormatCheck::NonBillValueIsValid(amount_status)) {
+    std::cout << FormatCheck::GetCurrencyErrorMessage(amount_status)
+              << std::endl;
     return;
   }
-  if (amount <= 0) {
-    std::cout << ERROR_MIN_INPUT << std::endl;
-    return;
-  }
-  if (amount > 99999.99){
-    std::cout << ERROR_MAX_INPUT << std::endl;
-    return;
-  }
+  
   std::vector<Account*> temp = accounts_[name];
   if (temp.empty()) {
     std::cout << ERROR_MESSAGE_ACCOUNTLESS_USER << std::endl;
@@ -517,9 +488,14 @@ void Commands::create() {
   }
   std::string name = PromptForAccountHolderIfUnknown();
   std::cout << PROMPT_INIT_BALANCE << std::endl;
-  double init = ConsoleInput::GetDouble();
-  if (init > 99999.99) {
+  int status;
+  double init = ConsoleInput::GetDouble(&status);
+  if (status == FormatCheck::CurrencyError::kTooLarge) {
     std::cout << ERROR_ABOVE_MAX_INIT << std::endl;
+    return;
+  } else if(!FormatCheck::NonBillValueIsValid(status)) {
+    std::cout << FormatCheck::GetCurrencyErrorMessage(status)
+              << std::endl;
     return;
   }
   PushTransactionRecord(5, name, 00000, init);

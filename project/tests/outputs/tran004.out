@@ -1,7 +1,15 @@
+Please enter a command: 
 Please enter your session type: 
 Please enter a login name: 
 Please enter a command: 
-Enter your account number: 
-Enter account number to transfer to: 
-Enter amount: 
-Success, 1000.00 was transferred to 12346.
+Please enter the transferring account's number: 
+Please enter the recipient account's number: 
+Please enter amount to transfer: 
+Amount has been transferred successfully.
+Available Balance (12348):
+9009.90
+Available Balance (12346):
+1110.00
+Daily Transfer Limit Remaining (12348):
+0.00
+Please enter a command: 

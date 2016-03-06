@@ -118,11 +118,6 @@ class Commands {
     **/
     bool UserExists(std::string name);
 
-    /**
-    * Checks if 'amount' is valid currency.
-    **/
-    bool CheckUnit(double amount);
-
     /*
     * Determines if it's a standard or admin session
     */

@@ -38,21 +38,9 @@ int GetInteger() { // turn string from cin into an integer
 }
 
 double GetDouble(int* status) { // turn string from cin into a double
-  // get string
   std::string number = GetString();
-  
-  // status
-  if(status)
-    *status = FormatCheck::CheckCurrency(number);
-    
-  // convert
-  double destination;
-  try {
-    destination = std::stof(number);
-  } catch(std::exception& e) {
-    return FLT_MIN;
-  }
-  return destination;
+  double value = FormatCheck::CheckCurrency(number, status);
+  return FormatCheck::NonBillValueIsValid(*status) ? value : 0.0;
 }
 } // namespace ConsoleInput
 } // namespace BankFrontEnd

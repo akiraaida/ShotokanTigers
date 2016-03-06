@@ -30,9 +30,7 @@ Please enter a command:
 Please enter the account holder's name: 
 Please enter the user's account number: 
 Please enter amount to deposit: 
-The deposit transaction has completed.
-Available Balance (12345):
-110.00
+ERROR, VALUE CAN HAVE AT MOST 2 DIGITS FOLLOWING THE DECIMAL.
 Please enter a command: 
 Please enter the account holder's name: 
 Please enter the user's account number: 
@@ -69,13 +67,11 @@ Available Balance (12345):
 Please enter a command: 
 Please enter the user's account number: 
 Please enter amount to deposit: 
-The deposit transaction has completed.
-Available Balance (12345):
-109.80
+ERROR, VALUE CAN HAVE AT MOST 2 DIGITS FOLLOWING THE DECIMAL.
 Please enter a command: 
 Please enter the user's account number: 
 Please enter amount to deposit: 
 The deposit transaction has completed.
 Available Balance (12345):
-109.75
+109.80
 Please enter a command: 
