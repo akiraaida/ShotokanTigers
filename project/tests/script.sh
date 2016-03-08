@@ -6,14 +6,9 @@ cd inputs
 # For loop for all of the chng files
 for f in *.in;
 do
-    # If the transactions file exists, delete it since it will have output for other test cases
+    # Create actual files for each test case (actual transfer and actual output)
     tempCons=../${f%%.*}.aout
     trans=../${f%%.*}.atf
-    if [ -f $trans ]
-    then
-        rm $trans
-    fi
-    # Create an empty transaction file
     touch $trans
     # Pipe the input file into the program and then output the console output to the tempCons file
     $exe $accounts $trans < $f > $tempCons
@@ -33,15 +28,7 @@ do
         echo -e "[ transactions ]"
         diff $trans ../outputs/${f%%.*}.trans -y
     fi
+    # Move the temporary files to the actual files directory to compare actual/expected
     mv $tempCons ../actual
     mv $trans ../actual
 done
-# Delete files made during tests
-if [ -f $tempCons ]
-then
-    rm $tempCons
-fi
-if [ -f $trans ]
-then
-    rm $trans
-fi
