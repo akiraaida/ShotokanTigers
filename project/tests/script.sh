@@ -1,16 +1,14 @@
 #!/bin/bash
 exe="../../src/./frontend.exe"
 accounts="../../src/accounts.txt"
-trans="../../src/transactions.txt"
-tempCons="../tempCons.txt"
 # Switch to the inputs directory
 cd inputs
 # For loop for all of the chng files
 for f in *.in;
 do
-    # Output the test being run in white
-    #echo -e "\t\e[1;30;47m[ Running Test: $f ]\e[0m"
     # If the transactions file exists, delete it since it will have output for other test cases
+    tempCons=../${f%%.*}.aout
+    trans=../${f%%.*}.atf
     if [ -f $trans ]
     then
         rm $trans
@@ -29,17 +27,14 @@ do
     else
         # Output the test has failed in red
         echo -e "\e[1;30;41m[ '$f' Test Case Has Failed ]\e[0m"
-        #echo $checkCons
-        #echo $checkTrans
-        #cat $tempCons
-        #cat $trans
+        # Outputs the differences between the actual file and the output that should be there 
         echo -e "[ output ]"
         diff $tempCons ../outputs/${f%%.*}.out -y
         echo -e "[ transactions ]"
         diff $trans ../outputs/${f%%.*}.trans -y
     fi
-    # Output the test ended in white
-    #echo -e "\t\e[1;30;47m[ Finished Test: $f ]\e[0m\n"
+    mv $tempCons ../actual
+    mv $trans ../actual
 done
 # Delete files made during tests
 if [ -f $tempCons ]
