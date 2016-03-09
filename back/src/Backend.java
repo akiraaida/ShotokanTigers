@@ -9,6 +9,11 @@ public class Backend {
 
     public static void main(String[] args){
         
+        if(args.length == 0){
+            System.out.println("ERROR, NOT ENOUGH ARGUEMENTS.");
+            System.exit(0);
+        }
+
         try{
             FileReader masterIn = new FileReader(args[0]);
             BufferedReader masterBr = new BufferedReader(masterIn);
