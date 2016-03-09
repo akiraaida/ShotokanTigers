@@ -89,16 +89,32 @@ public class Backend {
         }
     }
 
-    public static List<String> parseTrans(){
+    public static List<Transaction> parseTrans(){
         
-        List<String> transactions = new ArrayList<String>();
+        List<Transaction> transactions = new ArrayList<Transaction>();
         try{
             FileReader parseFr = new FileReader("concat.txt");
             BufferedReader parseBr = new BufferedReader(parseFr);
 
             String line;
             while((line = parseBr.readLine()) != null){
-                transactions.add(line);    
+
+                String code = line.substring(0,2);
+                String name = line.substring(3, 23);
+                String num = line.substring(24,29);
+                String amount = line.substring(30, 38);
+                String misc = line.substring(39,41);
+                
+                name = name.trim();
+
+                Transaction tempTrans = new Transaction();
+                tempTrans.code = code;
+                tempTrans.name = name;
+                tempTrans.num = Integer.parseInt(num);
+                tempTrans.amount = Double.parseDouble(amount);
+                tempTrans.misc = misc;
+
+                transactions.add(tempTrans);    
             }
             return transactions;
         } catch (Exception e){
@@ -135,7 +151,7 @@ public class Backend {
         concatTrans(transFiles);
 
         // Put all of the transactions that are in "concat.txt" into an ArrayList
-        List<String> transactions = parseTrans();
+        List<Transaction> transactions = parseTrans();
 
         // TODO: Use the map data structure and the transactions data structure to
         // create a new master bank accounts file.
