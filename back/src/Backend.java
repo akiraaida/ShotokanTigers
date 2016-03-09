@@ -5,7 +5,7 @@ public class Backend {
 
     public static final String ACTIVE = "A";
     public static final String STUDENT = "S";
-    public static final String END = "END_OF_FILE         ";
+    public static final String END = "END_OF_FILE";
 
     public static void main(String[] args){
         
@@ -24,6 +24,8 @@ public class Backend {
                 String trans = line.substring(38, 42);
                 String plan = line.substring(43, 44);
 
+                name = name.trim();
+    
                 if(name.compareTo(END) != 0){
                     Account tempAccount = new Account();
 
