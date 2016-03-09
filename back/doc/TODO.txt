@@ -2,8 +2,8 @@ TODO
 =====
 
 1. Use the map data structure and the transactions data structure to create a new master bank accounts file.
-NNNNN_AAAAAAAAAAAAAAAAAAAA_S_PPPPPPPP_TTTT_Q
-Account Number_Name_Active/Disabled_Bank Balance_Number of Transactions_Student/No    n-Student 
+- NNNNN_AAAAAAAAAAAAAAAAAAAA_S_PPPPPPPP_TTTT_Q
+- Account Number_Name_Active/Disabled_Bank Balance_Number of Transactions_Student/Non-Student 
 
 2.  Debit the accounts 0.05 for each student plan transaction or 0.10 for each non-student plan transaction
 
@@ -25,5 +25,5 @@ COMPLETED
 
 3. Load the transactions file in and store the data into a data structure
     - data structure name = transactions
-    - Transactions are stored in an ArrayList<String> 
-
+    - Transactions are stored in an ArrayList<Transaction> 
+    - Transaction Code_Name_Account Number_Amount of Money_Misc
