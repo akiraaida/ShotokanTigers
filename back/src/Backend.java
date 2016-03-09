@@ -11,8 +11,8 @@ public class Backend {
     
         Map<String, ArrayList<Account>> accounts = new HashMap<String, ArrayList<Account>>();
         try{
-            FileReader masterIn = new FileReader(masterFile);
-            BufferedReader masterBr = new BufferedReader(masterIn);
+            FileReader masterFr = new FileReader(masterFile);
+            BufferedReader masterBr = new BufferedReader(masterFr);
 
             String line;
             while((line = masterBr.readLine()) != null){
@@ -56,6 +56,7 @@ public class Backend {
             return accounts;
         } catch (Exception e){
             System.out.println(e);
+            System.exit(0);
         }
         return accounts;
     }
@@ -71,8 +72,8 @@ public class Backend {
             BufferedWriter bwriter = new BufferedWriter(writer);
             pwriter = new PrintWriter(bwriter);
             for(int i = 0; i < transFiles.size(); i++){
-                FileReader transIn = new FileReader(transFiles.get(i));
-                BufferedReader transBr = new BufferedReader(transIn);
+                FileReader transFr = new FileReader(transFiles.get(i));
+                BufferedReader transBr = new BufferedReader(transFr);
                 String line;
                 while((line = transBr.readLine()) != null){
                     pwriter.println(line);
@@ -81,11 +82,31 @@ public class Backend {
 
         } catch (Exception e){
             System.out.println(e);
+            System.exit(0);
         } finally {
             if(pwriter != null){
                 pwriter.close();
             }
         }
+    }
+
+    public static List<String> parseTrans(){
+        
+        List<String> transactions = new ArrayList<String>();
+        try{
+            FileReader parseFr = new FileReader("concat.txt");
+            BufferedReader parseBr = new BufferedReader(parseFr);
+
+            String line;
+            while((line = parseBr.readLine()) != null){
+                transactions.add(line);    
+            }
+            return transactions;
+        } catch (Exception e){
+            System.out.println(e);
+            System.exit(0);
+        }
+        return transactions;
     }
 
     public static void main(String[] args){
@@ -102,6 +123,12 @@ public class Backend {
             transFiles.add(args[i]);
         }
         concatTrans(transFiles);
+
+        List<String> transactions = parseTrans();
+
+        for(int i = 0; i < transactions.size(); i++){
+            System.out.println(transactions.get(i));
+        }
     }
 }
 
