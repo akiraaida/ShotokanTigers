@@ -1,5 +1,6 @@
 prepare:
 	javac Account.java
+	javac Transaction.java
 	javac Backend.java
 
 run:
