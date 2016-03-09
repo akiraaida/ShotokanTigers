@@ -1,0 +1,3 @@
+1. If multiple transaction files then merge them. 
+2. Master Bank Accounts File Format = NNNNN_AAAAAAAAAAAAAAAAAAAA_S_PPPPPPPP_TTTT_Q where Q is S for student and N for non-student
+3. Accounts are debitted in the backend and not the front end. eg. If a withdrawal then deduct 0.05, the frontend should gurantee the backend does not push the account into negative values.

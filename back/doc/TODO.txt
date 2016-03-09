@@ -1,0 +1,29 @@
+TODO
+=====
+
+1. Use the map data structure and the transactions data structure to create a new master bank accounts file.
+NNNNN_AAAAAAAAAAAAAAAAAAAA_S_PPPPPPPP_TTTT_Q
+Account Number_Name_Active/Disabled_Bank Balance_Number of Transactions_Student/No    n-Student 
+
+2.  Debit the accounts 0.05 for each student plan transaction or 0.10 for each non-student plan transaction
+
+3. Reformat to fit Google style
+
+4. Comment functions and classes
+
+COMPLETED
+=====
+
+1. Load the master bank accounts file in and store the data into a data structure. 
+    - Data structure name = map
+    - Data is stored in a Map<String, ArrayList<Account>>
+    - Name of the user is the key, they will have 1 or more accounts
+    - Each account has an account number, account status, balance, number of transactions, and if they are a student or non-student.
+
+2. Merge transactions files
+    - If 1 or more transaction files then all information is put into the file "concat.txt"
+
+3. Load the transactions file in and store the data into a data structure
+    - data structure name = transactions
+    - Transactions are stored in an ArrayList<String> 
+
