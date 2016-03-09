@@ -3,130 +3,6 @@ import java.util.*;
 
 public class Backend {
 
-    public static final String ACTIVE = "A";
-    public static final String STUDENT = "S";
-    public static final String END = "END_OF_FILE";
-
-    public static Map<String, ArrayList<Account>> parseMaster(String masterFile){
-    
-        Map<String, ArrayList<Account>> accounts = new HashMap<String, ArrayList<Account>>();
-        try{
-            FileReader masterFr = new FileReader(masterFile);
-            BufferedReader masterBr = new BufferedReader(masterFr);
-
-            String line;
-            while((line = masterBr.readLine()) != null){
-                
-                String num = line.substring(0, 5);
-                String name = line.substring(6, 26);
-                String stat = line.substring(27, 28);
-                String bal = line.substring(29, 37);
-                String trans = line.substring(38, 42);
-                String plan = line.substring(43, 44);
-
-                name = name.trim();
-    
-                if(name.compareTo(END) != 0){
-                    Account tempAccount = new Account();
-
-                    tempAccount.num = Integer.parseInt(num);
-                    if(stat == ACTIVE){
-                        tempAccount.stat = false;
-                    } else {
-                        tempAccount.stat = true;
-                    }
-                    tempAccount.bal = Double.parseDouble(bal);
-                    tempAccount.trans = Integer.parseInt(trans);
-                    if(plan == STUDENT){
-                        tempAccount.plan = true;
-                    } else {
-                        tempAccount.plan = false;
-                    }
-                    ArrayList<Account> accountList = accounts.get(name);
-                    if(accounts.get(name) == null){
-                        accountList = new ArrayList<Account>();
-                        accountList.add(tempAccount);
-                        accounts.put(name, accountList);
-                    } else {
-                        accountList.add(tempAccount);
-                    }
-                }
-            }
-            masterBr.close();
-            return accounts;
-        } catch (Exception e){
-            System.out.println(e);
-            System.exit(0);
-        }
-        return accounts;
-    }
-
-    public static void concatTrans(List<String> transFiles){
-        
-        PrintWriter pwriter = null;
-        try{
-            pwriter = new PrintWriter("concat.txt");
-            pwriter.close();
-
-            FileWriter writer = new FileWriter("concat.txt", true);
-            BufferedWriter bwriter = new BufferedWriter(writer);
-            pwriter = new PrintWriter(bwriter);
-            for(int i = 0; i < transFiles.size(); i++){
-                FileReader transFr = new FileReader(transFiles.get(i));
-                BufferedReader transBr = new BufferedReader(transFr);
-                String line;
-                while((line = transBr.readLine()) != null){
-                    pwriter.println(line);
-                }
-                transBr.close();
-            }
-
-        } catch (Exception e){
-            System.out.println(e);
-            System.exit(0);
-        } finally {
-            if(pwriter != null){
-                pwriter.close();
-            }
-        }
-    }
-
-    public static List<Transaction> parseTrans(){
-        
-        List<Transaction> transactions = new ArrayList<Transaction>();
-        try{
-            FileReader parseFr = new FileReader("concat.txt");
-            BufferedReader parseBr = new BufferedReader(parseFr);
-
-            String line;
-            while((line = parseBr.readLine()) != null){
-
-                String code = line.substring(0,2);
-                String name = line.substring(3, 23);
-                String num = line.substring(24,29);
-                String amount = line.substring(30, 38);
-                String misc = line.substring(39,41);
-                
-                name = name.trim();
-
-                Transaction tempTrans = new Transaction();
-                tempTrans.code = code;
-                tempTrans.name = name;
-                tempTrans.num = Integer.parseInt(num);
-                tempTrans.amount = Double.parseDouble(amount);
-                tempTrans.misc = misc;
-
-                transactions.add(tempTrans);    
-            }
-            parseBr.close();
-            return transactions;
-        } catch (Exception e){
-            System.out.println(e);
-            System.exit(0);
-        }
-        return transactions;
-    }
-
     public static void main(String[] args){
         
         // Execution requires at least two files to run. The master accounts file
@@ -138,11 +14,13 @@ public class Backend {
             System.exit(0);
         }
 
+        FileParser parse = new FileParser();
+
         // Load all of the files in the master accounts file into the data
         // structure map with the name as the key and their account information
         // in the data structure "Account". "Account"s are in an ArrayList if they
         // have multiple accounts
-        Map<String, ArrayList<Account>> map = parseMaster(args[0]);
+        Map<String, ArrayList<Account>> map = parse.parseMaster(args[0]);
         
         // Add all of the transaction files to an ArrayList
         List<String> transFiles = new ArrayList<String>();
@@ -151,10 +29,10 @@ public class Backend {
         }
         // Concatenate all of the given transaction files and put all of their contents
         // into "concat.txt"
-        concatTrans(transFiles);
+        parse.concatTrans(transFiles);
 
         // Put all of the transactions that are in "concat.txt" into an ArrayList
-        List<Transaction> transactions = parseTrans();
+        List<Transaction> transactions = parse.parseTrans();
 
         // TODO: Use the map data structure and the transactions data structure to
         // create a new master bank accounts file.
