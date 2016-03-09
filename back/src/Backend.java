@@ -52,6 +52,7 @@ public class Backend {
                     }
                 }
             }
+            masterBr.close();
             return accounts;
         } catch (Exception e){
             System.out.println(e);
@@ -77,6 +78,7 @@ public class Backend {
                 while((line = transBr.readLine()) != null){
                     pwriter.println(line);
                 }
+                transBr.close();
             }
 
         } catch (Exception e){
@@ -116,6 +118,7 @@ public class Backend {
 
                 transactions.add(tempTrans);    
             }
+            parseBr.close();
             return transactions;
         } catch (Exception e){
             System.out.println(e);
