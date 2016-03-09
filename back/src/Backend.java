@@ -7,18 +7,13 @@ public class Backend {
     public static final String STUDENT = "S";
     public static final String END = "END_OF_FILE";
 
-    public static void main(String[] args){
-        
-        if(args.length == 0){
-            System.out.println("ERROR, NOT ENOUGH ARGUEMENTS.");
-            System.exit(0);
-        }
-
+    public static Map<String, ArrayList<Account>> parseMaster(String masterFile){
+    
+        Map<String, ArrayList<Account>> accounts = new HashMap<String, ArrayList<Account>>();
         try{
-            FileReader masterIn = new FileReader(args[0]);
+            FileReader masterIn = new FileReader(masterFile);
             BufferedReader masterBr = new BufferedReader(masterIn);
 
-            Map<String, ArrayList<Account>> accounts = new HashMap<String, ArrayList<Account>>();
             String line;
             while((line = masterBr.readLine()) != null){
                 
@@ -58,10 +53,55 @@ public class Backend {
                     }
                 }
             }
-
+            return accounts;
         } catch (Exception e){
             System.out.println(e);
         }
+        return accounts;
+    }
+
+    public static void concatTrans(List<String> transFiles){
+        
+        PrintWriter pwriter = null;
+        try{
+            pwriter = new PrintWriter("concat.txt");
+            pwriter.close();
+
+            FileWriter writer = new FileWriter("concat.txt", true);
+            BufferedWriter bwriter = new BufferedWriter(writer);
+            pwriter = new PrintWriter(bwriter);
+            for(int i = 0; i < transFiles.size(); i++){
+                FileReader transIn = new FileReader(transFiles.get(i));
+                BufferedReader transBr = new BufferedReader(transIn);
+                String line;
+                while((line = transBr.readLine()) != null){
+                    pwriter.println(line);
+                }
+            }
+
+        } catch (Exception e){
+            System.out.println(e);
+        } finally {
+            if(pwriter != null){
+                pwriter.close();
+            }
+        }
+    }
+
+    public static void main(String[] args){
+        
+        if(args.length < 2){
+            System.out.println("ERROR, NOT ENOUGH ARGUEMENTS.");
+            System.exit(0);
+        }
+
+        Map<String, ArrayList<Account>> map = parseMaster(args[0]);
+        
+        List<String> transFiles = new ArrayList<String>();
+        for(int i = 1; i < args.length; i++){
+            transFiles.add(args[i]);
+        }
+        concatTrans(transFiles);
     }
 }
 
