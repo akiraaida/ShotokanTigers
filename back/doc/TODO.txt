@@ -5,11 +5,13 @@ TODO
 - NNNNN_AAAAAAAAAAAAAAAAAAAA_S_PPPPPPPP_TTTT_Q
 - Account Number_Name_Active/Disabled_Bank Balance_Number of Transactions_Student/Non-Student 
 
-2.  Debit the accounts 0.05 for each student plan transaction or 0.10 for each non-student plan transaction
+2. Debit the accounts 0.05 for each student plan transaction or 0.10 for each non-student plan transaction
 
-3. Reformat to fit Google style
+3. Need to do proper error checking when reading the transactions (eg. login before deposit)
 
-4. Comment functions and classes
+4. Reformat to fit Google style
+
+5. Comment functions and classes
 
 COMPLETED
 =====

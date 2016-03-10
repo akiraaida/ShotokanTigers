@@ -33,6 +33,22 @@ public class Backend {
         // Put all of the transactions that are in "concat.txt" into an ArrayList
         List<Transaction> transactions = parse.parseTrans();
 
+        boolean admin = false;
+        for(int i = 0; i < transactions.size(); i++){
+            if((transactions.get(i).code).compareTo("10") == 0){
+                if((transactions.get(i).misc).compareTo("A ") == 0){
+                    System.out.println("Logged in as admin");
+                    admin = true;
+                } else {
+                    System.out.println("Logged in as a standard user");
+                    admin = false;
+                }
+            }
+
+        }
+
+
+
         // TODO: Use the map data structure and the transactions data structure to
         // create a new master bank accounts file.
         // NNNNN_AAAAAAAAAAAAAAAAAAAA_S_PPPPPPPP_TTTT_Q
