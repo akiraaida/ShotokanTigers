@@ -1,6 +1,16 @@
 import java.util.*;
 
 public class Backend {
+    public static void ApplyTransactions(Map<String, ArrayList<Account>>
+                                    account_table,
+                                    List<Transaction> transactions) {
+      for(Transaction transaction : transactions) {
+        switch(transaction.num) {
+          
+          
+        }
+      }
+    }
 
     public static void main(String[] args){
         
@@ -13,19 +23,21 @@ public class Backend {
             System.exit(0);
         }
 
+        // Open filestream
         FileParser parse = new FileParser();
 
         // Load all of the files in the master accounts file into the data
         // structure map with the name as the key and their account information
         // in the data structure "Account". "Account"s are in an ArrayList if they
         // have multiple accounts
-        Map<String, ArrayList<Account>> map = parse.parseMaster(args[0]);
+        Map<String, ArrayList<Account>> account_table = parse.parseMaster(args[0]);
         
         // Add all of the transaction files to an ArrayList
         List<String> transFiles = new ArrayList<String>();
         for(int i = 1; i < args.length; i++){
             transFiles.add(args[i]);
         }
+        
         // Concatenate all of the given transaction files and put all of their contents
         // into "concat.txt"
         parse.concatTrans(transFiles);
@@ -33,7 +45,7 @@ public class Backend {
         // Put all of the transactions that are in "concat.txt" into an ArrayList
         List<Transaction> transactions = parse.parseTrans();
 
-        boolean admin = false;
+        /*boolean admin = false;
         for(int i = 0; i < transactions.size(); i++){
             if((transactions.get(i).code).compareTo("10") == 0){
                 if((transactions.get(i).misc).compareTo("A ") == 0){
@@ -45,7 +57,9 @@ public class Backend {
                 }
             }
 
-        }
+        }*/
+        
+        ApplyTransactions(account_table, transactions);
 
 
 
