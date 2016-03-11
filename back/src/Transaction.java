@@ -1,6 +1,6 @@
 public class Transaction{
 
-    String code;
+    int code;
     String name;
     int num;
     double amount;

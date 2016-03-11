@@ -4,11 +4,39 @@ public class Backend {
     public static void ApplyTransactions(Map<String, ArrayList<Account>>
                                     account_table,
                                     List<Transaction> transactions) {
-      for(Transaction transaction : transactions) {
-        switch(transaction.num) {
+      for(int i = 0; i < transactions.size(); i++) {
+        Transaction transaction = transactions.get(i);
+        switch(transaction.code) {
+         case TransactionType.login:
+          System.out.println("login");
+          break;
+            
+         case TransactionType.logout:
+          System.out.println("logout");
+          break;
           
-          
+         default:
+          System.err.println("ERROR: This next code is " + transaction.code);  
+          break;
         }
+        
+        /**
+        * TODO: handling for each transaction goes here
+        * e.g. subtract from account balance for withdrawal
+        *
+        * TODO: add other cases for other transactions
+        *       (I have TransactionTypes for other transactions already)
+        *
+        * Instead of using a foreach kind of style, I decided to use is for
+        * things like transfer that consume 2 lines (can just increment i)
+        *
+        * Notes:
+        * - may want to return a new value instead of side effecting?
+        * - delegate handling of transactions to different functions?
+        * - I guess the error checking would go here. Should the error checking
+        *   be delegated to another function, while this one assumes it's okay?
+        *
+        **/
       }
     }
 

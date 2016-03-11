@@ -110,7 +110,7 @@ public class FileParser {
                 name = name.trim();
 
                 Transaction tempTrans = new Transaction();
-                tempTrans.code = code;
+                tempTrans.code = Integer.parseInt(code);
                 tempTrans.name = name;
                 tempTrans.num = Integer.parseInt(num);
                 tempTrans.amount = Double.parseDouble(amount);
