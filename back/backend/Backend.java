@@ -59,8 +59,6 @@ public class Backend {
         // in the data structure "Account". "Account"s are in an ArrayList if they
         // have multiple accounts
         Map<String, ArrayList<Account>> account_table = parse.parseMaster(args[0]);
-        FileUpdater update = new FileUpdater();
-        update.fileWriter(account_table);
         
         // Add all of the transaction files to an ArrayList
         List<String> transFiles = new ArrayList<String>();

@@ -30,14 +30,14 @@ public class FileParser {
                     Account tempAccount = new Account();
 
                     tempAccount.num = Integer.parseInt(num);
-                    if(stat == ACTIVE){
+                    if(stat.compareTo(ACTIVE) == 0){
                         tempAccount.stat = true;
                     } else {
                         tempAccount.stat = false;
                     }
                     tempAccount.bal = Double.parseDouble(bal);
                     tempAccount.trans = Integer.parseInt(trans);
-                    if(plan == STUDENT){
+                    if(plan.compareTo(STUDENT) == 0){
                         tempAccount.plan = true;
                     } else {
                         tempAccount.plan = false;

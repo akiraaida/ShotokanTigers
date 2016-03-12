@@ -7,6 +7,9 @@ public class FileUpdater {
     
         PrintWriter pwriter = null;
         try{
+            pwriter = new PrintWriter("newMaster.txt");
+            pwriter.close();
+
             FileWriter fwriter = new FileWriter("newMaster.txt", true);
             BufferedWriter bwriter = new BufferedWriter(fwriter);
             pwriter = new PrintWriter(bwriter);
@@ -24,9 +27,7 @@ public class FileUpdater {
                     String updatedAccount = createAccount(name, num, stat, bal, trans, plan);
                     pwriter.println(updatedAccount);
                 }
-
             }
-
         } catch (Exception e){
             System.out.println(e);
         } finally {
@@ -37,6 +38,7 @@ public class FileUpdater {
     }
 
     public String createAccount(String name, int num, boolean stat, double bal, int trans, boolean plan){
+
         String strName, strNum, strStat, strBal, strTrans, strPlan;
 
         strName = String.format("%-20s", name);
@@ -46,10 +48,18 @@ public class FileUpdater {
         } else {
             strStat = "D";
         }
-//         strBal = String.format("%05.2f",bal);
-
-
+        strBal = String.format("%05.2f",bal);
+        while(strBal.length() < 8){
+            strBal = "0" + strBal;
+        }
+        strTrans = String.format("%04d", trans);
+        if(plan == true){
+            strPlan = "S";
+        } else {
+            strPlan = "N";
+        }
         
-        return name;
+        String account = strName + " " + strNum + " " + strStat + " " + strBal + " " + strTrans + " " + strPlan;
+        return account;
     }
 }

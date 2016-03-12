@@ -12,3 +12,4 @@ run:
 clean:
 	rm *.class
 	rm concat.txt
+	rm newMaster.txt
