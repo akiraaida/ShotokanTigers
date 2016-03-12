@@ -59,7 +59,7 @@ public class FileUpdater {
             strPlan = "N";
         }
         
-        String account = strName + " " + strNum + " " + strStat + " " + strBal + " " + strTrans + " " + strPlan;
+        String account = strNum + " " + strName + " " + strStat + " " + strBal + " " + strTrans + " " + strPlan;
         return account;
     }
 }
