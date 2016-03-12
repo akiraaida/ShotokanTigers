@@ -31,9 +31,9 @@ public class FileParser {
 
                     tempAccount.num = Integer.parseInt(num);
                     if(stat == ACTIVE){
-                        tempAccount.stat = false;
-                    } else {
                         tempAccount.stat = true;
+                    } else {
+                        tempAccount.stat = false;
                     }
                     tempAccount.bal = Double.parseDouble(bal);
                     tempAccount.trans = Integer.parseInt(trans);
