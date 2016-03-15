@@ -31,18 +31,18 @@ class FileParser {
                 if(name.compareTo(END) != 0){
                     Account tempAccount = new Account();
 
-                    tempAccount.num = Integer.parseInt(num);
+                    tempAccount.number = Integer.parseInt(num);
                     if(stat.compareTo(ACTIVE) == 0){
-                        tempAccount.stat = true;
+                        tempAccount.is_active = true;
                     } else {
-                        tempAccount.stat = false;
+                        tempAccount.is_active = false;
                     }
-                    tempAccount.bal = Double.parseDouble(bal);
-                    tempAccount.trans = Integer.parseInt(trans);
+                    tempAccount.balance = Double.parseDouble(bal);
+                    tempAccount.transaction_count = Integer.parseInt(trans);
                     if(plan.compareTo(STUDENT) == 0){
-                        tempAccount.plan = true;
+                        tempAccount.is_student_plan = true;
                     } else {
-                        tempAccount.plan = false;
+                        tempAccount.is_student_plan = false;
                     }
                     ArrayList<Account> accountList = accounts.get(name);
                     if(accounts.get(name) == null){
@@ -113,8 +113,8 @@ class FileParser {
 
                 Transaction tempTrans = new Transaction();
                 tempTrans.code = Integer.parseInt(code);
-                tempTrans.name = name;
-                tempTrans.num = Integer.parseInt(num);
+                tempTrans.account_name = name;
+                tempTrans.account_number = Integer.parseInt(num);
                 tempTrans.amount = Double.parseDouble(amount);
                 tempTrans.misc = misc;
 

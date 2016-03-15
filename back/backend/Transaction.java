@@ -1,10 +1,10 @@
 package backend;
 
-class Transaction{
+class Transaction {
 
     int code;
-    String name;
-    int num;
+    String account_name;
+    int account_number;
     double amount;
     String misc;
     

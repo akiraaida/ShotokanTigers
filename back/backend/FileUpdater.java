@@ -20,11 +20,11 @@ class FileUpdater {
                 String name = entry.getKey();
                 ArrayList<Account> account = entry.getValue();
                 for(int i = 0; i < account.size(); i++){
-                    int num = account.get(i).num;
-                    boolean stat = account.get(i).stat;
-                    double bal = account.get(i).bal;
-                    int trans = account.get(i).trans;
-                    boolean plan = account.get(i).plan;
+                    int num = account.get(i).number;
+                    boolean stat = account.get(i).is_active;
+                    double bal = account.get(i).balance;
+                    int trans = account.get(i).transaction_count;
+                    boolean plan = account.get(i).is_student_plan;
                     
                     String updatedAccount = createAccount(name, num, stat, bal, trans, plan);
                     pwriter.println(updatedAccount);

@@ -31,7 +31,6 @@ class TransactionCalculator {
     assert account_table_ != null;
     while(!transactions.isEmpty()) {
       Transaction current_transaction = transactions.firstElement();
-      System.out.println(current_transaction.code);
       switch(current_transaction.code) {
         case TransactionType.login:
         case TransactionType.logout:
@@ -83,10 +82,24 @@ class TransactionCalculator {
     }
   }
   
+  private Account getAccount(Transaction transaction) {
+    ArrayList<Account> accounts = account_table_.get(transaction.account_name);
+    for(Account account : accounts) {
+      if(account.number == transaction.account_number) {
+        return account;
+      }
+    }
+    return null;
+  }
+  
   private void handleWithdrawal(Vector<Transaction> transactions) {
     //todo
     Transaction top = transactions.firstElement();
     transactions.remove(0);
+    Account account = getAccount(top);
+    double new_balance = account.balance - top.amount;
+    assert new_balance >= 0.0;
+    account.balance = new_balance;
   }
 
   private void handleTransfer(Vector<Transaction> transactions) {

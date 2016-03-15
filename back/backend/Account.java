@@ -2,9 +2,9 @@ package backend;
 
 class Account {
  
-    int num;
-    boolean stat;
-    double bal;
-    int trans;
-    boolean plan;
+    int number;
+    boolean is_active;
+    double balance;
+    int transaction_count;
+    boolean is_student_plan;
 }
