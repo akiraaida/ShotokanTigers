@@ -1,4 +1,6 @@
-public class TransactionType {
+package backend;
+
+class TransactionType {
   public static final int login = 10;
   public static final int withdrawal = 1;
   public static final int transfer = 2;

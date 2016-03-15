@@ -1,7 +1,9 @@
+package backend;
+
 import java.util.*;
 import java.io.*;
 
-public class FileUpdater {
+class FileUpdater {
 
     public void fileWriter(Map<String, ArrayList<Account>> accounts){
     

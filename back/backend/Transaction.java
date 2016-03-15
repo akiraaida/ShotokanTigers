@@ -1,4 +1,6 @@
-public class Transaction{
+package backend;
+
+class Transaction{
 
     int code;
     String name;

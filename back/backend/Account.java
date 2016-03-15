@@ -1,4 +1,6 @@
-public class Account {
+package backend;
+
+class Account {
  
     int num;
     boolean stat;

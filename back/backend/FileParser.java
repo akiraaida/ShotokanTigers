@@ -1,7 +1,9 @@
+package backend;
+
 import java.io.*;
 import java.util.*;
 
-public class FileParser {
+class FileParser {
 
     public static final String ACTIVE = "A";
     public static final String STUDENT = "S";
