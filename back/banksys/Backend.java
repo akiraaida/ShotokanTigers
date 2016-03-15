@@ -99,7 +99,8 @@ public class Backend {
         // create a new master bank accounts file.
         // NNNNN_AAAAAAAAAAAAAAAAAAAA_S_PPPPPPPP_TTTT_Q
         // Account Number_Name_Active/Disabled_Bank Balance_Number of Transactions_Student/Non-Student
-
+        FileUpdater file_updater = new FileUpdater();
+        file_updater.fileWriter(transaction_calculator.getAccountTable());
 
 
         // TODO: Debit the accounts 0.05 for each student plan transaction or 0.10 for

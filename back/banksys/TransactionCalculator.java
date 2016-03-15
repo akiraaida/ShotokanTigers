@@ -79,6 +79,13 @@ class TransactionCalculator {
         
       }
       
+      // add to transaction count 
+      if(current_transaction.account_number != 0) {
+        Account account = getAccount(current_transaction);
+        assert account != null;
+        account.transaction_count += 1;
+      }
+      
     }
   }
   
