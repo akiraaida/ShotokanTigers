@@ -3,7 +3,7 @@ package backend;
 import java.util.*;
 
 public class Backend {
-    public static void ApplyTransactions(Map<String, ArrayList<Account>>
+    /*public static void ApplyTransactions(Map<String, ArrayList<Account>>
                                     account_table,
                                     List<Transaction> transactions) {
       for(int i = 0; i < transactions.size(); i++) {
@@ -38,9 +38,9 @@ public class Backend {
         * - I guess the error checking would go here. Should the error checking
         *   be delegated to another function, while this one assumes it's okay?
         *
-        **/
+        *
       }
-    }
+    }*/
 
     public static void main(String[] args){
         
@@ -73,7 +73,7 @@ public class Backend {
         parse.concatTrans(transFiles);
 
         // Put all of the transactions that are in "concat.txt" into an ArrayList
-        List<Transaction> transactions = parse.parseTrans();
+        Vector<Transaction> transactions = new Vector<Transaction>(parse.parseTrans());
 
         /*boolean admin = false;
         for(int i = 0; i < transactions.size(); i++){
@@ -89,9 +89,11 @@ public class Backend {
 
         }*/
         
-//        ApplyTransactions(account_table, transactions);
-
-
+        // Apply transactions
+        TransactionCalculator transaction_calculator
+            = new TransactionCalculator();
+        transaction_calculator.setAccountTable(account_table);
+        transaction_calculator.applyTransactions(transactions);
 
         // TODO: Use the map data structure and the transactions data structure to
         // create a new master bank accounts file.

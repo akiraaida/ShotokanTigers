@@ -1,15 +1,26 @@
-prepare:
-	javac backend/Account.java
-	javac backend/Transaction.java
-	javac backend/TransactionType.java
-	javac backend/FileParser.java
-	javac backend/FileUpdater.java
-	javac backend/Backend.java
+ROOT_PACKAGE = backend
+SOURCES = $(ROOT_PACKAGE)/Account.java $(ROOT_PACKAGE)/Transaction.java $(ROOT_PACKAGE)/TransactionType.java $(ROOT_PACKAGE)/FileParser.java $(ROOT_PACKAGE)/FileUpdater.java $(ROOT_PACKAGE)/TransactionCalculator.java $(ROOT_PACKAGE)/Backend.java
+OBJECTS = $(subst .java,.class,$(SOURCES))
+JFLAGS = -Xlint:unchecked
+
+#prepare:
+#	javac backend/Account.java
+#	javac backend/Transaction.java
+#	javac backend/TransactionType.java
+#	javac backend/FileParser.java
+#	javac backend/FileUpdater.java
+#	javac backend/TransactionCalculator.java
+#	javac backend/Backend.java
+
+all: $(OBJECTS)
+
+%.class : %.java
+	javac $(JFLAGS) $(SOURCES)
 
 run:
-	java backend.Backend master.txt trans1.txt trans2.txt
+	java -ea:$(ROOT_PACKAGE).TransactionCalculator $(ROOT_PACKAGE).Backend master.txt trans1.txt trans2.txt
 
 clean:
-	rm backend/*.class
+	rm $(ROOT_PACKAGE)/*.class
 	rm concat.txt
 	rm newMaster.txt
