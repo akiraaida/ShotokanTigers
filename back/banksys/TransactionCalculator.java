@@ -28,14 +28,21 @@ class TransactionCalculator {
   * @brief Applies transactions to the bank system.
   **/
   public void applyTransactions(Vector<Transaction> transactions) {
+    // reset values
+    is_logged_in_ = false;
+    is_admin_ = false;
+    
+    // start scanning
     assert account_table_ != null;
     while(!transactions.isEmpty()) {
       Transaction current_transaction = transactions.firstElement();
       switch(current_transaction.code) {
         case TransactionType.login:
+          handleLogin(transactions);
+          break;
+        
         case TransactionType.logout:
-          // nothing to do
-          transactions.remove(0);
+          handleLogout(transactions);
           break;
           
         case TransactionType.withdrawal:
@@ -83,6 +90,7 @@ class TransactionCalculator {
       if(current_transaction.account_number != 0) {
         Account account = getAccount(current_transaction);
         assert account != null;
+        assert account.transaction_count >= 0;
         account.transaction_count += 1;
       }
       
@@ -100,8 +108,15 @@ class TransactionCalculator {
   }
   
   private double getTransactionFee(Account account) {
-    //todo
-    return 0.0;
+    assert is_logged_in_ == true;
+    if(is_admin_) {
+      return 0.0;
+    } else if (account.is_student_plan) {
+      return 0.05;
+    } else {
+      return 0.1;
+    }
+  
   }
   
   private boolean accountNumberExists(int number) {
@@ -114,6 +129,28 @@ class TransactionCalculator {
       }
     }
     return false;
+  }
+  
+  private void handleLogin(Vector<Transaction> transactions) {
+    // Pop off stuff
+    Transaction top = transactions.firstElement();
+    transactions.remove(0);
+    
+    // do login
+    is_logged_in_ = true;
+    assert top.misc.compareTo("A ") == 0 || top.misc.compareTo("S ") == 0;
+    is_admin_ = top.misc.compareTo("A ") == 0 ? true : false;
+  }
+  
+  private void handleLogout(Vector<Transaction> transactions) {
+    // Pop off stuff
+    Transaction top = transactions.firstElement();
+    transactions.remove(0);
+    
+    
+    // do login
+    is_logged_in_ = false;
+    is_admin_ = false;
   }
   
   private void handleWithdrawal(Vector<Transaction> transactions) {
@@ -186,9 +223,9 @@ class TransactionCalculator {
     transactions.remove(0);
     
     // Change the plan
-    assert top.misc.compareTo(" S") == 0 || top.misc.compareTo(" N") == 0;
+    assert top.misc.compareTo("S ") == 0 || top.misc.compareTo("N ") == 0;
     Account account = getAccount(top);
-    account.is_student_plan = top.misc.compareTo(" S") == 0 ? true : false;
+    account.is_student_plan = top.misc.compareTo("S ") == 0 ? true : false;
   }
 
   private void handleDelete(Vector<Transaction> transactions) {
@@ -241,4 +278,14 @@ class TransactionCalculator {
   * @brief Index of bank accounts.
   **/
   public Map<String, ArrayList<Account>> account_table_;
+  
+  /**
+  * @brief when scanning, whether a login or logout occured
+  **/
+  boolean is_logged_in_;
+  
+  /**
+  * @brief when scannign, whether logged in user is admin.
+  **/
+  boolean is_admin_;
 }

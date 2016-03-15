@@ -18,7 +18,7 @@ all: $(OBJECTS)
 	javac $(JFLAGS) $(SOURCES)
 
 run:
-	java -ea:$(ROOT_PACKAGE).TransactionCalculator $(ROOT_PACKAGE).Backend master.txt trans1.txt trans2.txt
+	java -ea:$(ROOT_PACKAGE).TransactionCalculator $(ROOT_PACKAGE).Backend master.txt trans1.txt trans2.txt trans3.txt
 
 clean:
 	rm $(ROOT_PACKAGE)/*.class
