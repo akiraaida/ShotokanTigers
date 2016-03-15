@@ -1,4 +1,4 @@
-ROOT_PACKAGE = backend
+ROOT_PACKAGE = banksys
 SOURCES = $(ROOT_PACKAGE)/Account.java $(ROOT_PACKAGE)/Transaction.java $(ROOT_PACKAGE)/TransactionType.java $(ROOT_PACKAGE)/FileParser.java $(ROOT_PACKAGE)/FileUpdater.java $(ROOT_PACKAGE)/TransactionCalculator.java $(ROOT_PACKAGE)/Backend.java
 OBJECTS = $(subst .java,.class,$(SOURCES))
 JFLAGS = -Xlint:unchecked
