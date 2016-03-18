@@ -3,11 +3,24 @@ package banksys;
 import java.io.*;
 import java.util.*;
 
+/* 
+ * Parse the files and puts them into data structures to easily manipulate
+ * them. Concatenates multiple transaction files into one and puts it into a list.
+ * As well as putting the master accounts into a map (name->their accounts)
+ */
+
 class FileParser {
 
     public static final String ACTIVE = "A";
     public static final String STUDENT = "S";
     public static final String END = "END_OF_FILE";
+    
+    /*
+     * Parses the master transactions file and puts it into a map of accounts
+     * for the rest of the program to use
+     * @param masterFile The file name of the master accounts' file 
+     * @return A map of accounts with the name as the key and their list of respective accounts that they own
+     */
 
     public Map<String, ArrayList<Account>> parseMaster(String masterFile){
     
@@ -63,6 +76,11 @@ class FileParser {
         return accounts;
     }
 
+    /*
+     * Takes all the transaction files and puts the contents of it into a file named "concat.txt"
+     * @param transFiles is a list of the transactions files
+     */
+
     public void concatTrans(List<String> transFiles){
         
         PrintWriter pwriter = null;
@@ -92,7 +110,11 @@ class FileParser {
             }
         }
     }
-
+    
+    /*
+     * Takes the "concat.txt" file and parses it into a usable data structure for the rest of the program. The "concat.txt" is all of the transactions files together
+     * @return A list of all of the transactions that need to be looked at and applied
+     */
     public List<Transaction> parseTrans(){
         
         List<Transaction> transactions = new ArrayList<Transaction>();
