@@ -24,3 +24,4 @@ clean:
 	rm $(ROOT_PACKAGE)/*.class
 	rm concat.txt
 	rm newMaster.txt
+	rm newCurr.txt
