@@ -2,13 +2,72 @@ TODO
 =====
 
 1. Reformat to fit Google style
+  - Capitalize constants TransactionType
+  - exchange underscore_things for camelCase
+  - Check private variables need the trailing underscore_
+  - Check that all function names are in camelCase
+  - Check todos in code (could be clarified/outdated)
+  - Add boilerplate to each file
+  - cull @brief and other non-javadoc things
+  - indentation, probably
+  - Things to change in UML and in code:
+    - Transaction Calculator
+      - change private variables account_table_, is_logged_in, is_admin_ to
+        accountTable, isLoggedIn, isAdmin
+      - accountTable should not be public, should be private
+    - Transaction
+      - change is_active --> isActive
+      - change transaction_count --> transactionCount
+      - change is_student_plan --> isStudentPlan
+
+
 
 2. Comment functions and classes
+  - Double check that all functions/classes have documentation now
+
+3. UML Diagram proofing:
+  - FileParser
+    - add "concat.txt" as an out file
+    - Move 'MasterAccounts.txt' to Backend(?)
+      - after, should call it like "Master Accounts File" or something as the
+        name is a parameter for the program
+  - TransactionType
+    - typo on WIDTHDRAW --> WITHDRAWAL
+  - FileUpdater
+    - missing connection:
+      - Account
+    - typo on parametersfileWriter method
+      (accounts(Map...):void) --> (accounts : Map...): void
+    - typo on newMasterAccount.txt --> newMaster.txt
+      - could change to fit, or to something like "New Master Account File"?
+  - TransactionCalculator
+    - missing connection:
+      - Transaction
+      - TransactionType
+    - typo on handleDisabke --> handleDisable
+  - BackEnd
+    - missing connections:
+      - Account
+      - Transaction
+    - typo on name "BackEnd" --> Backend to match file
+  - Transaction
+    - missing connection:
+      - "code" is implicitly of type TransactionType
+        --> should probably leave as int type, but add relationship
+    - change name --> accountName
+    - change num --> accountNumber
+  - Account
+    - change stat --> isActive
+    - change bal --> balance
+    - change trans --> transactionCount
+    - change plan --> isStudentPlan
+
+  4. Check for any overlooked google style specs
 
 COMPLETED
 =====
 
-1. Load the master bank accounts file in and store the data into a data structure. 
+1. Load the master bank accounts file in and store the data into a data structure.
     - Data structure name = map
     - Data is stored in a Map<String, ArrayList<Account>>
     - Name of the user is the key, they will have 1 or more accounts
@@ -19,12 +78,12 @@ COMPLETED
 
 3. Load the transactions file in and store the data into a data structure
     - data structure name = transactions
-    - Transactions are stored in an ArrayList<Transaction> 
+    - Transactions are stored in an ArrayList<Transaction>
     - Transaction Code_Name_Account Number_Amount of Money_Misc
 
 4. Use the map data structure and the transactions data structure to create a new master bank accounts file.
 - NNNNN_AAAAAAAAAAAAAAAAAAAA_S_PPPPPPPP_TTTT_Q
-- Account Number_Name_Active/Disabled_Bank Balance_Number of Transactions_Student/Non-Student 
+- Account Number_Name_Active/Disabled_Bank Balance_Number of Transactions_Student/Non-Student
 
 5. Debit the accounts 0.05 for each student plan transaction or 0.10 for each non-student plan transaction
 
