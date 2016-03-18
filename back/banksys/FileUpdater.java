@@ -3,8 +3,18 @@ package banksys;
 import java.util.*;
 import java.io.*;
 
+/* 
+ * Takes the data structure (name->their accounts) that has had the transactions
+ * applied to it and writes the new master accounts' file.
+ */
+
 class FileUpdater {
 
+    /*
+     * Loops through the data structure (name->their accounts) and writes all of the
+     * accounts to a "newMaster.txt" file using the createAccount helper function
+     * @param accounts the data structure (name->their accounts)
+     */
     public void fileWriter(Map<String, ArrayList<Account>> accounts){
     
         PrintWriter pwriter = null;
@@ -38,7 +48,17 @@ class FileUpdater {
             }
         }
     }
-
+    
+    /*
+     * A helper function for the fileWriter which formats a string (the account) to be written to a file
+     * @param name the name of the account holder
+     * @param num the account number
+     * @param stat the status of the account (active/disabled)
+     * @param bal the bank balance
+     * @param trans the number of transactions
+     * @param plan the status of the account's plan (student/non-student)
+     * @return a string that has the formatted information for the account to be written to file
+     */
     public String createAccount(String name, int num, boolean stat, double bal, int trans, boolean plan){
 
         String strName, strNum, strStat, strBal, strTrans, strPlan;
