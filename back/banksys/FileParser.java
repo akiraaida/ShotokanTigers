@@ -11,9 +11,9 @@ import java.util.*;
 
 class FileParser {
 
-    public static final String ACTIVE = "A";
-    public static final String STUDENT = "S";
-    public static final String END = "END_OF_FILE";
+    private static final String ACTIVE = "A";
+    private static final String STUDENT = "S";
+    private static final String END = "END_OF_FILE";
     
     /**
     * Parses the master transactions file and puts it into a map of accounts
@@ -22,7 +22,7 @@ class FileParser {
     * @return A map of accounts with the name as the key and their list of respective accounts that they own
     */
 
-    public Map<String, ArrayList<Account>> parseMaster(String masterFile){
+    protected Map<String, ArrayList<Account>> parseMaster(String masterFile){
     
         Map<String, ArrayList<Account>> accounts = new HashMap<String, ArrayList<Account>>();
         try{
@@ -81,7 +81,7 @@ class FileParser {
     * @param transFiles is a list of the transactions files
     */
 
-    public void concatTrans(List<String> transFiles){
+    protected void concatTrans(List<String> transFiles){
         
         PrintWriter pwriter = null;
         try{
@@ -115,7 +115,7 @@ class FileParser {
     * Takes the "concat.txt" file and parses it into a usable data structure for the rest of the program. The "concat.txt" is all of the transactions files together
     * @return A list of all of the transactions that need to be looked at and applied
     */
-    public List<Transaction> parseTrans(){
+    protected List<Transaction> parseTrans(){
         
         List<Transaction> transactions = new ArrayList<Transaction>();
         try{
