@@ -1,25 +1,9 @@
 TODO
 =====
-1. UML Diagram proofing:
-  - Backend
-    - missing connections:
-      - Account
-  - ****Things to change in UML and in code:
-    - Transaction Calculator
-      - change private variables account_table_, is_logged_in, is_admin_ to
-        accountTable, isLoggedIn, isAdmin
-      - accountTable should not be public, should be private
-  - typos
-    - TransactionType
-      - typo on WIDTHDRAWAL --> WITHDRAWAL
-    - FileParser
-      - concat.txt.out --> concat.txt : out
-    - Should remove .txt from "MasterAccountsFile.txt";
-        as name is a parameter for the program
+[ *tumbleweed* ]
 
 COMPLETED
 =====
-
 1. Load the master bank accounts file in and store the data into a data structure.
     - Data structure name = map
     - Data is stored in a Map<String, ArrayList<Account>>
@@ -75,6 +59,7 @@ COMPLETED
       ParseMaster: Change from public symbol to protected symbol
       concatTrans: Change from public symbol to protected symbol
       parseTrans: Change from public symbol to protected symbol
+    - concat.txt.out --> concat.txt : out
   - FileUpdater
     - missing connection:
       - Account
@@ -90,12 +75,17 @@ COMPLETED
       - Transaction
       - TransactionType
     - typo on handleDisabke --> handleDisable
+    - change private variables account_table_, is_logged_in, is_admin_ to
+      accountTable, isLoggedIn, isAdmin
+    - accountTable should not be public, should be private
   - Backend
       - missing connections:
         - Transaction
       - typo on name "BackEnd" --> Backend to match file
       - Add TransactionFiles: in
         - FileParser: Remove TransactionFiles:in (Since the input is taken in the main and passed to FileParser)
+        - Should remove .txt from "MasterAccountsFile.txt";
+            as name is a parameter for the program
   - Transaction
     - missing connection:
       - "code" is implicitly of type TransactionType
@@ -103,11 +93,14 @@ COMPLETED
     - change name --> accountName
     - change num --> accountNumber
   - Account
+    - missing connections:
+      - Account
     - change stat --> isActive
     - change bal --> balance
     - change trans --> transactionCount
     - change plan --> isStudentPlan
-    
+  - TransactionType
+    - typo on WIDTHDRAWAL --> WITHDRAWAL
     
 9. Comment functions and classes
   - Double check that all functions/classes have documentation now
