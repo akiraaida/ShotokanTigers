@@ -52,6 +52,18 @@ TODO
         accountTable, isLoggedIn, isAdmin
       - accountTable should not be public, should be private
   - Akira's public/private changes
+      FileUpdater: Remove concat.txt:out
+      FileParser: Add concat.txt:out
+      FileParser: Remove TransactionFiles:in (Since the input is taken in the main and passed to FileParser)
+      Backend: Add TransactionFiles: in
+      fileWriter: Change from public symbol to protected symbol
+      createAccount: Change from public symbol to private symbol
+      ACTIVE: Change from public symbol to private symbol
+      STUDENT: Change from public symbol to private symbol
+      END: Change from public symbol to private symbol
+      parseMaster: Change from public symbol to protected symbol
+      concatTrans: Change from public symbol to protected symbol
+      parseTrans: Change from public symbol to protected symbol
 
 COMPLETED
 =====
