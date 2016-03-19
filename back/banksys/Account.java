@@ -1,4 +1,4 @@
-/**
+/*
 * Account.java
 * CSCI 3060U/SOFE 3980U: Course Project Back End
 * Winter 2016
@@ -17,10 +17,11 @@ package banksys;
 *
 * <h1>Example Usage:</h1>
 * <p>
-*  if(currentAccount.isActive) <br />
+*  if(currentAccount.isActive) { <br />
 * System.out.printf("Account #%d is active%n", currentAccount.number); <br/>
-*  else <br/>
+* } else {<br/>
 * System.out.printf("Account #%d is disabled%n", currentAccount.number); <br/>
+* }
 * </p>
 */
 class Account {

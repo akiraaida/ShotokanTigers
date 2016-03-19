@@ -1,5 +1,5 @@
-/**
-* backend.java
+/*
+* Backend.java
 * CSCI 3060U/SOFE 3980U: Course Project Back End
 * Winter 2016
 *
@@ -12,8 +12,10 @@
 
 package banksys;
 
-import java.util.*;
-
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.Vector;
 
 public class Backend {
     
@@ -34,7 +36,7 @@ public class Backend {
         * Execution... java Backend master.txt trans1.txt trans2.txt
         * Where there can be an unilimited number of transaction files
         */
-        if(args.length < 2){
+        if(args.length < 2) {
             System.out.println("ERROR, NOT ENOUGH ARGUEMENTS.");
             System.exit(0);
         }
@@ -49,7 +51,7 @@ public class Backend {
         Map<String, ArrayList<Account>> accountTable = parse.parseMaster(args[0]);
         
         List<String> transFiles = new ArrayList<String>();
-        for(int i = 1; i < args.length; i++){
+        for(int i = 1; i < args.length; i++) {
             transFiles.add(args[i]);
         }
         

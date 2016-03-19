@@ -2,22 +2,13 @@ TODO
 =====
 
 1. Reformat to fit Google style
-  - Add boilerplate to each file
   - cull @brief and other non-javadoc things
   - indentation, probably
-  - remove wildcard indentation
-  - check for missing braces on one-liner if, else, etc. (4.1.1)
   - check bracket newlines
   - check line wrapping
-  - check whitespace for ifs and such (4.6.2)
-  - check variable declarations (4.8.2)
   - check switch statement according to 4.8.4
   - check block comments have *
-  - check order of modifiers
   - check javadoc
-  - Things to change in UML and in code:
-    - Transaction Calculator
-      - accountTable should not be public, should be private
 
 
 2. Comment functions and classes
@@ -68,6 +59,14 @@ COMPLETED
 7. Finished google reformattings:
   - Fixed naming of functions, fields & variables, where appropriate
   - Check todos in code (could be clarified/outdated)
+  - Add boilerplate to each file
+  - remove wildcard imports
+  - check variable declarations (4.8.2)
+  - Things to change in UML and in code:
+    - Transaction Calculator
+      - accountTable should not be public, should be private
+  - check for missing braces on one-liner if, else, etc. (4.1.1)
+  - check whitespace for ifs and such (4.6.2)
 
 8. Finished UML reformattings:
   - FileParser

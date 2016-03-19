@@ -1,3 +1,15 @@
+/*
+* TransactionCalculator.java
+* CSCI 3060U/SOFE 3980U: Course Project Back End
+* Winter 2016
+*
+* Shotokan Tigers:
+* -----
+* Akira Aida          100526064
+* Kathryn McKay       100524201
+* Alexander Wheadon   100514985
+*/
+
 package banksys;
 
 import java.util.Map;
@@ -454,15 +466,15 @@ class TransactionCalculator {
   /**
   * Index of bank accounts.
   */
-  public Map<String, ArrayList<Account>> accountTable;
+  private Map<String, ArrayList<Account>> accountTable;
 
   /**
   * When scanning, whether a login or logout occured.
   */
-  boolean isLoggedIn;
+  private boolean isLoggedIn;
 
   /**
   * When scanning, whether logged in user is admin.
   */
-  boolean isAdmin;
+  private boolean isAdmin;
 }

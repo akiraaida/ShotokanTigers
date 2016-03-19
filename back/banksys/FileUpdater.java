@@ -1,7 +1,22 @@
+/*
+* FileUpdater.java
+* CSCI 3060U/SOFE 3980U: Course Project Back End
+* Winter 2016
+*
+* Shotokan Tigers:
+* -----
+* Akira Aida          100526064
+* Kathryn McKay       100524201
+* Alexander Wheadon   100514985
+*/
+
 package banksys;
 
-import java.util.*;
-import java.io.*;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.Map;
 
 /** 
 * Takes the data structure (name->their accounts) that has had the transactions
@@ -33,10 +48,10 @@ class FileUpdater {
             BufferedWriter cbwriter = new BufferedWriter(cfwriter);
             cpwriter = new PrintWriter(cbwriter);
             
-            for(Map.Entry<String, ArrayList<Account>> entry : accounts.entrySet()){
+            for(Map.Entry<String, ArrayList<Account>> entry : accounts.entrySet()) {
                 String name = entry.getKey();
                 ArrayList<Account> account = entry.getValue();
-                for(int i = 0; i < account.size(); i++){
+                for(int i = 0; i < account.size(); i++) {
                     int num = account.get(i).number;
                     boolean stat = account.get(i).isActive;
                     double bal = account.get(i).balance;
@@ -54,10 +69,10 @@ class FileUpdater {
         } catch (Exception e){
             System.out.println(e);
         } finally {
-            if(mpwriter != null){
+            if(mpwriter != null) {
                 mpwriter.close();
             }
-            if(cpwriter != null){
+            if(cpwriter != null) {
                 cpwriter.close();
             }
         }
@@ -80,23 +95,23 @@ class FileUpdater {
 
         strName = String.format("%-20s", name);
         strNum = String.format("%05d", num);
-        if(stat == true){
+        if(stat == true) {
             strStat = "A";
         } else {
             strStat = "D";
         }
         strBal = String.format("%05.2f",bal);
-        while(strBal.length() < 8){
+        while(strBal.length() < 8) {
             strBal = "0" + strBal;
         }
         strTrans = String.format("%04d", trans);
-        if(plan == true){
+        if(plan == true) {
             strPlan = "S";
         } else {
             strPlan = "N";
         }
         String account;
-        if(master == true){
+        if(master == true) {
             account = strNum + " " + strName + " " + strStat + " " + strBal + " " + strTrans + " " + strPlan;
         } else {
             account = strNum + " " + strName + " " + strStat + " " + strBal + " " + strPlan;

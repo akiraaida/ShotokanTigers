@@ -1,7 +1,26 @@
+/*
+* FileParser.java
+* CSCI 3060U/SOFE 3980U: Course Project Back End
+* Winter 2016
+*
+* Shotokan Tigers:
+* -----
+* Akira Aida          100526064
+* Kathryn McKay       100524201
+* Alexander Wheadon   100514985
+*/
+
 package banksys;
 
-import java.io.*;
-import java.util.*;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.HashMap;
 
 /** 
 * Parse the files and puts them into data structures to easily manipulate
@@ -30,7 +49,7 @@ class FileParser {
             BufferedReader masterBr = new BufferedReader(masterFr);
 
             String line;
-            while((line = masterBr.readLine()) != null){
+            while((line = masterBr.readLine()) != null) {
                 
                 String num = line.substring(0, 5);
                 String name = line.substring(6, 26);
@@ -41,24 +60,24 @@ class FileParser {
 
                 name = name.trim();
     
-                if(name.compareTo(END) != 0){
+                if(name.compareTo(END) != 0) {
                     Account tempAccount = new Account();
 
                     tempAccount.number = Integer.parseInt(num);
-                    if(stat.compareTo(ACTIVE) == 0){
+                    if(stat.compareTo(ACTIVE) == 0) {
                         tempAccount.isActive = true;
                     } else {
                         tempAccount.isActive = false;
                     }
                     tempAccount.balance = Double.parseDouble(bal);
                     tempAccount.transactionCount = Integer.parseInt(trans);
-                    if(plan.compareTo(STUDENT) == 0){
+                    if(plan.compareTo(STUDENT) == 0) {
                         tempAccount.isStudentPlan = true;
                     } else {
                         tempAccount.isStudentPlan = false;
                     }
                     ArrayList<Account> accountList = accounts.get(name);
-                    if(accounts.get(name) == null){
+                    if(accounts.get(name) == null) {
                         accountList = new ArrayList<Account>();
                         accountList.add(tempAccount);
                         accounts.put(name, accountList);
@@ -91,11 +110,11 @@ class FileParser {
             FileWriter writer = new FileWriter("concat.txt", true);
             BufferedWriter bwriter = new BufferedWriter(writer);
             pwriter = new PrintWriter(bwriter);
-            for(int i = 0; i < transFiles.size(); i++){
+            for(int i = 0; i < transFiles.size(); i++) {
                 FileReader transFr = new FileReader(transFiles.get(i));
                 BufferedReader transBr = new BufferedReader(transFr);
                 String line;
-                while((line = transBr.readLine()) != null){
+                while((line = transBr.readLine()) != null) {
                     pwriter.println(line);
                 }
                 transBr.close();
@@ -105,7 +124,7 @@ class FileParser {
             System.out.println(e);
             System.exit(0);
         } finally {
-            if(pwriter != null){
+            if(pwriter != null) {
                 pwriter.close();
             }
         }
@@ -123,7 +142,7 @@ class FileParser {
             BufferedReader parseBr = new BufferedReader(parseFr);
 
             String line;
-            while((line = parseBr.readLine()) != null){
+            while((line = parseBr.readLine()) != null) {
 
                 String code = line.substring(0,2);
                 String name = line.substring(3, 23);
