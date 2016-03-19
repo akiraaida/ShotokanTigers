@@ -15,7 +15,7 @@ class FileUpdater {
     * accounts to a "newMaster.txt" file using the createAccount helper function
     * @param accounts the data structure (name->their accounts)
     */
-    public void fileWriter(Map<String, ArrayList<Account>> accounts){
+    protected void fileWriter(Map<String, ArrayList<Account>> accounts){
     
         PrintWriter mpwriter = null;
         PrintWriter cpwriter = null;
@@ -74,7 +74,7 @@ class FileUpdater {
     * @param plan the status of the account's plan (student/non-student)
     * @return a string that has the formatted information for the account to be written to file
     */
-    public String createAccount(boolean master, String name, int num, boolean stat, double bal, int trans, boolean plan){
+    private String createAccount(boolean master, String name, int num, boolean stat, double bal, int trans, boolean plan){
 
         String strName, strNum, strStat, strBal, strTrans, strPlan;
 
