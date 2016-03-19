@@ -23,6 +23,7 @@ public class Backend {
     * from the old master accounts file
     * Input: master.txt trans1.txt trans2.txt trans3.txt
     * Output: concat.txt newMaster.txt newCurr.txt
+    * Usage: Navigate to the directory with the Makefile (the one above the banksys directory)
     * Usage: make
     * Usage: make run
     */
