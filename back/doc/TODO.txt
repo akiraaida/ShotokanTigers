@@ -2,10 +2,6 @@ TODO
 =====
 
 1. Reformat to fit Google style
-  - Capitalize constants TransactionType
-  - exchange underscore_things for camelCase
-  - Check private variables [do not use] trailing underscore_
-  - Check that all function names are in camelCase
   - Check todos in code (could be clarified/outdated)
   - Add boilerplate to each file
   - cull @brief and other non-javadoc things
@@ -22,13 +18,7 @@ TODO
   - check javadoc
   - Things to change in UML and in code:
     - Transaction Calculator
-      - change private variables account_table_, is_logged_in, is_admin_ to
-        accountTable, isLoggedIn, isAdmin
       - accountTable should not be public, should be private
-    - Transaction
-      - change is_active --> isActive
-      - change transaction_count --> transactionCount
-      - change is_student_plan --> isStudentPlan
 
 
 2. Comment functions and classes
@@ -91,7 +81,7 @@ COMPLETED
 6. Need to do proper error checking when reading the transactions (eg. login before deposit)
 
 7. Finished google reformattings:
-  - [None since I made that big list -Kathryn]
+  - Fixed naming of functions, fields & variables, where appropriate
 
 8. Finished UML reformattings:
   - FileParser

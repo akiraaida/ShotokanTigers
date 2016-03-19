@@ -38,10 +38,10 @@ class FileUpdater {
                 ArrayList<Account> account = entry.getValue();
                 for(int i = 0; i < account.size(); i++){
                     int num = account.get(i).number;
-                    boolean stat = account.get(i).is_active;
+                    boolean stat = account.get(i).isActive;
                     double bal = account.get(i).balance;
-                    int trans = account.get(i).transaction_count;
-                    boolean plan = account.get(i).is_student_plan;
+                    int trans = account.get(i).transactionCount;
+                    boolean plan = account.get(i).isStudentPlan;
                     
                     String masterAccount = createAccount(true, name, num, stat, bal, trans, plan);
                     String currAccount = createAccount(false, name, num, stat, bal, trans, plan);

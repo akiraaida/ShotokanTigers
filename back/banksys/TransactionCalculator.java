@@ -9,18 +9,18 @@ import java.util.Vector;
 *
 * <h1>Usage Example:<h1>
 * <p>
-*   transactionCalculator.setAccountTable(account_table);<br />
-*   transactionCalculator.applyTransactions(transactions_list);<br />
+*   transactionCalculator.setAccountTable(accountTable);<br />
+*   transactionCalculator.applyTransactions(transactionsList);<br />
 * </p>
 *
 */
 class TransactionCalculator {
   /**
   * Gives known accounts to the calculator for reference.
-  * @param account_table Customer names keyed to bank accounts.
+  * @param accountTable Customer names keyed to bank accounts.
   */
-  public void setAccountTable(Map<String, ArrayList<Account>> account_table) {
-    account_table_ = account_table;
+  public void setAccountTable(Map<String, ArrayList<Account>> accountTable) {
+    accountTable = accountTable;
   }
 
   /**
@@ -28,7 +28,7 @@ class TransactionCalculator {
   * @return Database with all previous operations applied to it.
   */
   public Map<String, ArrayList<Account>> getAccountTable() {
-    return account_table_;
+    return accountTable;
   }
 
   /**
@@ -42,55 +42,55 @@ class TransactionCalculator {
   */
   public void applyTransactions(Vector<Transaction> transactions) {
     // reset values
-    is_logged_in_ = false;
-    is_admin_ = false;
+    isLoggedIn = false;
+    isAdmin = false;
 
     // start scanning
-    assert account_table_ != null;
+    assert accountTable != null;
     while(!transactions.isEmpty()) {
-      Transaction current_transaction = transactions.firstElement();
-      switch(current_transaction.code) {
-        case TransactionType.login:
+      Transaction currentTransaction = transactions.firstElement();
+      switch(currentTransaction.code) {
+        case TransactionType.LOGIN:
           handleLogin(transactions);
           break;
 
-        case TransactionType.logout:
+        case TransactionType.LOGOUT:
           handleLogout(transactions);
           break;
 
-        case TransactionType.withdrawal:
+        case TransactionType.WITHDRAWAL:
           handleWithdrawal(transactions);
           break;
 
-        case TransactionType.transfer:
+        case TransactionType.TRANSFER:
           handleTransfer(transactions);
           break;
 
-        case TransactionType.paybill:
+        case TransactionType.PAYBILL:
           handlePaybill(transactions);
           break;
 
-        case TransactionType.deposit:
+        case TransactionType.DEPOSIT:
           handleDeposit(transactions);
           break;
 
-        case TransactionType.changeplan:
+        case TransactionType.CHANGEPLAN:
           handleChangePlan(transactions);
           break;
 
-        case TransactionType.delete:
+        case TransactionType.DELETE:
           handleDelete(transactions);
           break;
 
-        case TransactionType.create:
+        case TransactionType.CREATE:
           handleCreate(transactions);
           break;
 
-        case TransactionType.disable:
+        case TransactionType.DISABLE:
           handleDisable(transactions);
           break;
 
-        case TransactionType.enable:
+        case TransactionType.ENABLE:
           handleEnable(transactions);
           break;
 
@@ -100,16 +100,16 @@ class TransactionCalculator {
       }
 
       // add to transaction count
-      if(current_transaction.account_number != 0) {
-        Account account = getAccount(current_transaction);
+      if(currentTransaction.accountNumber != 0) {
+        Account account = getAccount(currentTransaction);
 
         assert account != null;                // TODO when phase 5: report
                                                // error when transaction uses
                                                // invalid user
-        assert account.transaction_count >= 0; // TODO when phase 5: report
+        assert account.transactionCount >= 0; // TODO when phase 5: report
                                                // error when transaction count
                                                // is negative
-        account.transaction_count += 1;
+        account.transactionCount += 1;
       }
 
     }
@@ -121,9 +121,9 @@ class TransactionCalculator {
   * @return null, if the account was not found.
   */
   private Account getAccount(Transaction transaction) {
-    ArrayList<Account> accounts = account_table_.get(transaction.account_name);
+    ArrayList<Account> accounts = accountTable.get(transaction.accountName);
     for(Account account : accounts) {
-      if(account.number == transaction.account_number) {
+      if(account.number == transaction.accountNumber) {
         return account;
       }
     }
@@ -136,11 +136,11 @@ class TransactionCalculator {
   * @return A fee of zero, if an admin is known to be logged in.
   */
   private double getTransactionFee(Account account) {
-    assert is_logged_in_ == true; // TODO when phase 5 is done: print error when
+    assert isLoggedIn == true; // TODO when phase 5 is done: print error when
                                   // user is not logged in.
-    if(is_admin_) {
+    if(isAdmin) {
       return 0.0;
-    } else if (account.is_student_plan) {
+    } else if (account.isStudentPlan) {
       return 0.05;
     } else {
       return 0.1;
@@ -155,7 +155,7 @@ class TransactionCalculator {
   */
   private boolean accountNumberExists(int number) {
     for(Map.Entry<String, ArrayList<Account>> entry
-        : account_table_.entrySet()) {
+        : accountTable.entrySet()) {
       for(Account account : entry.getValue()) {
         if(account.number == number) {
           return true;
@@ -184,9 +184,9 @@ class TransactionCalculator {
 
     // do login
     // TODO when phase 5: Print error when misc has bad value
-    is_logged_in_ = true;
+    isLoggedIn = true;
     assert top.misc.compareTo("A ") == 0 || top.misc.compareTo("S ") == 0;
-    is_admin_ = top.misc.compareTo("A ") == 0 ? true : false;
+    isAdmin = top.misc.compareTo("A ") == 0 ? true : false;
   }
   /**
   * Processes the 'logout' transaction.
@@ -204,8 +204,8 @@ class TransactionCalculator {
 
 
     // do login
-    is_logged_in_ = false;
-    is_admin_ = false;
+    isLoggedIn = false;
+    isAdmin = false;
   }
 
   /**
@@ -229,11 +229,11 @@ class TransactionCalculator {
     // Perform withdrawal
     // TODO when phase 5: Print error if balance becomes negative
     Account account = getAccount(top);
-    double account_fee = getTransactionFee(account);
-    double debit = top.amount + account_fee;
-    double new_balance = account.balance - debit;
-    assert new_balance >= 0.0;
-    account.balance = new_balance;
+    double accountFee = getTransactionFee(account);
+    double debit = top.amount + accountFee;
+    double newBalance = account.balance - debit;
+    assert newBalance >= 0.0;
+    account.balance = newBalance;
   }
   /**
   * Processes the 'transfer' transaction.
@@ -250,25 +250,25 @@ class TransactionCalculator {
   */
   private void handleTransfer(Vector<Transaction> transactions) {
     // Pop off first two
-    Transaction sender_transaction = transactions.firstElement();
+    Transaction senderTransaction = transactions.firstElement();
     transactions.remove(0);
-    Transaction recipient_transaction = transactions.firstElement();
+    Transaction recipientTransaction = transactions.firstElement();
     transactions.remove(0);
 
     // Check transaction
     // TODO when phase 5: Print error if transfer amount does not match
-    assert sender_transaction.amount == recipient_transaction.amount;
-    double amount = sender_transaction.amount;
+    assert senderTransaction.amount == recipientTransaction.amount;
+    double amount = senderTransaction.amount;
 
     // Perform transfer
     // TODO when phase 5: Print error if sender balance drops below 0.0
-    Account sender = getAccount(sender_transaction);
-    Account recipient = getAccount(recipient_transaction);
-    double sender_fee = getTransactionFee(sender);
-    double debit = sender_fee + amount;
-    double sender_balance = sender.balance - debit;
-    assert sender_balance >= 0.0;
-    sender.balance = sender_balance;
+    Account sender = getAccount(senderTransaction);
+    Account recipient = getAccount(recipientTransaction);
+    double senderFee = getTransactionFee(sender);
+    double debit = senderFee + amount;
+    double senderBalance = sender.balance - debit;
+    assert senderBalance >= 0.0;
+    sender.balance = senderBalance;
     recipient.balance = recipient.balance + amount;
   }
 
@@ -293,11 +293,11 @@ class TransactionCalculator {
     // pay that bill
     // TODO when phase 5: Print error if balance drops below 0.0
     Account account = getAccount(top);
-    double account_fee = getTransactionFee(account);
-    double debit = top.amount + account_fee;
-    double new_balance = account.balance - debit;
-    assert new_balance >= 0.0;
-    account.balance = new_balance;
+    double accountFee = getTransactionFee(account);
+    double debit = top.amount + accountFee;
+    double newBalance = account.balance - debit;
+    assert newBalance >= 0.0;
+    account.balance = newBalance;
   }
 
   /**
@@ -321,11 +321,11 @@ class TransactionCalculator {
     // Do a deposit
     // TODO when phase 5: print error if balance drops below 0.0
     Account account = getAccount(top);
-    double account_fee = getTransactionFee(account);
-    double credit = top.amount - account_fee;
-    double new_balance = account.balance + credit;
-    assert new_balance >= 0.0;
-    account.balance = new_balance;
+    double accountFee = getTransactionFee(account);
+    double credit = top.amount - accountFee;
+    double newBalance = account.balance + credit;
+    assert newBalance >= 0.0;
+    account.balance = newBalance;
   }
   /**
   * Processes the 'changeplan' transaction.
@@ -349,7 +349,7 @@ class TransactionCalculator {
     // TODO when phase 5: print error if misc value is invalid
     assert top.misc.compareTo("S ") == 0 || top.misc.compareTo("N ") == 0;
     Account account = getAccount(top);
-    account.is_student_plan = top.misc.compareTo("S ") == 0 ? true : false;
+    account.isStudentPlan = top.misc.compareTo("S ") == 0 ? true : false;
   }
 
   /**
@@ -373,7 +373,7 @@ class TransactionCalculator {
     // TODO when phase 5: print error if account does not exist
     Account account = getAccount(top);
     assert account != null;
-    account_table_.get(top.account_name).remove(account);
+    accountTable.get(top.accountName).remove(account);
   }
 
   /**
@@ -395,7 +395,7 @@ class TransactionCalculator {
 
     // ensure account number does not already exist
     // TODO when phase 5: print error if account number exists already
-    assert !accountNumberExists(top.account_number);
+    assert !accountNumberExists(top.accountNumber);
 
     // TODO when phase 5: implement creation
   }
@@ -421,8 +421,8 @@ class TransactionCalculator {
     // TODO when phase 5: print error if account cannot be disabled
     Account account = getAccount(top);
     assert account != null;
-    assert account.is_active == true;
-    account.is_active = false;
+    assert account.isActive == true;
+    account.isActive = false;
   }
 
   /**
@@ -447,22 +447,22 @@ class TransactionCalculator {
     // TODO when phase 5: print error if account cannot be enabled
     Account account = getAccount(top);
     assert account != null;
-    assert account.is_active != true;
-    account.is_active = true;
+    assert account.isActive != true;
+    account.isActive = true;
   }
 
   /**
   * Index of bank accounts.
   */
-  public Map<String, ArrayList<Account>> account_table_;
+  public Map<String, ArrayList<Account>> accountTable;
 
   /**
   * When scanning, whether a login or logout occured.
   */
-  boolean is_logged_in_;
+  boolean isLoggedIn;
 
   /**
   * When scanning, whether logged in user is admin.
   */
-  boolean is_admin_;
+  boolean isAdmin;
 }

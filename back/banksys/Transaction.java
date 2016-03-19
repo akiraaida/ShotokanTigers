@@ -13,13 +13,13 @@ class Transaction {
     /**
     * Account owner name as parameter to this transaction.
     */
-    String account_name;
+    String accountName;
 
     /**
     * Account number as parameter to this transaction.
     * @see Account class.
     */
-    int account_number;
+    int accountNumber;
 
     /**
     * Dollar amount in CAD as parameter to this transaction.

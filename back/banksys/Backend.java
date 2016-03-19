@@ -46,7 +46,7 @@ public class Backend {
         * have multiple accounts
         */
         FileParser parse = new FileParser();
-        Map<String, ArrayList<Account>> account_table = parse.parseMaster(args[0]);
+        Map<String, ArrayList<Account>> accountTable = parse.parseMaster(args[0]);
         
         List<String> transFiles = new ArrayList<String>();
         for(int i = 1; i < args.length; i++){
@@ -62,13 +62,13 @@ public class Backend {
         Vector<Transaction> transactions = new Vector<Transaction>(parse.parseTrans());
         
         // Apply the transactions to the map
-        TransactionCalculator transaction_calculator
+        TransactionCalculator transactionCalculator
             = new TransactionCalculator();
-        transaction_calculator.setAccountTable(account_table);
-        transaction_calculator.applyTransactions(transactions);
+        transactionCalculator.setAccountTable(accountTable);
+        transactionCalculator.applyTransactions(transactions);
 
         // Write the updated accounts to file
-        FileUpdater file_updater = new FileUpdater();
-        file_updater.fileWriter(transaction_calculator.getAccountTable());
+        FileUpdater fileUpdater = new FileUpdater();
+        fileUpdater.fileWriter(transactionCalculator.getAccountTable());
     }
 }

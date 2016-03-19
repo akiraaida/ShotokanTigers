@@ -5,10 +5,10 @@ package banksys;
 *
 * <h1>Example Usage:</h1>
 * <p>
-*  if(current_account.is_active) <br />
-* System.out.printf("Account #%d is active%n", current_account.number); <br/>
+*  if(currentAccount.isActive) <br />
+* System.out.printf("Account #%d is active%n", currentAccount.number); <br/>
 *  else <br/>
-* System.out.printf("Account #%d is disabled%n", current_account.number); <br/>
+* System.out.printf("Account #%d is disabled%n", currentAccount.number); <br/>
 * </p>
 */
 class Account {
@@ -20,7 +20,7 @@ class Account {
     /**
     * When false, indicates a disabled account.
     */
-    boolean is_active;
+    boolean isActive;
 
     /**
     * Dollars (CAD) in account.
@@ -35,10 +35,10 @@ class Account {
     /**
     * Number of transactions applied to this account e.g. deposits, disables.
     */
-    int transaction_count;
+    int transactionCount;
 
     /**
     * When false, indicates that this account is on a non-student plan.
     */
-    boolean is_student_plan;
+    boolean isStudentPlan;
 }

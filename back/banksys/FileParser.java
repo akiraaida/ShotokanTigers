@@ -46,16 +46,16 @@ class FileParser {
 
                     tempAccount.number = Integer.parseInt(num);
                     if(stat.compareTo(ACTIVE) == 0){
-                        tempAccount.is_active = true;
+                        tempAccount.isActive = true;
                     } else {
-                        tempAccount.is_active = false;
+                        tempAccount.isActive = false;
                     }
                     tempAccount.balance = Double.parseDouble(bal);
-                    tempAccount.transaction_count = Integer.parseInt(trans);
+                    tempAccount.transactionCount = Integer.parseInt(trans);
                     if(plan.compareTo(STUDENT) == 0){
-                        tempAccount.is_student_plan = true;
+                        tempAccount.isStudentPlan = true;
                     } else {
-                        tempAccount.is_student_plan = false;
+                        tempAccount.isStudentPlan = false;
                     }
                     ArrayList<Account> accountList = accounts.get(name);
                     if(accounts.get(name) == null){
@@ -135,8 +135,8 @@ class FileParser {
 
                 Transaction tempTrans = new Transaction();
                 tempTrans.code = Integer.parseInt(code);
-                tempTrans.account_name = name;
-                tempTrans.account_number = Integer.parseInt(num);
+                tempTrans.accountName = name;
+                tempTrans.accountNumber = Integer.parseInt(num);
                 tempTrans.amount = Double.parseDouble(amount);
                 tempTrans.misc = misc;
 
