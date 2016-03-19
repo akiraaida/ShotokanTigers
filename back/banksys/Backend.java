@@ -20,16 +20,16 @@ import java.util.Vector;
 /**
  * Containing the main function.
  *
- * <p>The program will take a master accounts file and one or many transaction
+ * The program will take a master accounts file and one or many transaction
  * files and then create a new master accounts file with the transactions
- * applied to it from the old master accounts file.</p>
+ * applied to it from the old master accounts file.
  *
  * <p>Input: master.txt trans1.txt trans2.txt trans3.txt<br />
  * Output: concat.txt newMaster.txt newCurr.txt <br />
- * Usage: <br />
- * make <br/>
- * make run</p>
- *
+ * Usage: Navigate to the directory with the Makefile (the one above the banksys
+ *    directory)<br />
+ *    make <br />
+ *    make run</p>
  */
 public class Backend {
   /**
