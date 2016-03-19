@@ -2,7 +2,6 @@ TODO
 =====
 
 1. Reformat to fit Google style
-  - Check todos in code (could be clarified/outdated)
   - Add boilerplate to each file
   - cull @brief and other non-javadoc things
   - indentation, probably
@@ -68,6 +67,7 @@ COMPLETED
 
 7. Finished google reformattings:
   - Fixed naming of functions, fields & variables, where appropriate
+  - Check todos in code (could be clarified/outdated)
 
 8. Finished UML reformattings:
   - FileParser

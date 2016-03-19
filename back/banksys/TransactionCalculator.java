@@ -19,8 +19,8 @@ class TransactionCalculator {
   * Gives known accounts to the calculator for reference.
   * @param accountTable Customer names keyed to bank accounts.
   */
-  public void setAccountTable(Map<String, ArrayList<Account>> accountTable) {
-    accountTable = accountTable;
+  public void setAccountTable(Map<String, ArrayList<Account>> pAccountTable) {
+    accountTable = pAccountTable;
   }
 
   /**
