@@ -17,44 +17,40 @@ import java.util.ArrayList;
 import java.util.Vector;
 
 /**
-* Acts out operations upon accounts table based on transactions.
-*
-* <h1>Usage Example:<h1>
-* <p>
-*   transactionCalculator.setAccountTable(accountTable);<br />
-*   transactionCalculator.applyTransactions(transactionsList);<br />
-* </p>
-*
-*/
+ * Acts out operations upon accounts table based on transactions.
+ *
+ * <h1>Usage Example:<h1>
+ * <p>transactionCalculator.setAccountTable(accountTable);<br />
+ * transactionCalculator.applyTransactions(transactionsList);</p>
+ */
 class TransactionCalculator {
   /**
-  * Gives known accounts to the calculator for reference.
-  * @param accountTable Customer names keyed to bank accounts.
-  */
+   * Gives known accounts to the calculator for reference.
+   *
+   * @param accountTable Customer names keyed to bank accounts.
+   */
   public void setAccountTable(Map<String, ArrayList<Account>>
       pAccountTable) {
     accountTable = pAccountTable;
   }
 
   /**
-  * Retrieves account table.
-  * @return Database with all previous operations applied to it.
-  */
+   * Retrieves account table.
+   *
+   * @return Database with all previous operations applied to it.
+   */
   public Map<String, ArrayList<Account>> getAccountTable() {
     return accountTable;
   }
 
   /**
-  * Applies transaction operations to the bank system.
-  * @param transactions Sequence of changes to be made to the bank
-  *   system.
-  *
-  * <p>
-  * An error occurs if a transaction involves a nonexistent user,
-  * or if a
-  * user's transaction count is negative.
-  * <p>
-  */
+   * Applies transaction operations to the bank system.
+   *
+   * An error occurs if a transaction involves a nonexistent user, or if a
+   * user's transaction count is negative.
+   *
+   * @param transactions Sequence of changes to be made to the bank system.
+   */
   public void applyTransactions(Vector<Transaction> transactions) {
     // reset values
     isLoggedIn = false;
@@ -124,15 +120,15 @@ class TransactionCalculator {
         assert account.transactionCount >= 0; 
         account.transactionCount += 1;
       }
-
     }
   }
 
   /**
-  * Searches for account in the bank system.
-  * @param transaction Code containing account number & owner name
-  * @return null, if the account was not found.
-  */
+   * Searches for account in the bank system.
+   *
+   * @param transaction Code containing account number & owner name
+   * @return null, if the account was not found.
+   */
   private Account getAccount(Transaction transaction) {
     ArrayList<Account> accounts = accountTable.get(
         transaction.accountName);
@@ -145,10 +141,11 @@ class TransactionCalculator {
   }
 
   /**
-  * Looks up the appropriate transaction fee.
-  * @param account Account with fees being applied to it
-  * @return A fee of zero, if an admin is known to be logged in.
-  */
+   * Looks up the appropriate transaction fee.
+   *
+   * @param account Account with fees being applied to it
+   * @return A fee of zero, if an admin is known to be logged in.
+   */
   private double getTransactionFee(Account account) {
     // TODO when phase 5 is done: print error when user is not
     // logged in.
@@ -160,14 +157,14 @@ class TransactionCalculator {
     } else {
       return 0.1;
     }
-
   }
 
   /**
-  * Searches for an account with the specified number in the system.
-  * @param number 5-digit (i.e. <=99999) account number.
-  * @return False, if no accounts with that number are found.
-  */
+   * Searches for an account with the specified number in the system.
+   *
+   * @param number 5-digit (i.e. <=99999) account number.
+   * @return False, if no accounts with that number are found.
+   */
   private boolean accountNumberExists(int number) {
     for(Map.Entry<String, ArrayList<Account>> entry
         : accountTable.entrySet()) {
@@ -181,17 +178,14 @@ class TransactionCalculator {
   }
 
   /**
-  * Processes the 'login' transaction.
-  * @param transactions Stack of operations.
-  *
-  * <p>
-  * The entirety of the login is consumed from the given stack.
-  * </p>
-  *
-  * <p>
-  * An error occurs when the misc does not include 'A ' or 'S '.
-  * </p>
-  */
+   * Processes the 'login' transaction.
+   *
+   * The entirety of the login is consumed from the given stack.
+   *
+   * <p>An error occurs when the misc does not include 'A ' or 'S '.</p>
+   *
+   * @param transactions Stack of operations.
+   */
   private void handleLogin(Vector<Transaction> transactions) {
     // Pop off stuff
     Transaction top = transactions.firstElement();
@@ -204,15 +198,14 @@ class TransactionCalculator {
         || top.misc.compareTo("S ") == 0;
     isAdmin = top.misc.compareTo("A ") == 0 ? true : false;
   }
+  
   /**
-  * Processes the 'logout' transaction.
-  * @param transactions Stack of operations.
-  *
-  * <p>
-  * The entirety of the logout is consumed from the given stack.
-  * </p>
-  *
-  */
+   * Processes the 'logout' transaction.
+   *
+   * The entirety of the logout is consumed from the given stack.
+   *
+   * @param transactions Stack of operations.
+   */
   private void handleLogout(Vector<Transaction> transactions) {
     // Pop off stuff
     Transaction top = transactions.firstElement();
@@ -225,18 +218,15 @@ class TransactionCalculator {
   }
 
   /**
-  * Processes the 'withdrawal' transaction.
-  * @param transactions Stack of operations.
-  *
-  * <p>
-  * The entirety of the withdrawal is consumed from the given stack.
-  * </p>
-  *
-  * <p>
-  * An error occurs if the transaction would cause the balance to go
-  * below zero.
-  * </p>
-  */
+   * Processes the 'withdrawal' transaction.
+   *
+   * The entirety of the withdrawal is consumed from the given stack.
+   *
+   * <p>An error occurs if the transaction would cause the balance to go below
+   * zero.</p>
+   *
+   * @param transactions Stack of operations.
+   */
   private void handleWithdrawal(Vector<Transaction> transactions) {
     // Pop off stuff
     Transaction top = transactions.firstElement();
@@ -251,19 +241,17 @@ class TransactionCalculator {
     assert newBalance >= 0.0;
     account.balance = newBalance;
   }
+  
   /**
-  * Processes the 'transfer' transaction.
-  * @param transactions Stack of operations.
-  *
-  * <p>
-  * The entirety of the transfer is consumed from the given stack.
-  * </p>
-  *
-  * <p>
-  * An error occurs if the transaction would cause the sender's
-  * balance to go below zero, or if the transfer amounts do not match.
-  * </p>
-  */
+   * Processes the 'transfer' transaction.
+   *
+   * The entirety of the transfer is consumed from the given stack.
+   *
+   * <p>An error occurs if the transaction would cause the sender's balance to
+   * go below zero, or if the transfer amounts do not match.</p>
+   *
+   * @param transactions Stack of operations.
+   */
   private void handleTransfer(Vector<Transaction> transactions) {
     // Pop off first two
     Transaction senderTransaction = transactions.firstElement();
@@ -291,18 +279,15 @@ class TransactionCalculator {
   }
 
   /**
-  * Processes the 'paybill' transaction.
-  * @param transactions Stack of operations.
-  *
-  * <p>
-  * The entirety of the paybill is consumed from the given stack.
-  * </p>
-  *
-  * <p>
-  * An error occurs if the transaction would cause the balance to go
-  * below zero.
-  * </p>
-  */
+   * Processes the 'paybill' transaction.
+   *
+   * The entirety of the paybill is consumed from the given stack.
+   *
+   * <p>An error occurs if the transaction would cause the balance to go below
+   * zero.</p>
+   *
+   * @param transactions Stack of operations.
+   */
   private void handlePaybill(Vector<Transaction> transactions) {
     // Pop off first one
     Transaction top = transactions.firstElement();
@@ -319,18 +304,15 @@ class TransactionCalculator {
   }
 
   /**
-  * Processes the 'deposit' transaction.
-  * @param transactions Stack of operations.
-  *
-  * <p>
-  * The entirety of the deposit is consumed from the given stack.
-  * </p>
-  *
-  * <p>
-  * An error occurs if the transaction would cause the balance to go
-  * below zero (e.g. because of transaction fees).
-  * </p>
-  */
+   * Processes the 'deposit' transaction.
+   *
+   * The entirety of the deposit is consumed from the given stack.
+   *
+   * <p>An error occurs if the transaction would cause the balance to go below
+   * zero (e.g. because of transaction fees).</p>
+   *
+   * @param transactions Stack of operations.
+   */
   private void handleDeposit(Vector<Transaction> transactions) {
     // Pop off the first one
     Transaction top = transactions.firstElement();
@@ -345,19 +327,17 @@ class TransactionCalculator {
     assert newBalance >= 0.0;
     account.balance = newBalance;
   }
+  
   /**
-  * Processes the 'changeplan' transaction.
-  * @param transactions Stack of operations.
-  *
-  * <p>
-  * The entirety of the changeplan is consumed from the given stack.
-  * </p>
-  *
-  * <p>
-  * An error occurs if the misc column in the transaction does not
-  * contain the flags 'S ' or 'N '
-  * </p>
-  */
+   * Processes the 'changeplan' transaction.
+   *
+   * The entirety of the changeplan is consumed from the given stack.
+   *
+   * <p>An error occurs if the misc column in the transaction does not contain
+   * the flags 'S ' or 'N '</p>
+   *
+   * @param transactions Stack of operations.
+   */
   private void handleChangePlan(Vector<Transaction> transactions) {
     // Pop off the transaction
     Transaction top = transactions.firstElement();
@@ -371,17 +351,14 @@ class TransactionCalculator {
   }
 
   /**
-  * Processes the 'delete' transaction.
-  * @param transactions Stack of operations.
-  *
-  * <p>
-  * The entirety of the delete is consumed from the given stack.
-  * </p>
-  *
-  * <p>
-  *   An error occurs if the account is not found.
-  * </p>
-  */
+   * Processes the 'delete' transaction.
+   *
+   * The entirety of the delete is consumed from the given stack.
+   *
+   * <p>An error occurs if the account is not found.</p>
+   *
+   * @param transactions Stack of operations.
+   */
   private void handleDelete(Vector<Transaction> transactions) {
     // Pop off the transaction
     Transaction top = transactions.firstElement();
@@ -395,17 +372,14 @@ class TransactionCalculator {
   }
 
   /**
-  * Processes the 'create' transaction.
-  * @param transactions Stack of operations.
-  *
-  * <p>
-  * The entirety of the create is consumed from the given stack.
-  * </p>
-  *
-  * <p>
-  *   An error occurs if the account number already exists.
-  * </p>
-  */
+   * Processes the 'create' transaction.
+   *
+   * The entirety of the create is consumed from the given stack.
+   
+   * <p>An error occurs if the account number already exists.</p>
+   *
+   * @param transactions Stack of operations.
+   */
   private void handleCreate(Vector<Transaction> transactions) {
     // Pop off the transaction
     Transaction top = transactions.firstElement();
@@ -419,17 +393,15 @@ class TransactionCalculator {
   }
 
   /**
-  * Processes the 'disable' transaction.
-  * @param transactions Stack of operations.
-  *
-  * <p>
-  * The entirety of the disable is consumed from the given stack.
-  * </p>
-  *
-  * <p>
-  *   An error occurs if the account is not found, or if it is already disabled.
-  * </p>
-  */
+   * Processes the 'disable' transaction.
+   *
+   * The entirety of the disable is consumed from the given stack.
+   *
+   * <p>An error occurs if the account is not found, or if it is already
+   * disabled.</p>
+   *
+   * @param transactions Stack of operations.
+   */
   private void handleDisable(Vector<Transaction> transactions) {
     // Pop off the transaction
     Transaction top = transactions.firstElement();
@@ -444,18 +416,15 @@ class TransactionCalculator {
   }
 
   /**
-  * Processes the 'enable' transaction.
-  * @param transactions Stack of operations.
-  *
-  * <p>
-  * The entirety of the enable is consumed from the given stack.
-  * </p>
-  *
-  * <p>
-  *   An error occurs if the account is not found, or if the account is already
-  *   enabled.
-  * </p>
-  */
+   * Processes the 'enable' transaction.
+   *
+   * The entirety of the enable is consumed from the given stack.
+   *
+   * <p>An error occurs if the account is not found, or if the account is
+   * already enabled.</p>
+   *
+   * @param transactions Stack of operations.
+   */
   private void handleEnable(Vector<Transaction> transactions) {
     // Pop off the transaction
     Transaction top = transactions.firstElement();
@@ -469,18 +438,12 @@ class TransactionCalculator {
     account.isActive = true;
   }
 
-  /**
-  * Index of bank accounts.
-  */
+  /** Index of bank accounts. */
   private Map<String, ArrayList<Account>> accountTable;
 
-  /**
-  * When scanning, whether a login or logout occured.
-  */
+  /** When scanning, whether a login or logout occured. */
   private boolean isLoggedIn;
 
-  /**
-  * When scanning, whether logged in user is admin.
-  */
+  /** When scanning, whether logged in user is admin. */
   private boolean isAdmin;
 }

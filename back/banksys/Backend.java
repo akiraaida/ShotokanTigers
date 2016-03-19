@@ -17,35 +17,43 @@ import java.util.List;
 import java.util.Map;
 import java.util.Vector;
 
+/**
+ * Containing the main function.
+ *
+ * <p>The program will take a master accounts file and one or many transaction
+ * files and then create a new master accounts file with the transactions
+ * applied to it from the old master accounts file.</p>
+ *
+ * <p>Input: master.txt trans1.txt trans2.txt trans3.txt<br />
+ * Output: concat.txt newMaster.txt newCurr.txt <br />
+ * Usage: <br />
+ * make <br/>
+ * make run</p>
+ *
+ */
 public class Backend {
-  
   /**
-  * The program will take a master accounts file and one or many
-  * transaction files and then create a new master accounts file with
-  * the transactions applied to it from the old master accounts file.
-  * Input: master.txt trans1.txt trans2.txt trans3.txt
-  * Output: concat.txt newMaster.txt newCurr.txt
-  * Usage: make
-  * Usage: make run
+  * Arguments are [master accounts file] [transaction files]
+  *
+  * @param args Program parameters.
   */
   public static void main(String[] args) {
-    
-    /**
-    * Execution requires at least two files to run. The master
-    * accounts file and one transaction file.
-    * Execution... java Backend master.txt trans1.txt trans2.txt
-    * Where there can be an unilimited number of transaction files
+    /*
+    * Execution requires at least two files to run. The master accounts file and
+    * one transaction file.
+    *   Execution... java Backend master.txt trans1.txt trans2.txt
+    * Where there can be an unilimited number of transaction files.
     */
     if(args.length < 2) {
       System.out.println("ERROR, NOT ENOUGH ARGUEMENTS.");
       System.exit(0);
     }
 
-    /**
-    * Load all of the files in the master accounts file into the data
-    * structure map with the name as the key and their account
-    * information in the data structure "Account", "Account"s are in
-    * an ArrayList if they have multiple accounts.
+    /*
+    * Load all of the files in the master accounts file into the data structure
+    * map with the name as the key and their account information in the data
+    * structure "Account", "Account"s are in an ArrayList if they have multiple
+    * accounts.
     */
     FileParser parse = new FileParser();
     Map<String, ArrayList<Account>> accountTable = parse.parseMaster(
@@ -56,9 +64,9 @@ public class Backend {
       transFiles.add(args[i]);
     }
     
-    /**
-    * Concatenate all of the given transaction files and put all of
-    * their contents into "concat.txt"
+    /*
+    * Concatenate all of the given transaction files and put all of their
+    * contents into "concat.txt"
     */
     parse.concatTrans(transFiles);
 

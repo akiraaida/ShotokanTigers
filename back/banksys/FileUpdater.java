@@ -19,17 +19,17 @@ import java.util.ArrayList;
 import java.util.Map;
 
 /** 
-* Takes the data structure (name->their accounts) that has had the transactions
-* applied to it and writes the new master accounts' file.
-*/
-
+ * Takes the data structure (name->their accounts) that has had the transactions
+ * applied to it and writes the new master accounts' file.
+ */
 class FileUpdater {
   /**
-  * Loops through the data structure (name->their accounts) and writes all of
-  * the accounts to a "newMaster.txt" file using the createAccount helper
-  * function.
-  * @param accounts the data structure (name->their accounts)
-  */
+   * Loops through the data structure (name->their accounts) and writes all of
+   * the accounts to a "newMaster.txt" file using the createAccount helper
+   * function.
+   *
+   * @param accounts the data structure (name->their accounts)
+   */
   protected void fileWriter(Map<String, ArrayList<Account>> accounts) {
     PrintWriter mpwriter = null;
     PrintWriter cpwriter = null;
@@ -80,17 +80,20 @@ class FileUpdater {
   }
   
   /**
-  * A helper function for the fileWriter which formats a string (the account) to
-  * be written to a file.
-  * @param master if the file being printed to is newMaster accounts file or the current accounts file
-  * @param name the name of the account holder
-  * @param num the account number
-  * @param stat the status of the account (active/disabled)
-  * @param bal the bank balance
-  * @param trans the number of transactions
-  * @param plan the status of the account's plan (student/non-student)
-  * @return a string that has the formatted information for the account to be written to file
-  */
+   * A helper function for the fileWriter which formats a string (the account)
+   * to be written to a file.
+   *
+   * @param master Set true, when the file being printed to is newMaster =
+   *    accounts file or the current accounts file.
+   * @param name The name of the account holder.
+   * @param num The account number.
+   * @param stat The status of the account (active/disabled).
+   * @param bal The bank balance.
+   * @param trans The number of transactions.
+   * @param plan The status of the account's plan (student/non-student).
+   * @return A string that has the formatted information for the account to be
+   *    written to file.
+   */
   private String createAccount(boolean master, String name, int num, 
       boolean stat, double bal, int trans, boolean plan) {
 

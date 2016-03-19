@@ -23,24 +23,26 @@ import java.util.Map;
 import java.util.HashMap;
 
 /** 
-* Parse the files and puts them into data structures to easily manipulate
-* them. Concatenates multiple transaction files into one and puts it into a list.
-* As well as putting the master accounts into a map (name->their accounts)
-*/
-
+ * Processes account and transaction files.
+ *
+ * Parse the files and puts them into data structures to easily manipulate
+ * them. Concatenates multiple transaction files into one and puts it into a
+ * list; as well as putting the master accounts into a map
+ * (name->their accounts).
+ */
 class FileParser {
   private static final String ACTIVE = "A";
   private static final String STUDENT = "S";
   private static final String END = "END_OF_FILE";
   
   /**
-  * Parses the master transactions file and puts it into a map of accounts
-  * for the rest of the program to use
-  * @param masterFile The file name of the master accounts' file 
-  * @return A map of accounts with the name as the key and their list of
-  *         respective accounts that they own
-  */
-
+   * Parses the master transactions file and puts it into a map of accounts
+   * for the rest of the program to use.
+   *
+   * @param masterFile The file name of the master accounts' file 
+   * @return A map of accounts with the name as the key and their list of
+   *         respective accounts that they own
+   */
   protected Map<String, ArrayList<Account>> parseMaster(String masterFile) {
   
     Map<String, ArrayList<Account>> accounts = new HashMap<String,
@@ -96,11 +98,11 @@ class FileParser {
   }
 
   /**
-  * Takes all the transaction files and puts the contents of it into a file
-  * named "concat.txt"
-  * @param transFiles is a list of the transactions files
-  */
-
+   * Takes all the transaction files and puts the contents of it into a file
+   * named "concat.txt"
+   *
+   * @param transFiles is a list of the transactions files
+   */
   protected void concatTrans(List<String> transFiles) {
     PrintWriter pwriter = null;
     try {
@@ -131,12 +133,13 @@ class FileParser {
   }
   
   /**
-  * Takes the "concat.txt" file and parses it into a usable data structure for
-  * the rest of the program. The "concat.txt" is all of the transactions files
-  * together.
-  * @return A list of all of the transactions that need to be looked at and
-  *         applied.
-  */
+   * Takes the "concat.txt" file and parses it into a usable data structure for
+   * the rest of the program. The "concat.txt" is all of the transactions files
+   * together.
+   *
+   * @return A list of all of the transactions that need to be looked at and
+   *         applied.
+   */
   protected List<Transaction> parseTrans() {
     List<Transaction> transactions = new ArrayList<Transaction>();
     try {

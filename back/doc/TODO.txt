@@ -1,15 +1,6 @@
 TODO
 =====
-
-1. Reformat to fit Google style
-  - cull @brief and other non-javadoc things
-  - check block comments have *
-  - check javadoc
-
-2. Comment functions and classes
-  - Double check that all functions/classes have documentation now
-
-3. UML Diagram proofing:
+1. UML Diagram proofing:
   - Backend
     - missing connections:
       - Account
@@ -67,6 +58,13 @@ COMPLETED
     - check bracket newlines
     - check line wrapping
     - check switch statement according to 4.8.4
+  - documentation
+    - check block comments have *
+    - check javadoc
+      - fixed <p> wrapping and added tags where absent (7.1.2)
+      - added fragments where absent
+      - aligned stars with last star of /**
+    - distinguished between comments and javadoc
 
 8. Finished UML reformattings:
   - FileParser
@@ -109,3 +107,7 @@ COMPLETED
     - change bal --> balance
     - change trans --> transactionCount
     - change plan --> isStudentPlan
+    
+    
+9. Comment functions and classes
+  - Double check that all functions/classes have documentation now
