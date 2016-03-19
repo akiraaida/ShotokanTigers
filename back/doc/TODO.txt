@@ -3,13 +3,8 @@ TODO
 
 1. Reformat to fit Google style
   - cull @brief and other non-javadoc things
-  - indentation, probably
-  - check bracket newlines
-  - check line wrapping
-  - check switch statement according to 4.8.4
   - check block comments have *
   - check javadoc
-
 
 2. Comment functions and classes
   - Double check that all functions/classes have documentation now
@@ -66,7 +61,12 @@ COMPLETED
     - Transaction Calculator
       - accountTable should not be public, should be private
   - check for missing braces on one-liner if, else, etc. (4.1.1)
-  - check whitespace for ifs and such (4.6.2)
+  - whitespaceish things
+    - check whitespace for ifs and such (4.6.2)
+    - indentation, probably
+    - check bracket newlines
+    - check line wrapping
+    - check switch statement according to 4.8.4
 
 8. Finished UML reformattings:
   - FileParser

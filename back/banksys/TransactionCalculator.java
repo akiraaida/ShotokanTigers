@@ -31,7 +31,8 @@ class TransactionCalculator {
   * Gives known accounts to the calculator for reference.
   * @param accountTable Customer names keyed to bank accounts.
   */
-  public void setAccountTable(Map<String, ArrayList<Account>> pAccountTable) {
+  public void setAccountTable(Map<String, ArrayList<Account>>
+      pAccountTable) {
     accountTable = pAccountTable;
   }
 
@@ -45,11 +46,13 @@ class TransactionCalculator {
 
   /**
   * Applies transaction operations to the bank system.
-  * @param transactions Sequence of changes to be made to the bank system.
+  * @param transactions Sequence of changes to be made to the bank
+  *   system.
   *
   * <p>
-  *   An error occurs if a transaction involves a nonexistent user, or if a
-  *   user's transaction count is negative.
+  * An error occurs if a transaction involves a nonexistent user,
+  * or if a
+  * user's transaction count is negative.
   * <p>
   */
   public void applyTransactions(Vector<Transaction> transactions) {
@@ -108,19 +111,17 @@ class TransactionCalculator {
 
         default:
           assert false;
-
       }
 
       // add to transaction count
       if(currentTransaction.accountNumber != 0) {
+        // TODO when phase 5: report error when transaction uses
+        // invalid user
+        // TODO when phase 5: report error when transaction count
+        // is negative
         Account account = getAccount(currentTransaction);
-
-        assert account != null;                // TODO when phase 5: report
-                                               // error when transaction uses
-                                               // invalid user
-        assert account.transactionCount >= 0; // TODO when phase 5: report
-                                               // error when transaction count
-                                               // is negative
+        assert account != null;                
+        assert account.transactionCount >= 0; 
         account.transactionCount += 1;
       }
 
@@ -133,7 +134,8 @@ class TransactionCalculator {
   * @return null, if the account was not found.
   */
   private Account getAccount(Transaction transaction) {
-    ArrayList<Account> accounts = accountTable.get(transaction.accountName);
+    ArrayList<Account> accounts = accountTable.get(
+        transaction.accountName);
     for(Account account : accounts) {
       if(account.number == transaction.accountNumber) {
         return account;
@@ -148,8 +150,9 @@ class TransactionCalculator {
   * @return A fee of zero, if an admin is known to be logged in.
   */
   private double getTransactionFee(Account account) {
-    assert isLoggedIn == true; // TODO when phase 5 is done: print error when
-                                  // user is not logged in.
+    // TODO when phase 5 is done: print error when user is not
+    // logged in.
+    assert isLoggedIn == true; 
     if(isAdmin) {
       return 0.0;
     } else if (account.isStudentPlan) {
@@ -197,7 +200,8 @@ class TransactionCalculator {
     // do login
     // TODO when phase 5: Print error when misc has bad value
     isLoggedIn = true;
-    assert top.misc.compareTo("A ") == 0 || top.misc.compareTo("S ") == 0;
+    assert top.misc.compareTo("A ") == 0
+        || top.misc.compareTo("S ") == 0;
     isAdmin = top.misc.compareTo("A ") == 0 ? true : false;
   }
   /**
@@ -229,8 +233,8 @@ class TransactionCalculator {
   * </p>
   *
   * <p>
-  * An error occurs if the transaction would cause the balance to go below
-  * zero.
+  * An error occurs if the transaction would cause the balance to go
+  * below zero.
   * </p>
   */
   private void handleWithdrawal(Vector<Transaction> transactions) {
@@ -256,8 +260,8 @@ class TransactionCalculator {
   * </p>
   *
   * <p>
-  *   An error occurs if the transaction would cause the sender's balance to go
-  *   below zero, or if the transfer amounts do not match.
+  * An error occurs if the transaction would cause the sender's
+  * balance to go below zero, or if the transfer amounts do not match.
   * </p>
   */
   private void handleTransfer(Vector<Transaction> transactions) {
@@ -268,12 +272,14 @@ class TransactionCalculator {
     transactions.remove(0);
 
     // Check transaction
-    // TODO when phase 5: Print error if transfer amount does not match
+    // TODO when phase 5: Print error if transfer amount does not
+    // match
     assert senderTransaction.amount == recipientTransaction.amount;
     double amount = senderTransaction.amount;
 
     // Perform transfer
-    // TODO when phase 5: Print error if sender balance drops below 0.0
+    // TODO when phase 5: Print error if sender balance drops below
+    // 0.0
     Account sender = getAccount(senderTransaction);
     Account recipient = getAccount(recipientTransaction);
     double senderFee = getTransactionFee(sender);
@@ -293,8 +299,8 @@ class TransactionCalculator {
   * </p>
   *
   * <p>
-  *   An error occurs if the transaction would cause the balance to go below
-  *   zero.
+  * An error occurs if the transaction would cause the balance to go
+  * below zero.
   * </p>
   */
   private void handlePaybill(Vector<Transaction> transactions) {
@@ -321,8 +327,8 @@ class TransactionCalculator {
   * </p>
   *
   * <p>
-  *   An error occurs if the transaction would cause the balance to go below
-  *   zero (e.g. because of transaction fees).
+  * An error occurs if the transaction would cause the balance to go
+  * below zero (e.g. because of transaction fees).
   * </p>
   */
   private void handleDeposit(Vector<Transaction> transactions) {
@@ -348,8 +354,8 @@ class TransactionCalculator {
   * </p>
   *
   * <p>
-  *   An error occurs if the misc column in the transaction does not contain
-  *   the flags 'S ' and 'N '
+  * An error occurs if the misc column in the transaction does not
+  * contain the flags 'S ' or 'N '
   * </p>
   */
   private void handleChangePlan(Vector<Transaction> transactions) {
