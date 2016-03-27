@@ -1,0 +1,14 @@
+1: Make sure you properly install Junit and set up the appropriate classpaths
+2: Write the tests you want for a class all in one file
+    2.1: You may have multiple methods in a class
+        2.1.1: You may have multiple tests for a method
+3: The TestRunner.java will execute the TestSuite.class 
+4: The TestSuite.java will execute all of the written test files' classes
+5: If all test cases pass then the test runner will output true or false
+    5.1: The individual test cases will have additional error messages you implement
+6: To compile, navigate to the directory ABOVE the banksys and tests directory
+    
+    javac banksys/*.java
+    javac tests/*.java
+    java tests.TestRunner
+

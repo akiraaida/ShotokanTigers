@@ -22,12 +22,12 @@ package banksys;
  *   System.out.printf("Account #%d is disabled%n", currentAccount.number);<br/>
  * }</p>
  */
-class Account {
+public class Account {
   /** Unique identifier that should be 5 digits i.e. <=99999 */
-  int number;
+  public int number;
 
   /** When false, indicates a disabled account. */
-  boolean isActive;
+  public boolean isActive;
 
   /**
    * Dollars (CAD) in account.
@@ -35,14 +35,14 @@ class Account {
    * <p>Should be nonnegative, and should not exceed $99999.99 or have a
    * fractional part exceeding 2 digits.</p>
    */
-  double balance;
+  public double balance;
 
   /**
    * Number of transactions applied to this account e.g. deposits,
    * disables.
    */
-  int transactionCount;
+  public int transactionCount;
 
   /** When false, indicates that this account is on a non-student plan. */
-  boolean isStudentPlan;
+  public boolean isStudentPlan;
 }

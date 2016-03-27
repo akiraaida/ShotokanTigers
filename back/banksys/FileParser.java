@@ -30,7 +30,7 @@ import java.util.HashMap;
  * list; as well as putting the master accounts into a map
  * (name->their accounts).
  */
-class FileParser {
+public class FileParser {
   private static final String ACTIVE = "A";
   private static final String STUDENT = "S";
   private static final String END = "END_OF_FILE";
@@ -43,7 +43,7 @@ class FileParser {
    * @return A map of accounts with the name as the key and their list of
    *         respective accounts that they own
    */
-  protected Map<String, ArrayList<Account>> parseMaster(String masterFile) {
+  public Map<String, ArrayList<Account>> parseMaster(String masterFile) {
   
     Map<String, ArrayList<Account>> accounts = new HashMap<String,
         ArrayList<Account>>();

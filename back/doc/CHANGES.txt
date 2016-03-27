@@ -1,0 +1,9 @@
+NOTE ALL CHANGES YOU DO TO ANY SOURCE FILE
+===========================================
+
+- Changed FileParser from nothing to public so that test cases can access it.
+- Changed parseMaster from protected to public so that test cases can access it.
+- Changed Account from nothing to public so that test cases can access it.
+    - Changed all variables in Account from nothing to public so that test cases can access them
+
+- Changed FileUpdater to public so that test cases can access it.

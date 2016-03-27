@@ -22,7 +22,7 @@ import java.util.Map;
  * Takes the data structure (name->their accounts) that has had the transactions
  * applied to it and writes the new master accounts' file.
  */
-class FileUpdater {
+public class FileUpdater {
   /**
    * Loops through the data structure (name->their accounts) and writes all of
    * the accounts to a "newMaster.txt" file using the createAccount helper
