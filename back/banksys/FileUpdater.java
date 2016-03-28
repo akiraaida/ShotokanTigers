@@ -91,7 +91,7 @@ public class FileUpdater {
    * @return A string that has the formatted information for the account to be
    *    written to file.
    */
-  private String createAccount(boolean master, String name, int num, 
+  public String createAccount(boolean master, String name, int num, 
       boolean stat, double bal, int trans, boolean plan) {
 
     String strName = String.format("%-20s", name);

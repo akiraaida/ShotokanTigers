@@ -18,6 +18,7 @@ CHANGES NEEDED TO MAKE THE TEST CASES WORK
 - Deleted the finally block in fileWriter since it wasn't needed
 - Added two params to fileWriter which are two strings, one for the name of the new accounts file and one for the name of the new master file
 - Added the two file params for fileWriter "newMaster.txt" and "newCurr.txt" to the Backend.java
+- Changed createAccount from private to public
 
 FAILED TEST CASES
 
