@@ -81,6 +81,6 @@ public class Backend {
 
     // Write the updated accounts to file
     FileUpdater fileUpdater = new FileUpdater();
-    fileUpdater.fileWriter(transactionCalculator.getAccountTable());
+    fileUpdater.fileWriter(transactionCalculator.getAccountTable(), "newMaster.txt", "newCurr.txt");
   }
 }

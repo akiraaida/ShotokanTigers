@@ -25,7 +25,7 @@ public class TestParser {
     // Tests the parseMaster method with an input that's active and a student
     public void testActStu() {	
         FileParser parser = new FileParser();
-        Map<String, ArrayList<Account>> accounts = parser.parseMaster("tests/testParser1.txt");
+        Map<String, ArrayList<Account>> accounts = parser.parseMaster("tests/resources/testParser1.txt");
         
         for(Map.Entry<String, ArrayList<Account>> entry : accounts.entrySet()) {
             String name = entry.getKey();
@@ -45,7 +45,7 @@ public class TestParser {
     // Tests the parseMaster method with an input that's disabled and a non-student
     public void testDisNon() {   
         FileParser parser = new FileParser();
-        Map<String, ArrayList<Account>> accounts = parser.parseMaster("tests/testParser2.txt");
+        Map<String, ArrayList<Account>> accounts = parser.parseMaster("tests/resources/testParser2.txt");
       
         for(Map.Entry<String, ArrayList<Account>> entry : accounts.entrySet()) {
             String name = entry.getKey();
@@ -65,7 +65,7 @@ public class TestParser {
     // Tests the parseMaster method with an input that's the END_OF_FILE
     public void testEnd() {   
         FileParser parser = new FileParser();
-        Map<String, ArrayList<Account>> accounts = parser.parseMaster("tests/testParser3.txt");
+        Map<String, ArrayList<Account>> accounts = parser.parseMaster("tests/resources/testParser3.txt");
         assertEquals(true, accounts.isEmpty());
     }
 
@@ -76,14 +76,14 @@ public class TestParser {
     @Test
     // Tests one file being concatenated
     public void testOneConcat() {
-        final File expected = new File("tests/correctConcat1.txt");
+        final File expected = new File("tests/resources/correctConcat1.txt");
         List<String> files = new ArrayList<String>();    
-        files.add("tests/trans1.txt");
+        files.add("tests/resources/trans1.txt");
         
         FileParser parser = new FileParser();
         parser.concatTrans(files);
-        File file = new File("concat.txt");
-        File actual = new File("tests/actualConcat1.txt");
+        File file = new File("testConcat.txt");
+        File actual = new File("tests/resources/actualConcat1.txt");
         file.renameTo(actual);
         try { 
             BufferedReader in = new BufferedReader(new FileReader(actual));
@@ -112,16 +112,16 @@ public class TestParser {
     @Test
     // Tests three files are being concatenated
     public void testThreeConcat() {
-        final File expected = new File("tests/correctConcat2.txt");
+        final File expected = new File("tests/resources/correctConcat2.txt");
         List<String> files = new ArrayList<String>();    
-        files.add("tests/trans1.txt");
-        files.add("tests/trans2.txt");
-        files.add("tests/trans3.txt");
+        files.add("tests/resources/trans1.txt");
+        files.add("tests/resources/trans2.txt");
+        files.add("tests/resources/trans3.txt");
         
         FileParser parser = new FileParser();
         parser.concatTrans(files);
-        File file = new File("concat.txt");
-        File actual = new File("tests/actualConcat2.txt");
+        File file = new File("testConcat.txt");
+        File actual = new File("tests/resources/actualConcat2.txt");
         file.renameTo(actual);
         try { 
             BufferedReader in = new BufferedReader(new FileReader(actual));
@@ -151,7 +151,7 @@ public class TestParser {
     // Tests that a transaction was correctly parsed
     public void testTrans() {
         FileParser parser = new FileParser();
-        Vector<Transaction> transactions = new Vector<Transaction>(parser.parseTrans("tests/correctTrans.txt")); 
+        Vector<Transaction> transactions = new Vector<Transaction>(parser.parseTrans("tests/resources/correctTrans.txt")); 
         
         Iterator<Transaction> itr = transactions.iterator();
         while(itr.hasNext()){

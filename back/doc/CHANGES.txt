@@ -1,6 +1,8 @@
 NOTE ALL CHANGES YOU DO TO ANY SOURCE FILE
 ===========================================
 
+CHANGES NEEDED TO MAKE THE TEST CASES WORK
+
 - Changed FileParser from nothing to public so that test cases can access it.
 - Changed parseMaster from protected to public so that test cases can access it.
 - Changed Account from nothing to public so that test cases can access it.
@@ -11,5 +13,16 @@ NOTE ALL CHANGES YOU DO TO ANY SOURCE FILE
 - Changed the call of parseTrans in the Backend.java to use "concat.txt"
 - Changed Transaction from nothing to public so that test cases can access it
     - Changed all variables in Transactions from nothing to public so that test cases can access it
-
 - Changed FileUpdater to public so that test cases can access it.
+- Changed fileWriter from protected to public so that test cases can access it
+- Deleted the finally block in fileWriter since it wasn't needed
+- Added two params to fileWriter which are two strings, one for the name of the new accounts file and one for the name of the new master file
+- Added the two file params for fileWriter "newMaster.txt" and "newCurr.txt" to the Backend.java
+
+FAILED TEST CASES
+
+Test Failed: No END_OF_FILE in the new master accounts file
+testWriter(tests.TestUpdater): expected:<[11111 Bob                  A 00005.23 0034 S, 00000 END_OF_FILE          A 00000.00 0000 S]> but was:<[11111 Bob                  A 00005.23 0034 S]>
+
+Test Failed: No END_OF_FILE in the new current accounts file
+testWriter(tests.TestUpdater): expected:<[11111 Bob                  A 00005.23 S , 00000 END_OF_FILE          A 00000.00 S ]> but was:<[11111 Bob                  A 00005.23 S]>

@@ -29,21 +29,23 @@ public class FileUpdater {
    * function.
    *
    * @param accounts the data structure (name->their accounts)
+   * @param newM the new master file name
+   * @param newC the new current accounts file name
    */
-  protected void fileWriter(Map<String, ArrayList<Account>> accounts) {
+  public void fileWriter(Map<String, ArrayList<Account>> accounts, String newM, String newC) {
     PrintWriter mpwriter = null;
     PrintWriter cpwriter = null;
     try {
-      mpwriter = new PrintWriter("newMaster.txt");
+      mpwriter = new PrintWriter(newM);
       mpwriter.close();
-      cpwriter = new PrintWriter("newCurr.txt");
+      cpwriter = new PrintWriter(newC);
       cpwriter.close();
       
-      FileWriter mfwriter = new FileWriter("newMaster.txt", true);
+      FileWriter mfwriter = new FileWriter(newM, true);
       BufferedWriter mbwriter = new BufferedWriter(mfwriter);
       mpwriter = new PrintWriter(mbwriter);
 
-      FileWriter cfwriter = new FileWriter("newCurr.txt", true);
+      FileWriter cfwriter = new FileWriter(newC, true);
       BufferedWriter cbwriter = new BufferedWriter(cfwriter);
       cpwriter = new PrintWriter(cbwriter);
       
@@ -65,18 +67,13 @@ public class FileUpdater {
           cpwriter.println(currAccount);
         }
       }
+      mpwriter.println("00000 END_OF_FILE          A 00000.00 0000 S");
+      cpwriter.println("00000 END_OF_FILE          A 00000.00 S");
       mpwriter.close();
       cpwriter.close();
     } catch (Exception e) {
       System.out.println(e);
-    } finally {
-      if(mpwriter != null) {
-        mpwriter.close();
-      }
-      if(cpwriter != null) {
-        cpwriter.close();
-      }
-    }
+    } 
   }
   
   /**

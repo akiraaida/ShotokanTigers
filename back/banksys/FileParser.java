@@ -133,6 +133,7 @@ public class FileParser {
    * the rest of the program. The "concat.txt" is all of the transactions files
    * together.
    *
+   * @param file the file name that parseTrans will be parsing
    * @return A list of all of the transactions that need to be looked at and
    *         applied.
    */
