@@ -103,7 +103,7 @@ public class FileParser {
    *
    * @param transFiles is a list of the transactions files
    */
-  protected void concatTrans(List<String> transFiles) {
+  public void concatTrans(List<String> transFiles) {
     PrintWriter pwriter = null;
     try {
       pwriter = new PrintWriter("concat.txt");
@@ -121,14 +121,10 @@ public class FileParser {
         }
         transBr.close();
       }
-
+      pwriter.close();
     } catch (Exception e) {
       System.out.println(e);
       System.exit(0);
-    } finally {
-      if(pwriter != null) {
-        pwriter.close();
-      }
     }
   }
   
@@ -140,10 +136,10 @@ public class FileParser {
    * @return A list of all of the transactions that need to be looked at and
    *         applied.
    */
-  protected List<Transaction> parseTrans() {
+  public List<Transaction> parseTrans(String file) {
     List<Transaction> transactions = new ArrayList<Transaction>();
     try {
-      FileReader parseFr = new FileReader("concat.txt");
+      FileReader parseFr = new FileReader(file);
       BufferedReader parseBr = new BufferedReader(parseFr);
 
       String line;

@@ -13,31 +13,31 @@
 package banksys;
 
 /** POD storing the elements of a transaction string. */
-class Transaction {
+public class Transaction {
   /**
    * Indicates what kind of transaction this is.
    *
    * @see TransactionType
    */
-  int code;
+  public int code;
 
   /** Account owner name as parameter to this transaction.*/
-  String accountName;
+  public String accountName;
 
   /**
    * Account number as parameter to this transaction.
    *
    * @see Account class.
    */
-  int accountNumber;
+  public int accountNumber;
 
   /**
    * Dollar amount in CAD as parameter to this transaction.
    *
    * Should be 5 digits, i.e. <=99999
    */
-  double amount;
+  public double amount;
 
   /** 2-character parameter to this transaction. */
-  String misc;
+  public String misc;
 }

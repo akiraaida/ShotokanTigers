@@ -71,7 +71,7 @@ public class Backend {
     parse.concatTrans(transFiles);
 
     Vector<Transaction> transactions = new Vector<Transaction>(
-        parse.parseTrans());
+        parse.parseTrans("concat.txt"));
     
     // Apply the transactions to the map
     TransactionCalculator transactionCalculator

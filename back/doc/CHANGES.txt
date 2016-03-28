@@ -5,5 +5,11 @@ NOTE ALL CHANGES YOU DO TO ANY SOURCE FILE
 - Changed parseMaster from protected to public so that test cases can access it.
 - Changed Account from nothing to public so that test cases can access it.
     - Changed all variables in Account from nothing to public so that test cases can access them
+- Deleted the finally block in concatTrans() and moved the pwriter close within the try block
+- Changed parseTrans from protected to public so that test cases can access it.
+- Changed the parameter for parseTrans to be a string (for the file name) so that it can parse specified files instead of assuming "concat.txt"
+- Changed the call of parseTrans in the Backend.java to use "concat.txt"
+- Changed Transaction from nothing to public so that test cases can access it
+    - Changed all variables in Transactions from nothing to public so that test cases can access it
 
 - Changed FileUpdater to public so that test cases can access it.
