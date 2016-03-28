@@ -1,5 +1,6 @@
 ROOT_PACKAGE = banksys
-SOURCES = $(ROOT_PACKAGE)/Account.java $(ROOT_PACKAGE)/Transaction.java $(ROOT_PACKAGE)/TransactionType.java $(ROOT_PACKAGE)/FileParser.java $(ROOT_PACKAGE)/FileUpdater.java $(ROOT_PACKAGE)/TransactionCalculator.java $(ROOT_PACKAGE)/Backend.java
+TEST_PATH = tests
+SOURCES = $(ROOT_PACKAGE)/Account.java $(ROOT_PACKAGE)/Transaction.java $(ROOT_PACKAGE)/TransactionType.java $(ROOT_PACKAGE)/FileParser.java $(ROOT_PACKAGE)/FileUpdater.java $(ROOT_PACKAGE)/TransactionCalculator.java $(ROOT_PACKAGE)/Backend.java $(TEST_PATH)/TestParser.java $(TEST_PATH)/TestRunner.java $(TEST_PATH)/TestSuite.java $(TEST_PATH)/TestUpdater.java
 OBJECTS = $(subst .java,.class,$(SOURCES))
 JFLAGS = -Xlint:unchecked
 
@@ -25,3 +26,7 @@ clean:
 	rm concat.txt
 	rm newMaster.txt
 	rm newCurr.txt
+	
+test:
+	make all
+	java tests.TestRunner
