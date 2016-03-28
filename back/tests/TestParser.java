@@ -59,13 +59,45 @@ public class TestParser {
                 assertEquals(false, account.get(i).isStudentPlan);
             }
         }
-   }
+    }
+    
+    @Test
+    // Tests the parseMaster method with a user that has multiple accounts
+    public void testMultiple() {   
+        FileParser parser = new FileParser();
+        Map<String, ArrayList<Account>> accounts = parser.parseMaster("tests/resources/testParser3.txt");
+      
+        String correctData1 = "12346 Matt Cow false 10010.42 1030 false"; 
+        String correctData2 = "12347 Matt Cow true 23421.37 8 true";
+        
+        int count = 0;
+        for(Map.Entry<String, ArrayList<Account>> entry : accounts.entrySet()) {
+            String name = entry.getKey();
+            ArrayList<Account> account = entry.getValue();
+            String data = "";
+            for(int i = 0; i < account.size(); i++) {
+                data += account.get(i).number;
+                data += " " + name;
+                data += " " + account.get(i).isActive;
+                data += " " + account.get(i).balance;
+                data += " " + account.get(i).transactionCount;
+                data += " " + account.get(i).isStudentPlan;
+                if(count == 0){
+                    assertEquals(correctData1, data);
+                } else {
+                    assertEquals(correctData2, data);
+                }
+                count += 1;
+                data = "";
+            }
+        }
+    }
 
     @Test
     // Tests the parseMaster method with an input that's the END_OF_FILE
     public void testEnd() {   
         FileParser parser = new FileParser();
-        Map<String, ArrayList<Account>> accounts = parser.parseMaster("tests/resources/testParser3.txt");
+        Map<String, ArrayList<Account>> accounts = parser.parseMaster("tests/resources/testParser4.txt");
         assertEquals(true, accounts.isEmpty());
     }
 
