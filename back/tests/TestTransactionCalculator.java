@@ -37,9 +37,13 @@ public class TestTransactionCalculator {
   private static final String USERNAME_JOHN_DOE = "John Doe";
   private static final String USERNAME_MATT_COW = "Matt Cow";
   private static final String USERNAME_NEW_GUY = "New Guy";
+  private static final String USERNAME_MOTH_WALLET = "Moth Wallet";
+  private static final String[] USERNAME_OTHER_GUYS = {"Guy 1", "Guy 2", "Guy 3"};
   private static final Integer[] ACCOUNTS_JOHN_DOE = {12345, 12346, 12347, 12360, 12361};
   private static final Integer[] ACCOUNTS_MATT_COW = {12348, 12349};
   private static final Integer[] ACCOUNTS_NEW_GUY = {12350, 12351};
+  private static final Integer[] ACCOUNTS_OTHER_GUYS = {12370, 12371, 12372};
+  private static final Integer MOTH_WALLET_ACCOUNT = 12380;
   private static double DEFAULT_ACCOUNT_BALANCE = 100.0;
   private static double DEFAULT_DEBIT_AMOUNT = 5.00;
   private static double WEIRD_WITHDRAWAL_AMOUNT = 1.00;
@@ -50,6 +54,7 @@ public class TestTransactionCalculator {
   private static Integer HUGE_TRANSACTION_ACCOUNT_NUMBER = 12361;
   private static int NEGATIVE_TRANSACTION_VALUE = -1;
   private static int MAX_TRANSACTION_VALUE = 9999;
+  private static double MOTH_WALLET_BALANCE = 0.04;
 
   /**
    * Holds on to the referance to stdout printstream
@@ -93,10 +98,22 @@ public class TestTransactionCalculator {
       matt_cows_stuff.add(genAccount(accountNumber));
     }
     
+    // Initialize moth wallet
+    ArrayList<Account> moth_wallet_stuff = new ArrayList<Account>();
+    moth_wallet_stuff.add(genAccount(MOTH_WALLET_ACCOUNT));
+    
     // Assemble account table 
     Map<String, ArrayList<Account>> accountTable = new HashMap<String, ArrayList<Account>>();
     accountTable.put(USERNAME_JOHN_DOE, john_does_stuff);
     accountTable.put(USERNAME_MATT_COW, matt_cows_stuff);
+    accountTable.put(USERNAME_MOTH_WALLET, moth_wallet_stuff);
+    
+    // Add in extra guys
+    for(int i = 0; i < USERNAME_OTHER_GUYS.length; i++) {
+      ArrayList<Account> this_guys_stuff = new ArrayList<Account>();
+      this_guys_stuff.add(genAccount(ACCOUNTS_OTHER_GUYS[i]));
+      accountTable.put(USERNAME_OTHER_GUYS[i], this_guys_stuff);
+    }
     
     // Finarry
     transactionCalculator.setAccountTable(accountTable);
@@ -134,7 +151,8 @@ public class TestTransactionCalculator {
     Account account = new Account();
     account.number = accountNumber;
     account.isActive = accountNumber != DISABLED_ACCOUNT_NUMBER;
-    account.balance = DEFAULT_ACCOUNT_BALANCE;
+    account.balance = accountNumber == MOTH_WALLET_ACCOUNT ? MOTH_WALLET_BALANCE
+                                                      : DEFAULT_ACCOUNT_BALANCE;
     account.transactionCount = accountNumber == BAD_TRANSACTION_ACCOUNT_NUMBER ?
                                                 NEGATIVE_TRANSACTION_VALUE
                                                 : DEFAULT_TRANSACTION_COUNT;
@@ -529,10 +547,28 @@ public class TestTransactionCalculator {
   /**
    * Ensures statement, decision, & loop coverage of 'getTransactionFee'
    * 
+   * <ul><li>
+   * S1 Evaluate login status</li><li>
+   * S2 Check if it is student plan</li><li>
+   * S3 Otherwise</li><li>
+   * D1 No charge for admin</li><li>
+   * D2 Student plan charge</li><li>
+   * D3 Nonstudent charge</li></ul>
+   *
+   * <p>Experiment is to log in with different privleges and to withdraw from
+   *    different accounts. Depending on the login mode and account plan, the
+   *    amount the balance drops will be different because of the return value
+   *    of this function.</p>
+   * 
+   * <ul><li>
+   * T1 admin login, account 12345, expect no charge (coverage of S1, D1)
+   * T2 John Doe login, account 12345, expect 10 cent charge (coverage of S2, D2)
+   * T3 John Doe login, Student plan account, expect 5 cent charge (coverage of
+   *    S3, D3)</li></ul>
    */
   @Test
   public void checkGetTransactionFee() {
-    try { //TODO
+    try { //TODO impelment tests, create function
       fail("not implemented");
     } catch (Exception e) {
       failUnexpectedException(e);
@@ -542,6 +578,44 @@ public class TestTransactionCalculator {
   
   /**
    * Ensures statement, decision, & loop coverage of 'accountNumberExists'
+   *
+   * <ul><li>S1 iterate over user's accounts</li><li>
+   *         S2 check if current matches target</li><li>
+   *         S3 return true</li><li>
+   *         S4 return false</li><li>
+   *         (Decision block D1 would be equal to S3)</li><li>
+   *         L1-0 iterate over no K,V</li><li>
+   *         L1-1 iterate K,V run once</li><li>
+   *         L1-2 iterate K,V run twice</li><li>
+   *         L1-* iterate K,V run many times</li><li>
+   *         L2-1 first hit is account</li><li>
+   *         L2-2 find account on second hit</li><li>
+   *         L2-* find account after many hits</li></ul>
+   *
+   * <p>Since it shouldn't be valid for a name to exist in the system with no
+   * accounts, a case where the L2 loop runs once is not considered.</p>
+   *
+   * <p>To gain coverage of these nodes, the create transaction should be tried
+   * with the account number as a parameter. As in checkGetAccount, the order
+   * that the accounts will be checked is known, which will give us knowledge of
+   * the number of time the loop runs. The other parameter is the account map,
+   * which will be empty for some tests and filled as usual in others.</p>
+   * 
+   * <p>To assess whether or not the function returned true, the presence of an
+   * error output to console will be checked.</p>
+   * 
+   * <ul><li>T1, empty accountTable, target of 12345, expect no error.
+   *          (cover L1-0, S4)</li><li>
+   *         T2, filled accountTable, target of 12345, expect error.
+   *          (cover L1-1, L2-1, S1, S2, S3)</li><li>
+   *         T3, filled accountTable, John Doe's second account, expect error.
+   *          (cover L2-2)</li><li>
+   *         T4, filled accountTable, John Doe's third account, expect error.
+   *          (cover L2-3)</li><li>
+   *         T5, filled accountTable, Matt Cow's first account, expect error.
+   *          (cover L1-2)</li><li>
+   *         T6, filled accountTable, nonexistent account(0), expect no error,
+   *          (cover L1-*)</li></ul>
    */
   @Test
   public void checkAccountNumberExists() {
@@ -555,6 +629,23 @@ public class TestTransactionCalculator {
   
   /**
    * Ensures statement, decision, & loop coverage of 'handleLogin'
+   *
+   * <ul><li>S1 pop off top</li><li>
+   *         S2 make the thing logged in</li><li>
+   *         S3 assert that the flag is real</li><li>
+   *         S4 determine if the privlege is admin</li><li>
+   *         D1 React to bad flag</li><li>
+   *         D2 set admin to true</li><li>
+   *         D3 set admin to false</li></ul>
+   *
+   * <p>Our levers this time are the login name and flag used.</p>
+   *
+   * <ul><li>T1 use "admin" name, "A " flag, expect no error.
+   *          (Covers S1, S2, S3, S4, D2)</li><li>
+   *         T2 use "John Doe" name, "S " flag, expect no error.
+   *          (Covers D3)</li><li>
+   *         T3 use "John Doe" name, "" flag, expect error.
+   *          (Covers D1)</li></ul>
    */
   @Test
   public void checkHandleLogin() {
@@ -568,6 +659,13 @@ public class TestTransactionCalculator {
   
   /**
    * Ensures statement, decision, & loop coverage of 'handleLogout'
+   * 
+   * <ul><li>S1 pop off top</li><li>
+   *         S2 set isLoggedIn</li><li>
+   *         S3 set isAdmin</li></ul>
+   *
+   * <p>Only test needed to cover these statements is to push the logout code
+   *    transaction. Isn't that Neat?</p>
    */
   @Test
   public void checkHandleLogout() {
@@ -581,6 +679,21 @@ public class TestTransactionCalculator {
   
   /**
    * Ensures statement, decision, & loop coverage of 'handleWithdrawal'
+   *
+   * <ul><li>S1 pop off top</li><li>
+   *         S2 retrieve account.</li><li>
+   *         S3 retrieve account fee.</li><li>
+   *         S4 calculate charge.</li><li>
+   *         S5 calculate new balance.</li><li>
+   *         S6 check if balance is negative.</li><li>
+   *         S7 set new account balance.</li><li>
+   *         D1 respond to negative balance.</li></ul>
+   *
+   * <p>Main lever here is the debited amount.</p>
+   *
+   * <ul><li>T1 withdraw 5 dollars, expect success (covers S1-S7)</li><li>
+   *         T2 withdraw 105 dollars, expect message about negative balance</li></ul>
+   *
    */
   @Test
   public void checkHandleWithdrawal() {
@@ -593,6 +706,29 @@ public class TestTransactionCalculator {
   
   /**
    * Ensures statement, decision, & loop coverage of 'handleTransfer'
+   * 
+   * <ul><li>S1 Remove sender transaction</li><li>
+   *         S2 Get recipient transaction</li><li>
+   *         S3 Remove recipient transaction</li><li>
+   *         S4 Check if amounts match</li><li>
+   *         S5 Set amount</li><li>
+   *         S6 Get sender account</li><li>
+   *         S7 Get recipient account</li><li>
+   *         S8 Get sender fee</li><li>
+   *         S9-S11 Check sender balance</li><li>
+   *         S12-S13 Update balances for sender and reciever</li><li>
+   *         D1 Respond to mismatched amounts</li><li>
+   *         D2 Respond to negative balacne</li></ul>
+   *
+   * <p>The parameters for this test are the amounts sent and recievied. The
+   * output is the error message, or lackthereof.</p>
+   *
+   * <ul><li>T1 send & recieve 5.00, expect success
+   *          (covers S1-S13)</li><li>
+   *         T2 send 5.00, receive 105.00. Expect mismatched amounts error.
+   *          (covers D1)</li><li>
+   *         T3 send & recieve 105.00, expect negative balance error
+   *          (covers D2)</li></ul>
    */
   @Test
   public void checkHandleTransfer() {
@@ -606,6 +742,17 @@ public class TestTransactionCalculator {
   
   /**
    * Ensures statement, decision, & loop coverage of 'handlePaybill'
+   * 
+   * <ul><li>S1 pop off top transaction</li><li>
+   *         S2 retrieve account.</li><li>
+   *         S3-S6 check new balance.</li><li>
+   *         S7 update account balance.</li>
+   *         D1 Respond to negative balance.</ul>
+   *
+   * <p>The parameter here is amount, as usual.</p>
+   * 
+   * <ul><li>T1 pay 5.00, expect success</li><li>
+   *         T2 pay 105.00, expect negative balance error.</li></ul>
    */
   @Test
   public void checkHandlePaybill() {
@@ -619,6 +766,17 @@ public class TestTransactionCalculator {
   
   /**
    * Ensures statement, decision, & loop coverage of 'handleDeposit'
+   * 
+   * <ul><li>S1 pop off top.</li><li>
+   *         S2 retrieve account.</li><li>
+   *         S3-S6 check resulting balance.</li><li>
+   *         S7 update balance.</li></ul>
+   *
+   * <p>Deposit 5 cents in the moth wallet account as an admin or standard.</p>
+   *
+   * <ul><li>T1 deposit as admin, expect success.</li><li>
+   *         T2 desposit as standard, expect failure.</li></ul>
+   * 
    */
   @Test
   public void checkHandleDeposit() {
@@ -632,6 +790,24 @@ public class TestTransactionCalculator {
   
   /**
    * Ensures statement, decision, & loop coverage of 'handleChangePlan'
+   *
+   * <ul><li>S1 pop off top</li><li>
+   *         S2 check if flag is valid.</li><li>
+   *         S3 retrieve account.</li><li>
+   *         S4 determine plan.</li><li>
+   *         D1 respond to bad flag.</li><li>
+   *         D2 set student plan to true.</li><li>
+   *         D3 set student plan to false.</li></ul>
+   * 
+   * <p>The account and flag are the parameters here. Outputs are error message
+   *    and resulting account flag.</p>
+   *
+   * <ul><li>T1 Nonstudent account, Student flag, expect success & student plan.
+   *          (covers S1, S2, S3, S4, D3)</li><li>
+   *         T2 Nonstudent account, flag of "", expect failure.
+   *          (covers D1)</li><li>
+   *         T3 Student account, Nonstudent flag, expect success & Nonstudent
+   *            plan. (covers D3)</li></ul>
    */
   @Test
   public void checkHandleChangePlan() {
@@ -645,6 +821,18 @@ public class TestTransactionCalculator {
   
   /**
    * Ensures statement, decision, & loop coverage of 'handleDelete'
+   *
+   * <ul><li>S1 Pop off top</li><li>
+   *         S2 Retrieve account.</li><li>
+   *         S3 Check if account is already gone.</li><li>
+   *         S4 Remove account from table</li><li>
+   *         D1 Respond to broken account</li></ul>
+   *
+   * <p>The test parameter is the account number.</p>
+   *
+   * <ul><li>T1 delete 12345, expect success (covers S1-S4)</li><li>
+   *         T2 delete new guy, expect failure. (covers D1)</li></ul>
+   * 
    */
   @Test
   public void checkHandleDelete() {
@@ -658,6 +846,15 @@ public class TestTransactionCalculator {
   
   /**
    * Ensures statement, decision, & loop coverage of 'handleCreate'
+   *
+   * <ul><li>S1 pop off transaction</li><li>
+   *         S2 check if account number exists</li><li>
+   *         D1 respond to already existing account</li></ul>
+   *
+   * <p>Test parameter is the account number.</p>
+   *
+   * <ul><li>T1 create 12345, expect failure</li><li>
+   *         T2 create new guy, expect success</li></ul>
    */
   @Test
   public void checkHandleCreate() {
@@ -671,6 +868,20 @@ public class TestTransactionCalculator {
   
   /**
    * Ensures statement, decision, & loop coverage of 'handleDisable'
+   *
+   * <ul><li>S1 pop off top</li><li>
+   *         S2 retrieve account</li><li>
+   *         S3-S4 check if account is valid</li><li>
+   *         S5 set account as disabled</li><li>
+   *         D1 respond to nonexistent account</li><li>
+   *         D2 respond to already disabled account </li></ul>
+   *
+   * <p>Test parameter is the account number again.</p>
+   *
+   * <ul><li>T1 disable 12345, no error. (Covers S1-S5)</li><li>
+   *         T2 disable New guy, deleted account error (Covers D1)</li><li>
+   *         T3 disable disabled account, already disabled account error
+   *          (Covers D2)</li></ul>
    */
   @Test
   public void checkHandleDisable() {
@@ -684,6 +895,20 @@ public class TestTransactionCalculator {
   
   /**
    * Ensures statement, decision, & loop coverage of 'handleEnable'
+   *
+   * <ul><li>S1 pop off top</li><li>
+   *         S2 retrieve account</li><li>
+   *         S3-S4 check if account is valid</li><li>
+   *         S5 set account as enabled</li><li>
+   *         D1 respond to nonexistent account</li><li>
+   *         D2 respond to already enabled account </li></ul>
+   *
+   * <p>Test parameter is the account number again.</p>
+   *
+   * <ul><li>T1 enable disabled account, no error. (Covers S1-S5)</li><li>
+   *         T2 enable New guy, deleted account error (Covers D1)</li><li>
+   *         T3 enable 12345, already active account error
+   *          (Covers D2)</li></ul>
    */
   @Test
   public void checkHandleEnable() {
@@ -784,4 +1009,58 @@ public class TestTransactionCalculator {
     // cleanup for next times
     transactionList.clear();
   }
+  
+  private void doGetTransactionFeeTest(String loginName, int accountNumber,
+                                       double expectedCharge) {
+    fail("get transaction fee test not implemented");
+  }
+  
+  private void doAccountNumberExistsTest(boolean useInitializedMap,
+                                        int accountNumber,
+                                        boolean expectExists) {
+    fail("do account numbers exist test not implemented");
+  }
+  
+  private void doLoginTest(String loginName, String flag, boolean expectError) {
+    fail("login test not implemented");
+  }
+  
+  private void doWithdrawalTest(double debit, String expectedError) {
+    fail("withdrawal test no implemented");
+  }
+  
+  private void doTransferTest(double sentAmount, double recievedAmount,
+                              String expectedError) {
+    fail("transfer test no implemented");
+  }
+  
+  private void doPaybillTest(double debit, String expectedError) {
+    fail("paybill test no implemented");
+  }
+  
+  private void doDepositTest(boolean isAdmin, boolean expectError) {
+    fail("moth wallet test no implemented");
+  }
+  
+  private void doChangePlanTest(int accountNumber, String flag,
+                                boolean expectFailure) {
+    fail("no change plan test yet");
+  }
+  
+  private void doDeleteTest(int accountNumber, boolean expectError) {
+    fail("no delete test yet");
+  }
+  
+  private void doCreateTest(int accountNumber, boolean expectError) {
+    fail("no create test yet");
+  }
+  
+  private void doDisableTest(int accountNumber, boolean expectError) {
+    fail("no disable test yet");
+  }
+  
+  private void doEnableTest(int accountNumber, boolean expectError) {
+    fail("no enable test yet");
+  }
+  
 }
