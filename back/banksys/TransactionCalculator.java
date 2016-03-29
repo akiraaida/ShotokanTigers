@@ -24,18 +24,36 @@ import java.util.Vector;
  * transactionCalculator.applyTransactions(transactionsList);</p>
  */
 public class TransactionCalculator {
-  public static final String ERROR_FORMAT = "ERROR: %s";
-  public static final String ERROR_ACCOUNT_NO_EXIST = "Account %d does not exist";
-  public static final String ERROR_ACCOUNT_NO_YOURS = "Account number/username pair does not exist";
-  public static final String ERROR_NEGATIVE_TRANSACTION_COUNT = "Account has negative transaction count";
-  public static final String ERROR_BAD_LOGIN_CODE = "Invalid login flag '%s'";
-  public static final String ERROR_NEGATIVE_BALANCE = "Account %d balance is negative";
-  public static final String ERROR_MISMATCHED_TRANFER_AMOUNT = "Amount transferred and amount sent do not match: $%f vs $%f";
-  public static final String ERROR_BAD_CHANGEPLAN_CODE = "Invalid changeplan flag '%s'";
-  public static final String ERROR_ACCOUNT_IS_EXIST = "Account number %d already exists";
-  public static final String ERROR_ACCOUNT_CANNOT_REDISABLE = "Account %d is already disabled";
-  public static final String ERROR_ACCOUNT_CANNOT_REENABLE = "Account %d is already enabled";
+  // Error presentation
+  private static final String ERROR_FORMAT = "ERROR: %s";
   
+  // Account validation errors
+  public static final String ERROR_ACCOUNT_NO_EXIST = String.format(ERROR_FORMAT, "Account %d does not exist");
+  public static final String ERROR_USERNAME_NO_EXIST = String.format(ERROR_FORMAT, "Name '%s' was not found in system");
+  public static final String ERROR_ACCOUNT_NO_YOURS = String.format(ERROR_FORMAT, "Account number/username pair does not exist");
+  public static final String ERROR_NEGATIVE_BALANCE = String.format(ERROR_FORMAT, "Account %d balance is negative");
+  public static final String ERROR_NEGATIVE_TRANSACTION_COUNT = String.format(ERROR_FORMAT, "Account has negative transaction count");
+  public static final String ERROR_OVERFLOW_TRANSACTION_COUNT = String.format(ERROR_FORMAT, "Transaction count overflow");
+  
+  // General errors
+  public static final String ERROR_UNSET_ACCOUNT_TABLE = String.format(ERROR_FORMAT, "Account table is null");
+  public static final String ERROR_INVALID_TRANSACTION_SEQUENCE = String.format(ERROR_FORMAT, "Transaction sequence had no logout after login");
+  public static final String ERROR_INVALID_TRANSACTION_CODE = String.format(ERROR_FORMAT, "Unknown transaction code %d");
+  
+  // Login/Logout errors
+  public static final String ERROR_BAD_LOGIN_CODE = String.format(ERROR_FORMAT, "Invalid login flag '%s'");
+  public static final String ERROR_LOGIN_TWICE = String.format(ERROR_FORMAT, "Login conflict, already logged in as '%s'");
+  public static final String ERROR_LOGOUT_TWICE = String.format(ERROR_FORMAT, "Cannot logout, already logged out");
+  
+  // Credit/Debit errors
+  public static final String ERROR_NONCANADIAN_WITHDRAWAL_AMOUNT = String.format(ERROR_FORMAT, "Only canadian values are valid for withdrawal");
+  public static final String ERROR_MISMATCHED_TRANSFER_AMOUNT = String.format(ERROR_FORMAT, "Amount transferred and amount sent do not match: $%f vs $%f");
+  public static final String ERROR_BAD_CHANGEPLAN_CODE = String.format(ERROR_FORMAT, "Invalid changeplan flag '%s'");
+  
+  // Admin errors
+  public static final String ERROR_ACCOUNT_IS_EXIST = String.format(ERROR_FORMAT, "Account number %d already exists");
+  public static final String ERROR_ACCOUNT_CANNOT_REDISABLE = String.format(ERROR_FORMAT, "Account %d is already disabled");
+  public static final String ERROR_ACCOUNT_CANNOT_REENABLE = String.format(ERROR_FORMAT, "Account %d is already enabled");
   
   
   /**
