@@ -36,8 +36,6 @@ public class TransactionCalculator {
   public static final String ERROR_ACCOUNT_CANNOT_REDISABLE = "Account %d is already disabled";
   public static final String ERROR_ACCOUNT_CANNOT_REENABLE = "Account %d is already enabled";
   
-  
-  
   /**
    * Gives known accounts to the calculator for reference.
    *

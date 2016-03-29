@@ -15,7 +15,7 @@ package banksys;
 /**
  * References transaction codes used in trasaction files.
  */
-class TransactionType {
+public class TransactionType {
   /** Code indicating a 'login' transaction. */
   public static final int LOGIN = 10;
 
