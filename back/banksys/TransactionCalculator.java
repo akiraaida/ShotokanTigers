@@ -24,17 +24,18 @@ import java.util.Vector;
  * transactionCalculator.applyTransactions(transactionsList);</p>
  */
 public class TransactionCalculator {
-  public static final String ERROR_FORMAT = "ERROR: %s";
-  public static final String ERROR_ACCOUNT_NO_EXIST = "Account %d does not exist";
-  public static final String ERROR_ACCOUNT_NO_YOURS = "Account number/username pair does not exist";
-  public static final String ERROR_NEGATIVE_TRANSACTION_COUNT = "Account has negative transaction count";
-  public static final String ERROR_BAD_LOGIN_CODE = "Invalid login flag '%s'";
-  public static final String ERROR_NEGATIVE_BALANCE = "Account %d balance is negative";
-  public static final String ERROR_MISMATCHED_TRANFER_AMOUNT = "Amount transferred and amount sent do not match: $%f vs $%f";
-  public static final String ERROR_BAD_CHANGEPLAN_CODE = "Invalid changeplan flag '%s'";
-  public static final String ERROR_ACCOUNT_IS_EXIST = "Account number %d already exists";
-  public static final String ERROR_ACCOUNT_CANNOT_REDISABLE = "Account %d is already disabled";
-  public static final String ERROR_ACCOUNT_CANNOT_REENABLE = "Account %d is already enabled";
+  private static final String ERROR_FORMAT = "ERROR: %s";
+  public static final String ERROR_ACCOUNT_NO_EXIST = String.format(ERROR_FORMAT, "Account %d does not exist");
+  public static final String ERROR_USERNAME_NO_EXIST = String.format(ERROR_FORMAT, "Name '%s' was not found in system");
+  public static final String ERROR_ACCOUNT_NO_YOURS = String.format(ERROR_FORMAT, "Account number/username pair does not exist");
+  public static final String ERROR_NEGATIVE_TRANSACTION_COUNT = String.format(ERROR_FORMAT, "Account has negative transaction count");
+  public static final String ERROR_BAD_LOGIN_CODE = String.format(ERROR_FORMAT, "Invalid login flag '%s'");
+  public static final String ERROR_NEGATIVE_BALANCE = String.format(ERROR_FORMAT, "Account %d balance is negative");
+  public static final String ERROR_MISMATCHED_TRANFER_AMOUNT = String.format(ERROR_FORMAT, "Amount transferred and amount sent do not match: $%f vs $%f");
+  public static final String ERROR_BAD_CHANGEPLAN_CODE = String.format(ERROR_FORMAT, "Invalid changeplan flag '%s'");
+  public static final String ERROR_ACCOUNT_IS_EXIST = String.format(ERROR_FORMAT, "Account number %d already exists");
+  public static final String ERROR_ACCOUNT_CANNOT_REDISABLE = String.format(ERROR_FORMAT, "Account %d is already disabled");
+  public static final String ERROR_ACCOUNT_CANNOT_REENABLE = String.format(ERROR_FORMAT, "Account %d is already enabled");
   
   /**
    * Gives known accounts to the calculator for reference.
