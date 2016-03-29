@@ -97,6 +97,14 @@ public class TestTransactionCalculator {
   }
   
   /**
+  * Routine to report unexpected exceptions e.g. null pointer, etc.
+  */
+  public void failUnexpectedException(Exception e) {
+    e.printStackTrace(System.err);
+    fail(String.format("Exception was thrown:%n%s%ncause: %s", e.toString(), e.getCause()));
+  }
+  
+  /**
   * Swaps out old stdout destination to storage
   */
   @Before
@@ -146,57 +154,10 @@ public class TestTransactionCalculator {
     return makeTransaction(code, "", 0, 0.0, "");
   }
   
-  /**
-  * Confirms that apply transactions applies ALL transactions.
-  */
-  @Test
-  public void applyTransactionsConsumesStackTest() {
-    try {
-      // Apply 2 transactions
-      transactionList.add(makeTransaction(TransactionType.LOGIN));
-      transactionList.add(makeTransaction(TransactionType.LOGOUT));
-      transactionCalculator.applyTransactions(transactionList);
-      assertEquals("Failed to apply all 2 transactions", true, transactionList.isEmpty());
-      
-      // Apply 3 transactions
-      transactionList.add(makeTransaction(TransactionType.LOGIN));
-      transactionList.add(makeTransaction(TransactionType.WITHDRAWAL, USERNAME_JOHN_DOE, ACCOUNTS_JOHN_DOE[0], 5.00, ""));
-      transactionList.add(makeTransaction(TransactionType.LOGOUT));
-      transactionCalculator.applyTransactions(transactionList);
-      assertEquals("Failed to apply all 3 transactions", true, transactionList.isEmpty());
-      
-      // Apply 5 transactions
-      transactionList.add(makeTransaction(TransactionType.LOGIN));
-      transactionList.add(makeTransaction(TransactionType.WITHDRAWAL, USERNAME_JOHN_DOE, ACCOUNTS_JOHN_DOE[0], 5.00, ""));
-      transactionList.add(makeTransaction(TransactionType.WITHDRAWAL, USERNAME_JOHN_DOE, ACCOUNTS_JOHN_DOE[0], 5.00, ""));
-      transactionList.add(makeTransaction(TransactionType.WITHDRAWAL, USERNAME_JOHN_DOE, ACCOUNTS_JOHN_DOE[0], 5.00, ""));
-      transactionList.add(makeTransaction(TransactionType.LOGOUT));
-      transactionCalculator.applyTransactions(transactionList);
-      assertEquals("Failed to apply all 5 transactions", true, transactionList.isEmpty());
-      
-      // Apply all transactions
-      transactionList.add(makeTransaction(TransactionType.LOGIN, "admin", 0, 0.0, "A "));
-      transactionList.add(makeTransaction(TransactionType.WITHDRAWAL, USERNAME_JOHN_DOE, ACCOUNTS_JOHN_DOE[0], 5.00, ""));
-      transactionList.add(makeTransaction(TransactionType.TRANSFER, USERNAME_JOHN_DOE, ACCOUNTS_JOHN_DOE[0], 5.00, ""));
-      transactionList.add(makeTransaction(TransactionType.TRANSFER, USERNAME_MATT_COW, ACCOUNTS_MATT_COW[0], 5.00, ""));
-      transactionList.add(makeTransaction(TransactionType.PAYBILL, USERNAME_JOHN_DOE, ACCOUNTS_JOHN_DOE[0], 5.00, "TV"));
-      transactionList.add(makeTransaction(TransactionType.DEPOSIT, USERNAME_JOHN_DOE, ACCOUNTS_JOHN_DOE[0], 5.00, ""));
-      transactionList.add(makeTransaction(TransactionType.CREATE, USERNAME_NEW_GUY, ACCOUNTS_NEW_GUY[0], DEFAULT_ACCOUNT_BALANCE, ""));
-      transactionList.add(makeTransaction(TransactionType.DELETE, USERNAME_JOHN_DOE, ACCOUNTS_JOHN_DOE[0], 0.0, ""));
-      transactionList.add(makeTransaction(TransactionType.DISABLE, USERNAME_MATT_COW, ACCOUNTS_MATT_COW[0], 0.0, ""));
-      transactionList.add(makeTransaction(TransactionType.CHANGEPLAN, USERNAME_JOHN_DOE, STUDENT_PLAN_ACCOUNT_NUMBER, 5.00, "N "));
-      transactionList.add(makeTransaction(TransactionType.ENABLE, USERNAME_JOHN_DOE, DISABLED_ACCOUNT_NUMBER, 0.0, ""));
-      transactionList.add(makeTransaction(TransactionType.LOGOUT));
-      transactionCalculator.applyTransactions(transactionList);
-      assertEquals("Failed to apply all transactions in admin mode", true, transactionList.isEmpty());
-    } catch (Exception e) {
-      e.printStackTrace(System.err);
-      fail(String.format("Exception was thrown with message:%n%s%ncause: %s", e.toString(), e.getCause()));
-    }
-  }
+  
   
   /**
-  * Tests that the stdout storage used in other tests works as expected.
+  * Confirms that the stdout storage used in other tests works as expected.
   */
   @Test
   public void testNothing() {
