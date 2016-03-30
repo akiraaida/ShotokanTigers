@@ -568,8 +568,11 @@ public class TestTransactionCalculator {
    */
   @Test
   public void checkGetTransactionFee() {
-    try { //TODO impelment tests, create function
-      fail("not implemented");
+    try {
+      doGetTransactionFeeTest("admin", ACCOUNTS_JOHN_DOE[0], 0.0);
+      doGetTransactionFeeTest(USERNAME_JOHN_DOE, ACCOUNTS_JOHN_DOE[0], 0.1);
+      doGetTransactionFeeTest(USERNAME_JOHN_DOE, STUDENT_PLAN_ACCOUNT_NUMBER,
+                              0.05);
     } catch (Exception e) {
       failUnexpectedException(e);
     }
@@ -614,13 +617,18 @@ public class TestTransactionCalculator {
    *          (cover L2-3)</li><li>
    *         T5, filled accountTable, Matt Cow's first account, expect error.
    *          (cover L1-2)</li><li>
-   *         T6, filled accountTable, nonexistent account(0), expect no error,
-   *          (cover L1-*)</li></ul>
+   *         T6, filled accountTable, nonexistent account(New guy), expect no
+   *           error, (cover L1-*)</li></ul>
    */
   @Test
   public void checkAccountNumberExists() {
-    try { //TODO
-      fail("not implemented");
+    try {
+      doAccountNumberExistsTest(false, ACCOUNTS_JOHN_DOE[0], false);
+      doAccountNumberExistsTest(true, ACCOUNTS_JOHN_DOE[0], true);
+      doAccountNumberExistsTest(true, ACCOUNTS_JOHN_DOE[1], true);
+      doAccountNumberExistsTest(true, ACCOUNTS_JOHN_DOE[2], true);
+      doAccountNumberExistsTest(true, ACCOUNTS_MATT_COW[0], true);
+      doAccountNumberExistsTest(true, ACCOUNTS_NEW_GUY[0], false);
     } catch (Exception e) {
       failUnexpectedException(e);
     }
@@ -649,8 +657,10 @@ public class TestTransactionCalculator {
    */
   @Test
   public void checkHandleLogin() {
-    try { //TODO
-      fail("not implemented");
+    try {
+      doLoginTest("admin", "A ", false);
+      doLoginTest("John Doe", "S ", false);
+      doLoginTest("John Doe", "", true);
     } catch (Exception e) {
       failUnexpectedException(e);
     }
@@ -669,8 +679,11 @@ public class TestTransactionCalculator {
    */
   @Test
   public void checkHandleLogout() {
-    try { //TODO
-      fail("not implemented");
+    try { 
+      transactionList.add(makeTransaction(TransactionType.LOGOUT));
+      transactionCalculator.applyTransactions(transactionList);
+      assertEquals("Expected logout transaction to be consumed", true,
+                    transactionList.isEmpty());
     } catch (Exception e) {
       failUnexpectedException(e);
     }
@@ -697,8 +710,10 @@ public class TestTransactionCalculator {
    */
   @Test
   public void checkHandleWithdrawal() {
-    try { //TODO
-      fail("not implemented");
+    try { 
+      doWithdrawalTest(DEFAULT_DEBIT_AMOUNT, "");
+      doWithdrawalTest(DEFAULT_ACCOUNT_BALANCE + DEFAULT_DEBIT_AMOUNT,
+        TransactionCalculator.ERROR_NEGATIVE_BALANCE);
     } catch (Exception e) {
       failUnexpectedException(e);
     }
@@ -732,13 +747,18 @@ public class TestTransactionCalculator {
    */
   @Test
   public void checkHandleTransfer() {
-    try { //TODO
-      fail("not implemented");
+    try { 
+      doTransferTest(DEFAULT_DEBIT_AMOUNT, DEFAULT_DEBIT_AMOUNT, "");
+      doTransferTest(DEFAULT_DEBIT_AMOUNT, DEFAULT_ACCOUNT_BALANCE
+        + DEFAULT_DEBIT_AMOUNT,
+        TransactionCalculator.ERROR_MISMATCHED_TRANSFER_AMOUNT);
+      doTransferTest(DEFAULT_ACCOUNT_BALANCE + DEFAULT_DEBIT_AMOUNT,
+        DEFAULT_ACCOUNT_BALANCE + DEFAULT_DEBIT_AMOUNT,
+        TransactionCalculator.ERROR_NEGATIVE_BALANCE);
     } catch (Exception e) {
       failUnexpectedException(e);
     }
   }
-  
   
   /**
    * Ensures statement, decision, & loop coverage of 'handlePaybill'
@@ -756,8 +776,10 @@ public class TestTransactionCalculator {
    */
   @Test
   public void checkHandlePaybill() {
-    try { //TODO
-      fail("not implemented");
+    try { 
+      doPaybillTest(DEFAULT_DEBIT_AMOUNT, "");
+      doPaybillTest(DEFAULT_ACCOUNT_BALANCE + DEFAULT_DEBIT_AMOUNT,
+        TransactionCalculator.ERROR_NEGATIVE_BALANCE);
     } catch (Exception e) {
       failUnexpectedException(e);
     }
@@ -780,8 +802,9 @@ public class TestTransactionCalculator {
    */
   @Test
   public void checkHandleDeposit() {
-    try { //TODO
-      fail("not implemented");
+    try { 
+      doDepositTest(true, false);
+      doDepositTest(true, true);
     } catch (Exception e) {
       failUnexpectedException(e);
     }
@@ -811,8 +834,10 @@ public class TestTransactionCalculator {
    */
   @Test
   public void checkHandleChangePlan() {
-    try { //TODO
-      fail("not implemented");
+    try { 
+      doChangePlanTest(ACCOUNTS_JOHN_DOE[0], "S ", false);
+      doChangePlanTest(ACCOUNTS_JOHN_DOE[0], "", true);
+      doChangePlanTest(STUDENT_PLAN_ACCOUNT_NUMBER, "N ", false);
     } catch (Exception e) {
       failUnexpectedException(e);
     }
@@ -836,8 +861,9 @@ public class TestTransactionCalculator {
    */
   @Test
   public void checkHandleDelete() {
-    try { //TODO
-      fail("not implemented");
+    try { 
+      doDeleteTest(ACCOUNTS_JOHN_DOE[0], false);
+      doDeleteTest(ACCOUNTS_NEW_GUY[0], true);
     } catch (Exception e) {
       failUnexpectedException(e);
     }
@@ -858,8 +884,9 @@ public class TestTransactionCalculator {
    */
   @Test
   public void checkHandleCreate() {
-    try { //TODO
-      fail("not implemented");
+    try { 
+      doCreateTest(ACCOUNTS_JOHN_DOE[0], true);
+      doCreateTest(ACCOUNTS_NEW_GUY[0], false);
     } catch (Exception e) {
       failUnexpectedException(e);
     }
@@ -885,8 +912,12 @@ public class TestTransactionCalculator {
    */
   @Test
   public void checkHandleDisable() {
-    try { //TODO
-      fail("not implemented");
+    try {
+      doDisableTest(ACCOUNTS_JOHN_DOE[0], "");
+      doDisableTest(ACCOUNTS_NEW_GUY[0],
+        TransactionCalculator.ERROR_ACCOUNT_NO_EXIST);
+      doDisableTest(DISABLED_ACCOUNT_NUMBER, 
+        TransactionCalculator.ERROR_ACCOUNT_CANNOT_REDISABLE);
     } catch (Exception e) {
       failUnexpectedException(e);
     }
@@ -912,8 +943,12 @@ public class TestTransactionCalculator {
    */
   @Test
   public void checkHandleEnable() {
-    try { //TODO
-      fail("not implemented");
+    try { 
+      doEnableTest(DISABLED_ACCOUNT_NUMBER, "");
+      doEnableTest(ACCOUNTS_NEW_GUY[0],
+        TransactionCalculator.ERROR_ACCOUNT_NO_EXIST);
+      doEnableTest(ACCOUNTS_JOHN_DOE[0],
+        TransactionCalculator.ERROR_ACCOUNT_CANNOT_REENABLE);
     } catch (Exception e) {
       failUnexpectedException(e);
     }
@@ -1055,11 +1090,11 @@ public class TestTransactionCalculator {
     fail("no create test yet");
   }
   
-  private void doDisableTest(int accountNumber, boolean expectError) {
+  private void doDisableTest(int accountNumber, String expectedError) {
     fail("no disable test yet");
   }
   
-  private void doEnableTest(int accountNumber, boolean expectError) {
+  private void doEnableTest(int accountNumber, String expectedError) {
     fail("no enable test yet");
   }
   
