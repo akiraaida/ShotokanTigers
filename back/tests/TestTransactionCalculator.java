@@ -140,8 +140,7 @@ public class TestTransactionCalculator {
    * Routine to report unexpected exceptions e.g. null pointer, etc.
    */
   public void failUnexpectedException(Exception e) {
-    e.printStackTrace(System.err);
-    fail(String.format("Exception was thrown:%n%s%ncause: %s", e.toString(), e.getCause()));
+    fail(e.toString());
   }
   
   /**
@@ -358,7 +357,7 @@ public class TestTransactionCalculator {
       logSandwich("admin", transactionList);
       transactionList.add(0, transactionList.firstElement());
       doApplyTransactionsTest(transactionList,
-            TransactionCalculator.ERROR_LOGIN_TWICE);
+            String.format(TransactionCalculator.ERROR_LOGIN_TWICE, "admin"));
             
       // T10 confirm logout reached
       transactionList.clear();
@@ -386,7 +385,8 @@ public class TestTransactionCalculator {
             DEFAULT_DEBIT_AMOUNT, ""));
       logSandwich("admin", transactionList);
       doApplyTransactionsTest(transactionList,
-        TransactionCalculator.ERROR_MISMATCHED_TRANSFER_AMOUNT);
+        String.format(TransactionCalculator.ERROR_MISMATCHED_TRANSFER_AMOUNT,
+          WEIRD_WITHDRAWAL_AMOUNT, DEFAULT_DEBIT_AMOUNT));
         
       // T13 confirm paybill
       transactionList.clear();
@@ -568,8 +568,11 @@ public class TestTransactionCalculator {
    */
   @Test
   public void checkGetTransactionFee() {
-    try { //TODO impelment tests, create function
-      fail("not implemented");
+    try {
+      doGetTransactionFeeTest("admin", ACCOUNTS_JOHN_DOE[0], 0.0);
+      doGetTransactionFeeTest(USERNAME_JOHN_DOE, ACCOUNTS_JOHN_DOE[0], 0.1);
+      doGetTransactionFeeTest(USERNAME_JOHN_DOE, STUDENT_PLAN_ACCOUNT_NUMBER,
+                              0.05);
     } catch (Exception e) {
       failUnexpectedException(e);
     }
@@ -614,13 +617,18 @@ public class TestTransactionCalculator {
    *          (cover L2-3)</li><li>
    *         T5, filled accountTable, Matt Cow's first account, expect error.
    *          (cover L1-2)</li><li>
-   *         T6, filled accountTable, nonexistent account(0), expect no error,
-   *          (cover L1-*)</li></ul>
+   *         T6, filled accountTable, nonexistent account(New guy), expect no
+   *           error, (cover L1-*)</li></ul>
    */
   @Test
   public void checkAccountNumberExists() {
-    try { //TODO
-      fail("not implemented");
+    try {
+      doAccountNumberExistsTest(false, ACCOUNTS_JOHN_DOE[0], false);
+      doAccountNumberExistsTest(true, ACCOUNTS_JOHN_DOE[0], true);
+      doAccountNumberExistsTest(true, ACCOUNTS_JOHN_DOE[1], true);
+      doAccountNumberExistsTest(true, ACCOUNTS_JOHN_DOE[2], true);
+      doAccountNumberExistsTest(true, ACCOUNTS_MATT_COW[0], true);
+      doAccountNumberExistsTest(true, ACCOUNTS_NEW_GUY[0], false);
     } catch (Exception e) {
       failUnexpectedException(e);
     }
@@ -649,8 +657,10 @@ public class TestTransactionCalculator {
    */
   @Test
   public void checkHandleLogin() {
-    try { //TODO
-      fail("not implemented");
+    try {
+      doLoginTest("admin", "A ", false);
+      doLoginTest("John Doe", "S ", false);
+      doLoginTest("John Doe", "", true);
     } catch (Exception e) {
       failUnexpectedException(e);
     }
@@ -669,8 +679,11 @@ public class TestTransactionCalculator {
    */
   @Test
   public void checkHandleLogout() {
-    try { //TODO
-      fail("not implemented");
+    try { 
+      transactionList.add(makeTransaction(TransactionType.LOGOUT));
+      transactionCalculator.applyTransactions(transactionList);
+      assertEquals("Expected logout transaction to be consumed", true,
+                    transactionList.isEmpty());
     } catch (Exception e) {
       failUnexpectedException(e);
     }
@@ -697,8 +710,10 @@ public class TestTransactionCalculator {
    */
   @Test
   public void checkHandleWithdrawal() {
-    try { //TODO
-      fail("not implemented");
+    try { 
+      doWithdrawalTest(DEFAULT_DEBIT_AMOUNT, "");
+      doWithdrawalTest(DEFAULT_ACCOUNT_BALANCE + DEFAULT_DEBIT_AMOUNT,
+        TransactionCalculator.ERROR_NEGATIVE_BALANCE);
     } catch (Exception e) {
       failUnexpectedException(e);
     }
@@ -732,13 +747,20 @@ public class TestTransactionCalculator {
    */
   @Test
   public void checkHandleTransfer() {
-    try { //TODO
-      fail("not implemented");
+    try { 
+      doTransferTest(DEFAULT_DEBIT_AMOUNT, DEFAULT_DEBIT_AMOUNT, "");
+      doTransferTest(DEFAULT_DEBIT_AMOUNT, DEFAULT_ACCOUNT_BALANCE
+        + DEFAULT_DEBIT_AMOUNT,
+        String.format(TransactionCalculator.ERROR_MISMATCHED_TRANSFER_AMOUNT,
+          DEFAULT_DEBIT_AMOUNT, DEFAULT_ACCOUNT_BALANCE
+          + DEFAULT_DEBIT_AMOUNT));
+      doTransferTest(DEFAULT_ACCOUNT_BALANCE + DEFAULT_DEBIT_AMOUNT,
+        DEFAULT_ACCOUNT_BALANCE + DEFAULT_DEBIT_AMOUNT,
+        TransactionCalculator.ERROR_NEGATIVE_BALANCE);
     } catch (Exception e) {
       failUnexpectedException(e);
     }
   }
-  
   
   /**
    * Ensures statement, decision, & loop coverage of 'handlePaybill'
@@ -756,8 +778,10 @@ public class TestTransactionCalculator {
    */
   @Test
   public void checkHandlePaybill() {
-    try { //TODO
-      fail("not implemented");
+    try { 
+      doPaybillTest(DEFAULT_DEBIT_AMOUNT, "");
+      doPaybillTest(DEFAULT_ACCOUNT_BALANCE + DEFAULT_DEBIT_AMOUNT,
+        TransactionCalculator.ERROR_NEGATIVE_BALANCE);
     } catch (Exception e) {
       failUnexpectedException(e);
     }
@@ -780,8 +804,9 @@ public class TestTransactionCalculator {
    */
   @Test
   public void checkHandleDeposit() {
-    try { //TODO
-      fail("not implemented");
+    try { 
+      doDepositTest(true, false);
+      doDepositTest(true, true);
     } catch (Exception e) {
       failUnexpectedException(e);
     }
@@ -811,8 +836,10 @@ public class TestTransactionCalculator {
    */
   @Test
   public void checkHandleChangePlan() {
-    try { //TODO
-      fail("not implemented");
+    try { 
+      doChangePlanTest(ACCOUNTS_JOHN_DOE[0], "S ", false);
+      doChangePlanTest(ACCOUNTS_JOHN_DOE[0], "", true);
+      doChangePlanTest(STUDENT_PLAN_ACCOUNT_NUMBER, "N ", false);
     } catch (Exception e) {
       failUnexpectedException(e);
     }
@@ -836,8 +863,9 @@ public class TestTransactionCalculator {
    */
   @Test
   public void checkHandleDelete() {
-    try { //TODO
-      fail("not implemented");
+    try { 
+      doDeleteTest(ACCOUNTS_JOHN_DOE[0], false);
+      doDeleteTest(ACCOUNTS_NEW_GUY[0], true);
     } catch (Exception e) {
       failUnexpectedException(e);
     }
@@ -858,8 +886,9 @@ public class TestTransactionCalculator {
    */
   @Test
   public void checkHandleCreate() {
-    try { //TODO
-      fail("not implemented");
+    try { 
+      doCreateTest(ACCOUNTS_JOHN_DOE[0], true);
+      doCreateTest(ACCOUNTS_NEW_GUY[0], false);
     } catch (Exception e) {
       failUnexpectedException(e);
     }
@@ -885,8 +914,14 @@ public class TestTransactionCalculator {
    */
   @Test
   public void checkHandleDisable() {
-    try { //TODO
-      fail("not implemented");
+    try {
+      doDisableTest(ACCOUNTS_JOHN_DOE[0], "");
+      doDisableTest(ACCOUNTS_NEW_GUY[0],
+        String.format(TransactionCalculator.ERROR_ACCOUNT_NO_EXIST,
+          ACCOUNTS_NEW_GUY[0]));
+      doDisableTest(DISABLED_ACCOUNT_NUMBER, 
+        String.format(TransactionCalculator.ERROR_ACCOUNT_CANNOT_REDISABLE,
+          DISABLED_ACCOUNT_NUMBER));
     } catch (Exception e) {
       failUnexpectedException(e);
     }
@@ -912,8 +947,14 @@ public class TestTransactionCalculator {
    */
   @Test
   public void checkHandleEnable() {
-    try { //TODO
-      fail("not implemented");
+    try { 
+      doEnableTest(DISABLED_ACCOUNT_NUMBER, "");
+      doEnableTest(ACCOUNTS_NEW_GUY[0],
+        String.format(TransactionCalculator.ERROR_ACCOUNT_NO_EXIST,
+          ACCOUNTS_NEW_GUY[0]));
+      doEnableTest(ACCOUNTS_JOHN_DOE[0],
+        String.format(TransactionCalculator.ERROR_ACCOUNT_CANNOT_REENABLE,
+                      ACCOUNTS_JOHN_DOE[0]));
     } catch (Exception e) {
       failUnexpectedException(e);
     }
@@ -971,7 +1012,14 @@ public class TestTransactionCalculator {
   */
   private void doApplyTransactionsTest(Vector<Transaction> transactions,
                         String expectedError) {
-    fail("apply transactions test not implemented"); //todo
+    // cleanse
+    Map<String, ArrayList<Account>> accountTable = transactionCalculator.getAccountTable();
+    scrubAccountTable(accountTable);
+    transactionList.clear();
+    consoleOutContent.reset();
+    transactionCalculator.applyTransactions(transactions);
+    assertEquals("Unexpected error message", expectedError,
+                 consoleOutContent.toString());  
   }
   
   /**
@@ -987,6 +1035,8 @@ public class TestTransactionCalculator {
   private void doCheckGetAccountTest(Integer whichAccount,
                                         boolean expectError) {
     // process transaction
+    transactionList.clear();
+    consoleOutContent.reset();
     int accountNumber = whichAccount == null ? 0 : ACCOUNTS_JOHN_DOE[whichAccount];
     transactionList.add(makeTransaction(TransactionType.LOGIN, "admin", 0, 0.0, ""));
     transactionList.add(makeTransaction(TransactionType.WITHDRAWAL,
@@ -1012,55 +1062,166 @@ public class TestTransactionCalculator {
   
   private void doGetTransactionFeeTest(String loginName, int accountNumber,
                                        double expectedCharge) {
-    fail("get transaction fee test not implemented");
+    Account account = getAccount(loginName, accountNumber);
+    account.balance = DEFAULT_ACCOUNT_BALANCE;
+    transactionList.clear();
+    consoleOutContent.reset();
+    transactionList.add(makeTransaction(TransactionType.WITHDRAWAL, loginName,
+      accountNumber, DEFAULT_DEBIT_AMOUNT, ""));
+    logSandwich(loginName, transactionList);
+    transactionCalculator.applyTransactions(transactionList);
+    assertEquals(expectedCharge, DEFAULT_ACCOUNT_BALANCE - account.balance,
+      0.01);
   }
   
   private void doAccountNumberExistsTest(boolean useInitializedMap,
                                         int accountNumber,
                                         boolean expectExists) {
-    fail("do account numbers exist test not implemented");
+    Map<String, ArrayList<Account>> oldAccountTable
+      = transactionCalculator.getAccountTable();
+    transactionList.clear();
+    consoleOutContent.reset();
+    transactionList.add(makeTransaction(TransactionType.CREATE, 
+      USERNAME_NEW_GUY, accountNumber, DEFAULT_ACCOUNT_BALANCE, ""));
+    logSandwich("admin", transactionList);
+    transactionCalculator.applyTransactions(transactionList);
+    assertEquals(expectExists, consoleOutContent.toString().isEmpty());
   }
   
   private void doLoginTest(String loginName, String flag, boolean expectError) {
-    fail("login test not implemented");
+    transactionList.clear();
+    consoleOutContent.reset();
+    logSandwich(loginName, transactionList);
+    transactionList.firstElement().misc = flag;
+    transactionCalculator.applyTransactions(transactionList);
+    assertEquals(String.format("Unexpected console contents ''%s' wanted error?", 
+      consoleOutContent.toString()), expectError, consoleOutContent.toString().isEmpty());
   }
   
   private void doWithdrawalTest(double debit, String expectedError) {
-    fail("withdrawal test no implemented");
+    transactionList.clear();
+    consoleOutContent.reset();
+    transactionList.add(makeTransaction(TransactionType.WITHDRAWAL,
+      USERNAME_JOHN_DOE, ACCOUNTS_JOHN_DOE[0], debit, ""));
+    logSandwich("admin", transactionList);
+    transactionCalculator.applyTransactions(transactionList);
+    assertEquals(expectedError, consoleOutContent.toString());
   }
   
   private void doTransferTest(double sentAmount, double recievedAmount,
                               String expectedError) {
-    fail("transfer test no implemented");
+    transactionList.clear();
+    consoleOutContent.reset();
+    scrubAccountTable(transactionCalculator.getAccountTable());
+    transactionList.add(makeTransaction(TransactionType.TRANSFER,
+                        USERNAME_JOHN_DOE, ACCOUNTS_JOHN_DOE[0], sentAmount,
+                        ""));
+    transactionList.add(makeTransaction(TransactionType.TRANSFER,
+                        USERNAME_JOHN_DOE, STUDENT_PLAN_ACCOUNT_NUMBER,
+                        recievedAmount, ""));
+    logSandwich("admin", transactionList);
+    transactionCalculator.applyTransactions(transactionList);
+    assertEquals(expectedError, consoleOutContent.toString());
   }
   
   private void doPaybillTest(double debit, String expectedError) {
-    fail("paybill test no implemented");
+    transactionList.clear();
+    consoleOutContent.reset();
+    transactionList.add(makeTransaction(TransactionType.PAYBILL,
+      USERNAME_JOHN_DOE, ACCOUNTS_JOHN_DOE[0], debit, "TV"));
+    logSandwich("admin", transactionList);
+    transactionCalculator.applyTransactions(transactionList);
+    assertEquals(expectedError, consoleOutContent.toString());
   }
   
   private void doDepositTest(boolean isAdmin, boolean expectError) {
-    fail("moth wallet test no implemented");
+    transactionList.clear();
+    consoleOutContent.reset();
+    transactionList.add(makeTransaction(TransactionType.DEPOSIT,
+      USERNAME_MOTH_WALLET, MOTH_WALLET_ACCOUNT, 0.05, ""));
+    logSandwich(isAdmin ? "admin" : USERNAME_MOTH_WALLET,
+      transactionList);
+    transactionCalculator.applyTransactions(transactionList);
+    assertEquals(String.format("Expected error to occur? [%s]",
+                 consoleOutContent.toString()), expectError,
+                 !consoleOutContent.toString().isEmpty());
   }
   
   private void doChangePlanTest(int accountNumber, String flag,
-                                boolean expectFailure) {
-    fail("no change plan test yet");
+                                boolean expectError) {
+    transactionList.clear();
+    consoleOutContent.reset();
+    transactionList.add(makeTransaction(TransactionType.CHANGEPLAN,
+      USERNAME_JOHN_DOE, accountNumber, 0.0, flag));
+    logSandwich("admin", transactionList);
+    transactionCalculator.applyTransactions(transactionList);
+    assertEquals(String.format("Expected error to occur? [%s]",
+                 consoleOutContent.toString()), expectError,
+                 !consoleOutContent.toString().isEmpty());
+    if(!expectError)
+      assertEquals("isStudentPlan?", flag.compareTo("S ") == 0,
+                   getAccount(USERNAME_JOHN_DOE,accountNumber).isStudentPlan);
   }
   
   private void doDeleteTest(int accountNumber, boolean expectError) {
-    fail("no delete test yet");
+    transactionList.clear();
+    consoleOutContent.reset();
+    transactionList.add(makeTransaction(TransactionType.DELETE,
+      USERNAME_JOHN_DOE, accountNumber, 0.0, ""));
+    logSandwich("admin", transactionList);
+    transactionCalculator.applyTransactions(transactionList);
+    assertEquals(String.format("Expected error to occur? [%s]",
+                 consoleOutContent.toString()), expectError,
+                 !consoleOutContent.toString().isEmpty());
   }
   
   private void doCreateTest(int accountNumber, boolean expectError) {
-    fail("no create test yet");
+    transactionList.clear();
+    consoleOutContent.reset();
+    transactionList.add(makeTransaction(TransactionType.CREATE,
+      USERNAME_NEW_GUY, accountNumber, 0.0, ""));
+    logSandwich("admin", transactionList);
+    transactionCalculator.applyTransactions(transactionList);
+    assertEquals(String.format("Expected error to occur? [%s]",
+                 consoleOutContent.toString()), expectError,
+                 !consoleOutContent.toString().isEmpty());
   }
   
-  private void doDisableTest(int accountNumber, boolean expectError) {
-    fail("no disable test yet");
+  private void doDisableTest(int accountNumber, String expectedError) {
+    transactionList.clear();
+    consoleOutContent.reset();
+    transactionList.add(makeTransaction(TransactionType.DISABLE,
+      USERNAME_JOHN_DOE, accountNumber, 0.0, ""));
+    logSandwich("admin", transactionList);
+    transactionCalculator.applyTransactions(transactionList);
+    assertEquals(expectedError, consoleOutContent.toString());
   }
   
-  private void doEnableTest(int accountNumber, boolean expectError) {
-    fail("no enable test yet");
+  private void doEnableTest(int accountNumber, String expectedError) {
+    transactionList.clear();
+    consoleOutContent.reset();
+    transactionList.add(makeTransaction(TransactionType.ENABLE,
+      USERNAME_JOHN_DOE, accountNumber, 0.0, ""));
+    logSandwich("admin", transactionList);
+    transactionCalculator.applyTransactions(transactionList);
+    assertEquals(expectedError, consoleOutContent.toString());
   }
   
+  /**
+  * Laziest ever revertion of calculator state
+  */
+  private void scrubAccountTable(Map<String, ArrayList<Account>> accountTable) {
+    if(accountTable != null) {
+      for(Map.Entry<String, ArrayList<Account>> entry
+          : accountTable.entrySet()) {
+        for(Account account : entry.getValue()) {
+          Account defaultAccount = genAccount(account.number);
+          account.isActive = defaultAccount.isActive;
+          account.balance = defaultAccount.balance;
+          account.transactionCount = defaultAccount.transactionCount;
+          account.isStudentPlan = defaultAccount.isStudentPlan;
+        }
+      }
+    }
+  }
 }

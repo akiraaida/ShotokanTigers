@@ -1,0 +1,20 @@
+make all
+make[1]: Entering directory `/home/kathryn/repo/ShotokanTigers/back'
+make[1]: Nothing to be done for `all'.
+make[1]: Leaving directory `/home/kathryn/repo/ShotokanTigers/back'
+java tests.TestRunner
+checkHandleChangePlan(tests.TestTransactionCalculator): java.lang.IndexOutOfBoundsException: Index: 12345, Size: 5
+checkHandleDeposit(tests.TestTransactionCalculator): Expected error to occur? [] expected:<true> but was:<false>
+checkHandleWithdrawal(tests.TestTransactionCalculator): expected:<[ERROR: Account %d balance is negative]> but was:<[]>
+checkHandleDisable(tests.TestTransactionCalculator): java.lang.NullPointerException
+checkHandleCreate(tests.TestTransactionCalculator): java.lang.NullPointerException
+checkHandleDelete(tests.TestTransactionCalculator): java.lang.NullPointerException
+checkHandleEnable(tests.TestTransactionCalculator): java.lang.NullPointerException
+checkAccountNumberExists(tests.TestTransactionCalculator): java.lang.NullPointerException
+checkHandleLogin(tests.TestTransactionCalculator): Unexpected console contents ''' wanted error? expected:<false> but was:<true>
+checkHandlePaybill(tests.TestTransactionCalculator): expected:<[ERROR: Account %d balance is negative]> but was:<[]>
+checkApplyTransactions(tests.TestTransactionCalculator): Unexpected error message expected:<[ERROR: Transaction sequence had no logout after login]> but was:<[]>
+checkHandleTransfer(tests.TestTransactionCalculator): expected:<[ERROR: Amount transferred and amount sent do not match: $5.00 vs $105.00]> but was:<[]>
+checkGetAccount(tests.TestTransactionCalculator): java.lang.NullPointerException
+checkGetTransactionFee(tests.TestTransactionCalculator): java.lang.NullPointerException
+false
