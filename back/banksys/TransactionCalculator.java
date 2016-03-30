@@ -47,7 +47,7 @@ public class TransactionCalculator {
   
   // Credit/Debit errors
   public static final String ERROR_NONCANADIAN_WITHDRAWAL_AMOUNT = String.format(ERROR_FORMAT, "Only canadian values are valid for withdrawal");
-  public static final String ERROR_MISMATCHED_TRANSFER_AMOUNT = String.format(ERROR_FORMAT, "Amount transferred and amount sent do not match: $%f vs $%f");
+  public static final String ERROR_MISMATCHED_TRANSFER_AMOUNT = String.format(ERROR_FORMAT, "Amount transferred and amount sent do not match: $%.2f vs $%.2f");
   public static final String ERROR_BAD_CHANGEPLAN_CODE = String.format(ERROR_FORMAT, "Invalid changeplan flag '%s'");
   
   // Admin errors
