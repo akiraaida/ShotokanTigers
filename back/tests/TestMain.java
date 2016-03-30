@@ -79,4 +79,12 @@ public class TestMain {
             System.out.println(e);
         } 
     }
+    
+    @Test
+    // Test the main method with missing arguments
+    public void testMissing(){
+
+        Backend.main(String argument = "tests/resources/testMaster.txt);
+        
+    }
 }
