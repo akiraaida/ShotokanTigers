@@ -6,6 +6,7 @@ import org.junit.runners.Suite;
 @Suite.SuiteClasses({
    TestParser.class,
    TestUpdater.class,
+   TestMain.class,
    TestTransactionCalculator.class
 })
 public class TestSuite {   
